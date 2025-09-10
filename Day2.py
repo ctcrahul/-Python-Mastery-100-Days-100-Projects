@@ -13,6 +13,7 @@ age = 42
 # Float
 height = 5.8
 
+
 # Boolean
 is_student = False
 
@@ -21,7 +22,9 @@ print(type(age))
 print(type(height))
 print(type(is_student))
 
+
 age = "42"
+
 
 myAge = int(age)
 
@@ -46,6 +49,7 @@ print("\n---- Personalized Greeting ----")
 print(f"Hello, {name}! 👋")
 print(f"You are {age} years old and {color} is a beautiful color!")
 print("You're now ready to start your Python adventure 🚀🐍")
+
 
 
 
