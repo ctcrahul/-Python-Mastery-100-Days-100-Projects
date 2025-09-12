@@ -1,5 +1,6 @@
 # Smart Expense Tracker
 
+
 import csv
 from datetime import datetime
 
@@ -65,5 +66,6 @@ if __name__ == "__main__":
 # ✅ File handling + CSV ka use
 # ✅ Good for college/demo project
 # ✅ Easy to extend (charts, GUI, database)
+
 
 
