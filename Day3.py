@@ -5,6 +5,7 @@ from datetime import datetime
 
 FILE_NAME = "expenses.csv"
 
+
 # Initialize CSV with headers if not exists
 def init_file():
     try:
@@ -26,7 +27,6 @@ def add_expense():
         writer.writerow([date, category, amount, note])
 
     print("✅ Expense Added!")
-
 # Show report
 def show_report():
     total = 0
@@ -65,4 +65,5 @@ if __name__ == "__main__":
 # ✅ File handling + CSV ka use
 # ✅ Good for college/demo project
 # ✅ Easy to extend (charts, GUI, database)
+
 
