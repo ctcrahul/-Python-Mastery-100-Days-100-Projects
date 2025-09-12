@@ -60,3 +60,9 @@ if __name__ == "__main__":
     main()
 
 
+# Why Best for Project?
+# ✅ Simple but useful in real life
+# ✅ File handling + CSV ka use
+# ✅ Good for college/demo project
+# ✅ Easy to extend (charts, GUI, database)
+
