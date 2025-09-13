@@ -23,7 +23,7 @@ Data is stored in a CSV file for persistence. 📊
 - **Modules:** `csv`, `datetime` (built-in, no external installation needed)
 
 ---
-
+-----
 ## 🚀 How to Run
 1. Clone the repository:
    ```bash
