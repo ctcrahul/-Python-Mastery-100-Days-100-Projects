@@ -6,6 +6,7 @@ This project allows users to **add expenses, categorize them, and view reports**
 Data is stored in a CSV file for persistence. 📊
 
 ---
+------
 
 ## ✨ Features
 - ➕ Add expenses with **category, amount, and note**  
