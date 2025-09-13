@@ -4,7 +4,7 @@
 import csv
 from datetime import datetime
 
-FILE_NAME = "expenses.csv" # Please Try this
+FILE_NAME = "expenses.csv" # Please Try this project you woll surpeise
 
 
 # Initialize CSV with headers if not exists
@@ -66,6 +66,7 @@ if __name__ == "__main__":
 # ✅ File handling + CSV ka use
 # ✅ Good for college/demo project
 # ✅ Easy to extend (charts, GUI, database)
+
 
 
 
