@@ -16,7 +16,7 @@ Data is stored in a CSV file for persistence. 📊
 - 🐍 Written in Python (easy to understand & extend)
 
 ---
----3---
+--------
 
 ## 🛠️ Tech Stack
 - **Language:** Python 3.x  
