@@ -1,5 +1,5 @@
 
-##💰 Smart Expense Tracker
+# 💰 Smart Expense Tracker
 
 A simple Python-based console application to track daily expenses.  
 This project allows users to **add expenses, categorize them, and view reports**.  
