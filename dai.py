@@ -3,16 +3,10 @@ print("Hlo World")
 
 
 
-# for i in range(o,5):
-#   if x <= 3:
-#     print("Not")
-#     return
-#     break
-    
+# To DO List
+todo = []
+todo.append("Buy milk")
+todo.append("Study Python")
+print(todo)
 
-for i in range(o,5):
-  if x <= 3:
-    print("Not")
-    return
-    break
-    
+
