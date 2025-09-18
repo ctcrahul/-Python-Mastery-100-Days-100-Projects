@@ -20,6 +20,10 @@ Data is stored in a CSV file for persistence. 📊
 
 ---
 
+<br>
+
+</br>
+
 
 ## 🛠️ Tech Stack
 - **Language:** Python 3.x  
