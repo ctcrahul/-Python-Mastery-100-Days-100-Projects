@@ -57,6 +57,8 @@ Data is stored in a CSV file for persistence. 📊
 A simple console-based To-Do List application built in Python.  
 You can **add, view, and delete tasks** easily.
 
+---
+
 ## 🚀 Features
 - Add new tasks  
 - View all tasks  
