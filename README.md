@@ -71,6 +71,13 @@ You can **add, view, and delete tasks** easily.
 - Delete tasks by number  
 - Exit program anytime  
 
+
+---
+
+<br>
+
+</br>
+
 ## ▶️ How to Run
 1. Clone or download this repository  
 2. Run the script:
