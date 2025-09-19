@@ -43,11 +43,7 @@ Data is stored in a CSV file for persistence. 📊
 1. Clone the repository:
    ```bash
    git clone https://github.com/ctcrahul/smart-expense-tracker.git
-
-
-
-
-
+---
 
 
 
