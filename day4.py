@@ -1,4 +1,4 @@
-# Simple To-Do List Application in Python
+# Simple To-Do List Application in Python To-Do List App (Console Based).
 
 tasks = []
 
