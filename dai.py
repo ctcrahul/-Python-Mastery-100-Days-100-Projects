@@ -22,6 +22,24 @@ else:
 
 
 
+original = [1, 2, [3, 4]]
+
+# 1. Slice (shallow copy)
+copy1 = original[:]
+
+# 2. .copy() method (shallow copy)
+copy2 = original.copy()
+
+# 3. Using list() (shallow copy)
+copy3 = list(original)
+
+# 4. deepcopy (deep copy)
+import copy
+copy4 = copy.deepcopy(original)
+
+
+
+
 
 original = [1, 2, [3, 4]]
 
@@ -56,4 +74,5 @@ print(copy1)
 # [1, 2, [3, 4, 5]] — nested list changed!
 print(copy4)
 # [1, 2, [3, 4]] — unchanged
+
 
