@@ -111,3 +111,10 @@ import copy
 copy4 = copy.deepcopy(original)
 
 
+
+    original[2].append(5)
+print(copy1)
+# [1, 2, [3, 4, 5]] — nested list changed!
+print(copy4)
+# [1, 2, [3, 4]] — unchanged
+
