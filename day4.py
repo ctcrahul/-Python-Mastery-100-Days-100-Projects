@@ -118,3 +118,9 @@ print(copy1)
 print(copy4)
 # [1, 2, [3, 4]] — unchanged
 
+
+
+    def greet(name):
+    print("Hello", name)
+
+greet("Alice")  # Hello Alice
