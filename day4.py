@@ -119,6 +119,13 @@ print(copy4)
 # [1, 2, [3, 4]] — unchanged
 
 
+    age = 20
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+
 
     def greet(name):
     print("Hello", name)
