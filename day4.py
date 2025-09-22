@@ -178,3 +178,10 @@ print(Counter(words))
 
      lst = [1,2,3,2,4]
 duplicates = set([x for x in lst if lst.count(x) > 1])
+
+
+
+
+          def is_sorted(lst):
+    return lst == sorted(lst)
+
