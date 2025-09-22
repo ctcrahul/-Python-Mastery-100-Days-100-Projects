@@ -171,3 +171,10 @@ print(Counter(words))
      def fib(n):
     return n if n <= 1 else fib(n-1) + fib(n-2)
 
+
+
+
+
+
+     lst = [1,2,3,2,4]
+duplicates = set([x for x in lst if lst.count(x) > 1])
