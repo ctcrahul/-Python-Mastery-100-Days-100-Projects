@@ -185,3 +185,5 @@ duplicates = set([x for x in lst if lst.count(x) > 1])
           def is_sorted(lst):
     return lst == sorted(lst)
 
+matrix = [[1, 2], [3, 4]]
+flat = [num for row in matrix for num in row]
