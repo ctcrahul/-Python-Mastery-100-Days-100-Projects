@@ -195,3 +195,7 @@ flat = [num for row in matrix for num in row]
     for line in f:
         print(line.strip())
 
+
+
+          nums = [1, 2, 3]
+squares = list(map(lambda x: x**2, nums))
