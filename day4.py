@@ -149,6 +149,12 @@ print(s[::-1])  # Output: 'olleh'
 
 
 
+     from collections import Counter
+words = ['apple', 'banana', 'apple']
+print(Counter(words))
+
+
+
 
      from collections import Counter
 words = ['apple', 'banana', 'apple']
