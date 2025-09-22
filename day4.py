@@ -131,3 +131,11 @@ else:
     print("Hello", name)
 
 greet("Alice")  # Hello Alice
+
+
+
+
+
+
+    s = "hello"
+print(s[::-1])  # Output: 'olleh'
