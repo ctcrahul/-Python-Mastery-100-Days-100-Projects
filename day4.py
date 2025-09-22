@@ -187,3 +187,11 @@ duplicates = set([x for x in lst if lst.count(x) > 1])
 
 matrix = [[1, 2], [3, 4]]
 flat = [num for row in matrix for num in row]
+
+
+
+
+    with open('file.txt') as f:
+    for line in f:
+        print(line.strip())
+
