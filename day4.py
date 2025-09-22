@@ -147,3 +147,9 @@ print(s[::-1])  # Output: 'olleh'
      def is_palindrome(s):
     return s == s[::-1]
 
+
+
+
+     from collections import Counter
+words = ['apple', 'banana', 'apple']
+print(Counter(words))
