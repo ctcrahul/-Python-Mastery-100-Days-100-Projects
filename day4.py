@@ -139,3 +139,11 @@ greet("Alice")  # Hello Alice
 
     s = "hello"
 print(s[::-1])  # Output: 'olleh'
+
+
+
+
+
+     def is_palindrome(s):
+    return s == s[::-1]
+
