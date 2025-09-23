@@ -53,3 +53,14 @@ even_numbers = [i for i in range(1, 101) if i % 2 == 0]
 print(even_numbers)
 
 
+
+6. How to find the longest word in a sentence?
+
+def longest_word(sentence):
+    words = sentence.split()
+    return max(words, key=len)
+
+print(longest_word("Python is a powerful language"))  # "powerful"
+
+
+
