@@ -63,4 +63,10 @@ def longest_word(sentence):
 print(longest_word("Python is a powerful language"))  # "powerful"
 
 
+7. How to count the frequency of elements in a list?
 
+from collections import Counter
+
+my_list = [1, 2, 2, 3, 3, 3, 4]
+frequency = Counter(my_list)
+print(frequency)  # Counter({3: 3, 2: 2, 1: 1, 4: 1})
