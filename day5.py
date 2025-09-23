@@ -20,3 +20,16 @@ def factorial(n):
     return n * factorial(n - 1)
 
 print(factorial(5))  # 120
+
+3. How to merge two dictionaries in Python?
+
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+
+# Method 1 (Python 3.5+)
+merged_dict = {**dict1, **dict2}
+
+# Method 2 (Python 3.9+)
+merged_dict = dict1 | dict2
+
+print(merged_dict)
