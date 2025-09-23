@@ -70,3 +70,12 @@ from collections import Counter
 my_list = [1, 2, 2, 3, 3, 3, 4]
 frequency = Counter(my_list)
 print(frequency)  # Counter({3: 3, 2: 2, 1: 1, 4: 1})
+
+
+8. How to remove duplicates from a list while maintaining the order?
+
+def remove_duplicates(lst):
+    return list(dict.fromkeys(lst))
+
+my_list = [1, 2, 2, 3, 4, 4, 5]
+print(remove_duplicates(my_list))  # [1, 2, 3, 4, 5]
