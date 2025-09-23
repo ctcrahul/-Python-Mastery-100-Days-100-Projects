@@ -108,3 +108,20 @@ reversed_head = reverse_linked_list(head)
 while reversed_head:
     print(reversed_head.data, end=" -> ")
     reversed_head = reversed_head.next
+
+
+10. How to implement a simple binary search algorithm?
+
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+print(binary_search([1, 2, 3, 4, 5, 6, 7], 4))  # 3
