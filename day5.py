@@ -33,3 +33,17 @@ merged_dict = {**dict1, **dict2}
 merged_dict = dict1 | dict2
 
 print(merged_dict)
+
+
+
+
+
+4. How to find the intersection of two lists?
+
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+
+intersection = list(set(list1) & set(list2))
+print(intersection)  # [3, 4]
+
+
