@@ -47,3 +47,9 @@ intersection = list(set(list1) & set(list2))
 print(intersection)  # [3, 4]
 
 
+5. How to generate a list of even numbers from 1 to 100?
+
+even_numbers = [i for i in range(1, 101) if i % 2 == 0]
+print(even_numbers)
+
+
