@@ -78,7 +78,6 @@ def math_quiz():
     print("Congratulations! You got all the questions correct.")
   elif score >= rounds // 2:
     print("Good job! You did well.")
-  else:
-    print("Keep practicing! You can do better next time.")
+
 
 
