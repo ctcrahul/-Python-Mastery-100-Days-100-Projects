@@ -62,8 +62,6 @@ def math_quiz():
   print("You will be presented with math problems, and you need to provide the correct answers.")
 
   for i in range(rounds):
-    question, correct_answer = generate_question()
-    print(f"\nQuestion {i + 1}: {question}")
-    user_answer = int(input("Your answer: "))
+    question, c
 
   
