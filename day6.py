@@ -49,10 +49,3 @@ def generate_question():
   elif operator == '-':
     answer = num1 - num2
   else:
-    answer = num1 * num2
-
-  return f"{num1} {operator} {num2}", answer
-
-# Step 2: Main Quiz Game Function
-
-  
