@@ -54,9 +54,5 @@ def generate_question():
   return f"{num1} {operator} {num2}", answer
 
 # Step 2: Main Quiz Game Function
-def math_quiz():
-  score = 0
-  rounds = 5
 
-  print("\n--- Welcome to the Math Quiz Game! ---")
   
