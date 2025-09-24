@@ -44,8 +44,3 @@ def generate_question():
   num2 = random.randint(1, 10)
   operator = random.choice(['+', '-', '*'])
 
-  if operator == '+':
-    answer = num1 + num2
-  elif operator == '-':
-    answer = num1 - num2
-  else:
