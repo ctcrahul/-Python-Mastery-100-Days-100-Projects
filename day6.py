@@ -38,9 +38,4 @@ print("The result is: ", result)
 
 import random
 
-# Step 1: Define the math question function
-def generate_question():
-  num1 = random.randint(1, 10)
-  num2 = random.randint(1, 10)
-  operator = random.choice(['+', '-', '*'])
-
+# Step 1: Define the ma
