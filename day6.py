@@ -75,9 +75,6 @@ def math_quiz():
   print("\n--- Game Over! ---")
   print(f"Your final score is: {score}/{rounds}")
   if score == rounds:
-    print("Congratulations! You got all the questions correct.")
-  elif score >= rounds // 2:
-    print("Good job! You did well.")
 
 
 
