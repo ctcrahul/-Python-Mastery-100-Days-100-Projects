@@ -66,7 +66,4 @@ def math_quiz():
     print(f"\nQuestion {i + 1}: {question}")
     user_answer = int(input("Your answer: "))
 
-    if user_answer == correct_answer:
-      print("Correct!")
- 
-
+  
