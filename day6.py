@@ -72,9 +72,5 @@ def math_quiz():
     else:
       print(f"Wrong! The correct answer is: {correct_answer}")
 
-  print("\n--- Game Over! ---")
-  print(f"Your final score is: {score}/{rounds}")
-  if score == rounds:
-
 
 
