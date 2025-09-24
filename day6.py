@@ -59,9 +59,4 @@ def math_quiz():
   rounds = 5
 
   print("\n--- Welcome to the Math Quiz Game! ---")
-  print("You will be presented with math problems, and you need to provide the correct answers.")
-
-  for i in range(rounds):
-    question, c
-
   
