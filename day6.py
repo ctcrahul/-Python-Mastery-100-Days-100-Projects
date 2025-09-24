@@ -82,5 +82,3 @@ def math_quiz():
     print("Keep practicing! You can do better next time.")
 
 
-# Step 3: Run the Game
-math_quiz()
