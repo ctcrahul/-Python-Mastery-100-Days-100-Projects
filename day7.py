@@ -53,9 +53,4 @@ def show_menu():
 
 # Step 3: Main Program Loop
 
-
-  if choice == "1":
-    print("\n--- Shopping List ---")
-
-
   
