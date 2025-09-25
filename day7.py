@@ -85,5 +85,3 @@ while True:
     print("Goodbye! Happy Shopping!")
     break
 
-  else:
-    print("Invalid choice. Please try again.")
