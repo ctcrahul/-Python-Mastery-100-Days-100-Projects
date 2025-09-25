@@ -81,7 +81,4 @@ while True:
     shopping_list.clear()
     print("The shopping list has been cleared.")
 
-  elif choice == "5":
-    print("Goodbye! Happy Shopping!")
-    break
 
