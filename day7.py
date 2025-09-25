@@ -73,9 +73,6 @@ while True:
     item = input("Enter the item to remove: ")
     if item in shopping_list:
       shopping_list.remove(item)
-      print(f"{item} has been removed from the shopping list.")
-    else:
-      print(f"{item} is not in the shopping list.")
 
   elif choice == "4":
     shopping_list.clear()
