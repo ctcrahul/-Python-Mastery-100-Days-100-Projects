@@ -74,8 +74,5 @@ while True:
     if item in shopping_list:
       shopping_list.remove(item)
 
-  elif choice == "4":
-    shopping_list.clear()
-    print("The shopping list has been cleared.")
 
 
