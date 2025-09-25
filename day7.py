@@ -58,7 +58,6 @@ while True:
 
   if choice == "1":
     print("\n--- Shopping List ---")
-    if not shopping_list:
-      print("Your shopping list is empty.")
+
 
   
