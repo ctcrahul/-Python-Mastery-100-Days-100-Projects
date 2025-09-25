@@ -60,10 +60,5 @@ while True:
     print("\n--- Shopping List ---")
     if not shopping_list:
       print("Your shopping list is empty.")
-    else:
-      for index, item in enumerate(shopping_list):
-        print(f"{index + 1}. {item}")
-
-
 
   
