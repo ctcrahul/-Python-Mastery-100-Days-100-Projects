@@ -47,9 +47,7 @@ def show_menu():
   print("\n--- Shopping List Menu ---")
   print("1. View the shopping list")
   print("2. Add an item")
-  print("3. Remove an item")
-  print("4. Clear List")
-  print("5. Exit")
+ 
 
 # Step 3: Main Program Loop
 
