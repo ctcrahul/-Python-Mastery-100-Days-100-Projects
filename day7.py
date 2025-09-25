@@ -52,9 +52,7 @@ def show_menu():
   print("5. Exit")
 
 # Step 3: Main Program Loop
-while True:
-  show_menu()
-  choice = input("Enter your choice (1-5): ")
+
 
   if choice == "1":
     print("\n--- Shopping List ---")
