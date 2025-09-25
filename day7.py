@@ -69,10 +69,4 @@ while True:
     shopping_list.append(item)
     print(f"{item} has been added to the shopping list.")
 
-  elif choice == "3":
-    item = input("Enter the item to remove: ")
-    if item in shopping_list:
-      shopping_list.remove(item)
-
-
-
+  
