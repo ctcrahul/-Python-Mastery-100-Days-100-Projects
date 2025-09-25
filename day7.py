@@ -64,9 +64,6 @@ while True:
       for index, item in enumerate(shopping_list):
         print(f"{index + 1}. {item}")
 
-  elif choice == "2":
-    item = input("Enter the item to add: ")
-    shopping_list.append(item)
-    print(f"{item} has been added to the shopping list.")
+
 
   
