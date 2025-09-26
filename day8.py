@@ -124,6 +124,4 @@ while True:
     delete_contact()
   elif choice == "6":
     print("Thank you for using the Contact Book. Goodbye!")
-    break
-  else:
-    print("Invalid choice. Please select a valid option (1-6).")
+
