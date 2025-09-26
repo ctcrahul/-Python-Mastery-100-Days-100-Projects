@@ -109,5 +109,3 @@ def delete_contact():
 
 # Step 8: Main Program Loop
 while True:
-  show_menu()
-  choice = input("Enter your choice (1-6): ")
