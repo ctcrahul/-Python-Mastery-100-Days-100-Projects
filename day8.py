@@ -80,12 +80,6 @@ def view_contacts():
 def search_contact():
   name = input("Enter the name of the contact you want to search: ")
   if name in contacts:
-    print(f"\n--- Contact Details for {name} ---")
-    print(f"Name: {name}")
-    print(f"Phone: {contacts[name]['phone']}")
-    print(f"Email: {contacts[name]['email']}")
-  else:
-    print(f"Contact {name} not found in your contact book.")
 
 # Step 6: Edit a contact
 def edit_contact():
