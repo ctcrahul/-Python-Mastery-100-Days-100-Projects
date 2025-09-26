@@ -93,8 +93,5 @@ def edit_contact():
   if name in contacts:
     phone = input("Enter new phone number: ")
     email = input("Enter new email: ")
-    contacts[name] = {"phone": phone, "email": email}
-    print(f"Contact {name} has been updated successfully!")
-  else:
-    print(f"Contact {name} not found in your contact book.")
+
 
