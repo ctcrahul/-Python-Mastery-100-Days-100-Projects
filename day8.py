@@ -98,8 +98,3 @@ def edit_contact():
   else:
     print(f"Contact {name} not found in your contact book.")
 
-# Step 7: Delete a contact
-def delete_contact():
-  name = input("Enter the name of the contact you want to delete: ")
-
-
