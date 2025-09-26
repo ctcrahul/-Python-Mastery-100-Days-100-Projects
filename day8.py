@@ -101,8 +101,5 @@ def edit_contact():
 # Step 7: Delete a contact
 def delete_contact():
   name = input("Enter the name of the contact you want to delete: ")
-  if name in contacts:
-    del contacts[name]
-    print(f"Contact {name} has been deleted successfully!")
-  else:
+
 
