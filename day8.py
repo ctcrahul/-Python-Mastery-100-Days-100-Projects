@@ -116,8 +116,3 @@ while True:
     add_contact()
   elif choice == "2":
     view_contacts()
-  elif choice == "3":
-    search_contact()
-  elif choice == "4":
-    edit_contact()
-
