@@ -105,7 +105,4 @@ def delete_contact():
     del contacts[name]
     print(f"Contact {name} has been deleted successfully!")
   else:
-    print(f"Contact {name} not found in your contact book.")
 
-# Step 8: Main Program Loop
-while True:
