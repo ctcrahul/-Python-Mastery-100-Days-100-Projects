@@ -120,8 +120,4 @@ while True:
     search_contact()
   elif choice == "4":
     edit_contact()
-  elif choice == "5":
-    delete_contact()
-  elif choice == "6":
-    print("Thank you for using the Contact Book. Goodbye!")
 
