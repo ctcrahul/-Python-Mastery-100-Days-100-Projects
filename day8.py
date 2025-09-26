@@ -111,8 +111,3 @@ def delete_contact():
 while True:
   show_menu()
   choice = input("Enter your choice (1-6): ")
-
-  if choice == "1":
-    add_contact()
-  elif choice == "2":
-    view_contacts()
