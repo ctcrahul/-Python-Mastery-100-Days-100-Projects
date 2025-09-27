@@ -65,5 +65,4 @@ else:
 
 if extra_ingredients:
     print(f"You have extra ingredients: {', '.join(extra_ingredients)}")
-else:
-    print("You have all the ingredients needed.")
+
