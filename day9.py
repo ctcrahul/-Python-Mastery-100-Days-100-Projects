@@ -52,6 +52,3 @@ recipe_ingredients = {"flour", "sugar", "butter", "eggs", "milk"}
 user_input = input("Enter the ingredients you have (separated by commas): ")
 user_ingredients = set(user_input.split(", "))
 
-# Step 3: Compare Ingredients
-missing_ingredients = recipe_ingredients - user_ingredients
-
