@@ -46,6 +46,4 @@ print(set_a - set_b)
 # Ingredients Checker
 
 # Step 1: Define the recipe ingredients
-recipe_ingredients = {"flour", "sugar", "butter", "eggs", "milk"}
 
-# Step 2: Get user input for available ingredients
