@@ -49,6 +49,3 @@ print(set_a - set_b)
 recipe_ingredients = {"flour", "sugar", "butter", "eggs", "milk"}
 
 # Step 2: Get user input for available ingredients
-user_input = input("Enter the ingredients you have (separated by commas): ")
-user_ingredients = set(user_input.split(", "))
-
