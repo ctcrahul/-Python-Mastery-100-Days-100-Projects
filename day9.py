@@ -41,9 +41,5 @@ set_b = {"sugar", "eggs"}
 
 print(set_a | set_b)
 print(set_a & set_b)
-print(set_a - set_b)
 
-# Ingredients Checker
-
-# Step 1: Define the recipe ingredients
 
