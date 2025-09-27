@@ -60,7 +60,5 @@ extra_ingredients = user_ingredients - recipe_ingredients
 print("\n--- Ingredient Check Results ----")
 if missing_ingredients:
     print(f"You are missing the following ingredients: {', '.join(missing_ingredients)}")
-else:
-    print("You have all the ingredients needed.")
 
 
