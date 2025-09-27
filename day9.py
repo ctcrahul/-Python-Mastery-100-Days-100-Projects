@@ -57,8 +57,5 @@ missing_ingredients = recipe_ingredients - user_ingredients
 extra_ingredients = user_ingredients - recipe_ingredients
 
 # Step 4: Display Results
-print("\n--- Ingredient Check Results ----")
-if missing_ingredients:
-    print(f"You are missing the following ingredients: {', '.join(missing_ingredients)}")
 
 
