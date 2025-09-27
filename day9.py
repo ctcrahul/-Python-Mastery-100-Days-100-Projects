@@ -54,8 +54,4 @@ user_ingredients = set(user_input.split(", "))
 
 # Step 3: Compare Ingredients
 missing_ingredients = recipe_ingredients - user_ingredients
-extra_ingredients = user_ingredients - recipe_ingredients
-
-# Step 4: Display Results
-
 
