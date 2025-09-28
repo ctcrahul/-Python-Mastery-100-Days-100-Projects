@@ -57,9 +57,3 @@ def delete_notes():
     with open(FILE_NAME, "w") as file:
       pass
     print("All notes have been deleted")
-  else:
-    print("Deletion cancelled")
-
-# Step 6: Main Program Loop
-
-
