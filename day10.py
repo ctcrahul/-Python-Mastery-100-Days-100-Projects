@@ -67,8 +67,5 @@ while True:
 
   if choice == "1":
     add_note()
-  elif choice == "2":
-    view_notes()
-  elif choice == "3":
-    delete_notes()
+
 
