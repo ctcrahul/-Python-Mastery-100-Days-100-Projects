@@ -50,7 +50,4 @@ def view_notes():
   except FileNotFoundError:
     print("No notes found.")
 
-# Step 5: Delete all notes
-def delete_notes():
-  confirm = input("Are you sure you want to delete all notes? (Yes/n): ")
 
