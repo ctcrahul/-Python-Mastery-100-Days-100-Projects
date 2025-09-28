@@ -17,10 +17,7 @@ with open("notes.txt", "w") as file:
 with open("notes1.txt", "a") as file:
   file.write("\nThis is a new second note.")
 
-# Note-Taking App
 
-# Step 1: Define file name
-FILE_NAME = "myNotes.txt"
 
 # Step 2: Display menu options
 def show_menu():
