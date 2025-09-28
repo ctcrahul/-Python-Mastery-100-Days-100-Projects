@@ -65,7 +65,5 @@ while True:
   show_menu()
   choice = input("Enter your choice (1-4): ")
 
-  if choice == "1":
-    add_note()
 
 
