@@ -35,9 +35,4 @@ def add_note():
   print("Note added successfully!")
 
 # Step 4: View all notes
-def view_notes():
-  try:
-    with open(FILE_NAME, "r") as file:
-      content = file.read()
-      if content:
-       
+de
