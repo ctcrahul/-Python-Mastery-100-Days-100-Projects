@@ -61,9 +61,5 @@ def delete_notes():
     print("Deletion cancelled")
 
 # Step 6: Main Program Loop
-while True:
-  show_menu()
-  choice = input("Enter your choice (1-4): ")
-
 
 
