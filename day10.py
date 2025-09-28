@@ -40,11 +40,4 @@ def view_notes():
     with open(FILE_NAME, "r") as file:
       content = file.read()
       if content:
-        print("\n--- Your Notes ---")
-        print(content)
-      else:
-        print("\nNo notes found.")
-  except FileNotFoundError:
-    print("No notes found.")
-
-
+       
