@@ -71,8 +71,4 @@ while True:
     view_notes()
   elif choice == "3":
     delete_notes()
-  elif choice == "4":
-    print("Exiting Note-Taking App. Goodbye!")
-    break
-  else:
-    print("Invalid choice. Please enter a number between 1 and 4.")
+
