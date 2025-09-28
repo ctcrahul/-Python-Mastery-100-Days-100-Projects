@@ -53,7 +53,4 @@ def view_notes():
 # Step 5: Delete all notes
 def delete_notes():
   confirm = input("Are you sure you want to delete all notes? (Yes/n): ")
-  if confirm.lower() == "yes":
-    with open(FILE_NAME, "w") as file:
-      pass
-    print("All notes have been deleted")
+
