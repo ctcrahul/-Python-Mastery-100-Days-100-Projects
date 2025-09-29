@@ -80,7 +80,4 @@ while True:
   show_menu()
   choice = input("Enter your choice (1-5): ")
 
-  if choice == '5':
-    print("Exiting the calculator. Goodbye!")
- 
 
