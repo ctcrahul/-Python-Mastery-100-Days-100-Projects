@@ -82,11 +82,5 @@ while True:
 
   if choice == '5':
     print("Exiting the calculator. Goodbye!")
-    break
-
-  try:
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
-
-
+ 
 
