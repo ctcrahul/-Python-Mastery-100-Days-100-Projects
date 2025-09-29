@@ -104,6 +104,4 @@ while True:
   except ZeroDivisionError as e:
     print(f"Error: {e}")
   except Exception as e:
-    print(f"An unexpected error occurred: {e}")
-  finally:
-    print("Thank you for using the Safe Calculator!... Restarting...")
+
