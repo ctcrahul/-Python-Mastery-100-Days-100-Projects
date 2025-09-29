@@ -100,8 +100,4 @@ while True:
       print("Invalid choice. Please select a valid option.")
 
   except ValueError:
-    print("Invalid input. Please enter valid numbers.")
-  except ZeroDivisionError as e:
-    print(f"Error: {e}")
-  except Exception as e:
 
