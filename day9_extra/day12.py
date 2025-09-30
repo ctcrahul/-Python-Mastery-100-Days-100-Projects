@@ -76,7 +76,5 @@ while True:
   elif choice == '3':
     kelvin = float(input("Enter temperature in Kelvin: "))
     print(f"Celsius: {kelvin_to_celsius(kelvin):.2f}")
-    print(f"Fahrenheit: {kelvin_to_fahrenheit(kelvin):.2f}")
-  elif choice == '4':
-    print("Exiting the program. Goodbye!")
+
 
