@@ -79,6 +79,4 @@ while True:
     print(f"Fahrenheit: {kelvin_to_fahrenheit(kelvin):.2f}")
   elif choice == '4':
     print("Exiting the program. Goodbye!")
-    break
-  else:
-    print("Invalid choice. Please select a valid option.")
+
