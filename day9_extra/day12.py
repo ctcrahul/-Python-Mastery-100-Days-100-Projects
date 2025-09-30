@@ -68,8 +68,5 @@ while True:
   if choice == '1':
     celsius = float(input("Enter temperature in Celsius: "))
     print(f"Fahrenheit: {celsius_to_fahrenheit(celsius):.2f}")
-    print(f"Kelvin: {celsius_to_kelvin(celsius):.2f}")
-  elif choice == '2':
-    fahrenheit = float(input("Enter temperature in Fahrenheit: "))
 
 
