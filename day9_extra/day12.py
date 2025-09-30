@@ -65,8 +65,4 @@ while True:
   show_menu()
   choice = input("Enter your choice (1/2/3/4): ")
 
-  if choice == '1':
-    celsius = float(input("Enter temperature in Celsius: "))
-    print(f"Fahrenheit: {celsius_to_fahrenheit(celsius):.2f}")
-
 
