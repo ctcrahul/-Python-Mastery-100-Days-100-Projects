@@ -61,8 +61,5 @@ def show_menu():
   print("4. Exit")
 
 # Step 3: Main Program Loop
-while True:
-  show_menu()
-  choice = input("Enter your choice (1/2/3/4): ")
 
 
