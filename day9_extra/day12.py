@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """Day12.ipynb
 
                        Temperature Converter: Functions with Return Values
