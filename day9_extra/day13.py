@@ -34,9 +34,4 @@ scores = [int(score) for score in student_scores.split(",")]
 
 # Step 2: Assign Grades using List Comprehension
 grades = [
-    "A" if score >= 90 else
-    "B" if score >= 80 else
-    "C" if score >= 70 else
-    "D" if score >= 60 else
-    "F"
 
