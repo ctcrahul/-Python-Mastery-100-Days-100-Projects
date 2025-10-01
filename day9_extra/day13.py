@@ -48,8 +48,4 @@ failing_students = [score for score in scores if score < 60]
 
 # Step 4: Print Results
 print("\n--- Student Grades ----")
-for i, (score, grade) in enumerate(zip(scores, grades), start=1):
-    print(f"Student {i}: Score = {score}, Grade = {grade}")
-
-print("\n--- Passing and Failing Students ---")
 
