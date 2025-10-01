@@ -52,5 +52,4 @@ for i, (score, grade) in enumerate(zip(scores, grades), start=1):
     print(f"Student {i}: Score = {score}, Grade = {grade}")
 
 print("\n--- Passing and Failing Students ---")
-print("Passing Students:", passing_students)
-print("Failing Students:", failing_students)
+
