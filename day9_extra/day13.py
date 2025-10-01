@@ -44,8 +44,5 @@ grades = [
 
 # Step 3: Filter Passing and Failing Students
 passing_students = [score for score in scores if score >=60]
-failing_students = [score for score in scores if score < 60]
 
-# Step 4: Print Results
-print("\n--- Student Grades ----")
 
