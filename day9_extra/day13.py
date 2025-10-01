@@ -18,8 +18,3 @@ numbers = [1, 2, 3, 4, 5, 6, 7]
 evens = [x for x in numbers if x % 2 == 0]
 print(evens)
 
-names = ["Alice", "Bob", "Charlie", "Dave"]
-short_names = [name for name in names if len(name) < 5]
-print(short_names)
-
-
