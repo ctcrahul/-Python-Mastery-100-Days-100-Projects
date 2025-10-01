@@ -39,10 +39,4 @@ grades = [
     "C" if score >= 70 else
     "D" if score >= 60 else
     "F"
-    for score in scores
-]
-
-# Step 3: Filter Passing and Failing Students
-passing_students = [score for score in scores if score >=60]
-
 
