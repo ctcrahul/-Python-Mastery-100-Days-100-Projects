@@ -29,9 +29,3 @@ print(labels)
 # Student Grade Manager
 
 # Step 1: Get student scores
-student_scores = input("Enter student scores separated by commas: ")
-scores = [int(score) for score in student_scores.split(",")]
-
-# Step 2: Assign Grades using List Comprehension
-grades = [
-
