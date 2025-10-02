@@ -73,6 +73,9 @@ try:
   length = int(input("Enter the desired password length (minimum 4): "))
   password = generate_password(length)
   print("Generated Password:", password)
+except ValueError as e:
+  print(e)
+  
 
 
 
