@@ -68,9 +68,3 @@ def view_recipe(recipes):
 recipe_file = "recipes.txt"
 recipes = load_recipes(recipe_file)
 
-while True:
-  show_menu()
-  choice = input("Enter your choice (1/2/3): ")
-
-  if choice == '1':
-
