@@ -64,7 +64,3 @@ def view_recipe(recipes):
   else:
     print("Recipe not found.")
 
-# Step 4: Main Program
-recipe_file = "recipes.txt"
-recipes = load_recipes(recipe_file)
-
