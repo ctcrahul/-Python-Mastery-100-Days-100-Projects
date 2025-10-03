@@ -73,9 +73,4 @@ while True:
   choice = input("Enter your choice (1/2/3): ")
 
   if choice == '1':
-    view_recipe(recipes)
-  elif choice == '2':
-    print("\n--- All Recipes ---")
-    for name in recipes:
-      print(name)
- 
+
