@@ -51,11 +51,4 @@ def load_recipes(file_path):
 def show_menu():
   print("\n--- Recipe Viewer Menu ---")
   print("1. View Recipe by Name")
-  print("2. List All Recipes")
-  print("3. Exit")
-
-# Step 3: Display Recipe Details
-def view_recipe(recipes):
-  name = input("Enter the name of the recipe: ").strip()
-  if name in recipes:
-  
+  print("2. 
