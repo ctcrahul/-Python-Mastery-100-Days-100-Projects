@@ -78,8 +78,4 @@ while True:
     print("\n--- All Recipes ---")
     for name in recipes:
       print(name)
-  elif choice == '3':
-    print("Exiting the program.")
-    break
-  else:
-    print("Invalid choice. Please try again.")
+ 
