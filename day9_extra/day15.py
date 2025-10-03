@@ -41,13 +41,7 @@ def load_recipes(file_path):
           name = lines[0].strip()
           ingredients = lines[1].replace('Ingredients: ','').strip()
           instructions = lines[2].replace('Instructions: ', '').strip()
-          recipe_dict[name] = {"ingredients": ingredients, "instructions": instructions}
-      return recipe_dict
-  except FileNotFoundError:
-    print("File not found.")
-    return {}
-
-# Step 2: Display Recipe Menu
+          recipe_dict[nam
 def show_menu():
   print("\n--- Recipe Viewer Menu ---")
   print("1. View Recipe by Name")
