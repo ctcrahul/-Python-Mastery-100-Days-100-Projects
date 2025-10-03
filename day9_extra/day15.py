@@ -58,9 +58,4 @@ def show_menu():
 def view_recipe(recipes):
   name = input("Enter the name of the recipe: ").strip()
   if name in recipes:
-    print(f"\n--- Recipe {name} Details ---")
-    print(f"Ingredients: {recipes[name]['ingredients']}")
-    print(f"Instructions: {recipes[name]['instructions']}")
-  else:
-    print("Recipe not found.")
-
+  
