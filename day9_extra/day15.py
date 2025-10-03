@@ -37,12 +37,4 @@ def load_recipes(file_path):
       recipe_dict = {}
       for recipe in recipes:
         lines = recipe.split("\n")
-        if len(lines) >= 3:
-          name = lines[0].strip()
-          ingredients = lines[1].replace('Ingredients: ','').strip()
-          instructions = lines[2].replace('Instructions: ', '').strip()
-          recipe_dict[nam
-def show_menu():
-  print("\n--- Recipe Viewer Menu ---")
-  print("1. View Recipe by Name")
   print("2. 
