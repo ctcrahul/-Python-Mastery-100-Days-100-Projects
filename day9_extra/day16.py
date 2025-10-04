@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-"""Day16.py
+
+"""                                   Day16.py
+
+                          Daily Journal Logger: Writing Files
 
 
 """
