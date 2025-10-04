@@ -26,14 +26,7 @@ def view_entries():
     print("No journal file found. Add an entry first!")
 
 # Step 4: Search entries by keyword
-def search_entries():
-  keyword = input("Enter a keyword to search for: ").lower()
-  try:
-    with open(JOURNAL_FILE, 'r') as file:
-      content = file.readlines()
-      found = False
-      print("\n--- Search Results ---")
-      for entry in content:
+def search_entries()
         if keyword in entry.lower():
           print(entry.strip())
           found = True
