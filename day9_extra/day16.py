@@ -6,9 +6,6 @@
 
 """
 
-
-# Daily Journal Lo
-# Step 2: Add a new entry
 def add_entry():
   entry = input("Write your journal entry: ")
   with open(JOURNAL_FILE, 'a') as file:
