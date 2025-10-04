@@ -69,12 +69,6 @@ def show_menu():
   print("3. Search entries by keyword")
   print("4. Exit")
 
-# Step 6: Main Program Loop
-while True:
-  show_menu()
-  choice = input("Enter your choice (1-4): ").strip()
-
-  if choice == '1':
     add_entry()
   elif choice == '2':
     view_entries()
