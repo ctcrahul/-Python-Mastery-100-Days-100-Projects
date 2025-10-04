@@ -6,14 +6,8 @@
 
 """
 
-with open("journal.txt", "w") as file:
-  file.write("Day 1: Today I learned about writing files in Python. \n")
 
-# Daily Journal Logger
-
-# Step 1: Define the journal file
-JOURNAL_FILE = 'daily_journal.txt'
-
+# Daily Journal Lo
 # Step 2: Add a new entry
 def add_entry():
   entry = input("Write your journal entry: ")
