@@ -80,8 +80,3 @@ while True:
     view_entries()
   elif choice == '3':
     search_entries()
-  elif choice == '4':
-    print("Exiting the program. Goodbye!")
-    break
-  else:
-    print("Invalid choice. Please enter a number between 1 and 4.")
