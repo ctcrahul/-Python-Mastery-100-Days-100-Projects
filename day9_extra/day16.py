@@ -10,13 +10,7 @@
 # Step 3: View all entries
 def view_entries():
   try:
-    with open(JOURNAL_FILE, 'r') as file:
-      content = file.read()
-      if content:
-        print("\n--- Your Journal Entries ---")
-        print(content)
-      else:
-        print("No entries found. Start writing today")
+    with open(JOURNAL_FIng today")
   except FileNotFoundError:
     print("No journal file found. Add an entry first!")
 
