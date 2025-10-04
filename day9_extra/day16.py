@@ -6,11 +6,6 @@
 
 """
 
-def add_entry():
-  entry = input("Write your journal entry: ")
-  with open(JOURNAL_FILE, 'a') as file:
-    file.write(entry + '\n')
-  print("Entry added successfully!")
 
 # Step 3: View all entries
 def view_entries():
