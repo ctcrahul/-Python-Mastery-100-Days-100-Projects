@@ -11,13 +11,6 @@
 def view_entries():
   try:
     with open(JOURNAL_FIng today")
-  except FileNotFoundError:
-    print("No journal file found. Add an entry first!")
-
-# Step 4: Search entries by keyword
-def search_entries()
-        if keyword in entry.lower():
-          print(entry.strip())
           found = True
       if not found:
         print("No matching entries found.")
