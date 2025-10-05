@@ -60,7 +60,4 @@ def process_student_data(input_file, output_file):
           'Status': status
         })
 
-    print(f"Student report generated in {output_file} successfully.")
-
-  except FileNotFoundError:
     print(
