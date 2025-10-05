@@ -70,9 +70,4 @@ def process_student_data(input_file, output_file):
     print(f"Student report generated in {output_file} successfully.")
 
   except FileNotFoundError:
-    print(f"Error: File '{input_file}' not found")
-  except KeyError:
-    print("Error: Invalid column names in the input file")
-  except Exception as e:
-    print(f"An error occurred: {e}")
-
+    print(
