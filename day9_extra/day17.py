@@ -46,10 +46,4 @@ def process_student_data(input_file, output_file):
       for row in reader:
         name = row['Name']
         math = int(row['Math'])
-        science = int(row['Science'])
-        english = int(row['English'])
-        average = round((math + science + english) / 3, 2)
-        status = "Pass" if average >= 60 else "Fail"
-
-        student_reports.append({
-          'Average': average,
+        science = int(row['
