@@ -41,9 +41,4 @@ def process_student_data(input_file, output_file):
   try:
     with open(input_file, 'r') as infile:
       reader = csv.DictReader(infile)
-      student_reports = []
-
-      for row in reader:
-        name = row['Name']
-        math = int(row['Math'])
-        science = int(row['
+      student_reports = [
