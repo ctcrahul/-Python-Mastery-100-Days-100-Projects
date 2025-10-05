@@ -52,8 +52,4 @@ def process_student_data(input_file, output_file):
         status = "Pass" if average >= 60 else "Fail"
 
         student_reports.append({
-          'Name': name,
-          'Math': math,
-          'Science': science,
-          'English': english,
           'Average': average,
