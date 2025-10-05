@@ -76,8 +76,3 @@ def process_student_data(input_file, output_file):
   except Exception as e:
     print(f"An error occurred: {e}")
 
-# Main Program
-input_file = 'students.csv'
-output_file = 'student_report.csv'
-
-process_student_data(input_file, output_file)
