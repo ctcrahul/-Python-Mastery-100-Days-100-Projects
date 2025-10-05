@@ -60,13 +60,6 @@ def process_student_data(input_file, output_file):
           'Status': status
         })
 
-    # Step 2: Write processed data to a new CSV
-    with open(output_file, 'w', newline='') as outfile:
-      fieldnames = ['Name', 'Math', 'Science', 'English', 'Average', 'Status']
-      writer = csv.DictWriter(outfile, fieldnames=fieldnames)
-      writer.writeheader()
-      writer.writerows(student_reports)
-
     print(f"Student report generated in {output_file} successfully.")
 
   except FileNotFoundError:
