@@ -20,13 +20,7 @@ with open('new_students.csv', 'w', newline='') as file:
   writer = csv.writer(file)
   writer.writerow(['Name', 'Math', 'Science', 'English'])
   writer.writerow(['Daisy', 88, 92, 85])
-
-import csv
-
-with open('new_students.csv', 'w', newline='') as file:
-  writer = csv.DictWriter(file, fieldnames=['Name', 'Math', 'Science', 'English'])
-  writer.writeheader()
-  writer.writerow({'Name': 'Eve', 'Math': 91, 'Science': 87, 'English': 90})
+, 'Science': 87, 'English': 90})
 
 # Student Report Generator
 import csv
