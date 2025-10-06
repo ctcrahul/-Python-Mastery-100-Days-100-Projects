@@ -124,9 +124,4 @@ while True:
     update_status()
   elif choice == '4':
     delete_task()
-  elif choice == '5':
-    print("Exiting the To-Do List App. Goodbye!")
-    break
-  else:
-    print("Invalid choice. Please enter a number between 1 and 5.")
-
+  elif choic
