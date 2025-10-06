@@ -86,13 +86,6 @@ def update_status():
       print("Invalid task number.")
   except ValueError:
     print("Invalid input. Please enter a valid task number.")
-
-# Step 6: Delete a Task
-def delete_task():
-  tasks = load_tasks()
-  view_tasks()
-  try:
-    task_index = int(input("Enter the task number to delete: ")) - 1
     if 0 <= task_index < len(tasks):
       deleted_task = tasks.pop(task_index)
       save_tasks(tasks)
