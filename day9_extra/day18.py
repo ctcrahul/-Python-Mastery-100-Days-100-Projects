@@ -62,16 +62,6 @@ def add_task():
   print(f'Task "{task_name}" added successfully!')
 
 # Step 4: View All Tasks
-# Step 5: Update Task Status
-def update_status():
-  tasks = load_tasks()
-  view_tasks()
-  try:
-    task_index = int(input("Enter the task number to update: ")) - 1
-    if 0 <= task_index < len(tasks):
-      new_status = input("Enter the new status (Complete/Incomplete): ").strip()
-      tasks[task_index]['status'] = new_status
-      save_tasks(tasks)
       print(f'Task "{deleted_task["task"]}" deleted successfully!')
     else:
   print("2. View all tasks")
