@@ -114,10 +114,4 @@ def display_menu():
 # Step 8: Main Program Loop
 while True:
   display_menu()
-  choice = input("Enter your choice (1-5): ").strip()
-
-  if choice == '1':
-    add_task()
-  elif choice == '2':
-    view_tasks()
   elif choice == '3':
