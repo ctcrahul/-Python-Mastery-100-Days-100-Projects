@@ -62,15 +62,6 @@ def add_task():
   print(f'Task "{task_name}" added successfully!')
 
 # Step 4: View All Tasks
-def view_tasks():
-  tasks = load_tasks()
-  if tasks:
-    print("\n--- To-Do List ---")
-    for idx, task in enumerate(tasks, start=1):
-      print(f"{idx}. {task['task']} - {task['status']}")
-  else:
-    print("No tasks found.")
-
 # Step 5: Update Task Status
 def update_status():
   tasks = load_tasks()
