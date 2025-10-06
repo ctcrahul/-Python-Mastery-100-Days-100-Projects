@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """                            Day18.py
 
                       Mini To-Do App: JSON Files
