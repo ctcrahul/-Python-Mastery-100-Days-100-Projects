@@ -72,14 +72,6 @@ def update_status():
       new_status = input("Enter the new status (Complete/Incomplete): ").strip()
       tasks[task_index]['status'] = new_status
       save_tasks(tasks)
-      print("Task status updated successfully!")
-    else:
-      print("Invalid task number.")
-  except ValueError:
-    print("Invalid input. Please enter a valid task number.")
-    if 0 <= task_index < len(tasks):
-      deleted_task = tasks.pop(task_index)
-      save_tasks(tasks)
       print(f'Task "{deleted_task["task"]}" deleted successfully!')
     else:
   print("2. View all tasks")
