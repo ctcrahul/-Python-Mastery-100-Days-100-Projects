@@ -107,11 +107,3 @@ def display_menu():
   print("\n--- Mini To-Do App ---")
   print("1. Add a new task")
   print("2. View all tasks")
-  print("3. Update Task status")
-  print("4. Delete a task")
-  print("5. Exit")
-
-# Step 8: Main Program Loop
-while True:
-  display_menu()
-  elif choice == '3':
