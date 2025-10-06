@@ -98,12 +98,4 @@ def delete_task():
       save_tasks(tasks)
       print(f'Task "{deleted_task["task"]}" deleted successfully!')
     else:
-      print("Invalid task number.")
-  except ValueError:
-    print("Invalid input. Please enter a valid task number.")
-
-# Step 7: Display Menu
-def display_menu():
-  print("\n--- Mini To-Do App ---")
-  print("1. Add a new task")
   print("2. View all tasks")
