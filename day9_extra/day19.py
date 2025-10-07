@@ -51,7 +51,7 @@ def get_weather(city):
     print("An error occurred: ", e)
   return None
 
-# Step 3: Display Weather Information
+# Step 3: Display Weather Info.
 def display_weather(weather):
   print("\n--- Weather Information ---")
   for key,value in weather.items():
