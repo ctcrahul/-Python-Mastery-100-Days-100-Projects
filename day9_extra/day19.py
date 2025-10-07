@@ -58,7 +58,4 @@ def display_weather(weather):
 
 # Step 4: Main Program Loop
 while True:
-  print("\n--- Weather App ---")
-  city = input("Enter a city name (or 'q' to quit): ").strip()
-  if city.lower() == 'q':
-    break
+  print("\n--- Wea
