@@ -5,15 +5,6 @@
               
 """
 
-# pip insthermap.org/data/2.5/weather?q
-    print("An error occurred. Status Code: ", response.status_code)
-
-# Weather App using OpenWeatherMap API
-import requests
-
-#Step 1: API SETUP
-API_KEY = "e611e115247fdc30fbb05fc9a54561cc"
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 # Step 2: Get Weather Data
 def get_weather(city):
