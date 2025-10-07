@@ -5,15 +5,7 @@
               
 """
 
-
-de == 200:
-      data = response.json()
-      weather = {
-          "City": data["name"],
-          "Temperature": f"{data['main']['temp']}C",
-          "Weather": data["weather"][0]['description'].title(),
-          "Humidity": f"{data['main']['humidity']}%",
-          "Wind Speed": f"{data['wind']['speed']}m/s"
+/s"
       }
       return weather
     elif response.status_code == 404:
