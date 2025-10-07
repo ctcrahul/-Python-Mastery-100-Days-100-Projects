@@ -5,14 +5,7 @@
               
 """
 
-# pip insthermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
-
-response = requests.get(url)
-
-if response.status_code == 200:
-  weather_data = response.json()
-  print(weather_data)
-else:
+# pip insthermap.org/data/2.5/weather?q
     print("An error occurred. Status Code: ", response.status_code)
 
 # Weather App using OpenWeatherMap API
