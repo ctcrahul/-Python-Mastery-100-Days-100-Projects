@@ -6,12 +6,7 @@
 """
 
 
-# Step 2: Get Weather Data
-def get_weather(city):
-  try:
-    url = f"{BASE_URL}?q={city}&appid={API_KEY}&units=metric"
-    response = requests.get(url)
-    if response.status_code == 200:
+de == 200:
       data = response.json()
       weather = {
           "City": data["name"],
