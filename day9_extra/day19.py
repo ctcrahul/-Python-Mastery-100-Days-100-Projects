@@ -62,6 +62,3 @@ while True:
   city = input("Enter a city name (or 'q' to quit): ").strip()
   if city.lower() == 'q':
     break
-  weather = get_weather(city)
-  if weather:
-    display_weather(weather)
