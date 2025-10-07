@@ -5,12 +5,7 @@
               
 """
 
-# pip install requests
-import requests
-
-API_KEY = "e611e115247fdc30fbb05fc9a54561cc"
-city = "London"
-url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+# pip insthermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
 
 response = requests.get(url)
 
