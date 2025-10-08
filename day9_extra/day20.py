@@ -16,14 +16,6 @@ import time
 def get_event_datetime():se YYYY-MM-DD HH:MM:SS format.")
     return None
 
-# Step 2: Calculating Time Remaining
-  hours, remainder = divmod(time_left.seconds, 3600)
-  minutes, seconds = divmod(remainder, 60)
-  print(f"\nTime Remaining: {days} days, {hours} hours, {minutes} minutes, {seconds} seconds", end="")
-
-# Step 4: Main Countdown Loop
-def start_countdown(event_date):
-  while True:
     time_left = calculate_time_remaining(event_date)
     if time_left.total_seconds() <= 0:
       print("\nCountdown Complete!")
