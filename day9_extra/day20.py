@@ -8,8 +8,6 @@
 
 
 
-event_date = datetime(2025, 1, 25)
-curreent_date = datetim
 # Event Countdown Timer
 from datetime import datetime, timedelta
 import time
