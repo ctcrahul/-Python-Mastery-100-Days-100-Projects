@@ -7,12 +7,6 @@
 """
 tetime
 
-event_date = datetime(2025, 12, 25, 9, 0, 0)
-print("Event Date and Time: ", event_date)
-
-from datetime import datetime
-
-current_time = datetime.now()
 formatted_time = current_time.strftime("%m-%d-%Y %H:%M:%S")
 print("Formatted Time:", formatted_time)
 
