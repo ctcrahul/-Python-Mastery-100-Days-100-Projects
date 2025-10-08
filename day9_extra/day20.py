@@ -67,7 +67,5 @@ def start_countdown(event_date):
 
 
 # Main Program
-event_datetime = get_event_datetime()
-if event_datetime:
-  print(f"Event set for: {event_datetime}")
+event_datetime = get_event_
   start_countdown(event_datetime)
