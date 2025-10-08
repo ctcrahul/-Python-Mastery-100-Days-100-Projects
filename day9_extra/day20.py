@@ -5,12 +5,8 @@
 
 
 """
-tetime
 
-formatted_time = current_time.strftime("%m-%d-%Y %H:%M:%S")
-print("Formatted Time:", formatted_time)
 
-from datetime import datetime
 
 event_date = datetime(2025, 1, 25)
 curreent_date = datetime.now()
