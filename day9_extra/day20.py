@@ -9,10 +9,7 @@
 
 
 event_date = datetime(2025, 1, 25)
-curreent_date = datetime.now()
-time_difference = event_date - curreent_date
-print("Days Remaining:", time_difference.days)
-
+curreent_date = datetim
 # Event Countdown Timer
 from datetime import datetime, timedelta
 import time
