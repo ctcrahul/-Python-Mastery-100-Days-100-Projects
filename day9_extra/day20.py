@@ -17,14 +17,6 @@ def get_event_datetime():se YYYY-MM-DD HH:MM:SS format.")
     return None
 
 # Step 2: Calculating Time Remaining
-def calculate_time_remaining(event_date):
-  current_datetime = datetime.now()
-  time_difference = event_date - current_datetime
-  return time_difference
-
-# Step 3: Display Countdown
-def display_countdown(time_left):
-  days = time_left.days
   hours, remainder = divmod(time_left.seconds, 3600)
   minutes, seconds = divmod(remainder, 60)
   print(f"\nTime Remaining: {days} days, {hours} hours, {minutes} minutes, {seconds} seconds", end="")
