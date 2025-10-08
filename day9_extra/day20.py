@@ -15,12 +15,7 @@ from datetime import datetime, timedelta
 import time
 
 # Step 1: Get Event Date and Time from User
-def get_event_datetime():
-  try:
-    date_input = input("Enter the event date (YYYY-MM-DD HH:MM:SS): ")
-    return datetime.strptime(date_input, "%Y-%m-%d %H:%M:%S")
-  except ValueError:
-    print("Invalid date format. Please use YYYY-MM-DD HH:MM:SS format.")
+def get_event_datetime():se YYYY-MM-DD HH:MM:SS format.")
     return None
 
 # Step 2: Calculating Time Remaining
