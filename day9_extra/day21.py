@@ -9,12 +9,7 @@
 """
 
 
-i
-
-if response.status_code == 200:
-    print(response.text[:500])
-else:
-    print(f"Failed to retrieve data. Status code: {response.status_code}")
+trieve data. Status code: {response.status_code}")
 
 from bs4 import BeautifulSoup
 
