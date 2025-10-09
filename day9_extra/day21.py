@@ -9,10 +9,7 @@
 """
 
 
-import requests
-
-url = "https://en.wikipedia.org/wiki/Python_(programming_language)"
-response = requests.get(url)
+i
 
 if response.status_code == 200:
     print(response.text[:500])
