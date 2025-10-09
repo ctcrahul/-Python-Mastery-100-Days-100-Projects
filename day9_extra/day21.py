@@ -21,17 +21,4 @@ def get_wikipedia_page(topic):
     if para.text.strip():
       return para.text.strip()
   return "No summary found"
-
-# Step 4: Extract Headings
-def get_headings(soup):
-  headings = [heading.text.strip() foef}")
-  return list(set(links))[:5]
-
-# Step 6: Main Program
-def main():
-    print(f"\nSummary: {summary}")
-    print("\nHeadings:")
-    for heading in headings[:5]:
-      print(f"- {heading}")
-
    
