@@ -9,10 +9,6 @@
 """
 
 
-trieve data. Status code: {response.status_code}")
-
-# Wikipedia Article Scraper
-import requests
 from bs4 import BeautifulSoup
 
 # Step 1: Get Wikipedia Article URL
