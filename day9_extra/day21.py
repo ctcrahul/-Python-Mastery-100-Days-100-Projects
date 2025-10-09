@@ -98,10 +98,4 @@ def main():
     for heading in headings[:5]:
       print(f"- {heading}")
 
-    print("\nRelated Links:")
-    for link in related_links:
-      print(f"- {link}")
-
-# Run Program
-if __name__ == "__main__":
-  main()
+   
