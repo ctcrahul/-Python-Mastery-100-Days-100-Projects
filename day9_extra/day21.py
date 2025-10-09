@@ -8,18 +8,6 @@
 
 """
 
-# <html>
-#   <head><title>Sample Page</title></head>
-#   <body>
-#     <h1>Main Title</h1>
-#     <p>This is a sample paragraph</p>
-#     <a href="https://example.com">Click here</a>
-#   </body>
-# </html>
-
-# pip install requests beautifulsoup4
-
-# https://en.wikipedia.org/wiki/Python_(programming_language)
 
 import requests
 
