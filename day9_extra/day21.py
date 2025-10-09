@@ -29,18 +29,6 @@ def get_headings(soup):
 
 # Step 6: Main Program
 def main():
-  topic = input("Enter a topic to search on Wikipedia: ").strip()
-  page_content = get_wikipedia_page(topic)
-
-  if page_content:
-    soup = BeautifulSoup(page_content, 'html.parser')
-    title = get_article_title(soup)
-    summary = get_article_summary(soup)
-    headings = get_headings(soup)
-    related_links = get_related_links(soup)
-
-    print("\n--- Wikipedia Article Details ---")
-    print(f"\nTitle: {title}")
     print(f"\nSummary: {summary}")
     print("\nHeadings:")
     for heading in headings[:5]:
