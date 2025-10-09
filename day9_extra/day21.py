@@ -15,18 +15,7 @@ from bs4 import BeautifulSoup
 def get_wikipedia_page(topic):
   url = f"https://en.wikipedia.org/wiki/{topic.replace(' ', '_')}"
   response = requests.get(url)
-  if response.status_code == 200:
-    return response.text
-  else:
-    print(f"Failed to retrieve data. Status code: {response.status_code}. Check the topic and try again")
-    return None
-
-# Step 2: Extract Article Title
-def get_article_title(soup):
-  return soup.find('h1').text
-
-# Step 3: Extract Article Summary
-def get_article_summary(soup):
+  if response.status_code 
   paragraphs = soup.find_all('p')
   for para in paragraphs:
     if para.text.strip():
