@@ -24,16 +24,7 @@ def get_wikipedia_page(topic):
 
 # Step 4: Extract Headings
 def get_headings(soup):
-  headings = [heading.text.strip() for heading in soup.find_all(['h2', 'h3', 'h4'])]
-  return headings
-
-# Step 5: Extract Related Links
-def get_related_links(soup):
-  links = []
-  for a_tag in soup.find_all('a', href=True):
-    href = a_tag['href']
-    if href.startswith('/wiki/') and ":" not in href:
-      links.append(f"https://en.wikipedia.org{href}")
+  headings = [heading.text.strip() foef}")
   return list(set(links))[:5]
 
 # Step 6: Main Program
