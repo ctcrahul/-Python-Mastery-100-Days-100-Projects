@@ -9,16 +9,6 @@
 
     self.breed = breed
 
-  def bark(self):
-    print(f"{self.name} is barking!")
-
-# Create objects
-dog1 = Dog("Buddy", "Golden Retriever")
-dog2 = Dog("Max", "Bulldog")
-
-dog1.bark()
-/1 = Person("John", 25)
-person1.greet()
 
 # Bank.
       self.balance += amount
