@@ -37,16 +37,7 @@ def access_account():
       if choice == '1':
         amount = float(input("Enter deposit amount: "))
         account.deposit(amount)
-    print("Account not found. Please create an account first.")
-
-# Main Menu
-while True:
-  print("\n--- Bank Account Simulator ---")
-  print("1. Create Account")
-  print("2. Access Account")
-  print("3. Exit")
-  choice = input("Enter your choice(1-3): ")
-
+    print("Account not found. Please c
   print(accounts)
 
   if choice == '1':
