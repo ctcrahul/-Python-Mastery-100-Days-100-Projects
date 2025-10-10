@@ -37,17 +37,6 @@ def access_account():
       if choice == '1':
         amount = float(input("Enter deposit amount: "))
         account.deposit(amount)
-      elif choice == '2':
-        amount = float(input("Enter withdrawal amount: "))
-        account.withdraw(amount)
-      elif choice == '3':
-        account.show_details()
-      elif choice == '4':
-        print("Exiting account menu.")
-        break
-      else:
-        print("Invalid choice. Please select a valid option.")
-  else:
     print("Account not found. Please create an account first.")
 
 # Main Menu
