@@ -23,24 +23,7 @@ def create_account():
   print("Account created successfully!")
 
 def access_account():
-  name = input("Enter your name: ").strip()
-  if name in accounts:
-    account = accounts[name]
-    while True:
-      print("\n--- Account Menu ---")
-      print("1. Deposit")
-      print("2. Withdraw")
-      print("3. Show Details")
-      print("4. Exit")
-      choice = input("Enter your choice(1-4): ")
-
-      if choice == '1':
-        amount = float(input("Enter deposit amount: "))
-        account.deposit(amount)
-    print("Account not found. Please c
-  print(accounts)
-
-  if choice == '1':
+  name = input("Enter your name: ").
     create_account()
   elif choice == '2':
     access_account()
