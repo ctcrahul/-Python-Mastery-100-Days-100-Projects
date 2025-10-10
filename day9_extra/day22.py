@@ -7,17 +7,6 @@
 
 
 
-    self.breed = breed
-
-
-# Bank.
-      self.balance += amount
-      print(f"Deposited ${amount}. New balance: ${self.balance}")
-    else:
-      print("Invalid deposit amount. Amount must be greater than 0.")
-
-  #Withdraw Money
-  def withdraw(self, amount):
     if amount > 0 and amount <= self.balance:
       self.balance -= amount,
     print(f"Account Balance: ${self.balance}")
