@@ -20,16 +20,7 @@ dog1.bark()
 /1 = Person("John", 25)
 person1.greet()
 
-# Bank Account Simulator
-
-class BankAccount:
-  def __init__(self, account_holder, initial_balance=0):
-    self.account_holder = account_holder
-    self.balance = initial_balance
-
-  #Deposit Money
-  def deposit(self, amount):
-    if amount > 0:
+# Bank.
       self.balance += amount
       print(f"Deposited ${amount}. New balance: ${self.balance}")
     else:
