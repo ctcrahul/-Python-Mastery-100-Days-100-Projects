@@ -6,13 +6,7 @@
 """
 
 
-  def display_info(self):
-    print(f"This is a {self.brand}: {self.model}.")
-.
 
-class Dog:
-  def __init__(self, name, breed):
-    self.name = name
     self.breed = breed
 
   def bark(self):
