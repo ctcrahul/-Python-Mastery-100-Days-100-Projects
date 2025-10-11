@@ -46,17 +46,7 @@ Utility.get_version()
 Utility.greet()
 
 class Account:
-  def __init__(self, owner, balance=0):
-    self.owner = owner
-    self.__balance = balance
-
-  def deposit(self, amount):
-    if amount > 0:
-      self.__balance += amount
-      print(f"Deposited ${amount}. New balance: ${self.__balance}")
-    else:
-      print("Invalid deposit amount.")
-
+z
   def get_balance(self):
     return self.__balance
 
