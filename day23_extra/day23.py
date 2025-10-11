@@ -55,19 +55,7 @@ account.deposit(500)
 print(f"Account Balance: ${account.get_balance()}")
 
 # Library Management System
-
-class Book:
-  def __init__(self, title, author):
-    self.title = title
-    self.author = author
-    self.is_borrowed = False
-
-  def display_info(self):
-    status = "Available" if not self.is_borrowed else "Borrowed"
-    print(f"Title: {self.title}")
-    print(f"Author: {self.author}")
-    print(f"Status: {status}")
-
+z
 class Library:
   def __init__(self):
     self.books = []
