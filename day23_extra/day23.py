@@ -39,18 +39,7 @@ class Utility:
     print(f"App Version: {cls.app_version}")
 
   @staticmethod
-  def greet():
-    print("Hello! Welcome to the app.")
-
-Utility.get_version()
-Utility.greet()
-
-class Account:
-z
-  def get_balance(self):
-    return self.__balance
-
-account = Account("John Doe", 1000)
+  def greet():z
 account.deposit(500)
 print(f"Account Balance: ${account.get_balance()}")
 
