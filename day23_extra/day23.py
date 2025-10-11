@@ -34,19 +34,7 @@ account.deposit(500)
 class Utility:
   app_version = "1.0"
 
-  @classmethod
-  def get_version(cls):
-    print(f"App Version: {cls.app_version}")
-
-  @staticmethod
-  def greet():z
-account.deposit(500)
-print(f"Account Balance: ${account.get_balance()}")
-
-# Library Management System
-z
-class Library:
-  def __init__(self):
+  @classmethodz
     self.books = []
 
   def add_book(self, title, author):
