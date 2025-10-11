@@ -29,20 +29,7 @@ class BankAccount:
         book.display_info()
 
   # Borrow a book
-  def borrow_book(self, title):
-    for book in self.books:
-      if book.title == title and not book.is_borrowed:
-        book.is_borrowed = True
-        print(f"Book '{title}' has been borrowed. Enjoy Reading")
-        return
-    print(f"Book '{title}' is not available for borrowing.")
-
-
-  # Return a book
-  def return_book(self, title):
-    for book in self.books:
-      if book.title == title and book.is_borrowed:
-        book.is_borrowed = False
+  def borrow_book(self, title):z
         print(f"Book '{title}' has been returned.")
         return
     print(f"Book '{title}' is not in the library.")
