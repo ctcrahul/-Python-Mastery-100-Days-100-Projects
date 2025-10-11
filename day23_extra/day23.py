@@ -73,17 +73,7 @@ class Library:
     self.books = []
 
   def add_book(self, title, author):
-    new_book = Book(title, author)
-    self.books.append(new_book)
-    print(f"Book '{title}' by {author} added to the library.")
-
-  # View all books
-  def view_books(self):
-    if not self.books:
-      print("No books in the library.")
-    else:
-      print("\n--- Library Catalog ---")
-      for book in self.books:
+    new_book = Book(title, ax
         book.display_info()
 
   # Borrow a book
