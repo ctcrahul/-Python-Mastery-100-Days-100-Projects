@@ -25,20 +25,7 @@ class BankAccount:
     self.balance = balance
 
   def deposit(self, amount):
-    self.balance += amount
-    print(f"Deposited ${amount}. New balance: ${self.balance}")
-
-account = BankAccount("John Doe", 1000)
-account.deposit(500)
-
-class Utility:
-  app_version = "1.0"
-
-  @classmethodz
-    self.books = []
-
-  def add_book(self, title, author):
-    new_book = Book(title, ax
+    self.balance += amountx
         book.display_info()
 
   # Borrow a book
