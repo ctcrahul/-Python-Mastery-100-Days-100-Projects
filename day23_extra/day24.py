@@ -35,18 +35,7 @@ child = Child()
 child.display()
 
 class A:
-  def method_a(self):
-    print("I am method A")
-
-class B:
-  def method_b(self):
-    print("I am method B")
-
-class C(A, B):
-  pass
-
-obj = C()
-obj.method_a()
+  def method_a(self):z
 obj.method_b()
 
 class GrandParent:
