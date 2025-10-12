@@ -6,18 +6,7 @@
 
 """
 
-#Parent class
-class Animal:
-  def sound(self):
-    print("Animal makes a sound")
-
-#Child class
-class Dog(Animal):
-  def barks(self):
-    print("Dog barks")
-
-#Child class
-class Cat(Animal):
+#Parent classz
   def sound(self):
     print("Cat meows")z
 child.display()
