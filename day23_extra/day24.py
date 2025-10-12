@@ -9,15 +9,7 @@
 #Parent classz
   def sound(self):
     print("Cat meows")z
-child.display()
-
-class A:
-  def method_a(self):z
-obj.method_b()
-z
-  def fuel_type(self):
-    print("Fuel type: Electric")
-
+child.display()z
 car = ElectricCar()
 car.fuel_type()
 
