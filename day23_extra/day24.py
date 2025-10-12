@@ -6,10 +6,82 @@
 
 """
 
-#Parent classz
+
+#Parent class
+class Animal:
   def sound(self):
-    print("Cat meows")z
-child.display()z
+    print("Animal makes a sound")
+
+#Child class
+class Dog(Animal):
+  def barks(self):
+    print("Dog barks")
+
+#Child class
+class Cat(Animal):
+  def sound(self):
+    print("Cat meows")
+
+dog = Dog()
+dog.sound()
+
+class Parent:
+  def display(self):
+    print("I am a Parent class")
+
+class Child(Parent):
+  pass
+
+child = Child()
+child.display()
+
+class A:
+  def method_a(self):
+    print("I am method A")
+
+class B:
+  def method_b(self):
+    print("I am method B")
+
+class C(A, B):
+  pass
+
+obj = C()
+obj.method_a()
+obj.method_b()
+
+class GrandParent:
+  def display(self):
+    print("I am a Grand Parent class")
+
+class Parent(GrandParent):
+  pass
+
+class Child(Parent):
+  pass
+
+child = Child()
+child.display()
+
+class Animal:
+  def __init__(self):
+    print("Animal Created")
+
+class Dog(Animal):
+  def __init__(self):
+    super().__init__()
+    print("Dog Created")
+
+dog = Dog()
+
+class Vehicle:
+  def fuel_type(self):
+    print("Fuel type: Petrol/Diesel")
+
+class ElectricCar(Vehicle):
+  def fuel_type(self):
+    print("Fuel type: Electric")
+
 car = ElectricCar()
 car.fuel_type()
 
@@ -17,7 +89,16 @@ from os import name
 # Employee Management System
 
 # Base Class: Employee
-class Employee:zid}")
+class Employee:
+  def __init__(self, name, emp_id, salary):
+    self.name = name
+    self.emp_id = emp_id
+    self.salary = salary
+
+  def display_info(self):
+    print("\n--- Employee Details ---")
+    print(f"Name: {self.name}")
+    print(f"Employee ID: {self.emp_id}")
     print(f"Salary: {self.salary}")
 
   def calculate_bonus(self):
@@ -81,7 +162,19 @@ def display_all_employees():
     print(f"Bonus: {employee.calculate_bonus()}")
 
 # Menu
-while True:z")
+while True:
+  print("\n--- Employee Management System ---")
+  print("1. Add Employee")
+  print("2. Display All Employees")
+  print("3. Exit")
+  choice = int(input("Enter your choice(1-3): ").strip())
+
+  if choice == 1:
+    add_employee()
+  elif choice == 2:
+    display_all_employees()
+  elif choice == 3:
+    print("Exiting the program.")
     break
   else:
     print("Invalid choice")
