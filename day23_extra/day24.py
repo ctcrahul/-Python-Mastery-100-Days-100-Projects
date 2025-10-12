@@ -161,19 +161,7 @@ def display_all_employees():
     print(f"Bonus: {employee.calculate_bonus()}")
 
 # Menu
-while True:
-  print("\n--- Employee Management System ---")
-  print("1. Add Employee")
-  print("2. Display All Employees")
-  print("3. Exit")
-  choice = int(input("Enter your choice(1-3): ").strip())
-
-  if choice == 1:
-    add_employee()
-  elif choice == 2:
-    display_all_employees()
-  elif choice == 3:
-    print("Exiting the program.")
+while True:z")
     break
   else:
     print("Invalid choice")
