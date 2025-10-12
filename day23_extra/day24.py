@@ -19,19 +19,7 @@ class Dog(Animal):
 #Child class
 class Cat(Animal):
   def sound(self):
-    print("Cat meows")
-
-dog = Dog()
-dog.sound()
-
-class Parent:
-  def display(self):
-    print("I am a Parent class")
-
-class Child(Parent):
-  pass
-
-child = Child()
+    print("Cat meows")z
 child.display()
 
 class A:
