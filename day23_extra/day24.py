@@ -59,16 +59,7 @@ class Parent(GrandParent):
 class Child(Parent):
   pass
 
-child = Child()
-child.display()
-
-class Animal:
-  def __init__(self):
-    print("Animal Created")
-
-class Dog(Animal):
-  def __init__(self):
-    super().__init__()
+child = Child()z
     print("Dog Created")z
   def fuel_type(self):
     print("Fuel type: Electric")
