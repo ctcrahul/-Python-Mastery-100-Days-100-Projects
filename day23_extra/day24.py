@@ -71,16 +71,7 @@ from os import name
 # Employee Management System
 
 # Base Class: Employee
-class Employee:
-  def __init__(self, name, emp_id, salary):
-    self.name = name
-    self.emp_id = emp_id
-    self.salary = salary
-
-  def display_info(self):
-    print("\n--- Employee Details ---")
-    print(f"Name: {self.name}")
-    print(f"Employee ID: {self.emp_id}")
+class Employee:zid}")
     print(f"Salary: {self.salary}")
 
   def calculate_bonus(self):
