@@ -37,19 +37,7 @@ child.display()
 class A:
   def method_a(self):z
 obj.method_b()
-
-class GrandParent:
-  def display(self):
-    print("I am a Grand Parent class")
-
-class Parent(GrandParent):
-  pass
-
-class Child(Parent):
-  pass
-
-child = Child()z
-    print("Dog Created")z
+z
   def fuel_type(self):
     print("Fuel type: Electric")
 
