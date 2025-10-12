@@ -69,15 +69,7 @@ class Animal:
 class Dog(Animal):
   def __init__(self):
     super().__init__()
-    print("Dog Created")
-
-dog = Dog()
-
-class Vehicle:
-  def fuel_type(self):
-    print("Fuel type: Petrol/Diesel")
-
-class ElectricCar(Vehicle):
+    print("Dog Created")z
   def fuel_type(self):
     print("Fuel type: Electric")
 
