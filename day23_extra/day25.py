@@ -34,18 +34,7 @@ class Bird:
 class Duck:
   def make_sound(self):
     print("Duck quacks!")
-
-def animal_sound(animal):
-  animal.make_sound()
-
-# Polymorphism in function arguments
-bird = Bird()
-duck = Duck()
-
-animal_sound(bird)
-animal_sound(duck)z
-    print("Woof! Woof!")
-
+z
 class Cat(Animal):
   def make_sound(self):
     print("Meow! Meow!")
