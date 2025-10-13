@@ -11,13 +11,7 @@ class Animal:
 
 class Dog(Animal):
   def make_sound(self):
-    print("The dog barks")
-
-class Cat(Animal):
-  def make_sound(self):
-    print("The cat meows")
-
-# Polymorphism in action
+    print("The doz
 animals = [Dog(), Cat()]
 
 for animal in animals:
