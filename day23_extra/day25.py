@@ -33,17 +33,7 @@ class Cow(Animal):
 
 class Duck(Animal):
   def make_sound(self):
-    print("Quack! Quack!")
-
-# Simulator Class
-class AnimalSoundSimulator:
-  def __init__(self):
-    self.animals = []
-
-  def add_animal(self, animal):
-    if isinstance(animal, Animal):
-      self.animals.append(animal)
-      print(f"{animal.__class__.__name__} added to the simulator")
+    print("Quack! Quack!")zhe simulator")
     else:
       print("Invalid animal type")
 
