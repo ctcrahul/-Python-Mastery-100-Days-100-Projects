@@ -22,19 +22,7 @@ class Square(Shape):
     print("Area of a Square: side*side")
 z
     print("Duck quacks!")
-z
-class Cat(Animal):
-  def make_sound(self):
-    print("Meow! Meow!")
-
-class Cow(Animal):
-  def make_sound(self):
-    print("Moo! Moo!")
-
-class Duck(Animal):
-  def make_sound(self):
-    print("Quack! Quack!")zhe simulator")
-    else:
+zz
       print("Invalid animal type")
 
   def make_all_sounds(self):
