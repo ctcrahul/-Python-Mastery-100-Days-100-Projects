@@ -5,15 +5,7 @@
 
 """
 
-class Animal:
-  def make_sound(self):
-    print("The animal makes a sound")
-
-class Dog(Animal):
-  def make_sound(self):
-    print("The doz
-animals = [Dog(), Cat()]
-
+class Animal:z
 for animal in animals:
   animal.make_sound()
 
