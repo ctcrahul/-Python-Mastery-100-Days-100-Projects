@@ -15,19 +15,7 @@ class Shape:
 
 class Circle(Shape):
   def area(self):
-    print("Area of a Circle: pi*r*r")
-
-class Square(Shape):
-  def area(self):
-    print("Area of a Square: side*side")
-z
-    print("Duck quacks!")
-zz
-      print("Invalid animal type")
-
-  def make_all_sounds(self):
-    if not self.animals:
-      print("No animals in the simulator")
+    print("Area of a Circle: pi*r*r")z
     else:
       print("\n--- Animal Sounds ---")z
   print("6. Exit")
