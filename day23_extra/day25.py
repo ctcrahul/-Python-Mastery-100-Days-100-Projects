@@ -41,20 +41,7 @@ class Duck(Animal):
     if not self.animals:
       print("No animals in the simulator")
     else:
-      print("\n--- Animal Sounds ---")
-      for animal in self.animals:
-        animal.make_sound()
-
-#Main Program
-simulator = AnimalSoundSimulator()
-
-while True:
-  print("\n--- Animal Sound Simulator ---")
-  print("1. Add Dog")
-  print("2. Add Cat")
-  print("3. Add Cow")
-  print("4. Add Duck")
-  print("5. Make All Sounds")
+      print("\n--- Animal Sounds ---")z
   print("6. Exit")
 
   choice = input("Enter your choice (1-6): ")
