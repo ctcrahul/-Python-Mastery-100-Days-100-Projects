@@ -43,18 +43,7 @@ bird = Bird()
 duck = Duck()
 
 animal_sound(bird)
-animal_sound(duck)
-
-# Animal Sound Simulator
-
-#Base Class
-class Animal:
-  def make_sound(self):
-    print("Some generic animal sound")
-
-# Derived Classes
-class Dog(Animal):
-  def make_sound(self):
+animal_sound(duck)z
     print("Woof! Woof!")
 
 class Cat(Animal):
