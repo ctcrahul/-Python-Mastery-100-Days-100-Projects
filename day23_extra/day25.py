@@ -20,19 +20,7 @@ class Circle(Shape):
 class Square(Shape):
   def area(self):
     print("Area of a Square: side*side")
-
-# Polymorphism in action
-shapes = [Circle(), Square()]
-
-for shape in shapes:
-  shape.area()
-
-class Bird:
-  def make_sound(self):
-    print("Bird chirps!")
-
-class Duck:
-  def make_sound(self):
+z
     print("Duck quacks!")
 z
 class Cat(Animal):
