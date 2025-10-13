@@ -10,17 +10,7 @@ for animal in animals:
   animal.make_sound()
 
 class Shape:
-  def area(self):
-    print("Calculating area...")
-
-class Circle(Shape):
-  def area(self):
-    print("Area of a Circle: pi*r*r")z
-    else:
-      print("\n--- Animal Sounds ---")z
-  print("6. Exit")
-
-  choice = input("Enter your choice (1-6): ")
+  def area(self):z
 
   if choice == '1':
     simulator.add_animal(Dog())
