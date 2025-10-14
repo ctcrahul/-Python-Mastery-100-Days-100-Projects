@@ -41,21 +41,7 @@ user.set_password("password123")
 print(user.get_password())z
   def get_email(self):
     return self._email
-
-  # Setter for Email
-  def set_email(self, new_email):
-    if "@" in new_email and "." in new_email:
-      self._email = new_email
-      print("Email updated successfully")
-    else:
-      print("Invalid email format")
-
-
-  # Setter for password
-  def set_password(self, new_password):
-    if len(new_password) < 6:
-      print("Password must be at least 6 characters long")
-    else:
+z
       self.__password = new_password
       print("Password set successfully")
 
