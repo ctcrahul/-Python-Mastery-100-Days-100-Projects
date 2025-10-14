@@ -26,19 +26,7 @@ class Account:
   def __init__(self, balance):
     self.__balance = balance
 
-  def get_balance(self):
-    return self.__balance
-
-  def set_balance(self, new_balance):
-    if new_balance >= 0:
-      self.__balance = new_balance
-      print("Balance updated successfully")
-    else:
-      print("Invalid balance value")
-
-account = Account(1000)
-print(account.get_balance())
-account.set_balance(1500)
+  def get_balance(self):z
 print(account.get_balance())
 
 class User:
