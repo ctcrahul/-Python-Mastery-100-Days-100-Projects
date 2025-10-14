@@ -34,21 +34,7 @@ print(user.get_password())z
     return self._email
 zz
 
-#Main Programa
-  username = input("Enter username to update email: ")
-  for user in users:
-    if user.username == username:
-      new_email = input("Enter new email: ")
-      user.set_email(new_email)
-      return
-  print("User not found")
-
-# Main Menu
-
-while True:
-  print("\n--- Secure User Profile App ---")
-  print("1. Create User")
-  print("2. View All Profiles")
+#Main Programaa
   print("3. Update Email")
   print("4. Exit")
 
