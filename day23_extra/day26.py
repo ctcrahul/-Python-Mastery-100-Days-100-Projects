@@ -24,17 +24,7 @@ user = User("vivian_aranha", "Secure123")
 print(user.username)
 print(user.get_password())
 user.set_password("NewPassword")
-
-class UserProfile:
-  def __init__(self, username, email, password):
-    self.username = username
-    self._email = email
-    self.__password = password
-
-  def show_profile(self):
-    print(f"Username: {self.username}")
-    print(f"Email: {self._email}")
-    print(f"Password: {self.__password}")
+z}")
 
 user = UserProfile("Alice", "alice@example.com", "pass1234")
 user.show_profile()
