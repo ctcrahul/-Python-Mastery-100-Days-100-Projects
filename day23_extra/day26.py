@@ -12,16 +12,7 @@ class User:
 
   def get_password(self):
     return "*****"
-
-  def set_password(self, new_password):
-    if len(new_password) >= 8:z
-print(user.get_password())
-user.set_password("NewPassword")
-z}")
-
-user = UserProfile("Alice", "alice@example.com", "pass1234")
-user.show_profile()
-
+a
 class Account:
   def __init__(self, balance):
     self.__balance = balance
