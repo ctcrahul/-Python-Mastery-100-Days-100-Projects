@@ -14,14 +14,7 @@ class User:
     return "*****"
 
   def set_password(self, new_password):
-    if len(new_password) >= 8:
-      self.__password = new_password
-      print("Passsword updated successfully")
-    else:
-      print("Password must be al least 8 characters")
-
-user = User("vivian_aranha", "Secure123")
-print(user.username)
+    if len(new_password) >= 8:z
 print(user.get_password())
 user.set_password("NewPassword")
 z}")
