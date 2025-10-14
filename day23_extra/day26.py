@@ -50,18 +50,7 @@ class User:
 
 user = User("Alice")
 user.set_password("password123")
-print(user.get_password())
-
-# Secure User Profile App
-
-class UserProfile:
-  def __init__(self, username, email, password):
-    self.username = username
-    self._email = email
-    self.__password = password
-    self.set_password(password)
-
-  # Getter for email
+print(user.get_password())z
   def get_email(self):
     return self._email
 
