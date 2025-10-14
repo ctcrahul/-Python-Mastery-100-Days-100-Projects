@@ -41,17 +41,7 @@ user.set_password("password123")
 print(user.get_password())z
   def get_email(self):
     return self._email
-z
-      self.__password = new_password
-      print("Password set successfully")
-
-  # Display Profile
-  def display_profile(self):
-    print("\n--- User Profile ---")
-    print(f"Username: {self.username}")
-    print(f"Email: {self._email}")
-    print(f"Password: {self.__password}")
-
+zz
 
 #Main Program
 users = []
