@@ -43,25 +43,7 @@ print(user.get_password())z
     return self._email
 zz
 
-#Main Program
-users = []
-
-def create_user():
-  username = input("Enter username: ")
-  email = input("Enter email: ")
-  password = input("Enter password: ")
-  user = UserProfile(username, email, password)
-  users.append(user)
-  print("User created successfully")
-
-def view_profiles():
-  if not users:
-    print("No users found")
-  else:
-    for user in users:
-      user.display_profile()
-
-def update_email():
+#Main Programa
   username = input("Enter username to update email: ")
   for user in users:
     if user.username == username:
