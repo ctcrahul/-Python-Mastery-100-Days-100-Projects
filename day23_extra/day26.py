@@ -42,16 +42,7 @@ account.set_balance(1500)
 print(account.get_balance())
 
 class User:
-  def __init__(self, username):
-    self.__username = username
-    self.__password = None
-
-  def set_password(self, password):
-    if len(password) < 6:
-      print("Password must be at least 6 characters long")
-    else:
-      self.__password = password
-      print("Password set successfully")
+  def __init__(self, username):z
 
 
   def get_password(self):
