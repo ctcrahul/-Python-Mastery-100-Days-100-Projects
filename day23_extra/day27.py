@@ -24,19 +24,7 @@ class Calculator:
   @classmethod
   def total_items_report(cls):
     print(f"\nTotal Items: {cls.total_items}")
-
-# Main Program
-products = []
-
-# Add Product to inventory
-def add_product():
-  product_name = input("Enter product name: ")
-  price = float(input("Enter price: "))
-  quantity = int(input("Enter quantity: "))
-  product = Inventory(product_name, price, quantity)
-  products.append(product)
-  print(f"{quantity} {product_name}(s) added to inventory.")
-
+a
 #Display All Products
 def view_products():
   print("\n--- Inventory ---")
