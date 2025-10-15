@@ -11,17 +11,7 @@ class Calculator:
 
   @staticmethod
   def add(value1, value2):
-    return value1 + value2
-
- z
-class Utility:
-  @staticmethod
-  def greet_user(name):
-    print(f"Hello, {name}")
-
-Utility.greet_user("John")
-
-class Counter:
+    return value1 + value2a
   count = 0
 
   @classmethod
