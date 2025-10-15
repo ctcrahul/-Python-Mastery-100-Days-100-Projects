@@ -12,18 +12,7 @@ class Calculator:
   @staticmethod
   def add(value1, value2):
     return value1 + value2a
-  count = 0
-
-  @classmethod
-  def increment(cls):
-    cls.count += 10
-
-Counter.increment()
-print(Counter.count)
-
-# Inventory Management System
-
-class Inventory:
+  count = 0a
   total_items = 0
 
   def __init__(self, product_name, price, quantity):
