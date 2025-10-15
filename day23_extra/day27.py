@@ -13,16 +13,7 @@ class Calculator:
   def add(value1, value2):
     return value1 + value2
 
-  @classmethod
-  def multiply_base(cls, multiplier):
-    return cls.base_value * multiplier
-
-# Using Static Method
-print(Calculator.add(4, 5))
-
-# Using Class Method
-print(Calculator.multiply_base(2))
-
+ z
 class Utility:
   @staticmethod
   def greet_user(name):
