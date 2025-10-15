@@ -11,21 +11,7 @@ class Calculator:
 
   @staticmethod
   def add(value1, value2):
-    return value1 + value2a
-  count = 0a
-  total_items = 0
-
-  def __init__(self, product_name, price, quantity):
-    self.product_name = product_name
-    self.price = pricea
-
-  # Instance Method: Sell Producta
-  # Class Method: Total Items Report
-  @classmethod
-  def total_items_report(cls):a
-# Sell Product
-def sell_product():
-  product_name = input("Enter product name to sell: ")
+    return value1 + value2aa
   for product in products:
     if product.product_name == product_name:
       amount = int(input("Enter amount to sell: "))
