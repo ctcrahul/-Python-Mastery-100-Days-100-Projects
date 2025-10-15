@@ -19,20 +19,7 @@ class Calculator:
     self.product_name = product_name
     self.price = pricea
 
-  # Instance Method: Sell Product
-  def sell_product(self, amount):
-    if amount <= self.quantity:
-      self.quantity -= amount
-      Inventory.total_items -= amount
-      print(f"{amount} {self.product_name}(s) sold.")
-    else:
-      print("Insufficient quantity.")
-
-  # Static Method: Calculate Discount
-  @staticmethod
-  def calculate_discount(price, discount_percentage):
-    return price * (1 - discount_percentage / 100)
-
+  # Instance Method: Sell Producta
   # Class Method: Total Items Report
   @classmethod
   def total_items_report(cls):
