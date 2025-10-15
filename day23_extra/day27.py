@@ -23,18 +23,7 @@ class Calculator:
 # Calculate Discount
 def discount_price():
   price = float(input("Enter price: "))
-  discount_percentage = float(input("Enter discount percentage: "))
-  discounted_price = Inventory.calculate_discount(price, discount_percentage)
-  print(f"Discounted Price: {discounted_price}")
-
-
-# Main Menu
-while True:
-  print("\n--- Inventory Management System ---")
-  print("1. Add Product")
-  print("2. View Products")
-  print("3. Sell Product")
-  print("4. Calculate Discount")
+  discount_percentage = float(input("Enter discount percentaga
   print("5. Total Items Report")
   print("6. Exit")
 
