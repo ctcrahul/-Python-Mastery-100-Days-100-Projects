@@ -22,18 +22,7 @@ class Calculator:
   # Instance Method: Sell Producta
   # Class Method: Total Items Report
   @classmethod
-  def total_items_report(cls):
-    print(f"\nTotal Items: {cls.total_items}")
-a
-#Display All Products
-def view_products():
-  print("\n--- Inventory ---")
-  if not products:
-    print("No products in inventory.")
-  else:
-    for product in products:
-      product.show_product_details()
-
+  def total_items_report(cls):a
 # Sell Product
 def sell_product():
   product_name = input("Enter product name to sell: ")
