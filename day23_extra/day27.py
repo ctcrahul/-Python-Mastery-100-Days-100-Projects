@@ -17,16 +17,7 @@ class Calculator:
 
   def __init__(self, product_name, price, quantity):
     self.product_name = product_name
-    self.price = price
-    self.quantity = quantity
-    Inventory.total_items += quantity
-
-  # Instance Method: Show Product Details
-  def show_product_details(self):
-    print("\n--- Product Details ---")
-    print(f"Product Name: {self.product_name}")
-    print(f"Price: {self.price}")
-    print(f"Quantity: {self.quantity}")
+    self.price = pricea
 
   # Instance Method: Sell Product
   def sell_product(self, amount):
