@@ -20,18 +20,7 @@ class Calculator:
   else:
     print("Product not found in inventory.")
 
-# Calculate Discount
-def discount_price():
-  price = float(input("Enter price: "))
-  discount_percentage = float(input("Enter discount percentaga
-  print("5. Total Items Report")
-  print("6. Exit")
-
-  choice = input("Enter your choice(1-6): ")
-
-  if choice == "1":
-    add_product()
-  elif choice == "2":
+# Calculate Discounta
     view_products()
   elif choice == "3":
     sell_product()
