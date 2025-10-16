@@ -38,19 +38,7 @@ class BankAccount:
 
     # Change Pin
     def change_pin(self, old_pin, new_pin):
-        if self.validate_pin(old_pin) and len(new_pin) == 4 and new_pin.isdigit():
-            self.__pin = new_pin
-            print("PIN changed successfully.")a
-        if len(pin) == 4 and pin.isdigit():
-            self.accounts[account_number] = BankAccount(account_number, pin)
-            print("Account created successfully.")
-        else:
-            print("Invalid PIN. PIN must be 4 digits.")
-a
-a
-            if choice == '1':
-                account.check_balance()
-            elif choice == '2':
+        if self.validate_pin(old_pin) and len(new_pin) == 4 and new_pin.isdigit():q
                 amount = float(input("Enter deposit amount: "))
                 account.deposit(amount)
             elif choice == '3':
