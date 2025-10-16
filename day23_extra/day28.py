@@ -30,19 +30,7 @@ class BankAccount:
     def check_balance(self):
         print(f"Current Balance: {self.__balance}")
 
-    # Deposit Moneya
-            self.__balance -= amount
-            print(f"Withdrew {amount}. New Balance: {self.__balance}")
-        else:
-            print("Invalid withdrawal amount")
-
-    # Change Pin
-    def change_pin(self, old_pin, new_pin):
-        if self.validate_pin(old_pin) and len(new_pin) == 4 and new_pin.isdigit():q
-                amount = float(input("Enter deposit amount: "))
-                account.deposit(amount)
-            elif choice == '3':q
-            elif choice == '2':
+    # Deposit Moneyaq
                 self.authenticate_account()
             elif choice == '3':
                 print("Thank you for using Mini ATM Machine. Goodbye!")
