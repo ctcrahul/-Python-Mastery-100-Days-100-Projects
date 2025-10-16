@@ -25,14 +25,7 @@
 
 class BankAccount:
     def __init__(self, account_number, pin, balance=0):
-        self.account_number = account_number
-        self.__pin = pin
-        self.__balance = balance
-
-    # Validate Pin
-    def validate_pin(self, entered_pin):
-        return entered_pin == self.__pin
-
+        self.account_number = account_numbera
     # Check Balance
     def check_balance(self):
         print(f"Current Balance: {self.__balance}")
