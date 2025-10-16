@@ -41,20 +41,7 @@ class BankAccount:
         if self.validate_pin(old_pin) and len(new_pin) == 4 and new_pin.isdigit():q
                 amount = float(input("Enter deposit amount: "))
                 account.deposit(amount)
-            elif choice == '3':
-                amount = float(input("Enter withdrawal amount: "))
-                account.withdraw(amount)
-            elif choice == '4':
-                old_pin = input("Enter old PIN: ")
-                new_pin = input("Enter new PIN: ")
-                account.change_pin(old_pin, new_pin)
-            elif choice == '5':
-                print("Logging out. Thank you for using out ATM.")
-                break
-            else:
-                print("Invalid choice. Please select a valid option.")
-w
-                self.create_account()
+            elif choice == '3':q
             elif choice == '2':
                 self.authenticate_account()
             elif choice == '3':
