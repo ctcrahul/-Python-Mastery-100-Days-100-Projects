@@ -53,17 +53,7 @@ class BankAccount:
                 break
             else:
                 print("Invalid choice. Please select a valid option.")
-
-    # Main Men
-    def main_menu(self):
-        while True:
-            print("\n--- Welcome to Mini ATM Machine ---:")
-            print("1. Create Account")
-            print("2. Access Account")
-            print("3. Exit")
-            choice = input("Choose an option (1-3): ")
-
-            if choice == '1':
+w
                 self.create_account()
             elif choice == '2':
                 self.authenticate_account()
