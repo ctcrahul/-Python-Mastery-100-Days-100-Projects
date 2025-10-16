@@ -15,19 +15,7 @@
 # Change PIN.
 # Exit securely.
 
-# Classes Overview:
-
-# BankAccount
-# Attributes: account_number, pin, balance
-# Methods: check_balance(), deposit(), withdraw(), change_pin()
-
-
-# ATM
-# Manages account authentication.
-# Provides the main menu for users.
-
-# Concepts Applied:
-
+# Classes Overview:a
 # Encapsulation: Secure PIN handling and balance access.
 # Static Method: For utility tasks like PIN validation.
 # Class Method: To maintain account-level settings.
