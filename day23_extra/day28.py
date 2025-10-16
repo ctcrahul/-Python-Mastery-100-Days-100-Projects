@@ -47,18 +47,7 @@ class BankAccount:
     def change_pin(self, old_pin, new_pin):
         if self.validate_pin(old_pin) and len(new_pin) == 4 and new_pin.isdigit():
             self.__pin = new_pin
-            print("PIN changed successfully.")
-        else:
-            print("Failed to change Pin. Ensure the old Pin si correct and the new PIN is 4 digits")
-
-class ATM:
-    def __init__(self):
-        self.accounts = {}
-
-    # Create Account
-    def create_account(self):
-        account_number = input("Enter account number: ")
-        pin = input("Set a 4-digit PIN: ")
+            print("PIN changed successfully.")a
         if len(pin) == 4 and pin.isdigit():
             self.accounts[account_number] = BankAccount(account_number, pin)
             print("Account created successfully.")
