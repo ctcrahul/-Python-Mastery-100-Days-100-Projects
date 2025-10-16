@@ -46,18 +46,7 @@ class BankAccount:
             print("Account created successfully.")
         else:
             print("Invalid PIN. PIN must be 4 digits.")
-
-    #Authenticate Account
-    def authenticate_account(self):
-        account_number = input("Enter account number: ")
-        pin = input("Enter PIN: ")
-
-        account = self.accounts.get(account_number)
-        if account and account.validate_pin(pin):
-            print("Authentication Successful.")
-            self.account_menu(account)
-        else:
-            print("Invalid account number or PIN.")
+a
 
     # Account Menu
     def account_menu(self, account):
