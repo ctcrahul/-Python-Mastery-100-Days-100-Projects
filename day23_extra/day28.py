@@ -47,19 +47,7 @@ class BankAccount:
         else:
             print("Invalid PIN. PIN must be 4 digits.")
 a
-
-    # Account Menu
-    def account_menu(self, account):
-        while True:
-            print("\n--- ATM Menu ---:")
-            print("1. Check Balance")
-            print("2. Deposit")
-            print("3. Withdraw")
-            print("4. Change PIN")
-            print("5. Logout")
-
-            choice = input("Enter your choice(1-5): ")
-
+a
             if choice == '1':
                 account.check_balance()
             elif choice == '2':
