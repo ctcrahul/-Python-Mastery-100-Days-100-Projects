@@ -2,16 +2,7 @@ import tkinter as tk
 
 # Mail GUI App!", font=("Arial", 18), bg="#f0f0f0")
 title_label.pack(pady=20)
-
-# Name Entry
-name_label = tk.Label(root, text="Enter your name:", font=("Arial", 12), bg="#f0f0f0")
-name_label.pack().,
-# Reset Function
-def reset():
-    name_entry.delete(0, tk.END)
-    greeting_label.config(text="")
-
-# Greet Button
+lll
 greet_button = tk.Button(root, text="Greet Me", command=greet_user, font=("Arial", 12), bg="red", fg="blue")
 greet_button.pack(pady=10)
 
