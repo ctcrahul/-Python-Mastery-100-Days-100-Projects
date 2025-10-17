@@ -1,8 +1,6 @@
 import tkinter as tk
 
-# Main Window
-root = tk.Tk()>
-title_label = tk.Label(root, text="Welcome to My GUI App!", font=("Arial", 18), bg="#f0f0f0")
+# Mail GUI App!", font=("Arial", 18), bg="#f0f0f0")
 title_label.pack(pady=20)
 
 # Name Entry
