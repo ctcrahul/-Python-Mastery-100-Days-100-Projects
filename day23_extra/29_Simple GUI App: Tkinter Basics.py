@@ -5,3 +5,10 @@ oooon.pack(pady=5)
 greeting_label = tk.Label(oo
 
                           llllllllllllllll;ppppppppppppppp
+
+
+
+
+
+
+lpop
