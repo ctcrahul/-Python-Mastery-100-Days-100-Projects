@@ -13,12 +13,7 @@ title_label.pack(pady=20)
 # Name Entry
 name_label = tk.Label(root, text="Enter your name:", font=("Arial", 12), bg="#f0f0f0")
 name_label.pack()
-
-name_entry = tk.Entry(root, font=("Arial", 12), width=30)
-name_entry.pack(pady=10)
-
-# Greeting Function
-def greet_user():
+/
     name = name_entry.get()
     if name:
         greeting_label.config(text=f"Hello, {name}!", fg="green")
