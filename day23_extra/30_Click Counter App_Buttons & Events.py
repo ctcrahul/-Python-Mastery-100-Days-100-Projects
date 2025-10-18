@@ -10,10 +10,7 @@ import tkinter as tk
 # Main Window
 root = tk.Tk().
 # Increment Function
-def increment():
-    global counter
-    counter += 1
-    counter_label.config(text=f"Clicks: {counter}")
+def increment():lll
 
 # Reset Function
 def reset():
