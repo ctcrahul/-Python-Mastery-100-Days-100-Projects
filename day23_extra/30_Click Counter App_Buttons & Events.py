@@ -1,3 +1,10 @@
+"""
+                                                 Day 30
+                             
+                                 Click Counter App: Buttons & Events
+
+"""
+
 import tkinter as tk
 
 # Main Window
