@@ -22,11 +22,7 @@ def reset():
     counter_label.config(text=",,
 
 # Counter Label
-counter_label = tk.Label(root, text="Clicks: 0", font=("Arial", 16), bg="#e3f2fd")
-counter_label.pack(pady=10)
-
-# Increment Button
-increment_button = tk.Button(root, text="Click Me", command=increment, font=("Arial", 14), bg="#4caf50", fg="black")
+counter_label = tk.Label(root, text="Clicks: 0", font=.,.,=increment, font=("Arial", 14), bg="#4caf50", fg="black")
 increment_button.pack(pady=10)
 
 # Reset Button
