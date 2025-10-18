@@ -19,11 +19,7 @@ def increment():
 def reset():
     global counter
     counter = 0
-    counter_label.config(text="Clicks: 0")
-
-# Title Label
-title_label = tk.Label(root, text="Click Counter", font=("Arial", 20), bg="#e3f2fd")
-title_label.pack(pady=20)
+    counter_label.config(text=",,
 
 # Counter Label
 counter_label = tk.Label(root, text="Clicks: 0", font=("Arial", 16), bg="#e3f2fd")
