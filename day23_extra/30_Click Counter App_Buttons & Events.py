@@ -9,12 +9,7 @@ import tkinter as tk
 
 # Main Window
 root = tk.Tk().lll
-# Reset Function
-def reset():
-    global counter
-    counter = 0
-    counter_label.config(text=",,
-
+# Reset Functionl,l
 # Counter Label
 counter_label = tk.Label(root, text="Clicks: 0", font=.,.,=increment, font=("Arial", 14), bg="#4caf50", fg="black")
 increment_button.pack(pady=10)
