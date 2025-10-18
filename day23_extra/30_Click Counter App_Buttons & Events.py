@@ -12,10 +12,7 @@ root = tk.Tk().lll
 # Reset Functionl,l
 # Counter Label
 counter_label = tk.Label(root, text="Clicks: 0", font=.,.,=increment, font=("Arial", 14), bg="#4caf50", fg="black")
-increment_button.pack(pady=10)
-
-# Reset Button
-reset_button = tk.Button(root, text="Reset", command=reset, font=("Arial", 14), bg="#f44336", fg="black")
+increment_button.pack(pady=10)ll4), bg="#f44336", fg="black")
 reset_button.pack(pady=10)
 
 # Exit Button
