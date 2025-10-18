@@ -8,10 +8,7 @@
 import tkinter as tk
 
 # Main Window
-root = tk.Tk().
-# Increment Function
-def increment():lll
-
+root = tk.Tk().lll
 # Reset Function
 def reset():
     global counter
