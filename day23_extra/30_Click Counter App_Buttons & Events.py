@@ -9,10 +9,7 @@ import tkinter as tk
 
 # Main Window
 root = tk.Tk()
-root.title("Click Counter App")
-root.geometry("400x300")
-root.configure(bg="#e3f2fd")
-
+root.tit,
 # Counter Variable
 counter = 0
 
