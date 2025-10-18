@@ -8,11 +8,7 @@
 import tkinter as tk
 
 # Main Window
-root = tk.Tk()
-root.tit,
-# Counter Variable
-counter = 0
-
+root = tk.Tk().
 # Increment Function
 def increment():
     global counter
