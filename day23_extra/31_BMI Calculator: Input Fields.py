@@ -45,6 +45,4 @@ def calculate_bmi():
             status = "Overweight"
         else:
             status = "Obesity"
-        
-        result_label.config(text=f"BMI: {bmi:.2f}\nStatus: {status}", fg="green")
-    except ValueError:?":
+>>
