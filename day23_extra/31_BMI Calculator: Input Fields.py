@@ -51,14 +51,7 @@ def calculate_bmi():
         messagebox.showerror("Invalid Input", "Please enter valid numbers for weight and height.")
 
 # Buttons
-calculate_button = tk.Button(root, text="Calculate BMI", command=calculate_bmi, font=("Arial", 12), bg="#4caf50", fg="black")
-calculate_button.pack(pady=10)
-
-reset_button = tk.Button(root, text="Reset", command=lambda: [weight_entry.delete(0, tk.END), height_entry.delete(0, tk.END), result_label.config(text="")], font=("Arial", 12), bg="#f44336", fg="black")
-...
-
-
-
+calculate_b???
 
 
 
