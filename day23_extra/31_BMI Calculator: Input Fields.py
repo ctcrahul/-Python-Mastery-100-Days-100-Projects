@@ -37,7 +37,4 @@ def calculate_bmi():
         
         bmi = weight / (height ** 2)
         status = ""
-        if bmi < 18.5:
-            status = "Underweight"
-        elif 18.5 <= bmi < 24.9:
-            status = "Normal weight"<LP
+        if bmi < 18.5:?|}":
