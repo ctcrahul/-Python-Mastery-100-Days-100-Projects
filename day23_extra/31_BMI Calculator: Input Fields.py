@@ -55,12 +55,7 @@ calculate_button = tk.Button(root, text="Calculate BMI", command=calculate_bmi, 
 calculate_button.pack(pady=10)
 
 reset_button = tk.Button(root, text="Reset", command=lambda: [weight_entry.delete(0, tk.END), height_entry.delete(0, tk.END), result_label.config(text="")], font=("Arial", 12), bg="#f44336", fg="black")
-reset_button.pack(pady=5)
-
-# Run the App
-root.mainloop()
-
-
+...
 
 
 
