@@ -30,10 +30,4 @@ height_label = tk.Label(root, text="Enter your height (m):", font=("Arial", 12),
 height_label.pack()
 height_entry = tk.Entry(root, font=("Arial", 12), width=15)
 height_entry.pack(pady=5)
-\\\\\
-def calculate_bmi():
-    try:
-        weight = float(weight_entry.get())
-        height = float(height_entry.get())
-        if weight <= 0 or height <= 0:
-            raise ValueError("Weight ?"::>
+\\\\\\\\\\\
