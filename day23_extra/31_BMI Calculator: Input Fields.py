@@ -74,7 +74,8 @@ root.mainloop()
 
 
 
-# Thanks for visiting to my profile
+# Thanks for visiting to my profile and try this code with yourself and enjoy this journey
+
 
 
 
