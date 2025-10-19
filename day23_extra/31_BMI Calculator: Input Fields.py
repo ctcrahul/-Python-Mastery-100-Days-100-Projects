@@ -47,13 +47,4 @@ def calculate_bmi():
             status = "Obesity"
         
         result_label.config(text=f"BMI: {bmi:.2f}\nStatus: {status}", fg="green")
-    except ValueError:
-        messagebox.showerror("Invalid Input", "Please enter valid numbers for weight and height.")
-
-# Buttons
-calculate_b???
-
-
-
-
-
+    except ValueError:?":
