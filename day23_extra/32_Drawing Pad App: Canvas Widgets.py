@@ -42,13 +42,7 @@ def clear_canvas():
 def change_color():
     global current_color
     color = colorchooser.askcolor()[1]
-    if color:
-        current_color = color
-
-# Change Thickness
-def change_thickness(value):was
-
-
+    if color:wssw
 
 
 
