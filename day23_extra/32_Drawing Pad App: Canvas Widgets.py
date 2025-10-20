@@ -49,10 +49,7 @@ def change_color():
 def change_thickness(value):
     global current_thickness
     current_thickness = int(value)
-
-# Bind Drawing
-canvas.bind("<B1-Motion>", draw)
-
+ws
 # Control Panel
 control_frame = tk.Frame(root, bg="#f0f0f0")
 control_frame.pack(pady=10)
