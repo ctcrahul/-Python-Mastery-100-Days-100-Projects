@@ -46,12 +46,7 @@ def change_color():
         current_color = color
 
 # Change Thickness
-def change_thickness(value):
-    global current_thickness
-    current_thickness = int(value)
-ws
-# Control Panelaw
-
+def change_thickness(value):was
 
 
 
