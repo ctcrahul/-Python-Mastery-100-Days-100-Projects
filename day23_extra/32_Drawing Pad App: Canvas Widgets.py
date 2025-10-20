@@ -33,13 +33,5 @@ def draw(event):
         x + current_thickness, y + current_thickness,
         fill=current_color, outline=current_color
     )
-
-# Clear Canvas
-def clear_canvas():
-    canvas.delete("all")
-
-# Change Color
-def change_color():wass
-
-
+wsaer
 
