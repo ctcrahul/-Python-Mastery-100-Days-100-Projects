@@ -69,13 +69,7 @@ clear_btn.grid(row=0, column=1, padx=10)
 thickness_label = tk.Label(control_frame, text="Thickness:", bg="#f0f0f0", font=("Arial", 10))
 thickness_label.grid(row=0, column=2, padx=10)
 
-thickness_slider = tk.Scale(control_frame, from_=1, to=10, orient="horizontal", command=change_thickness, bg="#f0f0f0")
-thickness_slider.set(2)
-thickness_slider.grid(row=0, column=3, padx=10)
-
-# Run Application
-root.mainloop()
-
+th
 
 
 
