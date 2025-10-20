@@ -39,12 +39,7 @@ def clear_canvas():
     canvas.delete("all")
 
 # Change Color
-def change_color():
-    global current_color
-    color = colorchooser.askcolor()[1]
-    if color:wssw
-
-
+def change_color():wass
 
 
 
