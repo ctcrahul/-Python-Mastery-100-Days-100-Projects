@@ -1,3 +1,13 @@
+"""
+                                                      Day 32.py
+                                                     
+                                            Drawing Pad App: Canvas Widgets
+
+
+"""
+
+
+
 import tkinter as tk
 from tkinter import colorchooser
 
