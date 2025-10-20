@@ -62,12 +62,7 @@ color_btn = tk.Button(control_frame, text="Choose Color", command=change_color, 
 color_btn.grid(row=0, column=0, padx=10)
 
 # Clear Button
-clear_btn = tk.Button(control_frame, text="Clear Canvas", command=clear_canvas, bg="#f44336", fg="black", font=("Arial", 10))
-clear_btn.grid(row=0, column=1, padx=10)
-
-# Thickness Control
-thickness_label = tk.Label(z
-
+clear_btn = tk.Buss
 
 
 
