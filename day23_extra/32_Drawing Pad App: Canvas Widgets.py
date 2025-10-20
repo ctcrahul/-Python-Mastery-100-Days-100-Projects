@@ -20,13 +20,7 @@ root.configure(bg="#f0f0f0")
 # Global Variables
 current_color = "black"
 current_thickness = 2
-
-# Create Canvas
-canvas = tk.Canvas(root, width=500, height=400, bg="white", relief="ridge", bd=2)
-canvas.pack(pady=20)
-
-# Drawing Function
-def draw(event):
+wer
     x, y = event.x, event.y
     canvas.create_oval(
         x - current_thickness, y - current_thickness,
