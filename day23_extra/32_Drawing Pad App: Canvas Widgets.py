@@ -50,12 +50,7 @@ def change_thickness(value):
     global current_thickness
     current_thickness = int(value)
 ws
-# Control Panel
-control_frame = tk.Frame(root, bg="#f0f0f0")
-control_frame.pack(pady=10)
-
-# Color Buttonss
-
+# Control Panelaw
 
 
 
