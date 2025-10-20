@@ -66,12 +66,7 @@ clear_btn = tk.Button(control_frame, text="Clear Canvas", command=clear_canvas, 
 clear_btn.grid(row=0, column=1, padx=10)
 
 # Thickness Control
-thickness_label = tk.Label(control_frame, text="Thickness:", bg="#f0f0f0", font=("Arial", 10))
-thickness_label.grid(row=0, column=2, padx=10)
-
-th
-
-
+thickness_label = tk.Label(z
 
 
 
