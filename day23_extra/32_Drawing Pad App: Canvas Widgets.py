@@ -54,12 +54,7 @@ ws
 control_frame = tk.Frame(root, bg="#f0f0f0")
 control_frame.pack(pady=10)
 
-# Color Button
-color_btn = tk.Button(control_frame, text="Choose Color", command=change_color, bg="#4CAF50", fg="black", font=("Arial", 10))
-color_btn.grid(row=0, column=0, padx=10)
-
-# Clear Button
-clear_btn = tk.Buss
+# Color Buttonss
 
 
 
