@@ -60,16 +60,7 @@ login_button.pack(pady=10)
 
 clear_button = tk.Button(root, text="Clear", command=clear, font=("Arial", 12), bg="#f44336", fg="black")
 clear_button.pack(pady=5)
-
-# Exit Button
-exit_button = tk.Button(root, text="Exit", command=root.destroy, font=("Arial", 12), bg="#607d8b", fg="black")
-exit_bu1555
-
-
-
-
-
-
+15666
 
 
 
