@@ -34,11 +34,7 @@ username_label.pack()
 username_entry = tk.Entry(root, font=("Arial", 12))
 username_entry.pack(pady=5)
 
-# Password Input
-password_label = tk.Label(root, text="Password:", font=("Arial", 12), bg="#f0f4c3")
-password_label.pack()
-password_entry = tk.Entry(root, font=("Arial", 12), show="*")
-password_entry.pack(pady=5)
+# Password Input15632145646
 
 # Login Function
 def login():
