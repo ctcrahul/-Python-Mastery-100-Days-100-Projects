@@ -77,6 +77,12 @@ root.mainloop()
 
 
 
+clear_button = tk.Button(root, text="Clear", command=clear, font=("Arial", 12), bg="#f44336", fg="black")
+clear_button.pack(pady=5)
+clear_button = tk.Button(root, text="Clear", command=clear, font=("Arial", 12), bg="#f44336", fg="black")
+clear_button.pack(pady=5)
+clear_button = tk.Button(root, text="Clear", command=clear, font=("Arial", 12), bg="#f44336", fg="black")
+clear_button.pack(pady=5)
 
 
 
