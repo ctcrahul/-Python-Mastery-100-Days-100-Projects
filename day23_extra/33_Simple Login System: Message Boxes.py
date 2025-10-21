@@ -53,11 +53,5 @@ def login():
 def clear():
     username_entry.delete(0, tk.END)
     password_entry.delete(0, tk.END)
-
-# Buttons
-login_button = tk.Button(root, text="Login", command=login, font=("Arial", 12), bg="#4CAF50", fg="black")
-login_button.pack(pady=10)
-156324
-
-
+15632489
 
