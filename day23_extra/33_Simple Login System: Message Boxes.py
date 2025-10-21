@@ -63,11 +63,7 @@ clear_button.pack(pady=5)
 
 # Exit Button
 exit_button = tk.Button(root, text="Exit", command=root.destroy, font=("Arial", 12), bg="#607d8b", fg="black")
-exit_button.pack(pady=10)
-
-# Run the App111
-root.mainloop()
-
+exit_bu1555
 
 
 
