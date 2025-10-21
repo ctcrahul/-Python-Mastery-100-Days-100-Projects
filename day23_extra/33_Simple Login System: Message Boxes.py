@@ -49,9 +49,4 @@ def login():
     else:
         messagebox.showerror("Login Failed", "Invalid username or password.")
 
-# Clear Function
-def clear():
-    username_entry.delete(0, tk.END)
-    password_entry.delete(0, tk.END)
-15632489
-
+# Clear Function156489152116
