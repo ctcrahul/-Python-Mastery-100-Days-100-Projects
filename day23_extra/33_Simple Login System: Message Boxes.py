@@ -33,11 +33,7 @@ username_label = tk.Label(root, text="Username:", font=("Arial", 12), bg="#f0f4c
 username_label.pack()
 username_entry = tk.Entry(root, font=("Arial", 12))
 username_entry.pack(pady=5)
-
-# Password Input15632145646
-
-# Login Function
-def login():
+5464656566
     username = username_entry.get()
     password = password_entry.get()
     if username in USER_CREDENTIALS and USER_CREDENTIALS[username] =15632466
