@@ -57,11 +57,7 @@ def clear():
 # Buttons
 login_button = tk.Button(root, text="Login", command=login, font=("Arial", 12), bg="#4CAF50", fg="black")
 login_button.pack(pady=10)
-
-clear_button = tk.Button(root, text="Clear", command=clear, font=("Arial", 12), bg="#f44336", fg="black")
-clear_button.pack(pady=5)
-15666
-
+156324
 
 
 
