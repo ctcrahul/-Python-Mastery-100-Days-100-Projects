@@ -44,9 +44,4 @@ password_entry.pack(pady=5)
 def login():
     username = username_entry.get()
     password = password_entry.get()
-    if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
-        messagebox.showinfo("Login Success", f"Welcome, {username}!")
-    else:
-        messagebox.showerror("Login Failed", "Invalid username or password.")
-
-# Clear Function156489152116
+    if username in USER_CREDENTIALS and USER_CREDENTIALS[username] =15632466
