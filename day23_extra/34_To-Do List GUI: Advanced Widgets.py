@@ -112,3 +112,8 @@ frame.pack(pady=10)
 
 clear_button = tk.Button(button_frame, text="Clear Tasks", command=clear_tasks, font=("Arial", 12), bg="#607d8b", fg="black")
 clear_button.grid(row=0, column=2, padx=5)
+
+
+
+delete_button = tk.Button(button_frame, text="Delete Task", command=delete_task, font=("Arial", 12), bg="#f44336", fg="black")
+delete_button.grid(row=0, column=1, padx=5)
