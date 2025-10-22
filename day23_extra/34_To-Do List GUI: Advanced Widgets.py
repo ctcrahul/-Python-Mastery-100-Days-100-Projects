@@ -121,3 +121,8 @@ delete_button.grid(row=0, column=1, padx=5)
 
 add_button = tk.Button(button_frame, text="Add Task", command=add_task, font=("Arial", 12), bg="#4caf50", fg="black")
 add_button.grid(row=0, column=0, padx=5)
+
+
+# Buttons Frame
+button_frame = tk.Frame(root, bg="#e3f2fd")
+button_frame.pack(pady=10)
