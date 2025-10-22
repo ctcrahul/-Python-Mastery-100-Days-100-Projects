@@ -103,3 +103,8 @@ scrollbar.config(command=task_listbox.yview)
 
 scrollbar = tk.Scrollbar(frame)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+
+# Task Listbox with Scrollbar
+frame = tk.Frame(root)
+frame.pack(pady=10)
