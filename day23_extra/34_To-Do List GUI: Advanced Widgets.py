@@ -79,7 +79,7 @@ root.mainloop()
 
 
 
-""""""""""
+""""""""""""
 
 
 # Run the App
@@ -95,4 +95,7 @@ exit_button.pack(pady=10)
 
 
 
+task_listbox = tk.Listbox(frame, width=50, height=15, yscrollcommand=scrollbar.set, font=("Arial", 12))
+task_listbox.pack(pady=10)
 
+scrollbar.config(command=task_listbox.yview)
