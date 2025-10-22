@@ -87,7 +87,9 @@ root.mainloop()
 
 
 
-
+# Exit Button
+exit_button = tk.Button(root, text="Exit", command=root.destroy, font=("Arial", 12), bg="#d32f2f", fg="black")
+exit_button.pack(pady=10)
 
 
 
