@@ -108,3 +108,7 @@ scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 # Task Listbox with Scrollbar
 frame = tk.Frame(root)
 frame.pack(pady=10)
+
+
+clear_button = tk.Button(button_frame, text="Clear Tasks", command=clear_tasks, font=("Arial", 12), bg="#607d8b", fg="black")
+clear_button.grid(row=0, column=2, padx=5)
