@@ -117,3 +117,7 @@ clear_button.grid(row=0, column=2, padx=5)
 
 delete_button = tk.Button(button_frame, text="Delete Task", command=delete_task, font=("Arial", 12), bg="#f44336", fg="black")
 delete_button.grid(row=0, column=1, padx=5)
+
+
+add_button = tk.Button(button_frame, text="Add Task", command=add_task, font=("Arial", 12), bg="#4caf50", fg="black")
+add_button.grid(row=0, column=0, padx=5)
