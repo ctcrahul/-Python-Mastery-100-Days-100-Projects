@@ -166,10 +166,7 @@ expense_listbox.pack()
 scrollbar.config(command=expense_listbox.yview)
 
 # Total Label
-total_label = tk.Label(root, text="Total Expenses: $0.00", font=("Arial", 14), bg="#f0f4c3")
-total_label.pack(pady=10)
-
-# Load Previous DatSSSS
+AAAa
 
 
 
