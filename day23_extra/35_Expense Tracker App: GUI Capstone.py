@@ -156,12 +156,7 @@ clear_button.grid(row=0, column=2, padx=5)
 # Expense Listbox with Scrollbar
 frame = tk.Frame(root)
 frame.pack(pady=10)
-
-scrollbar = tk.Scrollbar(frame)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-SSSSaaa
-
-
+AWSXAAW
 
 
 
