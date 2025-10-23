@@ -153,10 +153,7 @@ delete_button.grid(row=0, column=1, padx=5)
 clear_button = tk.Button(btn_frame, text="Clear All", command=clear_all, bg="#607d8b", fg="black")
 clear_button.grid(row=0, column=2, padx=5)
 
-# Expense Listbox with Scrollbar
-frame = tk.Frame(root)
-frame.pack(pady=10)
-AWSXAAW
+# Expense Listbox with ScrollQWQSDWDWSF
 
 
 
