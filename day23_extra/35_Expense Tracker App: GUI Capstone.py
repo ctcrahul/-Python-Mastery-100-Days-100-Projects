@@ -146,14 +146,7 @@ btn_frame.pack(pady=10)
 
 add_button = tk.Button(btn_frame, text="Add Expense", command=add_expense, bg="#4caf50", fg="black")
 add_button.grid(row=0, column=0, padx=5)
-
-delete_button = tk.Button(btn_frame, text="Delete Expense", command=delete_expense, bg="#f44336", fg="black")
-delete_button.grid(row=0, column=1, padx=5)
-
-clear_button = tk.Button(btn_frame, text="Clear All", command=clear_all, bg="#607d8b", fg="black")
-clear_button.grid(row=0, column=2, padx=5)
-
-# Expense Listbox with ScrollQWQSDWDWSF
+POpod = ds
 
 
 
