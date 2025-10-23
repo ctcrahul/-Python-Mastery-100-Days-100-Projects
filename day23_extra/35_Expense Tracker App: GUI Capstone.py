@@ -190,10 +190,5 @@ root.mainloop()
 
 
 
-### hi dosto pls 
-
-
-
-# fedfcsajfpisjmgipesgvbjpieatjm
 
 
