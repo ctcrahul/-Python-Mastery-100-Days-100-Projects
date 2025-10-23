@@ -1,3 +1,11 @@
+"""
+                                                    Day 35.py
+                                                    
+                                            Expense Tracker App: GUI Capstone
+
+"""
+
+
 # Objective: Build a GUI-based Expense Tracker App that allows users to:
 
 #Add new expenses with category, amount, and description.
