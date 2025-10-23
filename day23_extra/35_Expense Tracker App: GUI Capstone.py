@@ -5,7 +5,6 @@
 
 """
 
-
 # Objective: Build a GUI-based Expense Tracker App that allows users to:
 
 #Add new expenses with category, amount, and description.
@@ -143,5 +142,58 @@ description_entry.grid(row=2, column=1, padx=5, pady=5)
 # Buttons
 btn_frame = tk.Frame(root, bg="#f0f4c3")
 btn_frame.pack(pady=10)
-popp.pack
+
+add_button = tk.Button(btn_frame, text="Add Expense", command=add_expense, bg="#4caf50", fg="black")
+add_button.grid(row=0, column=0, padx=5)
+
+delete_button = tk.Button(btn_frame, text="Delete Expense", command=delete_expense, bg="#f44336", fg="black")
+delete_button.grid(row=0, column=1, padx=5)
+
+clear_button = tk.Button(btn_frame, text="Clear All", command=clear_all, bg="#607d8b", fg="black")
+clear_button.grid(row=0, column=2, padx=5)
+
+# Expense Listbox with Scrollbar
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+scrollbar = tk.Scrollbar(frame)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+expense_listbox = tk.Listbox(frame, width=50, height=15, yscrollcommand=scrollbar.set, font=("Arial", 12))
+expense_listbox.pack()
+
+scrollbar.config(command=expense_listbox.yview)
+
+# Total Label
+total_label = tk.Label(root, text="Total Expenses: $0.00", font=("Arial", 14), bg="#f0f4c3")
+total_label.pack(pady=10)
+
+# Load Previous Data
+load_expenses()
+calculate_total()
+
+# Exit Button
+exit_button = tk.Button(root, text="Exit", command=root.destroy, bg="#d32f2f", fg="black")
+exit_button.pack(pady=10)
+
+# Run Application
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
