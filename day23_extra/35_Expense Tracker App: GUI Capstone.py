@@ -143,13 +143,5 @@ description_entry.grid(row=2, column=1, padx=5, pady=5)
 # Buttons
 btn_frame = tk.Frame(root, bg="#f0f4c3")
 btn_frame.pack(pady=10)
-
-add_button = tk.Button(btn_frame, text="Add Expense", command=add_expense, bg="#4caf50", fg="black")
-add_button.grid(row=0, column=0, padx=5)
-POpod = ds
-
-
-
-
-
+popp.pack
 
