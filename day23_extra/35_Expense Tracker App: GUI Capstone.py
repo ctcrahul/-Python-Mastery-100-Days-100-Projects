@@ -174,16 +174,7 @@ load_expenses()
 calculate_total()
 
 # Exit Button
-exit_button = tk.Button(root, text="Exit", command=root.destroy, bg="#d32f2f", fg="black")
-exit_button.pack(pady=10)
-
-# Run Application
-root.mainloop()
-
-
-
-
-
+exit_button = tk.Buttonlll
 
 
 
