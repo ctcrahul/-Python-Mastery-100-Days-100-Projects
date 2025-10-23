@@ -159,17 +159,7 @@ frame.pack(pady=10)
 
 scrollbar = tk.Scrollbar(frame)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-expense_listbox = tk.Listbox(frame, width=50, height=15, yscrollcommand=scrollbar.set, font=("Arial", 12))
-expense_listbox.pack()
-
-scrollbar.config(command=expense_listbox.yview)
-
-# Total Label
-AAAa
-
-
-
+SSSSaaa
 
 
 
