@@ -116,3 +116,9 @@ def main():
     print("=================")
     print("Input Matrix A:")
     A = get_matrix()
+
+
+    try:
+        print("\nInverse of A:\n", np.linalg.inv(A))
+    except np.linalg.LinAlgError:
+        print("\nInverse of A: Not invertible.")erf
