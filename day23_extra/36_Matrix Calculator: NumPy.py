@@ -125,6 +125,15 @@ def main():
 
 
 
+ print("\nMatrix B:\n", B)
+
+    try:
+        print("\nAddition:\n", A + B)
+    except ValueError:
+        print("\nAddition: Matrices must have the same dimensions.")
+
+    try:
+
 
     print("\nTranspose of A:\n", A.T)
     print("\nTranspose of B:\n", B.T)
