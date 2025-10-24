@@ -94,4 +94,12 @@ if __name__ == "__main__":
 ### V36_Matrix Calculator: NumPy.py
 
 
+        return
+
+    matrix_operations(A, B)
+
+if __name__ == "__main__":
+    main()
+
+
 
