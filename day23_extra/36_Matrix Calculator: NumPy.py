@@ -122,3 +122,15 @@ def main():
         print("\nInverse of A:\n", np.linalg.inv(A))
     except np.linalg.LinAlgError:
         print("\nInverse of A: Not invertible.")erf
+
+
+
+
+    print("\nTranspose of A:\n", A.T)
+    print("\nTranspose of B:\n", B.T)
+
+    try:
+        print("\nDeterminant of A:", np.linalg.det(A))
+    except np.linalg.LinAlgError:
+        print("\nDeterminant of A: Not applicable (Matrix must be square).")
+bfghd
