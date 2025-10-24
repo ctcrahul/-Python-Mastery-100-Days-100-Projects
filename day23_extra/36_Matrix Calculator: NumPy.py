@@ -158,4 +158,13 @@ bfghd
         print("\nSubtraction: Matrices must have the same dimensions.")
 
     try:
+              return np.array(elements)
+    except ValueError as e:
+        print("Error:", e)
+        return None
+
+# Matrix Operations
+def matrix_operations(A, B):
+    print("\nMatrix A:\n", A)
+    print("\nMatrix B:\n", B)
     print("\nTranspose of A:\n", A.T)
