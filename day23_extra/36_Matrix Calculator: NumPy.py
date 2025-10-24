@@ -161,10 +161,10 @@ bfghd
               return np.array(elements)
     except ValueError as e:
         print("Error:", e)
-        return None
-
-# Matrix Operations
-def matrix_operations(A, B):
-    print("\nMatrix A:\n", A)
-    print("\nMatrix B:\n", B)
-    print("\nTranspose of A:\n", A.T)
+        return None        for _ in range(rows):
+            row = list(map(float, input().split()))
+            if len(row) != cols:
+                raise ValueError("Number of columns doesn't match.")
+            elements.append(row)
+        return np.array(elements)
+    except ValueError as e:
