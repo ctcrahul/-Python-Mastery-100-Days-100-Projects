@@ -103,3 +103,8 @@ if __name__ == "__main__":
 
 
 
+   if A is None:
+        return
+
+    print("\nInput Matrix B:")
+    B = get_matrix()
