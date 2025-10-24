@@ -134,3 +134,14 @@ def main():
     except np.linalg.LinAlgError:
         print("\nDeterminant of A: Not applicable (Matrix must be square).")
 bfghd
+
+
+    except ValueError:
+        print("\nElement-wise Multiplication: Matrices must have the same dimensions.")
+
+    try:
+        print("\nDot Product:\n", np.dot(A, B))
+    except ValueError:
+        print("\nDot Product: Number of columns in A must equal the number of rows in B.")
+
+    print("\nTranspose of A:\n", A.T)
