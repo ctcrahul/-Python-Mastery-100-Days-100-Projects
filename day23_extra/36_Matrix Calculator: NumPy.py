@@ -144,4 +144,9 @@ bfghd
     except ValueError:
         print("\nDot Product: Number of columns in A must equal the number of rows in B.")
 
+        print("\nSubtraction:\n", A - B)
+    except ValueError:
+        print("\nSubtraction: Matrices must have the same dimensions.")
+
+    try:
     print("\nTranspose of A:\n", A.T)
