@@ -108,3 +108,11 @@ if __name__ == "__main__":
 
     print("\nInput Matrix B:")
     B = get_matrix()
+
+
+# Main Program
+def main():
+    print("Matrix Calculator")
+    print("=================")
+    print("Input Matrix A:")
+    A = get_matrix()
