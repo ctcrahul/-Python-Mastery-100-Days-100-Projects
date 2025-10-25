@@ -93,3 +93,9 @@ if __name__ == '__main__':
 def add_city_weather():
     data = request.json
     city = data.get('city', '').lower()
+
+
+    return jsonify({"error": "City not found"}), 404
+
+# Add New weather Data
+@app.route('/weather', methods=['POST'])
