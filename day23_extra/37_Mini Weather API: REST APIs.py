@@ -89,3 +89,7 @@ if __name__ == '__main__':
     if not city or not temperature or not condition:
         return jsonify({'error': 'Missing city, temperature or condition'}), 400
 
+
+def add_city_weather():
+    data = request.json
+    city = data.get('city', '').lower()
