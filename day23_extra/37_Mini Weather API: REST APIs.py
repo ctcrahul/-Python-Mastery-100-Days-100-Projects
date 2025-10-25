@@ -96,6 +96,10 @@ def get_weather_by_city(city):
         return jsonify({'error': 'Missing city, temperature or condition'}), 400
 
 
+# Get Weather for All Cities
+@app.route('/weather', methods=['GET'])
+def get_all_weather():
+  
     return jsonify(weather_data)
 
 # Get Weather for a Specific City
