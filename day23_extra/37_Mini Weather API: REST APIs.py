@@ -112,6 +112,13 @@ def get_all_weather():
 @app.route('/weather/<city>', methods=['GET'])
 
 def add_city_weather():
+
+    "london": {"temperature": 15, "condition": "Cloudy"},
+    "tokyo": {"temperature": 28, "condition": "Clear"},
+    "sydney": {"temperature": 18, "condition": "Rainy"}
+}
+
+# Root Endpoint
     data = request.json
     city = data.get('city', '').lower()
 
