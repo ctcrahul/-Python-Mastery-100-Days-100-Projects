@@ -80,6 +80,12 @@ if __name__ == '__main__':
 """"
 
 
+def get_weather_by_city(city):
+    city = city.lower()
+    if city in weather_data:
+        return jsonify({city: weather_data[city]})
+
+  
     weather_data[city] = {"temperature": temperature, "condition": condition}
     return jsonify({"message": f"weather for {city} added successfully"}), 201
 
