@@ -1,3 +1,14 @@
+
+"""
+                                                    Day 37 
+                                          
+                                              Mini Weather API: REST APIs
+
+          
+"""
+
+
+
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
