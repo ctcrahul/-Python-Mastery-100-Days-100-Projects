@@ -67,6 +67,7 @@ if __name__ == '__main__':
 
 
 
+
 """"
 
 # Run App
@@ -119,6 +120,14 @@ def add_city_weather():
 }
 
 # Root Endpoint
+
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# Mock Weather Data
+weather_data = {
+    "new york": {"temperature": 22, "condition": "Sunny"},
     data = request.json
     city = data.get('city', '').lower()
 
