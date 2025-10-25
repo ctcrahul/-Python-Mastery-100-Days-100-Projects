@@ -95,6 +95,12 @@ def get_weather_by_city(city):
     if not city or not temperature or not condition:
         return jsonify({'error': 'Missing city, temperature or condition'}), 400
 
+# Root Endpoint
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Mini Weather API!"})
+  
+
 
 # Get Weather for All Cities
 @app.route('/weather', methods=['GET'])
