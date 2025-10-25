@@ -83,3 +83,9 @@ if __name__ == '__main__':
     weather_data[city] = {"temperature": temperature, "condition": condition}
     return jsonify({"message": f"weather for {city} added successfully"}), 201
 
+
+    condition = data.get('condition')
+
+    if not city or not temperature or not condition:
+        return jsonify({'error': 'Missing city, temperature or condition'}), 400
+
