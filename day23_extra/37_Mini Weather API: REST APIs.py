@@ -76,4 +76,10 @@ if __name__ == '__main__':
 
 
 
+
 """"
+
+
+    weather_data[city] = {"temperature": temperature, "condition": condition}
+    return jsonify({"message": f"weather for {city} added successfully"}), 201
+
