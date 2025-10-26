@@ -87,13 +87,14 @@ def main():
         elif choice == "5":
             print("Goodbye!")
             break
-           plot_expenses_by_category(df)
-        elif choice == "4":
+escription = input("Enter description: ")
+            log_expense(date, category, amount, description)
+            print("Expense logged successfully!")
+        elif choice == "2":
             df = load_expenses()
-            plot_monthly_trends(df)
-        elif choice == "5":
-            print("Goodbye!")
-
+            summarize_expenses(df)
+        elif choice == "3":
+            df = load_expenses()
 
 
 
