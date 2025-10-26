@@ -62,6 +62,14 @@ def plot_monthly_trends(df):
 	plt.xticks(rotation=45)
 	plt.show()
 
+	plt.xlabel("Month")
+	plt.ylabel("Total Expenses")
+	plt.xticks(rotation=45)
+	plt.show()
+
+# plot_monthly_tends(df)
+
+
 # plot_monthly_tends(df)
 
 
