@@ -14,60 +14,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def log_expense(date, category, amount, description):
-
-	
-def summarize_expenses(df):
-	summary = df.groupby("Category")["Amount"].sum()
-	print("\nExpense Sumamry:")
-	print(summary)
-
-# df = load_expenses()
-# summarize_expenses(df)
-
-
-def plot_expenses_by_category(df):
-	summary = df.groupby("Category")["Amount"].sum()
 	with open('expenses.csv', 'a', newline="") as file:
 		writer = csv.writer(file)
-	summary.plot(kind="pie", autopct="%1.1f%%", figsize=(8,8), title="Expenses by Category")
-	plt.ylabel("")
-	plt.show()
-
-# plot_expenses_by_category(df)
-# Example
-# log_expense(datetime.now().strftime("%Y-%m-%d"), "Food", 200.00, "Transport to cafe")
-# print("Expense Logged!")
-elif choice == "3":
-            df = load_expenses()
-            plot_expenses_by_category(df)
-        elif choice == "4":
-            df = load_expenses()
-            plot_monthly_trends(df)
-        elif choice == "5":
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
-if __name__ == "__main__":
-    main()
-
-
-
-def load_expenses():
-	return pd.read_csv("expenses.csv", name
-
-def plot_monthly_trends(df):
-	df["Date"] = pd.to_datetime(df["Date"])
-	df["Month"] = df["Date"].dt.
-		
-def main():
-    print("Welcome to the Expense Tracker!")
-    while True:
-        print("\nOptions:")
-        print("1. Log an Expense")
-        print("2. View Expense Summary")
-        print("3. Plot Expenses by Catego
 		writer.writerow([date, category, amount, description])
 
 # Example
@@ -105,14 +53,6 @@ def plot_monthly_trends(df):
 	plt.xticks(rotation=45)
 	plt.show()
 
-	plt.xlabel("Month")
-	plt.ylabel("Total Expenses")
-	plt.xticks(rotation=45)
-	plt.show()
-
-# plot_monthly_tends(df)
-
-
 # plot_monthly_tends(df)
 
 
@@ -147,23 +87,18 @@ def main():
         elif choice == "5":
             print("Goodbye!")
             break
-escription = input("Enter description: ")
-            log_expense(date, category, amount, description)
-            print("Expense logged successfully!")
-        elif choice == "2":
-            df = load_expenses()
-            summarize_expenses(df)
-        elif choice == "3":
-            df = load_expenses()
+        else:
+            print("Invalid choice. Please try again.")
 
-       print("4. Plot Monthly Trends")
-        print("5. Exit")
-        
-        choice = input("Enter your choice: ")
-        if choice == "1":
-            date = input("Enter date (YYYY-MM-DD): ")
-            category = input("Enter category: ")
-            amount = float(input("Enter amount: "))
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
 
 
 
