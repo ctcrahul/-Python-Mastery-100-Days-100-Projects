@@ -34,6 +34,13 @@ def plot_expenses_by_category(df):
 	plt.show()
 
 # plot_expenses_by_category(df)
+# Example
+# log_expense(datetime.now().strftime("%Y-%m-%d"), "Food", 200.00, "Transport to cafe")
+# print("Expense Logged!")
+
+
+def load_expenses():
+	return pd.read_csv("expenses.csv", name
 
 def plot_monthly_trends(df):
 	df["Date"] = pd.to_datetime(df["Date"])
