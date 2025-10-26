@@ -96,7 +96,14 @@ escription = input("Enter description: ")
         elif choice == "3":
             df = load_expenses()
 
-
+       print("4. Plot Monthly Trends")
+        print("5. Exit")
+        
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            date = input("Enter date (YYYY-MM-DD): ")
+            category = input("Enter category: ")
+            amount = float(input("Enter amount: "))
 
 
 
