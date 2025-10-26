@@ -14,6 +14,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def log_expense(date, category, amount, description):
+
+	
+def summarize_expenses(df):
+	summary = df.groupby("Category")["Amount"].sum()
+	print("\nExpense Sumamry:")
+	print(summary)
+
+# df = load_expenses()
+# summarize_expenses(df)
+
+
+def plot_expenses_by_category(df):
+	summary = df.groupby("Category")["Amount"].sum()
 	with open('expenses.csv', 'a', newline="") as file:
 		writer = csv.writer(file)
 	summary.plot(kind="pie", autopct="%1.1f%%", figsize=(8,8), title="Expenses by Category")
