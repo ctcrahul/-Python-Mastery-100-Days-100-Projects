@@ -87,14 +87,12 @@ def main():
         elif choice == "5":
             print("Goodbye!")
             break
-        else:
-            print("Invalid choice. Please try again.")
-
-if __name__ == "__main__":
-    main()
-
-
-
+           plot_expenses_by_category(df)
+        elif choice == "4":
+            df = load_expenses()
+            plot_monthly_trends(df)
+        elif choice == "5":
+            print("Goodbye!")
 
 
 
