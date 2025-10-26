@@ -16,6 +16,15 @@ import matplotlib.pyplot as plt
 def log_expense(date, category, amount, description):
 	with open('expenses.csv', 'a', newline="") as file:
 		writer = csv.writer(file)
+
+		
+def main():
+    print("Welcome to the Expense Tracker!")
+    while True:
+        print("\nOptions:")
+        print("1. Log an Expense")
+        print("2. View Expense Summary")
+        print("3. Plot Expenses by Catego
 		writer.writerow([date, category, amount, description])
 
 # Example
