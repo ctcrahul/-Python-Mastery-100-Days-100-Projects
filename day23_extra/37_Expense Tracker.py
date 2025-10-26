@@ -16,7 +16,15 @@ import matplotlib.pyplot as plt
 def log_expense(date, category, amount, description):
 	with open('expenses.csv', 'a', newline="") as file:
 		writer = csv.writer(file)
+	summary.plot(kind="pie", autopct="%1.1f%%", figsize=(8,8), title="Expenses by Category")
+	plt.ylabel("")
+	plt.show()
 
+# plot_expenses_by_category(df)
+
+def plot_monthly_trends(df):
+	df["Date"] = pd.to_datetime(df["Date"])
+	df["Month"] = df["Date"].dt.
 		
 def main():
     print("Welcome to the Expense Tracker!")
