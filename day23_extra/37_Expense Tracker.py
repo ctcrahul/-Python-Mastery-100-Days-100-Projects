@@ -37,6 +37,21 @@ def plot_expenses_by_category(df):
 # Example
 # log_expense(datetime.now().strftime("%Y-%m-%d"), "Food", 200.00, "Transport to cafe")
 # print("Expense Logged!")
+elif choice == "3":
+            df = load_expenses()
+            plot_expenses_by_category(df)
+        elif choice == "4":
+            df = load_expenses()
+            plot_monthly_trends(df)
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
 
 
 def load_expenses():
