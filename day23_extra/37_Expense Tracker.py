@@ -1,11 +1,8 @@
 """
                                                 Day 38
-  
 									        Expense Tracker   
 
 """
-
-
 # Date
 # Category
 # Amount
