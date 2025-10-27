@@ -61,7 +61,12 @@ if __name__ == "__main__":
 	main()
 	
 
-
+def main():
+	print("Welcome to the File Organizer Tool!")
+	base_path = input("Enter the path of the folder to organize: ")
+	if not os.path.exists(base_path):
+		print("Invalid path. Please Try again.")
+		return
 
 	create_folders(base_path)
 	organize_files(base_path)
