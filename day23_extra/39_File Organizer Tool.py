@@ -94,7 +94,12 @@ def organize_files(base_path):
 def move_file(file_path, base_path, folder_name):
 	target_folder = os.path.join(base_path, folder_name)
 	shutil.move(file_path, target_folder)
-	
+
+		folders = ["Documents", "Images", "Videos", "Audio", "Others"]
+	for folder in folders:
+		folder_path = os.path.join(base_path, folder)
+		os.makedirs(folder_path, exist_ok=True)
+		
 	create_folders(base_path)
 	organize_files(base_path)
 	print("Files have been organized successfully!")
