@@ -68,6 +68,12 @@ def main():
 		print("Invalid path. Please Try again.")
 		return
 
+			if os.path.isfile(file_path):
+			folder_name = get_folder_for_file(file_name)
+			move_file(file_path, base_path, folder_name)
+
+
+
 	create_folders(base_path)
 	organize_files(base_path)
 	print("Files have been organized successfully!")
