@@ -91,7 +91,10 @@ def organize_files(base_path):
         "Images": [".jpg", ".png", ".gif", ".bmp"],
         "Videos": [".mp4", ".mov", ".avi", ".mkv"],
         "Audio": [".mp3", ".wav", ".flac"],
-
+def move_file(file_path, base_path, folder_name):
+	target_folder = os.path.join(base_path, folder_name)
+	shutil.move(file_path, target_folder)
+	
 	create_folders(base_path)
 	organize_files(base_path)
 	print("Files have been organized successfully!")
