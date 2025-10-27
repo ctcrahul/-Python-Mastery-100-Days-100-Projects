@@ -67,6 +67,10 @@ def main():
 	if not os.path.exists(base_path):
 		print("Invalid path. Please Try again.")
 		return
+		
+
+def organize_files(base_path):
+	for file_name in os.listdir(base_path):
 
 			if os.path.isfile(file_path):
 			folder_name = get_folder_for_file(file_name)
