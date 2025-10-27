@@ -75,6 +75,10 @@ def main():
 def organize_files(base_path):
 	for file_name in os.listdir(base_path):
 
+			}
+	for folder, extentions in file_extentions.items():
+		if any(file_name.endswith(ext) for ext in extentions):
+			return folder
 			if os.path.isfile(file_path):
 			folder_name = get_folder_for_file(file_name)
 			move_file(file_path, base_path, folder_name)
