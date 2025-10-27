@@ -63,7 +63,9 @@ if __name__ == "__main__":
 
 
 
-
+	create_folders(base_path)
+	organize_files(base_path)
+	print("Files have been organized successfully!")
 
 
 
