@@ -67,6 +67,9 @@ def main():
 	if not os.path.exists(base_path):
 		print("Invalid path. Please Try again.")
 		return
+					return folder
+	return "Others"
+
 		
 
 def organize_files(base_path):
