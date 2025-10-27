@@ -83,6 +83,11 @@ def organize_files(base_path):
 			folder_name = get_folder_for_file(file_name)
 			move_file(file_path, base_path, folder_name)
 
+	def get_folder_for_file(file_name):
+	file_extentions = {
+		"Documents": [".pdf", ".docx", ".txt", ".xlsx"],
+        "Images": [".jpg", ".png", ".gif", ".bmp"],
+		
         "Images": [".jpg", ".png", ".gif", ".bmp"],
         "Videos": [".mp4", ".mov", ".avi", ".mkv"],
         "Audio": [".mp3", ".wav", ".flac"],
