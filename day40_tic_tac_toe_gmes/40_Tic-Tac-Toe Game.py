@@ -129,3 +129,9 @@ def is_draw(board):
     for col in range(3):
         if board[0][col] == board[1][col] == board[2][col] and board[0][col] != "":
             return board[0][col]
+
+def check_winner(board):
+    # Check Rows
+    for row in board:
+        if row[0] == row[1] == row[2] and row[0] != "":
+            return row[0]
