@@ -132,6 +132,11 @@ def is_draw(board):
         if board[0][col] == board[1][col] == board[2][col] and board[0][col] != "":
             return board[0][col]
 
+def create_board():
+    for row in range(3):
+        for col in range(3):
+            buttons[row][col] = tk.Button(window, text="", font=("Arial", 24), height=2, width=5,
+                                          
 def check_winner(board):
     # Check Rows
     for row in board:
