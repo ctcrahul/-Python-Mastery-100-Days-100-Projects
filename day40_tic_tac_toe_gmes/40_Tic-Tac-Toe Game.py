@@ -126,6 +126,8 @@ def is_draw(board):
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] != "":
         return board[1][1]
 
+                                      command=lambda r=row, c=col: on_click(r,c))
+            buttons[row][col].grid(row=row+1, column=col)
     for col in range(3):
         if board[0][col] == board[1][col] == board[2][col] and board[0][col] != "":
             return board[0][col]
