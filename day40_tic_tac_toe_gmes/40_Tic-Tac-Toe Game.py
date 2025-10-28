@@ -110,3 +110,8 @@ window.mainloop()
 create_board()
 reset_button = tk.Button(window, text="Reset", font=("Arial", 14), command=reset_game)
 
+
+def is_draw(board):
+    for row in board:
+        if "" in row:
+            return False
