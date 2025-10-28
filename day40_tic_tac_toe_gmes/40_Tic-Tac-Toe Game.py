@@ -121,3 +121,7 @@ def is_draw(board):
         return board[1][1]
 
     return None
+
+    # Check Diagonals
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != "":
+        return board[1][1]
