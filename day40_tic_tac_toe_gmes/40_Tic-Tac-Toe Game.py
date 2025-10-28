@@ -115,3 +115,9 @@ def is_draw(board):
     for row in board:
         if "" in row:
             return False
+
+
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != "":
+        return board[1][1]
+
+    return None
