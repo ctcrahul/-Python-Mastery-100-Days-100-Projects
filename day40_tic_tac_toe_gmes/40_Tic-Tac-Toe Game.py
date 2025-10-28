@@ -139,6 +139,10 @@ def create_board():
                                           
 def check_winner(board):
     # Check Rows
+                                                  else:
+            current_player = "0" if current_player == "X" else "X"
+            result_label.config(text=f"Player {current_player}'s Turn")
+      
     for row in board:
         if row[0] == row[1] == row[2] and row[0] != "":
             return row[0]
