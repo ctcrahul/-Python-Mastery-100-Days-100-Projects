@@ -105,5 +105,8 @@ reset_button.grid(row=4, column=0, columnspan=3)
 
 window.mainloop()
 
+    return True
 
+create_board()
+reset_button = tk.Button(window, text="Reset", font=("Arial", 14), command=reset_game)
 
