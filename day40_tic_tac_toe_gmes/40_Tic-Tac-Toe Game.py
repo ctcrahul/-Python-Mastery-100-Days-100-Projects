@@ -135,7 +135,14 @@ def is_draw(board):
 def create_board():
     for row in range(3):
         for col in range(3):
-            buttons[row][col] = tk.Button(window, text="", font=("Arial", 24), height=2, width=5,
+            buttons[row][col] = tk.Button(window, text=
+                                          
+                                                  if winner:
+            result_label.config(text=f"Plater {winner} Wins!")
+            disable_buttons()
+        elif is_draw(board):
+            result_label.config(text="Its a Draw!")
+      "", font=("Arial", 24), height=2, width=5,
                                           
 def check_winner(board):
     # Check Rows
