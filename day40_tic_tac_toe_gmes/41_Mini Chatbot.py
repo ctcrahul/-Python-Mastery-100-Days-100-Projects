@@ -122,69 +122,8 @@ if __name__ == "__main__":
 
 
 
-########################################################################################################################
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    chatbot_app = ChatbotApp(root)
-    root.mainloop()
+###########################################################################################################################################################################
+                                                       Try this code and keep supporting us
+###########################################################################################################################################################################
 
 
-    def display_message(self, sender, message):
-        """Displays a message in the chat window."""
-        self.chat_display.config(state=tk.NORMAL)
-        self.chat_display.insert(tk.END, f"{sender}: {message}\n")
-        self.chat_display.config(state=tk.DISABLED)
-        self.chat_display.yview(tk.END)  # Scroll to the bottom
-
-
-        # Loop through responses and match based on user input
-        for key, response in responses.items():
-            if key in user_input:
-                return response
-
-        return "I'm not sure how to respond to that. Could you please rephrase?"
-
-
-            "advice": "Do what makes you happy and never stop learning!",
-            "fun fact": "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient tombs that are over 3,000 years old!",
-            "hello there": "General Kenobi! How can I help you today?",
-            "how old are you": "I don't age, but I get smarter every day!",
-            "weather update": "I can't give you weather updates, but I suggest you check your local weather.",
-            "space exploration": "Space is an amazing field of study! Want to learn more?",
-            "tell a story": "Once upon a time, a curious chatbot wanted to help people with their questions. And here I am!"
-        }
-
-            "languages": "I can communicate in multiple languages. Which one would you like to use?",
-            "dreams": "Do you have any dreams you'd like to achieve? Let's talk about them!",
-            "thank you": "You're welcome! I'm always here to help.",
-            "math fact": "Did you know? Zero is the only number that cannot be represented by Roman numerals.",
-            "current events": "I can’t provide live updates, but you can check a news site for the latest events.",
-            "favorite color": "I think blue is a nice color, but I like all colors equally!",
-            "favorite season": "I think spring is beautiful, but I appreciate every season!",
-            "future predictions": "The future is unpredictable, but it's exciting. What do you think it holds?",
-
-
-          "math": "What kind of math do you want to discuss? Algebra, calculus, or something else?",
-            "learn": "I can help you learn various topics like programming, history, math, and more!",
-            "philosophy": "Philosophy makes you think deeply. Do you have a favorite philosopher?",
-            "good morning": "Good morning! Hope you have a fantastic day ahead!",
-            "good night": "Good night! Sleep tight, and dream sweet dreams!",
-
-		            "joke": "Why don't skeletons fight each other? They don't have the guts!",
-            "quote": "The only limit to our realization of tomorrow is our doubts of today. - Franklin D. Roosevelt",
-            "age": "I am timeless! I'm just here to assist you with anything you need.",
-            "favorite food": "I can't eat, but if I could, I’d try pizza, it’s a classic!",
-
-
-            "movies": "I love movies too! What kind of movies do you like?",
-            "animals": "I love animals! What's your favorite animal?",
-            "books": "I enjoy reading too! Any particular genre you’re interested in?",
-            "space": "Space is vast and mysterious! Are you interested in space exploration?",
-            "history": "I can tell you historical facts or events. What period are you interested in?",
-
-
-            "thanks": "You're welcome! Let me know if you need anything else.",
-            "news": "I can't fetch real-time news, but you can check your favorite news website.",
-            "sports": "Do you want to talk about sports? I can discuss football, basketball, and more!",
-            "music": "I love music! What genre are you into?",
