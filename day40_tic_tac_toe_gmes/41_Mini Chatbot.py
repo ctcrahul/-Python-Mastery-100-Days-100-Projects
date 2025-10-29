@@ -171,3 +171,10 @@ if __name__ == "__main__":
             "good morning": "Good morning! Hope you have a fantastic day ahead!",
             "good night": "Good night! Sleep tight, and dream sweet dreams!",
             "favorite food": "I can't eat, but if I could, I’d try pizza, it’s a classic!",
+
+
+            "movies": "I love movies too! What kind of movies do you like?",
+            "animals": "I love animals! What's your favorite animal?",
+            "books": "I enjoy reading too! Any particular genre you’re interested in?",
+            "space": "Space is vast and mysterious! Are you interested in space exploration?",
+            "history": "I can tell you historical facts or events. What period are you interested in?",
