@@ -118,3 +118,15 @@ if __name__ == "__main__":
     root = tk.Tk()
     chatbot_app = ChatbotApp(root)
     root.mainloop()
+
+
+
+
+########################################################################################################################
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    chatbot_app = ChatbotApp(root)
+    root.mainloop()
+
+
