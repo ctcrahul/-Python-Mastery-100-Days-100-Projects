@@ -136,3 +136,11 @@ if __name__ == "__main__":
         self.chat_display.insert(tk.END, f"{sender}: {message}\n")
         self.chat_display.config(state=tk.DISABLED)
         self.chat_display.yview(tk.END)  # Scroll to the bottom
+
+
+        # Loop through responses and match based on user input
+        for key, response in responses.items():
+            if key in user_input:
+                return response
+
+        return "I'm not sure how to respond to that. Could you please rephrase?"
