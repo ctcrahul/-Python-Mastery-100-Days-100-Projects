@@ -178,3 +178,9 @@ if __name__ == "__main__":
             "books": "I enjoy reading too! Any particular genre you’re interested in?",
             "space": "Space is vast and mysterious! Are you interested in space exploration?",
             "history": "I can tell you historical facts or events. What period are you interested in?",
+
+
+            "thanks": "You're welcome! Let me know if you need anything else.",
+            "news": "I can't fetch real-time news, but you can check your favorite news website.",
+            "sports": "Do you want to talk about sports? I can discuss football, basketball, and more!",
+            "music": "I love music! What genre are you into?",
