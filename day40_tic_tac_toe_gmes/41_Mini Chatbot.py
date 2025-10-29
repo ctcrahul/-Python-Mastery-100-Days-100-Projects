@@ -144,3 +144,14 @@ if __name__ == "__main__":
                 return response
 
         return "I'm not sure how to respond to that. Could you please rephrase?"
+
+
+            "advice": "Do what makes you happy and never stop learning!",
+            "fun fact": "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient tombs that are over 3,000 years old!",
+            "hello there": "General Kenobi! How can I help you today?",
+            "how old are you": "I don't age, but I get smarter every day!",
+            "weather update": "I can't give you weather updates, but I suggest you check your local weather.",
+            "space exploration": "Space is an amazing field of study! Want to learn more?",
+            "tell a story": "Once upon a time, a curious chatbot wanted to help people with their questions. And here I am!"
+        }
+		
