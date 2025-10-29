@@ -163,4 +163,11 @@ if __name__ == "__main__":
             "favorite color": "I think blue is a nice color, but I like all colors equally!",
             "favorite season": "I think spring is beautiful, but I appreciate every season!",
             "future predictions": "The future is unpredictable, but it's exciting. What do you think it holds?",
-		
+
+
+          "math": "What kind of math do you want to discuss? Algebra, calculus, or something else?",
+            "learn": "I can help you learn various topics like programming, history, math, and more!",
+            "philosophy": "Philosophy makes you think deeply. Do you have a favorite philosopher?",
+            "good morning": "Good morning! Hope you have a fantastic day ahead!",
+            "good night": "Good night! Sleep tight, and dream sweet dreams!",
+            "favorite food": "I can't eat, but if I could, I’d try pizza, it’s a classic!",
