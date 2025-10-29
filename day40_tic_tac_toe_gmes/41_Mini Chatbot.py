@@ -154,4 +154,13 @@ if __name__ == "__main__":
             "space exploration": "Space is an amazing field of study! Want to learn more?",
             "tell a story": "Once upon a time, a curious chatbot wanted to help people with their questions. And here I am!"
         }
+
+            "languages": "I can communicate in multiple languages. Which one would you like to use?",
+            "dreams": "Do you have any dreams you'd like to achieve? Let's talk about them!",
+            "thank you": "You're welcome! I'm always here to help.",
+            "math fact": "Did you know? Zero is the only number that cannot be represented by Roman numerals.",
+            "current events": "I can’t provide live updates, but you can check a news site for the latest events.",
+            "favorite color": "I think blue is a nice color, but I like all colors equally!",
+            "favorite season": "I think spring is beautiful, but I appreciate every season!",
+            "future predictions": "The future is unpredictable, but it's exciting. What do you think it holds?",
 		
