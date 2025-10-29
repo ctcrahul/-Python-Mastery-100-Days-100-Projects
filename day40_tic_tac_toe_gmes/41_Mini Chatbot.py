@@ -130,3 +130,9 @@ if __name__ == "__main__":
     root.mainloop()
 
 
+    def display_message(self, sender, message):
+        """Displays a message in the chat window."""
+        self.chat_display.config(state=tk.NORMAL)
+        self.chat_display.insert(tk.END, f"{sender}: {message}\n")
+        self.chat_display.config(state=tk.DISABLED)
+        self.chat_display.yview(tk.END)  # Scroll to the bottom
