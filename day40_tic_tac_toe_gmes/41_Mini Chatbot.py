@@ -170,6 +170,10 @@ if __name__ == "__main__":
             "philosophy": "Philosophy makes you think deeply. Do you have a favorite philosopher?",
             "good morning": "Good morning! Hope you have a fantastic day ahead!",
             "good night": "Good night! Sleep tight, and dream sweet dreams!",
+
+		            "joke": "Why don't skeletons fight each other? They don't have the guts!",
+            "quote": "The only limit to our realization of tomorrow is our doubts of today. - Franklin D. Roosevelt",
+            "age": "I am timeless! I'm just here to assist you with anything you need.",
             "favorite food": "I can't eat, but if I could, I’d try pizza, it’s a classic!",
 
 
