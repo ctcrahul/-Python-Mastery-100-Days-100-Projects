@@ -1,3 +1,8 @@
+"""                                                             Day =  41
+                          
+						                                     Mini Chatbot
+"""
+
 def get_response(user_input):
     user_input = user_input.lower()
     if "hello" in user_input or "hi" in user_input:
