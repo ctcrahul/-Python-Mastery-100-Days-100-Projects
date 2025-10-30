@@ -148,6 +148,10 @@ def save_summary_to_json(music_files, output_file):
 
 
     music_files = scan_directory(music_directory)
+            existing_hashes.add(file_hash)
+            shutil.move(file, destination)
+            logging.info(f"Moved: {file} -> {destination}")
+
     if not music_files:
         print("No music files found.")
         logging.warning("No music files found in the provided directory.")
