@@ -114,5 +114,11 @@ if __name__ == "__main__":
 
 
 
+        executor.submit(organize_files, music_files, output_directory, set())
+
+    print("Music organization complete!")
+
+if __name__ == "__main__":
+    main()
 
 
