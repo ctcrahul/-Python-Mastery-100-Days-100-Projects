@@ -6,31 +6,50 @@
 
 import os
 import shutil
+import logging
 from mutagen import File
 import json
+import hashlib
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+# Configure logging
+logging.basicConfig(filename='music_organizer.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 def scan_directory(directory, extensions=(".mp3", ".flac", ".wav")):
     music_files = []
-    for root, _, files in os.walk(directory):
-        for file in files:
-            if file.lower().endswith(extensions):
-                music_files.append(os.path.join(root, file))
+    directory = Path(directory)  # Using pathlib for easier path handling
+    for file in directory.rglob("*"):
+        if file.suffix.lower() in extensions:
+            music_files.append(file)
     return music_files
 
 def extract_metadata(file_path):
     try:
         audio = File(file_path, easy=True)
-        return {
+        metadata = {
             "title": audio.get("title", ["Unknown Title"])[0],
             "artist": audio.get("artist", ["Unknown Artist"])[0],
             "album": audio.get("album", ["Unknown Album"])[0],
-            "genre": audio.get("genre", ["Unknown Genre"])[0]
+            "genre": audio.get("genre", ["Unknown Genre"])[0],
+            "year": audio.get("year", ["Unknown Year"])[0] if audio.get("year") else "Unknown Year",
+            "track": audio.get("tracknumber", ["Unknown Track"])[0]
         }
+        return metadata
     except Exception as e:
-        print(f"Error extracting metadata for {file_path}: {e}")
+        logging.error(f"Error extracting metadata for {file_path}: {e}")
         return None
 
-def organize_files(music_files, output_directory):
+def generate_file_hash(file_path):
+    """Generate MD5 hash for duplicate file detection."""
+    hash_md5 = hashlib.md5()
+    with open(file_path, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
+def organize_files(music_files, output_directory, existing_hashes=set()):
     for file in music_files:
         metadata = extract_metadata(file)
         if metadata:
@@ -41,9 +60,17 @@ def organize_files(music_files, output_directory):
             album_folder = os.path.join(artist_folder, album)
 
             os.makedirs(album_folder, exist_ok=True)
-            destination = os.path.join(album_folder, os.path.basename(file))
+            destination = os.path.join(album_folder, file.name)
+
+            # Check for duplicate based on file hash
+            file_hash = generate_file_hash(file)
+            if file_hash in existing_hashes:
+                logging.info(f"Duplicate file skipped: {file}")
+                continue
+
+            existing_hashes.add(file_hash)
             shutil.move(file, destination)
-            print(f"Moved: {file} -> {destination}")
+            logging.info(f"Moved: {file} -> {destination}")
 
 def save_summary_to_json(music_files, output_file):
     summary = []
@@ -54,7 +81,7 @@ def save_summary_to_json(music_files, output_file):
 
     with open(output_file, "w") as json_file:
         json.dump(summary, json_file, indent=4)
-    print(f"Summary saved to {output_file}")
+    logging.info(f"Summary saved to {output_file}")
 
 def main():
     print("Welcome to the Music Playlist Organizer!")
@@ -64,12 +91,18 @@ def main():
     music_files = scan_directory(music_directory)
     if not music_files:
         print("No music files found.")
+        logging.warning("No music files found in the provided directory.")
         return
 
     print(f"Found {len(music_files)} music files.")
     save_summary_to_json(music_files, "music_summary.json")
-    organize_files(music_files, output_directory)
+
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor() as executor:
+        executor.submit(organize_files, music_files, output_directory, set())
+
     print("Music organization complete!")
 
 if __name__ == "__main__":
     main()
+
