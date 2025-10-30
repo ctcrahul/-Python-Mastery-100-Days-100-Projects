@@ -122,6 +122,12 @@ if __name__ == "__main__":
     main()
 
 
+def main():
+    print("Welcome to the Music Playlist Organizer!")
+    music_directory = input("Enter the path to your music directory: ")
+    output_directory = input("Enter the path for the organized music directory: ")
+
+
     print(f"Found {len(music_files)} music files.")
     save_summary_to_json(music_files, "music_summary.json")
 
