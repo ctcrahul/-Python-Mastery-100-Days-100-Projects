@@ -147,6 +147,14 @@ def save_summary_to_json(music_files, output_file):
 
 
             # Check for duplicate based on file hash
+
+
+            artist_folder = os.path.join(output_directory, artist)
+            album_folder = os.path.join(artist_folder, album)
+
+            os.makedirs(album_folder, exist_ok=True)
+            destination = os.path.join(album_folder, file.name)
+
             file_hash = generate_file_hash(file)
             if file_hash in existing_hashes:
                 logging.info(f"Duplicate file skipped: {file}")
