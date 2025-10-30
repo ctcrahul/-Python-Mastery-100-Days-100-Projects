@@ -130,3 +130,8 @@ if __name__ == "__main__":
       
 
 
+    music_files = scan_directory(music_directory)
+    if not music_files:
+        print("No music files found.")
+        logging.warning("No music files found in the provided directory.")
+        return
