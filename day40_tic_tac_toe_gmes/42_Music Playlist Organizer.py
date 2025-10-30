@@ -158,6 +158,15 @@ def save_summary_to_json(music_files, output_file):
             file_hash = generate_file_hash(file)
             if file_hash in existing_hashes:
                 logging.info(f"Duplicate file skipped: {file}")
+
+              
+def organize_files(music_files, output_directory, existing_hashes=set()):
+    for file in music_files:
+        metadata = extract_metadata(file)
+        if metadata:
+            artist = metadata["artist"]
+            album = metadata["album"]
+          
                 continue
 
 
