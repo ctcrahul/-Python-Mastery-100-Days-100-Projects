@@ -122,3 +122,11 @@ if __name__ == "__main__":
     main()
 
 
+    print(f"Found {len(music_files)} music files.")
+    save_summary_to_json(music_files, "music_summary.json")
+
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor() as executor:
+      
+
+
