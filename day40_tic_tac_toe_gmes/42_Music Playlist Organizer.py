@@ -134,6 +134,17 @@ def main():
     # Use ThreadPoolExecutor for parallel processing
     with ThreadPoolExecutor() as executor:
       
+def save_summary_to_json(music_files, output_file):
+    summary = []
+    for file in music_files:
+        metadata = extract_metadata(file)
+        if metadata:
+            summary.append(metadata)
+
+    with open(output_file, "w") as json_file:
+        json.dump(summary, json_file, indent=4)
+    logging.info(f"Summary saved to {output_file}")
+
 
 
     music_files = scan_directory(music_directory)
