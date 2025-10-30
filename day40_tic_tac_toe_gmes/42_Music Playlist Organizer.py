@@ -146,6 +146,13 @@ def save_summary_to_json(music_files, output_file):
     logging.info(f"Summary saved to {output_file}")
 
 
+            # Check for duplicate based on file hash
+            file_hash = generate_file_hash(file)
+            if file_hash in existing_hashes:
+                logging.info(f"Duplicate file skipped: {file}")
+                continue
+
+
 
     music_files = scan_directory(music_directory)
             existing_hashes.add(file_hash)
