@@ -1,3 +1,8 @@
+"""                                                            Day = 43
+
+											           	  Personal Budget Planner
+"""
+
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
