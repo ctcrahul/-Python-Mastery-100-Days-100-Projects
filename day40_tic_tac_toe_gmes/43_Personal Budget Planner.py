@@ -134,3 +134,10 @@ if __name__ == "__main__":
 if __name__ == "__main__":
     main()
 
+
+import matplotlib.pyplot as plt
+
+
+import matplotlib.pyplot as plt
+fr
+        elif choice == "6":
