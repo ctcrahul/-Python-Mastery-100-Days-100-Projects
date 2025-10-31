@@ -125,3 +125,29 @@ me, expenses)
             check_savings_goal(remaining, goal)
         elif choice == "5":
             plot_expenses()
+
+
+
+
+            print("Goodbye! See you soon!")
+            break
+        else:
+            print("Invalid choice, please try again.\n")
+
+if __name__ == "__main__":
+    main()
+
+if __name__ == "__main__":
+    main()
+
+
+import matplotlib.pyplot as plt
+
+
+import matplotlib.pyplot as plt
+fr
+        elif choice == "6":
+
+om collections import defaultdict
+import os entered
+            remaining = calculate_remaining_budget(inco
