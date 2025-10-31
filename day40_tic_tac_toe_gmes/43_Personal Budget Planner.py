@@ -162,3 +162,15 @@ def set_savings_goal():
     os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal screen
     print("Welcome to your Personal Budget Planner!")
     goal = float(input("En
+
+
+					   ter your monthly savings goal (e.g., 1500.00): $"))
+    print(f"Your savings goal is set to ${goal:.2f}\n")
+    return goal
+
+# Function to add income
+def add_income():
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal screen
+    print("Let's add your income details")
+    income = float(input("Enter your income amount (e.g., 3500.00): $"))
+    pri
