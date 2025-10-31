@@ -120,24 +120,8 @@ if __name__ == "__main__":
                                                           Thanks For visiting and keep support us
 ############################################################################################################################################################################
 
-
-
-
-            print("Goodbye! See you soon!")
-            break
-        else:
-            print("Invalid choice, please try again.\n")
-
-if __name__ == "__main__":
-    main()
-
-if __name__ == "__main__":
-    main()
-
-
-import matplotlib.pyplot as plt
-
-
-import matplotlib.pyplot as plt
-fr
-        elif choice == "6":
+me, expenses)
+            goal = set_savings_goal()  # Ensure savings goal is set
+            check_savings_goal(remaining, goal)
+        elif choice == "5":
+            plot_expenses()
