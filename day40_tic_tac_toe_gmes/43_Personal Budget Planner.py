@@ -151,3 +151,14 @@ fr
 om collections import defaultdict
 import os entered
             remaining = calculate_remaining_budget(inco
+
+												   
+
+# Store expenses globally
+expenses = []
+
+# Function to set savings goal
+def set_savings_goal():
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal screen
+    print("Welcome to your Personal Budget Planner!")
+    goal = float(input("En
