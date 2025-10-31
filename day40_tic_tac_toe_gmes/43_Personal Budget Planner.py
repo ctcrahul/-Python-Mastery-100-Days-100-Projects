@@ -123,8 +123,13 @@ if __name__ == "__main__":
 
 
 
-import matplotlib.pyplot as plt
+            print("Goodbye! See you soon!")
+            break
+        else:
+            print("Invalid choice, please try again.\n")
 
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
