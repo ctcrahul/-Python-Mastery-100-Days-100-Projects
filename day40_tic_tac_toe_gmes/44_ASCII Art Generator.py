@@ -146,7 +146,16 @@ if __name__ == "__main__":
 
 
     else:
-                      ascii_chars = "@%#*+=-:. "
+                      ascii_chars = "@%#*+=-:. "        return
+    
+    brightness = float(input("Enter brightness level (default is 1.0, range 0.0 to 2.0): ") or 1.0)
+    contrast = float(input("Enter contrast level (default is 1.0, range 0.0 to 2.0): ") or 1.0)
+    sharpen = float(input("Enter sharpness level (default is 1.0, range 0.0 to 2.0): ") or 1.0)
+    
+    custom_ascii = input("Would you like to provide your custom ASCII characters? (y/n): ").strip().lower()
+    if custom_ascii == "y":
+        ascii_chars = input("Enter custom ASCII characters in order of darkness (e.g. @%#*+=-:.): ").strip()
+    else:
     
     # Process Image and Generate ASCII Art
     ascii_art = process_image_in_parallel(image_path, new_width, brightness, contrast, sharpen, ascii_chars)
