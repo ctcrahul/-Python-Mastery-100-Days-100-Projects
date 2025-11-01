@@ -160,7 +160,12 @@ if __name__ == "__main__":
     # Process Image and Generate ASCII Art
     ascii_art = process_image_in_parallel(image_path, new_width, brightness, contrast, sharpen, ascii_chars)
 
-    if ascii_art:
+    if ascii_art:    try:
+        new_width = int(input("Enter the desired width of the ASCII art (default is 100): ") or 100)
+        if new_width <= 0:
+            raise ValueError("Width must be a positive integer.")
+    except ValueError as e:
+        print(f"Invalid input: {e}")
         print(f"\nASCII art generated successfully!\n")
         print(ascii_art)
 
