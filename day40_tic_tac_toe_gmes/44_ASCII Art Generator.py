@@ -138,6 +138,11 @@ if __name__ == "__main__":
 
 
 
+        save_option = input("Do you want to save the ASCII art to a file? (y/n): ").strip().lower()
+        if save_option == "y":
+            append_option = input("Do you want to append to the file if it exists? (y/n): ").strip().lower() == "y"
+            save_ascii_art(ascii_art, output_path, append=append_option)
+            print(f"ASCII art saved to {output_path}")
 
 
     else:
