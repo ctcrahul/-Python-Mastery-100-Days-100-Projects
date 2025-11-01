@@ -164,6 +164,16 @@ if __name__ == "__main__":
         new_width = int(input("Enter the desired width of the ASCII art (default is 100): ") or 100)
         if new_width <= 0:
             raise ValueError("Width must be a positive integer.")
+                    image_path = input("Enter the path to your image: ").strip()
+    if not os.path.isfile(image_path):
+        print(f"Error: {image_path} is not a valid file path!")
+        return
+
+    output_path = input("Enter the path to save the ASCII art (e.g., output.txt): ").strip()
+    if not os.path.isdir(os.path.dirname(output_path)):
+        print(f"Error: Invalid directory for output file!")
+        return
+              
     except ValueError as e:
         print(f"Invalid input: {e}")
         print(f"\nASCII art generated successfully!\n")
