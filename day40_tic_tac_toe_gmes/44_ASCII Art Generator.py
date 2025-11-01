@@ -146,6 +146,15 @@ if __name__ == "__main__":
 
 
     else:
+                      ascii_chars = "@%#*+=-:. "
+    
+    # Process Image and Generate ASCII Art
+    ascii_art = process_image_in_parallel(image_path, new_width, brightness, contrast, sharpen, ascii_chars)
+
+    if ascii_art:
+        print(f"\nASCII art generated successfully!\n")
+        print(ascii_art)
+
         print("Failed to generate ASCII art.")
 
 if __name__ == "__main__":
