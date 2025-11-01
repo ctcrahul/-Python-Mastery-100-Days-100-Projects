@@ -1,3 +1,8 @@
+"""                                                             Day 44
+          
+                                                         ASCII Art Generator                                                          
+"""
+
 from PIL import Image
 
 def load_image(image_path, new_width=100):
