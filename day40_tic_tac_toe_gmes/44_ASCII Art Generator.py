@@ -140,5 +140,11 @@ if __name__ == "__main__":
 
 
 
+    else:
+        print("Failed to generate ASCII art.")
+
+if __name__ == "__main__":
+    main()
+
 
 C:\\Users\\rahul\\OneDrive\\Pictures\\Screenshots\\rahuu.png
