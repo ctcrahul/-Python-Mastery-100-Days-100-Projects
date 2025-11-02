@@ -190,8 +190,20 @@ def start_timer():
         countdown()
         session_count += 1
         session_counter.config(text=f"Pomodoros: {session_count // 2}")  # Count completed Pomodoros
+"Pomodoro Timer")
+window.geometry("400x400")
+window.configure(bg="#f7f7f7")
 
-# Reset Timer
+# Add a label for Timer
+timer_label = tk.Label(window, text="25:00", font=("Arial", 48, "bold"), bg="#f7f7f7", fg="#333")
+timer_label.pack(pady=30)
+
+# Status Label
+status_label = tk.Label(window, text="Ready", font=("Arial", 20), bg="#f7f7f7", fg="black")
+status_label.pack()
+
+# Pomodoro Counter
+session_counter = tk.Lab
 def reset_timer():
     global session_count, timer_running, remaining_seconds
     session_count = 0
