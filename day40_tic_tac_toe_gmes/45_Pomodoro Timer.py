@@ -111,4 +111,34 @@ import winsound  # For sound notifications on Windows
 
 # Initialize Timer Variables
 session_count = 0
+import tkinter as tk
+from tkinter import messagebox
+import time
+import winsound  # For sound notifications on Windows
 
+# Initialize Timer Variables
+session_count = 0
+timer_running = False
+remaining_seconds = 0
+
+# Timer Logic
+def countdown():
+    global remaining_seconds, timer_running
+    if remaining_seconds >= 0:
+        mins, secs = divmod(remaining_seconds, 60)
+        timer_label.config(text=f"{mins:02d}:{secs:02d}")
+        remaining_seconds -= 1
+        window.after(1000, countdown)  # Update every second
+    else:
+        timer_running = False
+        start_timer()
+
+# Start Timer Function
+def start_timer():
+    global session_count, timer_running, remaining_seconds
+    if not timer_running:
+        timer_running = True
+        if session_count % 8 == 7:
+            remaining_seconds = 15 * 60  # Long Break (15 minutes)
+            status_label.config(text="Long Break", fg="blue")
+            winsound.Bee
