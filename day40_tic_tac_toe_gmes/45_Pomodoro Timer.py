@@ -1,3 +1,8 @@
+"""                                       Day 45
+
+					                   Pomodoro Timer
+"""
+
 import tkinter as tk
 
 # Initialize Timer variables
