@@ -104,4 +104,11 @@ window.mainloop()
 #############################################################################################################################################################################
 
 
+import tkinter as tk
+from tkinter import messagebox
+import time
+import winsound  # For sound notifications on Windows
+
+# Initialize Timer Variables
+session_count = 0
 
