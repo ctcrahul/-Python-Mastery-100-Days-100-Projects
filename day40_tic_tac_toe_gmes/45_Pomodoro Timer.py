@@ -213,6 +213,29 @@ def reset_timer():
     status_label.config(text="Ready", fg="black")
     session_counter.config(text="Pomodoros: 0")
     winsound.Beep(400, 500)  # Reset sound
+	el(window, text="Pomodoros: 0", font=("Arial", 16), bg="#f7f7f7", fg="black")
+session_counter.pack(pady=10)
+
+# Start Button with Custom Style
+start_button = tk.Button(window, text="Start", command=start_timer, font=("Arial", 16, "bold"), bg="#4CAF50", fg="white", relief="flat", height=2, width=10)
+start_button.pack(side="left", padx=20, pady=20)
+
+# Reset Button with Custom Style
+reset_button = tk.Button(window, text="Reset", command=reset_timer, font=("Arial", 16, "bold"), bg="#FF5733", fg="white", relief="flat", height=2, width=10)
+reset_button.pack(side="right", padx=20, pady=20)
+
+# Exit Button
+exit_button = tk.Button(window, text="Exit", command=window.quit, font=("Arial", 16, "bold"), bg="#9E9E9E", fg="white", relief="flat", height=2, width=10)
+exit_button.pack(side="bottom", pady=20)
+
+# Styling the Window
+window.configure(bg="#f7f7f7")
+window.resizable(False, False)
+
+# Run the Application
+window.mainloop()
+    global session_count, timer_running, remaining_seconds
+   
 
 # Create Main Window
 window = tk.Tk()
