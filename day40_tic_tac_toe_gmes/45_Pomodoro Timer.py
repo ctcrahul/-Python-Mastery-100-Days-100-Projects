@@ -172,3 +172,37 @@ def countdown():
 # Start Timer Function
 def start_timer():
 
+
+	 if not timer_running:
+        timer_running = True
+        if session_count % 8 == 7:
+            remaining_seconds = 15 * 60  # Long Break (15 minutes)
+            status_label.config(text="Long Break", fg="blue")
+            winsound.Beep(1000, 500)  # Sound for long break start
+        elif session_count % 2 == 0:
+            remaining_seconds = 25 * 60  # Work Session (25 minutes)
+            status_label.config(text="Work", fg="green")
+            winsound.Beep(800, 500)  # Sound for work session start
+        else:
+            remaining_seconds = 5 * 60  # Short Break (5 minutes)
+            status_label.config(text="Break", fg="orange")
+            winsound.Beep(600, 500)  # Sound for short break start
+        countdown()
+        session_count += 1
+        session_counter.config(text=f"Pomodoros: {session_count // 2}")  # Count completed Pomodoros
+
+# Reset Timer
+def reset_timer():
+    global session_count, timer_running, remaining_seconds
+    session_count = 0
+    timer_running = False
+    remaining_seconds = 25 * 60  # Default to 25 minutes work session
+    timer_label.config(text="25:00")
+    status_label.config(text="Ready", fg="black")
+    session_counter.config(text="Pomodoros: 0")
+    winsound.Beep(400, 500)  # Reset sound
+
+# Create Main Window
+window = tk.Tk()
+window.title(
+
