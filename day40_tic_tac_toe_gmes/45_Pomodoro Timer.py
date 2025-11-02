@@ -139,6 +139,4 @@ def start_timer():
     if not timer_running:
         timer_running = True
         if session_count % 8 == 7:
-            remaining_seconds = 15 * 60  # Long Break (15 minutes)
-            status_label.config(text="Long Break", fg="blue")
-            winsound.Bee
+  
