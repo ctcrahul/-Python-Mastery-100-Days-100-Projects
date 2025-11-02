@@ -156,4 +156,21 @@ remaining_seconds = 0
 
 # Timer Logic
 def countdown():
-  
+
+
+	
+    global remaining_seconds, timer_running
+    if remaining_seconds >= 0:
+        mins, secs = divmod(remaining_seconds, 60)
+        timer_label.config(text=f"{mins:02d}:{secs:02d}")
+        remaining_seconds -= 1
+        window.after(1000, countdown)  # Update every second
+    else:
+        timer_running = False
+        start_timer()
+
+# Start Timer Function
+def start_timer():
+    global session_count, timer_running, remaining_seconds
+   
+
