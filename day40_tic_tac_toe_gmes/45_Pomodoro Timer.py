@@ -139,4 +139,21 @@ def start_timer():
     if not timer_running:
         timer_running = True
         if session_count % 8 == 7:
+
+			          remaining_seconds = 15 * 60  # Long Break (15 minutes)
+            status_label.config(text="Long Break", fg="blue")
+            winsound.Bee
+
+import tkinter as tk
+from tkinter import messagebox
+import time
+import winsound  # For sound notifications on Windows
+
+# Initialize Timer Variables
+session_count = 0
+timer_running = False
+remaining_seconds = 0
+
+# Timer Logic
+def countdown():
   
