@@ -171,6 +171,4 @@ def countdown():
 
 # Start Timer Function
 def start_timer():
-    global session_count, timer_running, remaining_seconds
-   
 
