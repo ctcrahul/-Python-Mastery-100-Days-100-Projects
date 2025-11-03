@@ -201,6 +201,19 @@ def list_entries():
 
     os.makedirs("entries", exist_ok=True)
 
+    cipher = Fernet(key)
+    return cipher.encrypt(text.encode())
+
+# Decrypt the content of a diary entry
+def decrypt_text(encrypted_text):
+    key = load_key()
+    cipher = Fernet(key)
+    return cipher.decrypt(encrypted_text).decode()
+
+# Diary Function: Creating a new diary entry
+def create_entry():
+    title = input("What shall we call this moment? (Title):
+                  
   
     file_name = f"{date}_{title}.txt"
     with open(os.path.join("entries", file_name), "wb") as file:
