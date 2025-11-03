@@ -193,6 +193,15 @@ def list_entries():
       
 
     # Save the entry to a file
+    content = input("Write freely, express your feelings: ")
+    date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Encrypt content before saving it
+    encrypted_content = encrypt_text(content)
+
+    os.makedirs("entries", exist_ok=True)
+
+  
     file_name = f"{date}_{title}.txt"
     with open(os.path.join("entries", file_name), "wb") as file:
         file.write(encrypted_content)
