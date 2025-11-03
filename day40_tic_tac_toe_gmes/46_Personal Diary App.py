@@ -137,5 +137,16 @@ if __name__ == "__main__":
             elif choice == "4":
                 print("Farewell, until next time. 🌙")
 
+# Main App: User interface for interacting with the diary
+def main():
+    generate_key()
+    if authenticate():
+        while True:
+            print("\nChoose your path: ")
+            print("1. Create a New Diary Entry")
+            print("2. View All Entries")
+            print("3. Read an Entry")
+            print("4. Exit the Realm")
+            choice = input("Enter your choice: ")
 
 
