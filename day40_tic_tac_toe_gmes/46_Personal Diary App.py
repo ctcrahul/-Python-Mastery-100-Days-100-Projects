@@ -160,3 +160,15 @@ def authenticate():
     else:
         print("Access Denied. Only trusted souls may enter.")
         return False
+
+
+    try:
+        with open(file_path, "rb") as file:
+            encrypted_content = file.read()
+        content = decrypt_text(encrypted_content)
+        print("\n🌙 Your Diary Entry: ")
+        print(content)
+    except FileNotFoundError:
+        print("This entry does not exist. Perhaps it was a dream.")
+
+
