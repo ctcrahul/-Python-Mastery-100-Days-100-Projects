@@ -1,3 +1,8 @@
+"""                                                                Day = 46
+
+                                                            Personal Diary App
+"""
+
 import os
 import getpass
 from datetime import datetime
