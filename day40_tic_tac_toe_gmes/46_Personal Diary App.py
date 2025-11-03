@@ -49,7 +49,7 @@ def create_entry():
     file_name = f"{date}_{title}.txt"
     with open(os.path.join("entries", file_name), "wb") as file:
         file.write(encrypted_content)
-    print(f"\n✨ 'Your Diary Entry - {title}' has been preserved in time! ✨")
+    print(f"\n 'Your Diary Entry - {title}' has been preserved in time! ")
 
 # Diary Function: Listing all existing entries
 def list_entries():
@@ -72,7 +72,7 @@ def read_entry():
         with open(file_path, "rb") as file:
             encrypted_content = file.read()
         content = decrypt_text(encrypted_content)
-        print("\n🌙 Your Diary Entry: ")
+        print("\n Your Diary Entry: ")
         print(content)
     except FileNotFoundError:
         print("This entry does not exist. Perhaps it was a dream.")
@@ -106,7 +106,7 @@ def main():
             elif choice == "3":
                 read_entry()
             elif choice == "4":
-                print("Farewell, until next time. 🌙")
+                print("Farewell, until next time. ")
                 break
             else:
                 print("Hmm, that doesn't seem right. Try again.")
@@ -128,7 +128,14 @@ if __name__ == "__main__":
     main()
 
 
-
+            if choice == "1":
+                create_entry()
+            elif choice == "2":
+                list_entries()
+            elif choice == "3":
+                read_entry()
+            elif choice == "4":
+                print("Farewell, until next time. 🌙")
 
 
 
