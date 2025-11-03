@@ -180,3 +180,14 @@ def read_entry():
     file_path = os.path.join("entries", file_name)
     
 
+# Diary Function: Listing all existing entries
+def list_entries():
+    os.makedirs("entries", exist_ok=True)
+    entries = os.listdir("entries")
+    if entries:
+        print("\nHere are your cherished memories: ")
+        for index, entry in enumerate(entries, start=1):
+            print(f"{index}. {entry}")
+    else:
+        print("Your diary is still a blank canvas. Start writing today.")
+      
