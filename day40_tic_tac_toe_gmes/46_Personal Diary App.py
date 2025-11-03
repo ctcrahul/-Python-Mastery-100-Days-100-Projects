@@ -150,3 +150,13 @@ def main():
             choice = input("Enter your choice: ")
 
 
+# Authentication: Simple password authentication
+def authenticate():
+    correct_password = "PassW0rd"  # The secret password for access
+    password = getpass.getpass("Enter the sacred password to enter your realm: ")
+    if password == correct_password:
+        print("Access Granted! Welcome to your private space.")
+        return True
+    else:
+        print("Access Denied. Only trusted souls may enter.")
+        return False
