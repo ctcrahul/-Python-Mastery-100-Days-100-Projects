@@ -172,3 +172,11 @@ def authenticate():
         print("This entry does not exist. Perhaps it was a dream.")
 
 
+
+# Diary Function: Reading an existing entry
+def read_entry():
+    list_entries()
+    file_name = input("\nWhich entry would you like to read? (Enter the filename): ")
+    file_path = os.path.join("entries", file_name)
+    
+
