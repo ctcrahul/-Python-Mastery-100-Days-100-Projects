@@ -191,3 +191,9 @@ def list_entries():
     else:
         print("Your diary is still a blank canvas. Start writing today.")
       
+
+    # Save the entry to a file
+    file_name = f"{date}_{title}.txt"
+    with open(os.path.join("entries", file_name), "wb") as file:
+        file.write(encrypted_content)
+    print(f"\n✨ 'Your Diary Entry - {title}' has been preserved in time! ✨")
