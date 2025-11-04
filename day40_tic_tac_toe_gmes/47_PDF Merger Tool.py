@@ -175,39 +175,3 @@ if __name__ == "__main__":
 #############################################################################################################################################################################
                                                                Thanks for visting keep supporting us
 #############################################################################################################################################################################
-
-
-
-import os
-import tkinter as tk
-from tkinter import filedialog, messagebox
-from PyPDF2 import PdfMerger
-import subprocess
-import platform
-
-
-class PDFMergerApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("PDF Merger Tool")
-        self.root.geometry("700x450")
-        self.pdf_files = []
-
-        self.create_widgets()
-
-    root.mainloop()
-
-    def create_widgets(self):
-        # Title Label
-        self.title_label = tk.Label(self.root, text="PDF Merger Tool", font=("Helvetica", 16))
-        self.title_label.pack(pady=12)
-
-        # Instructions
-        self.instruction_label = tk.Label(self.root, text="Select PDFs to merge in the desired order. The list shows full paths to avoid confusion.", font=("Helvetica", 11))
-        self.instruction_label.pack(pady=6)
-
-        # Buttons frame
-        btn_frame = tk.Frame(self.root)
-
-
-        btn_frame.pack(pady=8)lll
