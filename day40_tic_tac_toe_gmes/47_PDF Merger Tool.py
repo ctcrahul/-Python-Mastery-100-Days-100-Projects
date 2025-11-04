@@ -186,3 +186,13 @@ import subprocess
 import platform
 
 
+class PDFMergerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("PDF Merger Tool")
+        self.root.geometry("700x450")
+        self.pdf_files = []
+
+        self.create_widgets()
+
+    root.mainloop()
