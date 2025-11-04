@@ -223,6 +223,39 @@ class PDFMergerApp:
         # Clear List
         self.clear_button = tk.Button(btn_frame, text="Clear List", font=("Helvetica", 11), command=self.clear_list)
         self.clear_button.grid(row=0, column=2, padx=6)
+      0, fill="both", expand=True)
+
+        self.scrollbar = tk.Scrollbar(list_frame)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self.listbox = tk.Listbox(list_frame, height=12, width=95, selectmode=tk.SINGLE, font=("Helvetica", 10), yscrollcommand=self.scrollbar.set)
+        self.listbox.pack(side=tk.LEFT, fill="both", expand=True)
+        self.scrollbar.config(command=self.listbox.yview)
+
+        # Merge Button
+        action_frame = tk.Frame(self.root)
+        action_frame.pack(pady=8)
+
+        self.merge_button = tk.Button(action_frame, text="Merge PDFs", font=("Helvetica", 12), command=self.merge_pdfs)
+        self.merge_button.grid(row=0, column=0, padx=8)
+
+        self.open_folder_button = tk.Button(action_frame, text="Open Output Folder", font=("Helvetica", 11), command=self.open_output_folder, state=tk.DISABLED)
+        self.open_folder_button.grid(row=0, column=1, padx=8)
+
+        # Label to show last output file path
+        self.output_label = tk.Label(self.root, text="", font=("Helvetica", 10), fg="green")
+        self.output_label.pack(pady=6)
+
+    def add_pdfs(self):
+        files = filedialog.askopenfilenames(title="Select PDF files", filetypes=[("PDF Files", "*.pdf")])
+        if files:
+            # preserve order and avoid duplicates
+            for f in files:
+                if f not in self.pdf_files:
+                    self.pdf_files.append(f)
+            self.update_listbox()
+
+    root = tk.Tk()
 
         # Listbox to display selected PDFs with a scrollbar
         list_frame = tk.Frame(self.root)
