@@ -196,3 +196,15 @@ class PDFMergerApp:
         self.create_widgets()
 
     root.mainloop()
+
+    def create_widgets(self):
+        # Title Label
+        self.title_label = tk.Label(self.root, text="PDF Merger Tool", font=("Helvetica", 16))
+        self.title_label.pack(pady=12)
+
+        # Instructions
+        self.instruction_label = tk.Label(self.root, text="Select PDFs to merge in the desired order. The list shows full paths to avoid confusion.", font=("Helvetica", 11))
+        self.instruction_label.pack(pady=6)
+
+        # Buttons frame
+        btn_frame = tk.Frame(self.root)
