@@ -261,3 +261,27 @@ class PDFMergerApp:
         list_frame = tk.Frame(self.root)
         list_frame.pack(padx=20, pady=1
     app = PDFMergerApp(root)
+
+    def update_listbox(self):
+        self.listbox.delete(0, tk.END)
+        for idx, pdf in enumerate(self.pdf_files, start=1):
+            display = f"{idx}. {pdf}"  # indexed + full path
+            self.listbox.insert(tk.END, display)
+
+    def remove_selected(self):
+        sel = self.listbox.curselection()
+        if not sel:
+            messagebox.showinfo("Info", "No item selected to remove.")
+            return
+        index = sel[0]
+        removed = self.pdf_files.pop(index)
+        self.update_listbox()
+
+    def clear_list(self):
+        if not self.pdf_files:
+            return
+        if messagebox.askyesno("Confirm", "Clear all selected files?"):
+            self.pdf_files.clear()
+            self.update_listbox()
+            self.output_label.config(text=
+if __name__ == "__main__":
