@@ -1,3 +1,7 @@
+"""                                            Day = 47
+                                        
+                                            PDF Merger Tool
+"""
 import os
 from PyPDF2 import PdfMerger
 
