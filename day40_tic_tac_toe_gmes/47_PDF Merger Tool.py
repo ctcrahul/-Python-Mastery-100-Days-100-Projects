@@ -208,3 +208,23 @@ class PDFMergerApp:
 
         # Buttons frame
         btn_frame = tk.Frame(self.root)
+
+
+        btn_frame.pack(pady=8)
+
+        # Add PDFs Button
+        self.add_button = tk.Button(btn_frame, text="Add PDFs", font=("Helvetica", 11), command=self.add_pdfs)
+        self.add_button.grid(row=0, column=0, padx=6)
+
+        # Remove Selected
+        self.remove_button = tk.Button(btn_frame, text="Remove Selected", font=("Helvetica", 11), command=self.remove_selected)
+        self.remove_button.grid(row=0, column=1, padx=6)
+
+        # Clear List
+        self.clear_button = tk.Button(btn_frame, text="Clear List", font=("Helvetica", 11), command=self.clear_list)
+        self.clear_button.grid(row=0, column=2, padx=6)
+
+        # Listbox to display selected PDFs with a scrollbar
+        list_frame = tk.Frame(self.root)
+        list_frame.pack(padx=20, pady=1
+    app = PDFMergerApp(root)
