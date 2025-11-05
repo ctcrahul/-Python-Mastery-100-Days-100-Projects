@@ -142,3 +142,13 @@ if __name__ == "__main__":
 ############################################################################################################################################################################
                                                          Thanks for visting keep supporting us
 ############################################################################################################################################################################
+
+
+
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import pandas as pd
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+
