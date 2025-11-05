@@ -160,3 +160,13 @@ class DataVisualizerApp:
 
         self.df = None
 
+        # Title Section
+        title = tk.Label(root, text="Data Visualizer Pro", font=("Segoe UI", 20, "bold"), fg="#2c3e50", bg="#f2f4f7")
+        title.pack(pady=20)
+
+        # Upload Section
+        upload_frame = tk.Frame(root, bg="#ffffff", bd=2, relief="groove")
+        upload_frame.pack(pady=15, padx=30, fill="x")
+
+
+
