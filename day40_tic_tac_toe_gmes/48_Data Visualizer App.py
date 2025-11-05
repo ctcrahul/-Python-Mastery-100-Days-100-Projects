@@ -168,5 +168,28 @@ class DataVisualizerApp:
         upload_frame = tk.Frame(root, bg="#ffffff", bd=2, relief="groove")
         upload_frame.pack(pady=15, padx=30, fill="x")
 
+        upload_label = tk.Label(upload_frame, text="Upload your CSV or Excel file:", font=("Segoe UI", 12), bg="#ffffff")
+        upload_label.pack(side="left", padx=20, pady=15)
+
+        upload_btn = tk.Button(upload_frame, text="📂 Choose File", command=self.handle_file_upload,
+                               font=("Segoe UI", 11, "bold"), bg="#3498db", fg="white", activebackground="#2980b9",
+                               relief="flat", padx=20, pady=5, cursor="hand2")
+        upload_btn.pack(side="right", padx=20, pady=10)
+
+        # Dropdown Section
+        self.dropdown_frame = tk.Frame(root, bg="#f2f4f7")
+        self.dropdown_frame.pack(pady=10)
+
+        tk.Label(self.dropdown_frame, text="Select X-axis:", font=("Segoe UI", 11), bg="#f2f4f7").grid(row=0, column=0, padx=10, pady=5)
+        self.x_dropdown = tk.StringVar()
+        self.x_menu = tk.OptionMenu(self.dropdown_frame, self.x_dropdown, ())
+        self.style_optionmenu(self.x_menu)
+        self.x_menu.grid(row=0, column=1, padx=10, pady=5)
+
+        tk.Label(self.dropdown_frame, text="Select Y-axis:", font=("Segoe UI", 11), bg="#f2f4f7").grid(row=0, column=2, padx=10, pady=5)
+        self.y_dropdown = tk.StringVar()
+        self.y_menu = tk.OptionMenu(self.dropdown_frame, self.y_dropdown, ())
+        self.style_optionmenu(self.y_menu)
+        self.y_menu.grid(row=0, column=3, padx=10, pady=5)
 
 
