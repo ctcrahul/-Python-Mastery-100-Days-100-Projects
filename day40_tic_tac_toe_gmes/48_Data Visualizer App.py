@@ -218,4 +218,9 @@ class DataVisualizerApp:
         try:
  t)
     root.mainloop()
+           self.df = self.load_file(file_path)
+            self.update_dropdowns(self.df.columns)
+            messagebox.showinfo("Success", f"File loaded successfully!\n\nColumns detected:\n{', '.join(self.df.columns)}")
+        except Exception as e:
 
+    app = DataVisualizerApp(roo
