@@ -207,4 +207,19 @@ class DataVisualizerApp:
         menu.config(font=("Segoe UI", 10), bg="white", relief="flat", highlightthickness=1, width=20, cursor="hand2")
 
  
+   def handle_file_upload(self):
+        file_path = filedialog.askopenfilename(
+            filetypes=[("CSV Files", "*.csv"), ("Excel Files", "*.xlsx")],
+            title="Select a CSV or Excel file"
+        )
+        if not file_path:
+            return
+
+        try:
+            self.df = self.load_file(file_path)
+            self.update_dropdowns(self.df.columns)
+            messagebox.showinfo("Success", f"File loaded successfully!\n\nColumns detected:\n{', '.join(self.df.columns)}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Unable to load file.\n\n{str(e)}")
+
 
