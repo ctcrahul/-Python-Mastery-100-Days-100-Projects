@@ -193,3 +193,18 @@ class DataVisualizerApp:
         self.y_menu.grid(row=0, column=3, padx=10, pady=5)
 
 
+        # Plot Button
+        plot_btn = tk.Button(root, text="📈 Generate Plot", command=self.handle_plot,
+                             font=("Segoe UI", 12, "bold"), bg="#27ae60", fg="white", activebackground="#1e8449",
+                             relief="flat", padx=20, pady=10, cursor="hand2")
+        plot_btn.pack(pady=20)
+
+        # Frame for the plot
+        self.plot_frame = tk.Frame(root, bg="#ffffff", bd=2, relief="groove")
+        self.plot_frame.pack(pady=10, padx=30, fill="both", expand=True)
+
+    def style_optionmenu(self, menu):
+        menu.config(font=("Segoe UI", 10), bg="white", relief="flat", highlightthickness=1, width=20, cursor="hand2")
+
+ 
+
