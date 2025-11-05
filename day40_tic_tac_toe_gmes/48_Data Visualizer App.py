@@ -224,3 +224,6 @@ class DataVisualizerApp:
         except Exception as e:
 
     app = DataVisualizerApp(roo
+            messagebox.showerror("Error", f"Unable to load file.\n\n{str(e)}")
+    def load_file(self, file_path):
+        if file_path.ends
