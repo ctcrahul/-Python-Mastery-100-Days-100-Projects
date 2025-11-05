@@ -151,4 +151,12 @@ import pandas as pd
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+class DataVisualizerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("📊 Data Visualizer Pro")
+        self.root.geometry("950x650")
+        self.root.configure(bg="#f2f4f7")
+
+        self.df = None
 
