@@ -1,3 +1,6 @@
+                                                        Day = 49
+
+                                                  Social Media Scraper
 """
 Social Media Scraper UI (Twitter/X and Instagram)
 - Twitter/X scraping via snscrape (public tweets)
