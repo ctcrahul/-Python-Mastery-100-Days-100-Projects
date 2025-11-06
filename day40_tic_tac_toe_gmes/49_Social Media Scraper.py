@@ -354,6 +354,15 @@ if __name__ == "__main__":
 
 
 def main():
+  
+    def export_json(self):
+        if not self.data:
+            messagebox.showinfo("No data", "No items to export.")
+            return
+        default_path = os.path.join(self.output_dir, f"scrape_{int(time.time())}.json")
+        path = filedialog.asksaveasfilename(initialfile=os.path.basename(default_path), defaultextension=".json", filetypes=[("JSON files","*.json")])
+        if not path:
+          
       def show_selected(self):
         sel = self.tree.selection()
         if not sel:
