@@ -346,4 +346,10 @@ if __name__ == "__main__":
 
 
 
-
+    def open_output_dir(self):
+        if platform.system() == "Windows":
+            os.startfile(self.output_dir)
+        elif platform.system() == "Darwin":
+            os.system(f"open {self.output_dir}")
+        else:
+            os.system(f"xdg-open {self.output_dir}")
