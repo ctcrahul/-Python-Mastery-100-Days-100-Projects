@@ -362,7 +362,12 @@ if __name__ == "__main__":
         if not self.data:
             messagebox.showinfo("No data", "No items to export.")
             retur
-          
+           def _refresh_treeview(self):
+        self.tree.delete(*self.tree.get_children())
+        for item in self.data:
+            # truncate content for preview
+            content_preview = (item.get("content") or "")[:200].replace("\n"," ")
+            self.tree.insert("", "end", values=(item.get("platform"), item.get("date"), item.get("username"), content_preview, item.get("url")))
 
 def main():
   
