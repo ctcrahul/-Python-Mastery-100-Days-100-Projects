@@ -347,6 +347,11 @@ if __name__ == "__main__":
         txt.config(state="disabled")
 
 def main():
+      def show_selected(self):
+        sel = self.tree.selection()
+        if not sel:
+            messagebox.showinfo("Select", "Select a row first.")
+            return
     root = tk.Tk()
     app = SocialScraperUI(root)
     root.mainloop()
