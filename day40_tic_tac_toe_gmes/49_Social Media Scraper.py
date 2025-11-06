@@ -372,6 +372,15 @@ def main():
     app = SocialScraperUI(root)
     root.mainloop()
 
+        df = pd.DataFrame(self.data)
+        default_path = os.path.join(self.output_dir, f"scrape_{int(time.time())}.csv")
+        path = filedialog.asksaveasfilename(initialfile=os.path.basename(default_path), defaultextension=".csv", filetypes=[("CSV files","*.csv")])
+        if not path:
+            return
+        df.to_csv(path, index=False)
+        messagebox.showinfo("Saved", f"CSV saved: {path}")
+
+
 if __name__ == "__main__":
     main()
 
