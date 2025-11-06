@@ -335,6 +335,16 @@ if __name__ == "__main__":
 
 
 
+      idx = self.tree.index(sel[0])
+        item = self.data[idx]
+        text = json.dumps(item, indent=2, ensure_ascii=False)
+        # show in a simple popup with a scrollable Text
+        top = tk.Toplevel(self.root)
+        top.title("Item details")
+        txt = tk.Text(top, wrap="word", width=100, height=30)
+        txt.pack(fill="both", expand=True)
+        txt.insert("1.0", text)
+        txt.config(state="disabled")
 
 def main():
     root = tk.Tk()
