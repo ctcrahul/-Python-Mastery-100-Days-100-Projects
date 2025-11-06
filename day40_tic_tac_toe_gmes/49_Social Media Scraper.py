@@ -346,7 +346,13 @@ if __name__ == "__main__":
         txt.insert("1.0", text)
         txt.config(state="disabled")
 
+    def clear_results(self):
+        if messagebox.askyesno("Clear", "Clear current results?"):
+            self.data = []
+            self._refresh_treeview()
+            self.status_var.set("Cleared results.")
         if not path:
+          
             return
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self.data, f, ensure_ascii=False, indent=2)
