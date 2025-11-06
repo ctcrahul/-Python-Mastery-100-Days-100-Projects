@@ -352,6 +352,11 @@ if __name__ == "__main__":
             json.dump(self.data, f, ensure_ascii=False, indent=2)
         messagebox.showinfo("Saved", f"JSON saved: {path}")
 
+    def export_csv(self):
+        if not self.data:
+            messagebox.showinfo("No data", "No items to export.")
+            retur
+          
 
 def main():
   
