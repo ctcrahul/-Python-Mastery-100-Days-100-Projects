@@ -371,3 +371,14 @@ if __name__ == "__main__":
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
                                                  Thanks for visting and keep supporting us....
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+if __name__ == "__main__":
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    root = tk.Tk()
+    style = ttk.Style(root)
+    # use default theme for cross-platform consistency; you can change it to 'clam' or others
+    style.theme_use('default')
+    app = FinanceApp(root)
+    root.protocol("WM_DELETE_WINDOW", app.close)
+    root.mainloop()
