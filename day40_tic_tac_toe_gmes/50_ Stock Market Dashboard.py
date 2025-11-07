@@ -410,3 +410,16 @@ if __name__ == "__main__":
 
         ttk.Button(dlg, text="Save", command=save_budget).grid(row=2, column=0, columnspan=2, pady=10)
 
+
+    def open_budget_dialog(self):
+        # small dialog to set budgets for current month
+        month = f"{date.today().year}-{date.today().month:02d}"
+        dlg = tk.Toplevel(self.root)
+        dlg.title("Set Budgets for " + month)
+        ttk.Label(dlg, text="Category").grid(row=0, column=0, padx=6, pady=6)
+        cat_var = tk.StringVar()
+        ttk.Entry(dlg, textvariable=cat_var, width=20).grid(row=0, column=1, padx=6)
+
+        ttk.Label(dlg, text="Limit (₹)").grid(row=1, column=0, padx=6, pady=6)
+        limit_var = tk.StringVar()
+        ttk.Entry(dlg, textvariable=limit_var, width=12).grid(row=1, column=1, padx=6)
