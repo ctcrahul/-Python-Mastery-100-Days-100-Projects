@@ -465,3 +465,15 @@ if __name__ == "__main__":
         canvas = FigureCanvasTkAgg(fig, master=self.chart_container)
         canvas.draw()
         canvas.get_tk_widget().pack(side="top", fill="both", expand=True, pady=6)
+
+
+        # Pie chart: category breakdown for current month
+        ym = f"{date.today().year}-{date.today().month:02d}"
+        breakdown = self.db.category_breakdown(ym)
+        cats = [b[0] for b in breakdown]
+        vals = [b[1] for b in breakdown]
+        fig = Figure(figsize=(4.2,3), dpi=100)
+        ax = fig.add_subplot(111)
+        if vals and sum(vals) > 0:
+            ax.pie(vals, labels=cats, autopct="%1.1f%%", startangle=140)
+            ax.set_title("This month's expenses by category")
