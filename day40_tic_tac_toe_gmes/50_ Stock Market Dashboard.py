@@ -463,6 +463,12 @@ if __name__ == "__main__":
             ax.axis("off")
 
         canvas = FigureCanvasTkAgg(fig, master=self.chart_container)
+      
+    def show_charts(self):
+        # clear container
+        for w in self.chart_container.winfo_children():
+            w.destroy()
+          
         canvas.draw()
         canvas.get_tk_widget().pack(side="top", fill="both", expand=True, pady=6)
 
