@@ -438,3 +438,21 @@ if __name__ == "__main__":
         if warn_text:
             lbl = ttk.Label(self.chart_container, text=warn_text, foreground="red", justify="left")
             lbl.pack(side="top", pady=6)
+
+
+
+        # Line chart: last 6 months income vs expense
+        trend = self.db.monthly_totals_over_time(6)
+        months = [t[0] for t in trend]
+        incomes = [t[1] for t in trend]
+        expenses = [t[2] for t in trend]
+        fig2 = Figure(figsize=(4.2,2.6), dpi=100)
+        ax2 = fig2.add_subplot(111)
+        ax2.plot(months, incomes, marker="o", label="Income")
+        ax2.plot(months, expenses, marker="o", label="Expense")
+        ax2.set_title("Last 6 months")
+        ax2.legend()
+        ax2.grid(True, linestyle="--", alpha=0.4)
+        canvas2 = FigureCanvasTkAgg(fig2, master=self.chart_container)
+        canvas2.draw()
+        canvas2.get_tk_widget().pack(side="top", fill="both", expand=True, pady=6)
