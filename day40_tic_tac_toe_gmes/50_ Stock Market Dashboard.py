@@ -456,3 +456,12 @@ if __name__ == "__main__":
         canvas2 = FigureCanvasTkAgg(fig2, master=self.chart_container)
         canvas2.draw()
         canvas2.get_tk_widget().pack(side="top", fill="both", expand=True, pady=6)
+
+
+        else:
+            ax.text(0.5, 0.5, "No expense data this month", ha="center", va="center")
+            ax.axis("off")
+
+        canvas = FigureCanvasTkAgg(fig, master=self.chart_container)
+        canvas.draw()
+        canvas.get_tk_widget().pack(side="top", fill="both", expand=True, pady=6)
