@@ -391,3 +391,22 @@ if __name__ == "__main__":
     app = FinanceApp(root)
     root.protocol("WM_DELETE_WINDOW", app.close)
     root.mainloop()
+
+
+        def save_budget():
+            try:
+                limit_amount = float(limit_var.get())
+            except Exception:
+                messagebox.showerror("Invalid", "Please enter numeric limit.")
+                return
+            category = cat_var.get().strip()
+            if not category:
+                messagebox.showerror("Invalid", "Provide category name.")
+                return
+            self.db.set_budget(month, category, limit_amount)
+            messagebox.showinfo("Saved", f"Budget set: {category} → ₹{limit_amount:.2f} for {month}")
+            dlg.destroy()
+            self.show_charts()
+
+        ttk.Button(dlg, text="Save", command=save_budget).grid(row=2, column=0, columnspan=2, pady=10)
+
