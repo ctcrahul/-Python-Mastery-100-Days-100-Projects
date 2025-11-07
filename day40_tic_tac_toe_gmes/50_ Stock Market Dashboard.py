@@ -1,4 +1,10 @@
-  tx_type = self.type_var.get()
+"""
+                                                                  Day = 50
+
+                                                             Stock Market Dashboard
+"""
+
+tx_type = self.type_var.get()
         try:
             amount = float(self.amount_var.get())
         except Exception:
