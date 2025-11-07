@@ -423,3 +423,18 @@ if __name__ == "__main__":
         ttk.Label(dlg, text="Limit (₹)").grid(row=1, column=0, padx=6, pady=6)
         limit_var = tk.StringVar()
         ttk.Entry(dlg, textvariable=limit_var, width=12).grid(row=1, column=1, padx=6)
+
+
+        # Check budgets and show simple warnings if exceeded or near limit
+        budgets = self.db.get_budgets(ym)
+        warn_text = ""
+        if budgets:
+            for cat, limit in budgets.items():
+                spent = next((v for c,v in breakdown if c==cat), 0.0)
+                if spent >= limit:
+                    warn_text += f"Budget exceeded for {cat}: ₹{spent:.2f} / ₹{limit:.2f}\n"
+                elif spent >= 0.8 * limit:
+                    warn_text += f"Approaching budget for {cat}: ₹{spent:.2f} / ₹{limit:.2f}\n"
+        if warn_text:
+            lbl = ttk.Label(self.chart_container, text=warn_text, foreground="red", justify="left")
+            lbl.pack(side="top", pady=6)
