@@ -589,6 +589,24 @@ if __name__ == "__main__":
     style.theme_use("clam")  # nicer cross-platform default
     app = PomodoroApp(root)
     root.mainloop()
+      df = pd.DataFrame(sessions, columns=["id", "task_id", "start_time", "end_time", "duration_minutes", "session_type"])
+        df["day"] = pd.to_datetime(df["start_time"]).dt.date
+        work_df = df[df["session_type"] == "work"].copy()
+        if work_df.empty:
+            lbl = ttk.Label(self.chart_container, text="No work sessions yet.")
+            lbl.pack()
+            return
+
+        counts = work_df.groupby("day").size().reset_index(name="count")
+        minutes = work_df.groupby("day")["duration_minutes"].sum().reset_index(name="minutes")
+
+        # Line chart: sessions per day
+        fig = Figure(figsize=(6, 3), dpi=100)
+        ax = fig.add_subplot(121)
+        ax.plot(counts["day"].astype(str), counts["count"], marker="o")
+        ax.set_title("Work sessions per day")
+        ax.set_xlabel("Day")
+        ax.set_ylabel("Sessions")
 
    # -------------------------
     # Exports & utilitiesk
