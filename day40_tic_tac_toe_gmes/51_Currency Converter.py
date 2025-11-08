@@ -592,6 +592,18 @@ if __name__ == "__main__":
       df = pd.DataFrame(sessions, columns=["id", "task_id", "start_time", "end_time", "duration_minutes", "session_type"])
         df["day"] = pd.to_datetime(df["start_time"]).dt.date
         work_df = df[df["session_type"] == "work"].copy()
+
+    def _refresh_history(self):
+        self.history_tree.delete(*self.history_tree.get_children())
+        sessions = self.db.get_sessions()
+        for s in sessions:
+            sid, task_id, start, end, duration, s_type = s
+            task_title = self._task_title_by_id(task_id)
+            start_str = start.split(".")[0] if isinstance(start, str) else str(start)
+            end_str = end.split(".")[0] if isinstance(end, str) else str(end)
+            self.history_tree.insert("", "end", values=(sid, task_title, start_str, end_str, f"{duration:.1f}", s_type))
+        self._draw_charts()
+      
         if work_df.empty:
             lbl = ttk.Label(self.chart_container, text="No work sessions yet.")
             lbl.pack()
