@@ -1,3 +1,7 @@
+""                                                  Day = 51 
+                         
+                                             Currency Converter                                                                                                        ""
+
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import sqlite3
