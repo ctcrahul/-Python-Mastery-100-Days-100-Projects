@@ -594,6 +594,23 @@ if __name__ == "__main__":
     # Exports & utilitiesk
     # -------------------------
     def _export_csv(self):
+
+              # Bar chart: minutes per day
+        ax2 = fig.add_subplot(122)
+        ax2.bar(minutes["day"].astype(str), minutes["minutes"])
+        ax2.set_title("Minutes worked per day")
+        ax2.set_xlabel("Day")
+        ax2.set_ylabel("Minutes")
+        ax2.tick_params(axis='x', rotation=45)
+
+        canvas = FigureCanvasTkAgg(fig, master=self.chart_container)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
+
+    def _clear_chart(self):
+        for w in self.chart_container.winfo_children():
+            w.destroy()
+          
         sessions = self.db.get_sessions()
         if not sessions:
             messagebox.showinfo("No data", "No sessions to export.")
