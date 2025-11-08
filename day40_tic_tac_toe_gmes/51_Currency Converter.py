@@ -603,6 +603,15 @@ if __name__ == "__main__":
         # Line chart: sessions per day
         fig = Figure(figsize=(6, 3), dpi=100)
         ax = fig.add_subplot(121)
+
+    def _task_title_by_id(self, tid):
+        if not tid:
+            return "(none)"
+        for t in self.db.get_tasks():
+            if t[0] == tid:
+                return t[1]
+        return f"id:{tid}"
+      
         ax.plot(counts["day"].astype(str), counts["count"], marker="o")
         ax.set_title("Work sessions per day")
         ax.set_xlabel("Day")
