@@ -589,3 +589,13 @@ if __name__ == "__main__":
     style.theme_use("clam")  # nicer cross-platform default
     app = PomodoroApp(root)
     root.mainloop()
+
+    # -------------------------
+    # Cleanup the code
+    # -------------------------
+    def _on_close(self):
+        if self.engine.is_running() or self.engine.is_paused():
+            if not messagebox.askyesno("Exit", "Timer is running or paused. Exit anyway?"):
+                return
+        self.db.close()
+        self.root.destroy()
