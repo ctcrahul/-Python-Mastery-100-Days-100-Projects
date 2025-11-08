@@ -657,40 +657,4 @@ if __name__ == "__main__":
 
         canvas = FigureCanvasTkAgg(fig, master=self.chart_container)
         canvas.draw()
-        canvas.get_tk_widget().pack(fill="both", expand=True)
-
-    def _clear_chart(self):
-        for w in self.chart_container.winfo_children():
-            w.destroy()
-          
-        sessions = self.db.get_sessions()
-        if not sessions:
-            messagebox.showinfo("No data", "No sessions to export.")
-            return
-        df = pd.DataFrame(sessions, columns=["id", "task_id", "start_time", "end_time", "duration_minutes", "session_type"])
-        # add task title
-        df["task_title"] = df["task_id"].apply(self._task_title_by_id)
-        path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile=f"pomodoro_sessions_{int(time.time())}.csv")
-        if not path:
-            return
-        df.to_csv(path, index=False)
-        messagebox.showinfo("Saved", f"Exported to {path}")
-    # -------------------------
-    # Cleanup the code
-    # -------------------------
-    def _on_close(self):
-        if self.engine.is_running() or self.engine.is_paused():
-            if not messagebox.askyesno("Exit", "Timer is running or paused. Exit anyway?"):
-                return
-
-
-          # -------------------------
-    # Timer UI helpers
-    # -------------------------
-    def _update_timer_label(self, remaining_seconds):
-        mins = remaining_seconds // 60
-        secs = remaining_seconds % 60
-        self.time_label.config(text=f"{int(mins):02d}:{int(secs):02d}")
-      
-        self.db.close()
-        self.root.destroy()
+lop
