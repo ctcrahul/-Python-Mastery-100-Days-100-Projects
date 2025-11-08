@@ -682,5 +682,15 @@ if __name__ == "__main__":
         if self.engine.is_running() or self.engine.is_paused():
             if not messagebox.askyesno("Exit", "Timer is running or paused. Exit anyway?"):
                 return
+
+
+          # -------------------------
+    # Timer UI helpers
+    # -------------------------
+    def _update_timer_label(self, remaining_seconds):
+        mins = remaining_seconds // 60
+        secs = remaining_seconds % 60
+        self.time_label.config(text=f"{int(mins):02d}:{int(secs):02d}")
+      
         self.db.close()
         self.root.destroy()
