@@ -618,6 +618,19 @@ if __name__ == "__main__":
         ax2.bar(minutes["day"].astype(str), minutes["minutes"])
         ax2.set_title("Minutes worked per day")
         ax2.set_xlabel("Day")
+
+    def _draw_charts(self):
+        # Clear container
+        for w in self.chart_container.winfo_children():
+            w.destroy()
+
+        # Prepare data: sessions per day (work sessions only)
+        sessions = self.db.get_sessions()
+        if not sessions:
+            lbl = ttk.Label(self.chart_container, text="No sessions yet — start a Pomodoro to build stats.")
+            lbl.pack()
+            return
+          
         ax2.set_ylabel("Minutes")
         ax2.tick_params(axis='x', rotation=45)
 
