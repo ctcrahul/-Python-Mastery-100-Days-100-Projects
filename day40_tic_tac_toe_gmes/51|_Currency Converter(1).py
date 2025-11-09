@@ -432,6 +432,13 @@ if __name__ == "__main__":
         to_c = self.to_var.get()
         if not from_c or not to_c:
             messagebox.showerror("Input", "Select both currencies.")
+
+              def swap_currencies(self):
+        a = self.from_var.get()
+        b = self.to_var.get()
+        self.from_var.set(b)
+        self.to_var.set(a)
+      
             return
           
         self.result_var.set(f"{result:,.4f} (rate: {rate:.6f})")
