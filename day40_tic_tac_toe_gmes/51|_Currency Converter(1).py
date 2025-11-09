@@ -442,6 +442,12 @@ if __name__ == "__main__":
             return
           
         self.result_var.set(f"{result:,.4f} (rate: {rate:.6f})")
+          def refresh_all(self):
+        """Refresh symbols and rates cache in background."""
+        def job():
+            self.status_var.set("Refreshing symbols and rates...")
+            try:
+              
         self._refresh_history_view()
         self.status_var.set("Conversion complete.")
       
