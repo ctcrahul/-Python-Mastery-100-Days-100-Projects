@@ -427,6 +427,11 @@ if __name__ == "__main__":
         df = pd.DataFrame(self.history)
         path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile="conversion_history.csv")
         if not path:
+              def _update_after_convert(self, rate, result):
+        self.result_var.set(f"{result:,.4f} (rate: {rate:.6f})")
+        self._refresh_history_view()
+        self.status_var.set("Conversion complete.")
+      
             return
         df.to_csv(path, index=False)
         messagebox.showinfo("Saved", f"History exported to {path}")
