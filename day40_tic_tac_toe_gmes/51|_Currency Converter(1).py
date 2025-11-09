@@ -428,6 +428,12 @@ if __name__ == "__main__":
         path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile="conversion_history.csv")
         if not path:
               def _update_after_convert(self, rate, result):
+                        from_c = self.from_var.get()
+        to_c = self.to_var.get()
+        if not from_c or not to_c:
+            messagebox.showerror("Input", "Select both currencies.")
+            return
+          
         self.result_var.set(f"{result:,.4f} (rate: {rate:.6f})")
         self._refresh_history_view()
         self.status_var.set("Conversion complete.")
