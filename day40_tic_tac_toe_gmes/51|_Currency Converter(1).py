@@ -387,3 +387,18 @@ if __name__ == "__main__":
         canvas = FigureCanvasTkAgg(fig, master=self.plot_container)
         canvas.draw()
         canvas.get_tk_widget().pack(fill="both", expand=True)
+
+        def job():
+            try:
+                payload = fetch_timeseries(base, target, start, end)
+                rates = payload.get("rates", {})
+                dates = sorted(rates.keys())
+                series = [rates[d].get(target) for d in dates]
+                # draw plot on main thread
+                self.root.after(0, lambda: self._draw_plot(dates, series, base, target))
+                self.root.after(0, lambda: self.status_var.set("Timeseries plotted."))
+            except Exception as e:
+                self.root.after(0, lambda: messagebox.showerror("Timeseries failed", str(e)))
+                self.root.after(0, lambda: self.status_var.set("Timeseries failed."))
+        threading.Thread(target=job, daemon=True).start()
+      
