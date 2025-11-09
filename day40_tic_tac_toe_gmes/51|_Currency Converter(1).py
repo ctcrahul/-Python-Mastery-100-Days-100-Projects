@@ -1,4 +1,6 @@
-"""
+"""                                                    Day 51
+
+                                                  Currency Conveter
 Currency Converter Desktop App
 - Live rates from exchangerate.host (no API key)
 - Caches latest rates locally (cache.json)
