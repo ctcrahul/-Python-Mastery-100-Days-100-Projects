@@ -419,3 +419,15 @@ if __name__ == "__main__":
                 self.root.after(0, lambda: self.status_var.set("Timeseries failed."))
         threading.Thread(target=job, daemon=True).start()
       
+
+    def export_history(self):
+        if not self.history:
+            messagebox.showinfo("No data", "No conversions to export.")
+            return
+        df = pd.DataFrame(self.history)
+        path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile="conversion_history.csv")
+        if not path:
+            return
+        df.to_csv(path, index=False)
+        messagebox.showinfo("Saved", f"History exported to {path}")
+      
