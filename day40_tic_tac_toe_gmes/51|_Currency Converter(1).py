@@ -371,3 +371,19 @@ if __name__ == "__main__":
     style.theme_use("clam")
     app = CurrencyConverterApp(root)
     root.mainloop()
+
+    def _draw_plot(self, dates, series, base, target):
+        # clear previous
+        for w in self.plot_container.winfo_children():
+            w.destroy()
+        fig = Figure(figsize=(3.2,2.8), dpi=100)
+        ax = fig.add_subplot(111)
+        ax.plot(dates, series, marker="o")
+        ax.set_title(f"{base}/{target} rate")
+        ax.set_xlabel("Date")
+        ax.set_ylabel("Rate")
+        ax.tick_params(axis='x', rotation=45)
+        fig.tight_layout()
+        canvas = FigureCanvasTkAgg(fig, master=self.plot_container)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
