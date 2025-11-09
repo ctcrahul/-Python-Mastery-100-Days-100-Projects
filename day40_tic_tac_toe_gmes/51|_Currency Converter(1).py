@@ -396,6 +396,16 @@ if __name__ == "__main__":
             return
           
         def job():
+          
+    def plot_timeseries(self):
+        base = self.from_var.get()
+        target = self.to_var.get()
+        start = self.start_entry.get().strip()
+        end = self.end_entry.get().strip()
+        if not (base and target and start and end):
+            messagebox.showerror("Input", "Set base, target and both dates (YYYY-MM-DD).")
+            return
+          
             try:
                 payload = fetch_timeseries(base, target, start, end)
                 rates = payload.get("rates", {})
