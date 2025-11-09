@@ -388,6 +388,13 @@ if __name__ == "__main__":
         canvas.draw()
         canvas.get_tk_widget().pack(fill="both", expand=True)
 
+              try:
+            datetime.fromisoformat(start)
+            datetime.fromisoformat(end)
+        except Exception:
+            messagebox.showerror("Input", "Dates must be YYYY-MM-DD.")
+            return
+          
         def job():
             try:
                 payload = fetch_timeseries(base, target, start, end)
