@@ -381,3 +381,14 @@ if __name__ == "__main__":
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                        Thanks
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  def export_history(self):
+        if not self.history:
+            messagebox.showinfo("No history", "No actions to export during this session.")
+            return
+        path = filedialog.asksaveasfilename(title="Export session history", defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile=f"spam_session_history_{int(time.time())}.csv")
+        if not path:
+            return
+        pd.DataFrame(self.history).to_csv(path, index=False)
+        messagebox.showinfo("Saved", f"Session history exported:\n{path}")
+        self.status_var.set("History exported.")
