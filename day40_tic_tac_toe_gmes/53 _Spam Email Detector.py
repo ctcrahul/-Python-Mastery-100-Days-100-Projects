@@ -379,26 +379,5 @@ if __name__ == "__main__":
     root.mainloop()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                       Thanks
+                                                       Thanks for visting keep supporting us
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  def export_history(self):
-        if not self.history:
-            messagebox.showinfo("No history", "No actions to export during this session.")
-            return
-        path = filedialog.asksaveasfilename(title="Export session history", defaultextension=".csv", filetypes=[("CSV files","*.csv")], initialfile=f"spam_session_history_{int(time.time())}.csv")
-        if not path:
-            return
-        pd.DataFrame(self.history).to_csv(path, index=False)
-        messagebox.showinfo("Saved", f"Session history exported:\n{path}")
-        self.status_var.set("History exported.")
-
-        try:
-            m = joblib.load(path)
-            # basic sanity: must have predict
-            if not hasattr(m, "predict"):
-                raise ValueError("Selected file is not a valid sklearn model.")
-            self.model = m
-            self.status_var.set(f"Model loaded: {os.path.basename(path)}")
-            self.history.append({"time":datetime.utcnow().isoformat(), "action":"load_model", "path":os.path.basename(path)})
-   zsz
