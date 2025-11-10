@@ -421,4 +421,15 @@ def save_model(self):
             messagebox.showwarning("No model", "Train or load a model first.")
             return
         try:
+
+
+            def predict_single(self):
+        text = self.single_text.get("1.0", tk.END).strip()
+        if not text:
+            messagebox.showwarning("Input", "Enter email text to classify.")
+            return
+        if self.model is None:
+            messagebox.showwarning("No model", "Train or load a model first.")
+            return
+          
           
