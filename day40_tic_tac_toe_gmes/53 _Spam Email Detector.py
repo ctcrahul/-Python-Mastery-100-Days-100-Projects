@@ -450,3 +450,19 @@ def save_model(self):
             return
 
 
+  def _plot_confusion_matrix(self, cm):
+        # clear
+        for w in self.cm_container.winfo_children():
+            w.destroy()
+        fig = Figure(figsize=(4,3), dpi=100)
+        ax = fig.add_subplot(111)
+        im = ax.imshow(cm, interpolation="nearest", cmap=matplotlib.cm.Blues)
+        ax.set_title("Confusion Matrix")
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Actual")
+        tick_marks = [0,1]
+        ax.set_xticks(tick_marks)
+        ax.set_yticks(tick_marks)
+        ax.set_xticklabels(["ham","spam"])
+        ax.set_yticklabels(["ham","spam"])
+    
