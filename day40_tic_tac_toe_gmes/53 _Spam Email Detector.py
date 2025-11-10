@@ -1,5 +1,6 @@
-"""
-Spam Email Detector — Desktop App (Tkinter)
+"""                                                 Day = 53
+                           
+                                   Spam Email Detector — Desktop App (Tkinter)
 Features:
 - Load CSV dataset with columns: 'text' and 'label' (spam/ham or 1/0)
 - Train TF-IDF + MultinomialNB classifier, show evaluation metrics
