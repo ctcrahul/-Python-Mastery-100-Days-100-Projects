@@ -411,4 +411,14 @@ def save_model(self):
         path = filedialog.asksaveasfilename(title="Save model", defaultextension=".joblib", filetypes=[("Joblib files","*.joblib")], initialfile=f"spam_model_{int(time.time())}.joblib")
         if not path:
             return
+
+
+    def classify_csv(self):
+        path = filedialog.askopenfilename(title="Select CSV to classify", filetypes=[("CSV files","*.csv")])
+        if not path:
+            return
+        if self.model is None:
+            messagebox.showwarning("No model", "Train or load a model first.")
+            return
+        try:
           
