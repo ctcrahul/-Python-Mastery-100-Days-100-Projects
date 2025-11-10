@@ -403,4 +403,12 @@ if __name__ == "__main__":
             self.history.append({"time":datetime.utcnow().isoformat(), "action":"load_model", "path":os.path.basename(path)})
         except Exception as e:
             messagebox.showerror("Load failed", str(e))
+
+def save_model(self):
+        if self.model is None:
+            messagebox.showwarning("No model", "Train a model first.")
+            return
+        path = filedialog.asksaveasfilename(title="Save model", defaultextension=".joblib", filetypes=[("Joblib files","*.joblib")], initialfile=f"spam_model_{int(time.time())}.joblib")
+        if not path:
+            return
           
