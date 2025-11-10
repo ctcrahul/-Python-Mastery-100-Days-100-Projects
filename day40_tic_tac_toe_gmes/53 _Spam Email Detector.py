@@ -432,4 +432,13 @@ def save_model(self):
             messagebox.showwarning("No model", "Train or load a model first.")
             return
           
-          
+
+  def evaluate_on_dataset(self):
+        if self.dataset is None:
+            messagebox.showwarning("No data", "Load a dataset first.")
+            return
+        if self.model is None:
+            messagebox.showwarning("No model", "Train or load a model first.")
+            return
+
+
