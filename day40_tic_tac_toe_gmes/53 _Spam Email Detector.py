@@ -431,6 +431,14 @@ def save_model(self):
         if self.model is None:
             messagebox.showwarning("No model", "Train or load a model first.")
             return
+
+ for i in range(cm.shape[0]):
+            for j in range(cm.shape[1]):
+                ax.text(j, i, format(cm[i, j], 'd'),
+                        ha="center", va="center",
+                        color="white" if cm[i, j] > thresh else "black")
+
+
           
 
   def evaluate_on_dataset(self):
