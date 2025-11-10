@@ -392,3 +392,15 @@ if __name__ == "__main__":
         pd.DataFrame(self.history).to_csv(path, index=False)
         messagebox.showinfo("Saved", f"Session history exported:\n{path}")
         self.status_var.set("History exported.")
+
+        try:
+            m = joblib.load(path)
+            # basic sanity: must have predict
+            if not hasattr(m, "predict"):
+                raise ValueError("Selected file is not a valid sklearn model.")
+            self.model = m
+            self.status_var.set(f"Model loaded: {os.path.basename(path)}")
+            self.history.append({"time":datetime.utcnow().isoformat(), "action":"load_model", "path":os.path.basename(path)})
+        except Exception as e:
+            messagebox.showerror("Load failed", str(e))
+          
