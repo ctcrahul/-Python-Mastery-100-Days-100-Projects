@@ -450,6 +450,15 @@ def save_model(self):
             return
 
 
+   def _update_after_train(self, acc, prec, rec, f1, cm, cv_scores):
+        self.metrics_text.delete("1.0", tk.END)
+        s = f"Accuracy: {acc:.4f}\nPrecision: {prec:.4f}\nRecall: {rec:.4f}\nF1: {f1:.4f}\n"
+        s += f"CV F1 scores: {np.array2string(cv_scores, precision=3, separator=', ')}\n"
+        self.metrics_text.insert(tk.END, s)
+        self.status_var.set("Model trained.")
+        self._plot_confusion_matrix(cm)
+
+
   def _plot_confusion_matrix(self, cm):
         # clear
         for w in self.cm_container.winfo_children():
