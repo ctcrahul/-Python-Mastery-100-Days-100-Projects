@@ -35,3 +35,20 @@ VOICE_GENDER = "female"  # "male" or "female" preference, engine will select clo
 LISTEN_TIMEOUT = 5    # seconds to wait for phrase
 LISTEN_PHRASE_TIME_LIMIT = 8  # max seconds to record a phrase
 
+# ---------------------------
+# Utilities: TTS, Recognition
+# ---------------------------
+class VoiceAssistant:
+    def __init__(self):
+        # speech recognizer
+        self.recognizer = sr.Recognizer()
+        self.microphone = sr.Microphone()
+        # tts engine
+        self.engine = pyttsx3.init()
+        self._configure_tts()
+        # command queue for worker thread
+        self.command_q = Queue()
+        self.running = True
+        # small history
+        self.history = []
+
