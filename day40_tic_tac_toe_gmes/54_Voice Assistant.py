@@ -92,4 +92,22 @@ class VoiceAssistant:
         else:
             t = threading.Thread(target=_say, daemon=True)
             t.start()
-   
+
+   def listen(self, timeout=LISTEN_TIMEOUT, phrase_time_limit=LISTEN_PHRASE_TIME_LIMIT):
+        """Listens from microphone and returns recognized lowercase text or None."""
+        with self.microphone as source:
+            try:
+                # dynamic energy threshold for noisy environments
+                self.recognizer.adjust_for_ambient_noise(source, duration=0.7)
+                audio = self.recognizer.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
+            except sr.WaitTimeoutError:
+                return None
+        try:
+            text = self.recognizer.recognize_google(audio)
+            return text.lower()
+        except sr.UnknownValueError:
+            return None
+        except sr.RequestError:
+            # network issue with Google API - return None
+            return None
+          
