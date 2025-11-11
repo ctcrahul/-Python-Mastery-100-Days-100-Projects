@@ -78,5 +78,18 @@ class VoiceAssistant:
                 pass
 
     def speak(self, text, block=False):
-        """Speak text. If block False, run in backgr
+        """Speak text. If block False, run in backgr""""
+                def _say():
+                  
+            try:
+                self.engine.say(text)
+                self.engine.runAndWait()
+            except Exception:
+                # fallback print
+                print("[TTS failed] " + text)
+        if block:
+            _say()
+        else:
+            t = threading.Thread(target=_say, daemon=True)
+            t.start()
    
