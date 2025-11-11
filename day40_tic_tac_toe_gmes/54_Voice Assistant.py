@@ -129,3 +129,24 @@ class VoiceAssistant:
             self.speak("Hello. How can I help you?")
             return
 
+    # Time and date
+        if "time" in text:
+            now = datetime.datetime.now()
+            resp = now.strftime("It's %I:%M %p")
+            self.speak(resp)
+            return
+        if "date" in text:
+            now = datetime.datetime.now()
+            resp = now.strftime("Today is %A, %B %d, %Y")
+            self.speak(resp)
+            return
+
+        # Open website / search
+        if text.startswith("search for "):
+            query = text.replace("search for ", "", 1).strip()
+            if query:
+                url = f"https://www.google.com/search?q={requests.utils.quote(query)}"
+                webbrowser.open(url)
+                self.speak(f"Searching Google for {query}")
+                return
+              
