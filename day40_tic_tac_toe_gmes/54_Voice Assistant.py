@@ -24,3 +24,14 @@ import time
 import wikipedia
 import requests
 from queue import Queue, Empty
+
+
+# ---------------------------
+# Configuration
+# ---------------------------
+WAKE_WORDS = ("hey assistant", "ok assistant", "assistant", "hey jarvis")  # words to wake assistant
+RATE = 150            # TTS speech rate
+VOICE_GENDER = "female"  # "male" or "female" preference, engine will select closest match
+LISTEN_TIMEOUT = 5    # seconds to wait for phrase
+LISTEN_PHRASE_TIME_LIMIT = 8  # max seconds to record a phrase
+
