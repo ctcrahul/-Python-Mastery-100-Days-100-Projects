@@ -149,4 +149,31 @@ class VoiceAssistant:
                 webbrowser.open(url)
                 self.speak(f"Searching Google for {query}")
                 return
-              
+
+
+
+        if text.startswith("open "):
+            target = text.replace("open ", "", 1).strip()
+            # simple mapping
+            sites = {
+                "youtube": "https://www.youtube.com",
+                "google": "https://www.google.com",
+                "github": "https://github.com",
+                "stackoverflow": "https://stackoverflow.com",
+                "gmail": "https://mail.google.com"
+            }
+            if target in sites:
+                webbrowser.open(sites[target])
+                self.speak(f"Opening {target}")
+                return
+            # allow opening URLs directly
+            if "." in target:
+                url = target if target.startswith("http") else "https://" + target
+                webbrowser.open(url)
+                self.speak(f"Opening {target}")
+                return
+            # else try as app name
+            self.open_application(target)
+            return
+
+
