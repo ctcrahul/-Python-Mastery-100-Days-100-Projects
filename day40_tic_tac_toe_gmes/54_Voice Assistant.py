@@ -111,3 +111,21 @@ class VoiceAssistant:
             # network issue with Google API - return None
             return None
           
+
+
+    # ---------------------------
+    # Command handling
+    # ---------------------------
+    def handle_command_text(self, text):
+        """Main command parser. Receives a phrase already stripped of wake word."""
+        if not text:
+            return
+        text = text.strip()
+        self.history.append((datetime.datetime.utcnow().isoformat(), text))
+        print("COMMAND:", text)
+
+        # Basic conversational replies
+        if any(kw in text for kw in ("hello", "hi", "hey")):
+            self.speak("Hello. How can I help you?")
+            return
+
