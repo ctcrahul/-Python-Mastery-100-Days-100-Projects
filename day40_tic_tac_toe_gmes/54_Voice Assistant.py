@@ -176,4 +176,20 @@ class VoiceAssistant:
             self.open_application(target)
             return
 
+      # wikipedia quick facts
+        if text.startswith("wikipedia ") or text.startswith("who is ") or text.startswith("what is "):
+            query = text.replace("wikipedia ", "", 1) if text.startswith("wikipedia ") else text
+            query = query.replace("who is ", "").replace("what is ", "").strip()
+            if not query:
+                self.speak("What would you like to look up on Wikipedia?")
+                return
+            try:
+                summary = wikipedia.summary(query, sentences=2, auto_suggest=True, redirect=True)
+                self.speak(summary)
+            except Exception as e:
+                self.speak("I couldn't fetch that
+
+
+                           
+
 
