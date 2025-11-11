@@ -52,3 +52,31 @@ class VoiceAssistant:
         # small history
         self.history = []
 
+
+    def _configure_tts(self):
+        # set rate
+        self.engine.setProperty("rate", RATE)
+        # choose voice based on gender preference if available
+        voices = self.engine.getProperty("voices")
+        chosen = None
+        if VOICE_GENDER.lower() == "female":
+            for v in voices:
+                if "female" in v.name.lower() or "female" in getattr(v, "gender", "").lower():
+                    chosen = v.id
+                    break
+        elif VOICE_GENDER.lower() == "male":
+            for v in voices:
+                if "male" in v.name.lower() or "male" in getattr(v, "gender", "").lower():
+                    chosen = v.id
+                    break
+        if not chosen and voices:
+            chosen = voices[0].id
+        if chosen:
+            try:
+                self.engine.setProperty("voice", chosen)
+            except Exception:
+                pass
+
+    def speak(self, text, block=False):
+        """Speak text. If block False, run in backgr
+   
