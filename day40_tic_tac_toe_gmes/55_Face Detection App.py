@@ -50,3 +50,23 @@ class FaceDetector:
         self.minNeighbors = minNeighbors
         self.minSize = minSize
         self._load_cascade()
+
+    def _load_cascade(self):
+        cascade_file = CASCADE_FILES.get(self.cascade_name, CASCADE_FILES["Haar-Frontal"])
+        cascade_path = cv2.data.haarcascades + cascade_file
+        if not os.path.exists(cascade_path):
+            raise RuntimeError(f"Cascade file not found: {cascade_path}")
+        # use CascadeClassifier for both Haar and LBP xmls
+        self.detector = cv2.CascadeClassifier(cascade_path)
+
+    def set_params(self, scaleFactor=None, minNeighbors=None, minSize=None):
+        if scaleFactor is not None:
+            self.scaleFactor = float(scaleFactor)
+        if minNeighbors is not None:
+            self.minNeighbors = int(minNeighbors)
+        if minSize is not None:
+            self.minSize = tuple(minSize)
+        # no reload required for these params
+
+    def set_cascade(self, cascade_name):
+        self.cascade_name =
