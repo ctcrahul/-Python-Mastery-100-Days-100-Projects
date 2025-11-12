@@ -33,3 +33,19 @@ CASCADE_FILES = {
     "Haar-Profile": "haarcascade_profileface.xml",
     "LBP-Face": "lbpcascade_frontalface.xml"
 }
+
+DEFAULT_CAMERA = 0
+OUTPUT_DIR = "face_captures"
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# -----------------------------
+# Face Detector Class
+# -----------------------------
+class FaceDetector:
+    def __init__(self, cascade_name="Haar-Frontal", scaleFactor=1.1, minNeighbors=5, minSize=(30,30)):
+        self.cascade_name = cascade_name
+        self.scaleFactor = scaleFactor
+        self.minNeighbors = minNeighbors
+        self.minSize = minSize
+        self._load_cascade()
