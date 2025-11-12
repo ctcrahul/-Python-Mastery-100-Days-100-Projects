@@ -179,3 +179,26 @@ class FaceDetectionApp:
         self.info_var = tk.StringVar(value="No camera opened.")
         ttk.Label(info, textvariable=self.info_var).pack(side="left")
 
+
+
+  # -----------------------------
+    # Camera control
+    # -----------------------------
+    def open_camera(self, index):
+        self.close_camera()
+        try:
+            self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW if os.name == "nt" else cv2.CAP_ANY)
+            if not self.cap or not self.cap.isOpened():
+                self.cap = None
+                self.info_var.set(f"Unable to open camera {index}.")
+                return False
+            self.running = True
+            self.video_thread = threading.Thread(target=self._video_loop, daemon=True)
+            self.video_thread.start()
+            self.info_var.set(f"Camera {index} opened.")
+            return True
+        except Exception as e:
+            self.cap = None
+            self.info_var.set(f"Failed to open camera: {e}")
+            return False
+          
