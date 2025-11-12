@@ -135,6 +135,23 @@ class FaceDetectionApp:
         ttk.Checkbutton(top, text="Enable Detection", variable=self.detect_enabled).pack(side="left", padx=6)
         ttk.Checkbutton(top, text="Show FPS", variable=self.show_fps).pack(side="left", padx=6)
 
+
+          ttk.Label(params, text="Detector:").grid(row=0, column=0, sticky="w")
+        cascade_menu = ttk.Combobox(params, textvariable=self.cascade_var, values=list(CASCADE_FILES.keys()), state="readonly", width=18)
+        cascade_menu.grid(row=0, column=1, padx=6)
+        ttk.Button(params, text="Apply Detector", command=self._apply_detector).grid(row=0, column=2, padx=6)
+
+        ttk.Label(params, text="scaleFactor:").grid(row=1, column=0, sticky="w", pady=6)
+        ttk.Spinbox(params, from_=1.01, to=2.5, increment=0.01, textvariable=self.scale_var, width=8).grid(row=1, column=1, sticky="w")
+        ttk.Label(params, text="minNeighbors:").grid(row=1, column=2, sticky="w", padx=(12,0))
+        ttk.Spinbox(params, from_=1, to=20, textvariable=self.nbrs_var, width=6).grid(row=1, column=3, sticky="w")
+
+        ttk.Label(params, text="minSize(px):").grid(row=1, column=4, sticky="w", padx=(12,0))
+        ttk.Spinbox(params, from_=10, to=300, textvariable=self.min_size_var, width=6).grid(row=1, column=5, sticky="w")
+
+        # Canvas area for video
+        canvas_frame = ttk.Frame(se
+                                 
         # Cascade selection & params
         params = ttk.Frame(self.root)
         params.pack(side="top", fill="x", padx=8, pady=6)
