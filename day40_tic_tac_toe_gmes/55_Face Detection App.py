@@ -2,9 +2,9 @@
                                                     
                                                               Face Detection App (single-file)
 Dependencies:
-    pip install opencv-python pillow numpy
+       pip install opencv-python pillow numpy
 Run:
-    python face_detection_app.py
+      python face_detection_app.py
 
 Features:
  - Real-time webcam preview with face detection (Haar cascades shipped with OpenCV)
@@ -24,7 +24,6 @@ import time
 import os
 import numpy as np
 import datetime
-
 
 # -----------------------------
 # Helper / Config
@@ -69,8 +68,8 @@ class FaceDetector:
         # no reload required for these params
 
     def set_cascade(self, cascade_name):
-        self.cascade_name =
-
+        self.cascade_name = cascade_name
+        self._load_cascade()
 
     def detect(self, gray_frame):
         # returns list of (x,y,w,h)
@@ -91,8 +90,7 @@ class FaceDetectionApp:
         self.root.title("Face Detection App")
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
-
-     # Video capture
+        # Video capture
         self.cam_index = DEFAULT_CAMERA
         self.cap = None
         self.video_thread = None
@@ -118,7 +116,7 @@ class FaceDetectionApp:
         self.open_camera(self.cam_index)
 
     def _build_ui(self):
-              # Top controls
+        # Top controls
         top = ttk.Frame(self.root)
         top.pack(side="top", fill="x", padx=8, pady=6)
 
@@ -135,8 +133,11 @@ class FaceDetectionApp:
         ttk.Checkbutton(top, text="Enable Detection", variable=self.detect_enabled).pack(side="left", padx=6)
         ttk.Checkbutton(top, text="Show FPS", variable=self.show_fps).pack(side="left", padx=6)
 
+        # Cascade selection & params
+        params = ttk.Frame(self.root)
+        params.pack(side="top", fill="x", padx=8, pady=6)
 
-          ttk.Label(params, text="Detector:").grid(row=0, column=0, sticky="w")
+        ttk.Label(params, text="Detector:").grid(row=0, column=0, sticky="w")
         cascade_menu = ttk.Combobox(params, textvariable=self.cascade_var, values=list(CASCADE_FILES.keys()), state="readonly", width=18)
         cascade_menu.grid(row=0, column=1, padx=6)
         ttk.Button(params, text="Apply Detector", command=self._apply_detector).grid(row=0, column=2, padx=6)
@@ -150,15 +151,8 @@ class FaceDetectionApp:
         ttk.Spinbox(params, from_=10, to=300, textvariable=self.min_size_var, width=6).grid(row=1, column=5, sticky="w")
 
         # Canvas area for video
-        canvas_frame = ttk.Frame(se
-                                 
-        # Cascade selection & params
-        params = ttk.Frame(self.root)
-        params.pack(side="top", fill="x", padx=8, pady=6)
-      
-      
-
-                                        canvas_frame.pack(side="top", fill="both", expand=True, padx=8, pady=6)
+        canvas_frame = ttk.Frame(self.root)
+        canvas_frame.pack(side="top", fill="both", expand=True, padx=8, pady=6)
         self.video_label = ttk.Label(canvas_frame)
         self.video_label.pack(fill="both", expand=True)
 
@@ -179,9 +173,7 @@ class FaceDetectionApp:
         self.info_var = tk.StringVar(value="No camera opened.")
         ttk.Label(info, textvariable=self.info_var).pack(side="left")
 
-
-
-  # -----------------------------
+    # -----------------------------
     # Camera control
     # -----------------------------
     def open_camera(self, index):
@@ -200,8 +192,9 @@ class FaceDetectionApp:
         except Exception as e:
             self.cap = None
             self.info_var.set(f"Failed to open camera: {e}")
+            return False
 
-              def close_camera(self):
+    def close_camera(self):
         self.running = False
         if self.cap:
             try:
@@ -230,8 +223,178 @@ class FaceDetectionApp:
         self.cam_entry.insert(0, str(next_idx))
         self._on_open_camera()
 
-      
-            return False
+    # -----------------------------
+    # Video loop & detection
+    # -----------------------------
+    def _video_loop(self):
+        prev_time = time.time()
+        fps = 0.0
+        while self.running and self.cap and self.cap.isOpened():
+            ret, frame = self.cap.read()
+            if not ret:
+                time.sleep(0.05)
+                continue
+
+            color_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            display_frame = color_frame.copy()
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            self.detector.set_params(scaleFactor=self.scale_var.get(), minNeighbors=self.nbrs_var.get(), minSize=(self.min_size_var.get(), self.min_size_var.get()))
+
+            faces = []
+            if self.detect_enabled.get():
+                faces = self.detector.detect(gray)
+                # faces: array-like of x,y,w,h
+
+            # draw boxes
+            self.last_faces = faces
+            self.last_color_frame = display_frame
+
+            for i, (x,y,w,h) in enumerate(faces):
+                # color changes by index
+                color = (255, 0, 0) if i != self.selected_face_index else (0, 255, 0)
+                cv2.rectangle(display_frame, (x,y), (x+w, y+h), color, 2)
+                # label with index
+                cv2.putText(display_frame, f"#{i}", (x, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+
+            # overlay face count
+            cv2.putText(display_frame, f"Faces: {len(faces)}", (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,0), 2)
+
+            # fps calc
+            now = time.time()
+            dt = now - prev_time
+            prev_time = now
+            if dt > 0:
+                fps = 0.9*fps + 0.1*(1.0/dt)
+            if self.show_fps.get():
+                cv2.putText(display_frame, f"FPS: {fps:.1f}", (10, 45), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,255,255), 2)
+
+            # convert to ImageTk and display
+            img = Image.fromarray(display_frame)
+            imgtk = ImageTk.PhotoImage(image=img)
+            # need to save reference to avoid GC
+            self.video_label.imgtk = imgtk
+            self.video_label.configure(image=imgtk)
+
+            # small sleep to reduce CPU use
+            time.sleep(0.01)
+
+    # -----------------------------
+    # Actions: snapshot & save faces
+    # -----------------------------
+    def take_snapshot(self):
+        if self.last_color_frame is None:
+            messagebox.showinfo("No frame", "No video frame available to snapshot.")
+            return
+        ts = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        fname = os.path.join(OUTPUT_DIR, f"snapshot_{ts}.png")
+        img_bgr = cv2.cvtColor(self.last_color_frame, cv2.COLOR_RGB2BGR)
+        cv2.imwrite(fname, img_bgr)
+        messagebox.showinfo("Saved", f"Snapshot saved: {fname}")
+        self.info_var.set(f"Saved snapshot: {fname}")
+
+    def save_detected_faces(self):
+        if self.last_color_frame is None:
+            messagebox.showinfo("No frame", "No video frame available.")
+            return
+        if len(self.last_faces) == 0:
+            messagebox.showinfo("No faces", "No faces detected in current frame.")
+            return
+        saved = []
+        for i, (x,y,w,h) in enumerate(self.last_faces):
+            crop = self.last_color_frame[y:y+h, x:x+w]
+            if crop.size == 0:
+                continue
+            ts = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+            fname = os.path.join(OUTPUT_DIR, f"face_{i}_{ts}.png")
+            cv2.imwrite(fname, cv2.cvtColor(crop, cv2.COLOR_RGB2BGR))
+            saved.append(fname)
+        messagebox.showinfo("Saved", f"Saved {len(saved)} faces to {OUTPUT_DIR}")
+        self.info_var.set(f"Saved {len(saved)} faces.")
+
+    def save_selected_face(self):
+        if self.last_color_frame is None:
+            messagebox.showinfo("No frame", "No video frame available.")
+            return
+        if not self.last_faces:
+            messagebox.showinfo("No faces", "No faces detected.")
+            return
+        # if user hasn't selected an index, take the first
+        idx = self.selected_face_index if self.selected_face_index is not None else 0
+        if idx < 0 or idx >= len(self.last_faces):
+            messagebox.showwarning("Index", "Selected face index out of range.")
+            return
+        x,y,w,h = self.last_faces[idx]
+        crop = self.last_color_frame[y:y+h, x:x+w]
+        if crop.size == 0:
+            messagebox.showinfo("Empty", "Selected crop is empty.")
+            return
+        ts = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        fname = os.path.join(OUTPUT_DIR, f"face_selected_{idx}_{ts}.png")
+        cv2.imwrite(fname, cv2.cvtColor(crop, cv2.COLOR_RGB2BGR))
+        messagebox.showinfo("Saved", f"Saved selected face to {fname}")
+        self.info_var.set(f"Saved selected face: {fname}")
+
+    def clear_output(self):
+        if messagebox.askyesno("Confirm", f"Delete all files in {OUTPUT_DIR}?"):
+            count = 0
+            for fname in os.listdir(OUTPUT_DIR):
+                try:
+                    os.remove(os.path.join(OUTPUT_DIR, fname))
+                    count += 1
+                except Exception:
+                    pass
+            messagebox.showinfo("Cleared", f"Removed {count} files.")
+            self.info_var.set(f"Cleared {count} files from {OUTPUT_DIR}.")
+
+    # -----------------------------
+    # Apply detector params
+    # -----------------------------
+    def _apply_detector(self):
+        try:
+            sf = float(self.scale_var.get())
+            mn = int(self.nbrs_var.get())
+            ms = int(self.min_size_var.get())
+        except Exception:
+            messagebox.showwarning("Params", "Invalid detector parameters.")
+            return
+        self.detector.set_params(scaleFactor=sf, minNeighbors=mn, minSize=(ms, ms))
+        # change cascade if needed
+        sel = self.cascade_var.get()
+        if sel != self.detector.cascade_name:
+            try:
+                self.detector.set_cascade(sel)
+            except Exception as e:
+                messagebox.showerror("Cascade", f"Failed to load cascade: {e}")
+                return
+        messagebox.showinfo("Applied", "Detector parameters updated.")
+
+    # -----------------------------
+    # Shutdown
+    # -----------------------------
+    def on_close(self):
+        self.running = False
+        # allow thread to stop
+        time.sleep(0.2)
+        try:
+            if self.cap and self.cap.isOpened():
+                self.cap.release()
+        except Exception:
+            pass
+        self.root.destroy()
+
+# -----------------------------
+# Entry point
+# -----------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    style = ttk.Style(root)
+    try:
+        style.theme_use("clam")
+    except Exception:
+        pass
+    app = FaceDetectionApp(root)
+    root.mainloop()
 
 #===========================================================================================================================================================================
                                                          Thanks for visting keep supporting us
