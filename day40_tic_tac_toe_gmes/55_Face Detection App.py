@@ -158,3 +158,24 @@ class FaceDetectionApp:
       
       
 
+                                        canvas_frame.pack(side="top", fill="both", expand=True, padx=8, pady=6)
+        self.video_label = ttk.Label(canvas_frame)
+        self.video_label.pack(fill="both", expand=True)
+
+        # Bottom controls
+        bottom = ttk.Frame(self.root)
+        bottom.pack(side="bottom", fill="x", padx=8, pady=8)
+
+        ttk.Button(bottom, text="Snapshot (save frame)", command=self.take_snapshot).pack(side="left", padx=6)
+        ttk.Button(bottom, text="Save Detected Faces", command=self.save_detected_faces).pack(side="left", padx=6)
+        ttk.Button(bottom, text="Crop & Save Selected Face", command=self.save_selected_face).pack(side="left", padx=6)
+
+        ttk.Button(bottom, text="Switch Camera", command=self.switch_camera).pack(side="left", padx=6)
+        ttk.Button(bottom, text="Clear Output Folder", command=self.clear_output).pack(side="left", padx=6)
+
+        # Info area
+        info = ttk.Frame(self.root)
+        info.pack(side="bottom", fill="x", padx=8, pady=(0,8))
+        self.info_var = tk.StringVar(value="No camera opened.")
+        ttk.Label(info, textvariable=self.info_var).pack(side="left")
+
