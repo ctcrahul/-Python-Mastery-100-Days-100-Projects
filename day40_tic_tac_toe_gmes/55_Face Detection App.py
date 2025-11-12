@@ -70,3 +70,25 @@ class FaceDetector:
 
     def set_cascade(self, cascade_name):
         self.cascade_name =
+
+
+    def detect(self, gray_frame):
+        # returns list of (x,y,w,h)
+        faces = self.detector.detectMultiScale(
+            gray_frame,
+            scaleFactor=self.scaleFactor,
+            minNeighbors=self.minNeighbors,
+            minSize=self.minSize
+        )
+        return faces
+
+# -----------------------------
+# Main App (Tkinter)
+# -----------------------------
+class FaceDetectionApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Face Detection App")
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+
