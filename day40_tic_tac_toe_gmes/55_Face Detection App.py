@@ -118,5 +118,26 @@ class FaceDetectionApp:
         self.open_camera(self.cam_index)
 
     def _build_ui(self):
+              # Top controls
+        top = ttk.Frame(self.root)
+        top.pack(side="top", fill="x", padx=8, pady=6)
+
+        ttk.Label(top, text="Camera:").pack(side="left")
+        self.cam_entry = ttk.Entry(top, width=5)
+        self.cam_entry.insert(0, str(DEFAULT_CAMERA))
+        self.cam_entry.pack(side="left", padx=(4, 10))
+
+        ttk.Button(top, text="Open Camera", command=self._on_open_camera).pack(side="left", padx=4)
+        ttk.Button(top, text="Close Camera", command=self._on_close_camera).pack(side="left", padx=4)
+
+        ttk.Separator(top, orient="vertical").pack(side="left", fill="y", padx=8)
+
+        ttk.Checkbutton(top, text="Enable Detection", variable=self.detect_enabled).pack(side="left", padx=6)
+        ttk.Checkbutton(top, text="Show FPS", variable=self.show_fps).pack(side="left", padx=6)
+
+        # Cascade selection & params
+        params = ttk.Frame(self.root)
+        params.pack(side="top", fill="x", padx=8, pady=6)
+      
       
 
