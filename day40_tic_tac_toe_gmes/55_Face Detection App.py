@@ -200,5 +200,36 @@ class FaceDetectionApp:
         except Exception as e:
             self.cap = None
             self.info_var.set(f"Failed to open camera: {e}")
+
+              def close_camera(self):
+        self.running = False
+        if self.cap:
+            try:
+                self.cap.release()
+            except Exception:
+                pass
+        self.cap = None
+        self.info_var.set("Camera closed.")
+
+    def _on_open_camera(self):
+        try:
+            idx = int(self.cam_entry.get().strip())
+        except Exception:
+            messagebox.showwarning("Input", "Camera index must be integer.")
+            return
+        self.cam_index = idx
+        self.open_camera(idx)
+
+    def _on_close_camera(self):
+        self.close_camera()
+
+    def switch_camera(self):
+        # try next index
+        next_idx = (self.cam_index + 1) % 4  # cycle through 0..3
+        self.cam_entry.delete(0, tk.END)
+        self.cam_entry.insert(0, str(next_idx))
+        self._on_open_camera()
+
+      
             return False
           
