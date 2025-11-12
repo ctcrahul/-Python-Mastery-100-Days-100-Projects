@@ -92,3 +92,31 @@ class FaceDetectionApp:
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
 
+     # Video capture
+        self.cam_index = DEFAULT_CAMERA
+        self.cap = None
+        self.video_thread = None
+        self.running = False
+
+        # Detector
+        self.detector = FaceDetector()
+
+        # GUI state
+        self.detect_enabled = tk.BooleanVar(value=True)
+        self.show_fps = tk.BooleanVar(value=True)
+        self.cascade_var = tk.StringVar(value="Haar-Frontal")
+        self.scale_var = tk.DoubleVar(value=1.1)
+        self.nbrs_var = tk.IntVar(value=5)
+        self.min_size_var = tk.IntVar(value=30)
+        self.selected_face_index = None
+
+        # last frame & faces
+        self.last_color_frame = None
+        self.last_faces = []
+
+        self._build_ui()
+        self.open_camera(self.cam_index)
+
+    def _build_ui(self):
+      
+
