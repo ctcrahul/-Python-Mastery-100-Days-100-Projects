@@ -23,3 +23,13 @@ import time
 import os
 import numpy as np
 import datetime
+
+
+# -----------------------------
+# Helper / Config
+# -----------------------------
+CASCADE_FILES = {
+    "Haar-Frontal": "haarcascade_frontalface_default.xml",
+    "Haar-Profile": "haarcascade_profileface.xml",
+    "LBP-Face": "lbpcascade_frontalface.xml"
+}
