@@ -29,3 +29,21 @@ from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import pickle
+
+
+
+# -------------------------------------------
+# 1. INTENTS (edit this for training)
+# -------------------------------------------
+INTENTS = [
+    {
+        "tag": "greeting",
+        "patterns": [
+            "hello", "hi", "hey", "good morning", "good evening",
+            "what's up", "how are you", "is anyone there"
+        ],
+        "responses": [
+            "Hello! How can I help you today?",
+            "Hi there! What can I do for you?",
+            "I'm here. Ask anything."
+        ]
