@@ -147,5 +147,15 @@ def predict_intent(msg):
         return None, max_prob
     return intent, max_prob
 
+def get_response(intent_tag):
+    for intent in INTENTS:
+        if intent["tag"] == intent_tag:
+            return random.choice(intent["responses"])
+    return random.choice(LOW_CONFIDENCE_RESPONSES)
 
-
+def chatbot_reply(msg):
+    intent, conf = predict_intent(msg)
+    if intent is None:
+        return random.choice(LOW_CONFIDENCE_RESPONSES)
+    return get_response(intent)
+ 
