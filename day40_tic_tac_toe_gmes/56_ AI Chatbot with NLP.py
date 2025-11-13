@@ -47,3 +47,17 @@ INTENTS = [
             "Hi there! What can I do for you?",
             "I'm here. Ask anything."
         ]
+
+         },
+    {
+        "tag": "goodbye",
+        "patterns": [
+            "bye", "goodbye", "see you later", "talk to you later"
+        ],
+        "responses": [
+            "Goodbye! Take care.",
+            "See you later!",
+            "Have a nice day!"
+        ]
+    },
+    {
