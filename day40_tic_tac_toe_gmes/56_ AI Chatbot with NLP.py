@@ -1,6 +1,6 @@
-"""                                                                          Day = 56
+"""                                                       Day = 56
                                                                     
-                                                                        AI Chatbot with NLP 
+                                                       AI Chatbot with NLP 
 
 Features:
  - Train your own chatbot using a simple intent-based NLP model
@@ -158,6 +158,19 @@ def chatbot_reply(msg):
     if intent is None:
         return random.choice(LOW_CONFIDENCE_RESPONSES)
     return get_response(intent)
+  
+# -------------------------------------------
+# 5. Tkinter Chat UI
+# -------------------------------------------
+class ChatApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("AI Chatbot with NLP")
+        self.root.geometry("600x600")
+        self.root.resizable(False, False)
+
+        self.chat_window = tk.Text(root, bd=1, bg="#F5F5F5", height=20, width=50, wrap="word")
+        self.chat_window.pack(pad
  
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
