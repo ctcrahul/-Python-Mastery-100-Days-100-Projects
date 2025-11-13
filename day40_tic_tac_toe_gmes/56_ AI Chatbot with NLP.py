@@ -20,3 +20,12 @@ Run:
 """
 
 import tkinter as tk
+from tkinter import ttk
+import re
+import random
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+import pickle
