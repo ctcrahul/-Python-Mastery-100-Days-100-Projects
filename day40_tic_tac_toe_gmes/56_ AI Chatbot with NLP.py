@@ -132,3 +132,20 @@ X_vec = vectorizer.fit_transform(X_train)
 model = LogisticRegression(max_iter=1000)
 model.fit(X_vec, y_train)
 
+
+# -------------------------------------------
+# 4. Chatbot Logic
+# -------------------------------------------
+def predict_intent(msg):
+    cleaned = clean_text(msg)
+    vec = vectorizer.transform([cleaned])
+    probabilities = model.predict_proba(vec)[0]
+    max_prob = max(probabilities)
+    intent = model.classes_[probabilities.argmax()]
+
+    if max_prob < 0.40:
+        return None, max_prob
+    return intent, max_prob
+
+
+
