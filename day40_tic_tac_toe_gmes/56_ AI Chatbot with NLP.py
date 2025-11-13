@@ -111,4 +111,24 @@ def clean_text(text):
     tokens = word_tokenize(text)
     tokens = [w for w in tokens if w not in STOPWORDS]
     return " ".
- 
+
+# -------------------------------------------
+# 3. Train the Intent Classifier
+# -------------------------------------------
+def prepare_training_data():
+    X = []
+    y = []
+    for intent in INTENTS:
+        for pattern in intent["patterns"]:
+            X.append(clean_text(pattern))
+            y.append(intent["tag"])
+    return X, y
+
+X_train, y_train = prepare_training_data()
+
+vectorizer = TfidfVectorizer()
+X_vec = vectorizer.fit_transform(X_train)
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_vec, y_train)
+
