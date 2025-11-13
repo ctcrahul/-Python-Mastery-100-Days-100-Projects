@@ -100,3 +100,15 @@ LOW_CONFIDENCE_RESPONSES = [
 ]
 
 
+# -------------------------------------------
+# 2. NLP Preprocessing
+# -------------------------------------------
+STOPWORDS = set(stopwords.words("english"))
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
+    tokens = word_tokenize(text)
+    tokens = [w for w in tokens if w not in STOPWORDS]
+    return " ".
+ 
