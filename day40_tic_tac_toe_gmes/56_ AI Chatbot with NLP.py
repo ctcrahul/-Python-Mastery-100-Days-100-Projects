@@ -61,3 +61,22 @@ INTENTS = [
         ]
     },
     {
+            "tag": "thanks",
+        "patterns": [
+            "thanks", "thank you", "thx", "I appreciate it"
+        ],
+        "responses": [
+            "You're welcome!",
+            "Glad I could help.",
+            "Anytime!"
+        ]
+    },
+    {
+        "tag": "weather",
+        "patterns": [
+            "what is the weather", "how is the weather", "weather today"
+        ],
+        "responses": [
+            "I cannot check live weather now, but you can try searching online.",
+            "Weather APIs are not enabled yet, but I can help with general questions."
+        ]
