@@ -80,3 +80,16 @@ INTENTS = [
             "I cannot check live weather now, but you can try searching online.",
             "Weather APIs are not enabled yet, but I can help with general questions."
         ]
+    },
+    {
+        "tag": "creator",
+        "patterns": [
+            "who created you", "who made you", "your creator"
+        ],
+        "responses": [
+            "I was created as a Python NLP project!",
+            "A developer built me using machine learning and NLP."
+        ]
+    },
+]
+
