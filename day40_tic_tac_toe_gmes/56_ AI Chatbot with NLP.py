@@ -30,8 +30,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import pickle
 
-
-
 # -------------------------------------------
 # 1. INTENTS (edit this for training)
 # -------------------------------------------
@@ -47,8 +45,7 @@ INTENTS = [
             "Hi there! What can I do for you?",
             "I'm here. Ask anything."
         ]
-
-         },
+    },
     {
         "tag": "goodbye",
         "patterns": [
@@ -61,7 +58,7 @@ INTENTS = [
         ]
     },
     {
-            "tag": "thanks",
+        "tag": "thanks",
         "patterns": [
             "thanks", "thank you", "thx", "I appreciate it"
         ],
@@ -99,7 +96,6 @@ LOW_CONFIDENCE_RESPONSES = [
     "I don't know that yet, but I'm learning.",
 ]
 
-
 # -------------------------------------------
 # 2. NLP Preprocessing
 # -------------------------------------------
@@ -110,7 +106,7 @@ def clean_text(text):
     text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
     tokens = word_tokenize(text)
     tokens = [w for w in tokens if w not in STOPWORDS]
-    return " ".
+    return " ".join(tokens)
 
 # -------------------------------------------
 # 3. Train the Intent Classifier
@@ -131,7 +127,6 @@ X_vec = vectorizer.fit_transform(X_train)
 
 model = LogisticRegression(max_iter=1000)
 model.fit(X_vec, y_train)
-
 
 # -------------------------------------------
 # 4. Chatbot Logic
@@ -158,7 +153,7 @@ def chatbot_reply(msg):
     if intent is None:
         return random.choice(LOW_CONFIDENCE_RESPONSES)
     return get_response(intent)
-  
+
 # -------------------------------------------
 # 5. Tkinter Chat UI
 # -------------------------------------------
@@ -170,8 +165,39 @@ class ChatApp:
         self.root.resizable(False, False)
 
         self.chat_window = tk.Text(root, bd=1, bg="#F5F5F5", height=20, width=50, wrap="word")
-        self.chat_window.pack(pad
- 
+        self.chat_window.pack(pady=10)
+
+        self.msg_entry = tk.Entry(root, bd=1, width=40, font=("Arial", 14))
+        self.msg_entry.pack(side="left", padx=10, pady=10)
+        self.msg_entry.bind("<Return>", self.send_msg)
+
+        send_button = ttk.Button(root, text="Send", command=self.send_btn)
+        send_button.pack(side="left", padx=10)
+
+        self.chat_window.insert(tk.END, "Chatbot: Hello! Ask me anything.\n\n")
+
+    def send_btn(self):
+        self.send_msg(None)
+
+    def send_msg(self, event):
+        msg = self.msg_entry.get().strip()
+        if not msg:
+            return
+        self.chat_window.insert(tk.END, f"You: {msg}\n")
+        self.msg_entry.delete(0, tk.END)
+
+        reply = chatbot_reply(msg)
+        self.chat_window.insert(tk.END, f"Chatbot: {reply}\n\n")
+        self.chat_window.see(tk.END)
+
+# -------------------------------------------
+# 6. Run App
+# -------------------------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ChatApp(root)
+    root.mainloop()
+
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                     Thanks for visting and keep supporting us..
