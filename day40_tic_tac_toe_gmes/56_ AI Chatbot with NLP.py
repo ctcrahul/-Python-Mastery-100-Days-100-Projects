@@ -93,3 +93,10 @@ INTENTS = [
     },
 ]
 
+LOW_CONFIDENCE_RESPONSES = [
+    "I'm not sure I understood that.",
+    "Can you rephrase?",
+    "I don't know that yet, but I'm learning.",
+]
+
+
