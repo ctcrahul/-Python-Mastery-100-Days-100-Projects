@@ -74,5 +74,14 @@ def download_file(url, dest_path, show_progress=True):
             print()
     except (URLError, HTTPError) as e:
         raise RuntimeError(f"Failed to download {url}: {e}")
-        
+
+
+def ensure_model_files():
+    try:
+        download_file(PROTOTXT_URL, PROTOTXT_PATH)
+        download_file(CAFFEMODEL_URL, CAFFEMODEL_PATH)
+    except Exception as e:
+        raise RuntimeError(f"Model download failed: {e}")
+
+
 
