@@ -95,5 +95,17 @@ class MobileNetSSDDetector:
 
     def set_confidence(self, val):
         self.conf_threshold = float(val)
-        
+
+
+    def detect(self, frame):
+        """
+        frame: BGR image (numpy array)
+        returns: list of dicts: {class_id, class_name, confidence, box: (x1,y1,x2,y2)}
+        """
+        (h, w) = frame.shape[:2]
+        blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),
+                                     0.007843, (300, 300), 127.5)
+        self.net.setInput(blob)
+        detections = self.net.forward()
+        results = []
 
