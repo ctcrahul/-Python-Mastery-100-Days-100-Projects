@@ -166,4 +166,14 @@ class ObjectDetectionApp:
         ttk.Button(top, text="Open Camera", command=self.open_camera).pack(side="left", padx=4)
         ttk.Button(top, text="Open Video File", command=self.open_video_file).pack(side="left", padx=4)
         ttk.Button(top, text="Close Video", command=self.close_camera).pack(side="left", padx=4)
-        
+
+
+        ttk.Label(top, text="Confidence:").pack(side="left", padx=(8,2))
+        self.conf_slider = ttk.Scale(top, from_=0.1, to=0.95, orient="horizontal", variable=self.conf_threshold, command=self._on_conf_change)
+        self.conf_slider.pack(side="left", padx=4, ipadx=50)
+
+        ttk.Button(top, text="Start Detection", command=self.start_detection).pack(side="left", padx=8)
+        ttk.Button(top, text="Stop Detection", command=self.stop_detection).pack(side="left", padx=4)
+        ttk.Button(top, text="Snapshot", command=self.take_snapshot).pack(side="left", padx=4)
+        ttk.Button(top, text="Save Detections CSV", command=self.save_csv).pack(side="left", padx=4)
+        ttk.Button(top, text="Save Crops", command=self.save_crops).pack(side="left", padx=4)
