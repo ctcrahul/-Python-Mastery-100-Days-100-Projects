@@ -42,3 +42,18 @@ CAFFEMODEL_URL = "https://github.com/chuanqi305/MobileNet-SSD/raw/master/MobileN
 PROTOTXT_PATH = os.path.join(MODEL_DIR, "MobileNetSSD_deploy.prototxt")
 CAFFEMODEL_PATH = os.path.join(MODEL_DIR, "MobileNetSSD_deploy.caffemodel")
 
+# ---------------------------
+# Class labels for MobileNet-SSD (VOC)
+# ---------------------------
+CLASS_NAMES = [
+    "background", "aeroplane", "bicycle", "bird", "boat",
+    "bottle", "bus", "car", "cat", "chair",
+    "cow", "diningtable", "dog", "horse", "motorbike",
+    "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"
+]
+
+OUTPUT_DIR = os.path.join(BASE_DIR, "detections_output")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+
