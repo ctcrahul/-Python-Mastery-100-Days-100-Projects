@@ -152,3 +152,18 @@ class ObjectDetectionApp:
         self.detection_log = []  # each entry: dict with time,class,conf,box,imagefile(optional)
 
         self._build_ui()
+
+    def _build_ui(self):
+        # Top controls
+        top = ttk.Frame(self.root)
+        top.pack(side="top", fill="x", padx=8, pady=6)
+
+        ttk.Label(top, text="Camera index:").pack(side="left")
+        self.cam_entry = ttk.Entry(top, width=5)
+        self.cam_entry.insert(0, "0")
+        self.cam_entry.pack(side="left", padx=4)
+
+        ttk.Button(top, text="Open Camera", command=self.open_camera).pack(side="left", padx=4)
+        ttk.Button(top, text="Open Video File", command=self.open_video_file).pack(side="left", padx=4)
+        ttk.Button(top, text="Close Video", command=self.close_camera).pack(side="left", padx=4)
+        
