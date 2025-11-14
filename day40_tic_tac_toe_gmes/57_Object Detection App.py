@@ -136,3 +136,19 @@ class ObjectDetectionApp:
         self.root.geometry("1100x700")
         self.root.resizable(True, True)
         
+        # Detector (lazy init)
+        self.detector = None
+        self.conf_threshold = tk.DoubleVar(value=0.5)
+
+        # Video capture state
+        self.cap = None
+        self.cam_index = 0
+        self.running = False
+        self.video_thread = None
+        self.frame = None
+        self.display_image = None
+
+        # Detection log (for CSV)
+        self.detection_log = []  # each entry: dict with time,class,conf,box,imagefile(optional)
+
+        self._build_ui()
