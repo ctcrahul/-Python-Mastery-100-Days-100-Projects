@@ -1,5 +1,6 @@
-"""
-Object Detection App (single-file)
+"""                                                           Day = 57
+                                                               
+                                                        Object Detection App 
 
 Dependencies:
     pip install opencv-python pillow numpy requests
@@ -177,3 +178,8 @@ class ObjectDetectionApp:
         ttk.Button(top, text="Snapshot", command=self.take_snapshot).pack(side="left", padx=4)
         ttk.Button(top, text="Save Detections CSV", command=self.save_csv).pack(side="left", padx=4)
         ttk.Button(top, text="Save Crops", command=self.save_crops).pack(side="left", padx=4)
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
