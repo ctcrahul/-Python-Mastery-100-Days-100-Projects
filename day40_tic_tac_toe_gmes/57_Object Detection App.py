@@ -28,3 +28,17 @@ import cv2
 import numpy as np
 from PIL import Image, ImageTk
 from datetime import datetime
+
+
+# ---------------------------
+# Model files & download URLs
+# ---------------------------
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+PROTOTXT_URL = "https://raw.githubusercontent.com/chuanqi305/MobileNet-SSD/master/MobileNetSSD_deploy.prototxt"
+CAFFEMODEL_URL = "https://github.com/chuanqi305/MobileNet-SSD/raw/master/MobileNetSSD_deploy.caffemodel"
+PROTOTXT_PATH = os.path.join(MODEL_DIR, "MobileNetSSD_deploy.prototxt")
+CAFFEMODEL_PATH = os.path.join(MODEL_DIR, "MobileNetSSD_deploy.caffemodel")
+
