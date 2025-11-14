@@ -56,4 +56,23 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "detections_output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
+# ---------------------------
+# Utilities: download model files if missing
+# ---------------------------
+def download_file(url, dest_path, show_progress=True):
+    if os.path.exists(dest_path) and os.path.getsize(dest_path) > 100:
+        return
+    try:
+        def _report(block_num, block_size, total_size):
+            if show_progress:
+                downloaded = block_num * block_size
+                pct = min(100, int(downloaded * 100 / total_size)) if total_size > 0 else 0
+                sys.stdout.write(f"\rDownloading {os.path.basename(dest_path)}... {pct}%")
+                sys.stdout.flush()
+        urllib.request.urlretrieve(url, dest_path, _report)
+        if show_progress:
+            print()
+    except (URLError, HTTPError) as e:
+        raise RuntimeError(f"Failed to download {url}: {e}")
+        
 
