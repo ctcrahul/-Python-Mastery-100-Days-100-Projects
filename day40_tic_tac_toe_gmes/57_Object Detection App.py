@@ -84,4 +84,16 @@ def ensure_model_files():
         raise RuntimeError(f"Model download failed: {e}")
 
 
+# ---------------------------
+# Object Detector wrapper
+# ---------------------------
+class MobileNetSSDDetector:
+    def __init__(self, prototxt=PROTOTXT_PATH, model=CAFFEMODEL_PATH, conf_threshold=0.5):
+        ensure_model_files()
+        self.net = cv2.dnn.readNetFromCaffe(prototxt, model)
+        self.conf_threshold = conf_threshold
+
+    def set_confidence(self, val):
+        self.conf_threshold = float(val)
+        
 
