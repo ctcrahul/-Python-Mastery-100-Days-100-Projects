@@ -108,4 +108,20 @@ class MobileNetSSDDetector:
         self.net.setInput(blob)
         detections = self.net.forward()
         results = []
-
+        for i in range(detections.shape[2]):
+            conf = float(detections[0, 0, i, 2])
+            if conf < self.conf_threshold:
+                continue
+            idx = int(detections[0, 0, i, 1])
+            box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
+            (x1, y1, x2, y2) = box.astype("int")
+            # clamp
+            x1, y1 = max(0, x1), max(0, y1)
+            x2, y2 = min(w - 1, x2), min(h - 1, y2)
+            results.append({
+                "class_id": idx,
+                "class_name": CLASS_NAMES[idx] if idx < len(CLASS_NAMES) else str(idx),
+                "confidence": conf,
+                "box": (x1, y1, x2, y2)
+            })
+        return results
