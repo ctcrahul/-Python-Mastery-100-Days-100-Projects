@@ -125,3 +125,14 @@ class MobileNetSSDDetector:
                 "box": (x1, y1, x2, y2)
             })
         return results
+
+# ---------------------------
+# Tkinter App
+# ---------------------------
+class ObjectDetectionApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Object Detection App - MobileNet-SSD")
+        self.root.geometry("1100x700")
+        self.root.resizable(True, True)
+        
