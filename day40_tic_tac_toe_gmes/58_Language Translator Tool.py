@@ -36,3 +36,13 @@ DEFAULT_TGT = "en"
 HISTORY_LIMIT = 500
 # ----------------------
 
+# Try optional googletrans if installed (used only if LibreTranslate fails)
+try:
+    from googletrans import Translator as GTTranslator
+except Exception:
+    GTTranslator = None
+
+# Text-to-speech engine
+tts_engine = pyttsx3.init()
+tts_engine.setProperty("rate", 160)
+
