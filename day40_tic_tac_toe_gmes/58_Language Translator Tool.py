@@ -106,6 +106,15 @@ def google_translate(text, source, target):
         res = gt.translate(text, src=source, dest=target)
     return {"translatedText": res.text}
 
+def google_detect(text):
+    if GTTranslator is None:
+        return None, 0.0
+    gt = GTTranslator()
+    res = gt.detect(text)
+    if hasattr(res, "lang"):
+        return res.lang, getattr(res, "confidence", 0.0)
+    return None, 0.0
+
 
 
 
