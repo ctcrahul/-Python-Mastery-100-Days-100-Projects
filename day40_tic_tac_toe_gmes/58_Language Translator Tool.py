@@ -63,4 +63,15 @@ def get_languages():
         return lang_map
     except Exception:
         # fallback to a sens
+                fallback = {
+            "auto": "Auto-detect",
+            "en": "English", "es": "Spanish", "fr": "French",
+            "de": "German", "hi": "Hindi", "zh": "Chinese",
+            "ar": "Arabic", "ru": "Russian", "ja": "Japanese",
+            "pt": "Portuguese", "bn": "Bengali", "ur": "Urdu",
+        }
+        _lang_cache = fallback
+        return fallback
+
+# Translate via LibreTranslate
         
