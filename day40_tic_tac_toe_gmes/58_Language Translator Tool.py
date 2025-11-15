@@ -25,3 +25,14 @@ import time
 import csv
 import os
 import pandas as pd
+
+
+
+# --- Configuration ---
+LIBRE_ENDPOINT = "https://libretranslate.com"
+TIMEOUT = 10  # seconds
+DEFAULT_SRC = "auto"
+DEFAULT_TGT = "en"
+HISTORY_LIMIT = 500
+# ----------------------
+
