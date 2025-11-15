@@ -82,6 +82,19 @@ def libre_translate(text, source, target):
         return {"translatedText": r.json().get("translatedText")}
     except Exception as e:
         raise RuntimeError(f"LibreTranslate error: {e}")
+# Detect language via LibreTranslate
+def libre_detect(text):
+    try:
+        r = requests.post(f"{LIBRE_ENDPOINT}/detect", data={"q": text}, timeout=TIMEOUT)
+        r.raise_for_status()
+        # returns list of detections with 'language' and 'confidence'
+        detections = r.json()
+        if isinstance(detections, list) and detections:
+            return detections[0].get("language"), detections[0].get("confidence", 0.0)
+        return None, 0.0
+    except Exception:
+        return None, 0.0
+
 
 
         
