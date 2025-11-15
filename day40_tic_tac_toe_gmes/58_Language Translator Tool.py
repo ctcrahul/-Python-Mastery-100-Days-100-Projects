@@ -37,6 +37,35 @@ DEFAULT_TGT = "en"
 HISTORY_LIMIT = 500
 # ----------------------
 
+
+# ------------------------
+# Tkinter UI
+# ------------------------
+class TranslatorApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Language Translator Tool")
+        self.root.geometry("920x640")
+        self.history = []  # list of dicts
+        self.langs = get_languages()
+        self.lang_codes = list(self.langs.keys())
+        # UI variables
+        self.src_var = tk.StringVar(value=DEFAULT_SRC)
+        self.tgt_var = tk.StringVar(value=DEFAULT_TGT)
+        self.status_var = tk.StringVar(value="Ready. Using LibreTranslate (if online).")
+        self._build_ui()
+
+    def _build_ui(self):
+        # Header
+        header = ttk.Frame(self.root, padding=10)
+        header.pack(fill="x")
+        ttk.Label(header, text="Language Translator", font=("Segoe UI", 18, "bold")).pack(side="left")
+        ttk.Button(header, text="Refresh Languages", command=self._refresh_languages).pack(side="right")
+
+        main = ttk.Frame(self.root, padding=10)
+        main.pack(fill="both", expand=True)
+      
+
 # Try optional googletrans if installed (used only if LibreTranslate fails)
 try:
     from googletrans import Translator as GTTranslator
