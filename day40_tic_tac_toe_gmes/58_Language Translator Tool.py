@@ -116,7 +116,20 @@ def google_detect(text):
     return None, 0.0
 
 
-
+# High-level translate wrapper with graceful fallback
+def translate_text(text, source, target):
+    # try LibreTranslate first
+    try:
+        return libre_translate(text, source, target)
+    except Exception:
+        # fallback to googletrans if available
+        if GTTranslator:
+            try:
+                return google_translate(text, source, target)
+            except Exception as e:
+                raise RuntimeError(f"No translation available: {e}")
+        raise RuntimeError("Translation failed and no fallback available.")
+        
 
 
         
