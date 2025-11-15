@@ -1,5 +1,6 @@
-"""
-Language Translator Tool (single-file)
+"""                                                            Day = 57
+
+                                                        Language Translator Tool 
 
 Dependencies (install as needed):
     pip install requests pyttsx3 pandas
@@ -148,4 +149,8 @@ def detect_language(text):
         except Exception:
             pass
     return None, 0.0
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                      Thanks for visiting and keep supporting..
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
