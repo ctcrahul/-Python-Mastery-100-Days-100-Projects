@@ -132,4 +132,20 @@ def translate_text(text, source, target):
         
 
 
-        
+
+def detect_language(text):
+    # try Libre
+    try:
+        lang, conf = libre_detect(text)
+        if lang:
+            return lang, conf
+    except Exception:
+        pass
+    # fallback
+    if GTTranslator:
+        try:
+            return google_detect(text)
+        except Exception:
+            pass
+    return None, 0.0
+
