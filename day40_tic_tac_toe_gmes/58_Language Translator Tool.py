@@ -45,4 +45,22 @@ except Exception:
 # Text-to-speech engine
 tts_engine = pyttsx3.init()
 tts_engine.setProperty("rate", 160)
-
+# Helper: fetch available languages from LibreTranslate (cached)
+_lang_cache = None
+def get_languages():
+    global _lang_cache
+    if _lang_cache:
+        return _lang_cache
+    try:
+        resp = requests.get(f"{LIBRE_ENDPOINT}/languages", timeout=TIMEOUT)
+        resp.raise_for_status()
+        data = resp.json()
+        # data is list of {"code":"en","name":"English"}
+        lang_map = {entry["code"]: entry["name"] for entry in data}
+        # include 'auto' option for detection
+        lang_map = {"auto": "Auto-detect", **lang_map}
+        _lang_cache = lang_map
+        return lang_map
+    except Exception:
+        # fallback to a sens
+        
