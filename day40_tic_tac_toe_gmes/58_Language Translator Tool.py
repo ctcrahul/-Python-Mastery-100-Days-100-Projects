@@ -74,4 +74,14 @@ def get_languages():
         return fallback
 
 # Translate via LibreTranslate
+def libre_translate(text, source, target):
+    payload = {"q": text, "source": source if source != "auto" else "auto", "target": target, "format": "text"}
+    try:
+        r = requests.post(f"{LIBRE_ENDPOINT}/translate", data=payload, timeout=TIMEOUT)
+        r.raise_for_status()
+        return {"translatedText": r.json().get("translatedText")}
+    except Exception as e:
+        raise RuntimeError(f"LibreTranslate error: {e}")
+
+
         
