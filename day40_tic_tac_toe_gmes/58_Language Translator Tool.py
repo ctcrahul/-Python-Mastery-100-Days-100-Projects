@@ -95,6 +95,19 @@ def libre_detect(text):
     except Exception:
         return None, 0.0
 
+# Fallback using googletrans if available
+def google_translate(text, source, target):
+    if GTTranslator is None:
+        raise RuntimeError("googletrans not available")
+    gt = GTTranslator()
+    if source == "auto":
+        res = gt.translate(text, dest=target)
+    else:
+        res = gt.translate(text, src=source, dest=target)
+    return {"translatedText": res.text}
+
+
+
 
 
         
