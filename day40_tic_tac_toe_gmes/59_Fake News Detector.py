@@ -88,3 +88,12 @@ class FakeNewsApp:
 
         self.status = tk.StringVar(value="Load a dataset to begin.")
         ttk.Label(top, textvariable=self.status, foreground="blue").pack(side="right")
+        input_frame = ttk.LabelFrame(self.root, text="Single Prediction", padding=10)
+        input_frame.pack(fill="x", padx=10, pady=10)
+
+        self.single_text = tk.Text(input_frame, height=6)
+        self.single_text.pack(fill="x")
+
+        ttk.Button(input_frame, text="Predict", command=self.predict_single).pack(pady=5)
+        self.single_result = tk.StringVar(value="No prediction yet.")
+        ttk.Label(input_frame, textvariable=self.single_result).pack()
