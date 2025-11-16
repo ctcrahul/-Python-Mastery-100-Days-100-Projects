@@ -78,3 +78,13 @@ class FakeNewsApp:
         self.dataset = None
 
         self.build_ui()
+    def build_ui(self):
+        top = ttk.Frame(self.root, padding=10)
+        top.pack(fill="x")
+
+        ttk.Button(top, text="Load Dataset (CSV)", command=self.load_data).pack(side="left", padx=8)
+        ttk.Button(top, text="Train Model", command=self.train_model).pack(side="left", padx=8)
+        ttk.Button(top, text="Evaluate Model", command=self.evaluate_model).pack(side="left", padx=8)
+
+        self.status = tk.StringVar(value="Load a dataset to begin.")
+        ttk.Label(top, textvariable=self.status, foreground="blue").pack(side="right")
