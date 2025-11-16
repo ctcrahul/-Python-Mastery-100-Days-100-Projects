@@ -1,3 +1,23 @@
+"""                                                                    Day = 59
+                      
+                                                                  Fake News Detector 
+--------------------------------
+Features:
+ - Load any CSV dataset with columns: "text" and "label"
+ - Train TF-IDF + Logistic Regression model
+ - Evaluate accuracy, precision, recall, F1
+ - Predict single text or classify a full CSV
+ - Export results to CSV
+ - Tkinter GUI
+
+Label format required:
+ - "fake" or "real"
+ - or 1 (fake) / 0 (real)
+
+Run:
+    python fake_news_detector.py
+"""
+
 """
 Fake News Detector (Single File)
 --------------------------------
@@ -23,7 +43,7 @@ import pandas as pd
 import numpy as np
 import os
 import time
-from datetime 
+from datetime import datetime
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
@@ -65,6 +85,7 @@ def load_dataset(path):
 
     return df
 
+
 # --------------------------------------
 # Main App
 # --------------------------------------
@@ -78,6 +99,7 @@ class FakeNewsApp:
         self.dataset = None
 
         self.build_ui()
+
     def build_ui(self):
         top = ttk.Frame(self.root, padding=10)
         top.pack(fill="x")
@@ -88,6 +110,8 @@ class FakeNewsApp:
 
         self.status = tk.StringVar(value="Load a dataset to begin.")
         ttk.Label(top, textvariable=self.status, foreground="blue").pack(side="right")
+
+        # Text input for prediction
         input_frame = ttk.LabelFrame(self.root, text="Single Prediction", padding=10)
         input_frame.pack(fill="x", padx=10, pady=10)
 
@@ -111,6 +135,10 @@ class FakeNewsApp:
         self.metrics_text = tk.Text(metrics_frame, height=12)
         self.metrics_text.pack(fill="both", expand=True)
 
+        # Confusion Matrix
+        self.cm_frame = ttk.LabelFrame(self.root, text="Confusion Matrix", padding=10)
+        self.cm_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
     # --------------------------------------
     # Load dataset
     # --------------------------------------
@@ -124,7 +152,8 @@ class FakeNewsApp:
             self.status.set(f"Dataset loaded: {len(self.dataset)} samples")
         except Exception as e:
             messagebox.showerror("Error", str(e))
-   # --------------------------------------
+
+    # --------------------------------------
     # Train Model
     # --------------------------------------
     def train_model(self):
@@ -138,7 +167,8 @@ class FakeNewsApp:
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             X, y, test_size=0.2, random_state=42, stratify=y
         )
-      self.model = Pipeline([
+
+        self.model = Pipeline([
             ("tfidf", TfidfVectorizer(stop_words="english", max_features=50000)),
             ("clf", LogisticRegression(max_iter=2000))
         ])
@@ -153,7 +183,8 @@ class FakeNewsApp:
         if self.model is None:
             messagebox.showwarning("Error", "Train the model first.")
             return
-  preds = self.model.predict(self.X_test)
+
+        preds = self.model.predict(self.X_test)
 
         acc = accuracy_score(self.y_test, preds)
         prec = precision_score(self.y_test, preds)
@@ -173,7 +204,8 @@ class FakeNewsApp:
         )
 
         self.plot_confusion_matrix(cm)
-   # --------------------------------------
+
+    # --------------------------------------
     # Confusion Matrix Plot
     # --------------------------------------
     def plot_confusion_matrix(self, cm):
@@ -193,3 +225,62 @@ class FakeNewsApp:
 
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
+
+        canvas = FigureCanvasTkAgg(fig, master=self.cm_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack()
+
+    # --------------------------------------
+    # Single Text Prediction
+    # --------------------------------------
+    def predict_single(self):
+        if self.model is None:
+            messagebox.showwarning("Error", "Train model first.")
+            return
+
+        text = self.single_text.get("1.0", tk.END).strip()
+        if not text:
+            return
+
+        pred = self.model.predict([text])[0]
+        label = "FAKE NEWS" if pred == 1 else "REAL NEWS"
+
+        self.single_result.set(f"Prediction: {label}")
+
+    # --------------------------------------
+    # Batch Prediction
+    # --------------------------------------
+    def batch_predict(self):
+        if self.model is None:
+            messagebox.showwarning("Error", "Train model first.")
+            return
+
+        path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
+        if not path:
+            return
+        
+        df = pd.read_csv(path)
+        text_col = df.columns[0]
+
+        preds = self.model.predict(df[text_col].astype(str))
+
+        df["predicted_label"] = ["fake" if p == 1 else "real" for p in preds]
+
+        save_path = filedialog.asksaveasfilename(defaultextension=".csv")
+        if save_path:
+            df.to_csv(save_path, index=False)
+            messagebox.showinfo("Success", f"Results saved to {save_path}")
+
+
+# --------------------------------------
+# Run App
+# --------------------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = FakeNewsApp(root)
+    root.mainloop()
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                         Thanks for visiting keep supporting us...
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
