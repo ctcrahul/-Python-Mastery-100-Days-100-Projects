@@ -153,3 +153,23 @@ class FakeNewsApp:
         if self.model is None:
             messagebox.showwarning("Error", "Train the model first.")
             return
+  preds = self.model.predict(self.X_test)
+
+        acc = accuracy_score(self.y_test, preds)
+        prec = precision_score(self.y_test, preds)
+        rec = recall_score(self.y_test, preds)
+        f1 = f1_score(self.y_test, preds)
+
+        cm = confusion_matrix(self.y_test, preds)
+
+        self.metrics_text.delete("1.0", tk.END)
+        self.metrics_text.insert(
+            tk.END,
+            f"Accuracy: {acc:.4f}\n"
+            f"Precision: {prec:.4f}\n"
+            f"Recall: {rec:.4f}\n"
+            f"F1 Score: {f1:.4f}\n\n"
+            + classification_report(self.y_test, preds)
+        )
+
+        self.plot_confusion_matrix(cm)
