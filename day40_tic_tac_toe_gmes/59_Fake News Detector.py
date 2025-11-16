@@ -110,3 +110,17 @@ class FakeNewsApp:
 
         self.metrics_text = tk.Text(metrics_frame, height=12)
         self.metrics_text.pack(fill="both", expand=True)
+
+    # --------------------------------------
+    # Load dataset
+    # --------------------------------------
+    def load_data(self):
+        path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
+        if not path:
+            return
+        
+        try:
+            self.dataset = load_dataset(path)
+            self.status.set(f"Dataset loaded: {len(self.dataset)} samples")
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
