@@ -138,3 +138,18 @@ class FakeNewsApp:
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             X, y, test_size=0.2, random_state=42, stratify=y
         )
+      self.model = Pipeline([
+            ("tfidf", TfidfVectorizer(stop_words="english", max_features=50000)),
+            ("clf", LogisticRegression(max_iter=2000))
+        ])
+
+        self.model.fit(self.X_train, self.y_train)
+        self.status.set("Model trained successfully.")
+
+    # --------------------------------------
+    # Evaluate Model
+    # --------------------------------------
+    def evaluate_model(self):
+        if self.model is None:
+            messagebox.showwarning("Error", "Train the model first.")
+            return
