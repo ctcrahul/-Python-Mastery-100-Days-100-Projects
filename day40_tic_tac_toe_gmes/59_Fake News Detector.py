@@ -37,3 +37,23 @@ from sklearn.metrics import (
     f1_score, confusion_matrix, classification_report
 )
 from sklearn.pipeline import Pipeline
+
+# --------------------------------------
+# Helper for dataset loading
+# --------------------------------------
+def load_dataset(path):
+    df = pd.read_csv(path)
+
+    text_col = None
+    label_col = None
+
+    for col in df.columns:
+        if col.lower() in ["text", "content", "headline"]:
+            text_col = col
+        if col.lower() in ["label", "output", "target", "y"]:
+            label_col = col
+
+    if text_col is None:
+        text_col = df.columns[0]
+    if label_col is None:
+        label_col = df.columns[1]
