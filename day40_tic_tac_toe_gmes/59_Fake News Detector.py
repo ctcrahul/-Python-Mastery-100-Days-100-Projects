@@ -97,3 +97,16 @@ class FakeNewsApp:
         ttk.Button(input_frame, text="Predict", command=self.predict_single).pack(pady=5)
         self.single_result = tk.StringVar(value="No prediction yet.")
         ttk.Label(input_frame, textvariable=self.single_result).pack()
+
+        # Batch prediction
+        batch_frame = ttk.LabelFrame(self.root, text="Batch Prediction", padding=10)
+        batch_frame.pack(fill="x", padx=10, pady=10)
+
+        ttk.Button(batch_frame, text="Classify CSV File", command=self.batch_predict).pack()
+
+        # Metrics Panel
+        metrics_frame = ttk.LabelFrame(self.root, text="Evaluation Metrics", padding=10)
+        metrics_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+        self.metrics_text = tk.Text(metrics_frame, height=12)
+        self.metrics_text.pack(fill="both", expand=True)
