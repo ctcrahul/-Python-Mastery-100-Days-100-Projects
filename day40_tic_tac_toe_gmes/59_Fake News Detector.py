@@ -124,3 +124,17 @@ class FakeNewsApp:
             self.status.set(f"Dataset loaded: {len(self.dataset)} samples")
         except Exception as e:
             messagebox.showerror("Error", str(e))
+   # --------------------------------------
+    # Train Model
+    # --------------------------------------
+    def train_model(self):
+        if self.dataset is None:
+            messagebox.showwarning("Error", "Load dataset first.")
+            return
+
+        X = self.dataset["text"]
+        y = self.dataset["label"]
+
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42, stratify=y
+        )
