@@ -65,3 +65,16 @@ def load_dataset(path):
 
     return df
 
+# --------------------------------------
+# Main App
+# --------------------------------------
+class FakeNewsApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Fake News Detector")
+        self.root.geometry("1000x700")
+
+        self.model = None
+        self.dataset = None
+
+        self.build_ui()
