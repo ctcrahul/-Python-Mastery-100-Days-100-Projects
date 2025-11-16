@@ -173,3 +173,23 @@ class FakeNewsApp:
         )
 
         self.plot_confusion_matrix(cm)
+   # --------------------------------------
+    # Confusion Matrix Plot
+    # --------------------------------------
+    def plot_confusion_matrix(self, cm):
+        for widget in self.cm_frame.winfo_children():
+            widget.destroy()
+
+        fig, ax = plt.subplots(figsize=(4, 3))
+        ax.imshow(cm, cmap="Blues")
+        ax.set_xticks([0, 1])
+        ax.set_yticks([0, 1])
+        ax.set_xticklabels(["Real", "Fake"])
+        ax.set_yticklabels(["Real", "Fake"])
+
+        for i in range(2):
+            for j in range(2):
+                ax.text(j, i, cm[i, j], ha="center", va="center")
+
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Actual")
