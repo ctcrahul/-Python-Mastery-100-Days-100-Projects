@@ -57,3 +57,11 @@ def load_dataset(path):
         text_col = df.columns[0]
     if label_col is None:
         label_col = df.columns[1]
+
+    df = df[[text_col, label_col]].rename(columns={text_col: "text", label_col: "label"})
+
+    df["label"] = df["label"].astype(str).str.lower().map(lambda x: 1 if x in ["fake", "1"] else 0)
+    df["text"] = df["text"].astype(str).fillna("")
+
+    return df
+
