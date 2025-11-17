@@ -53,3 +53,16 @@ SAMPLE_QUESTIONS = [
     (10, "What symbol is used to denote comments in SQL?", "-- | # | // | /* */", 0, "Databases", "SQL uses -- for single-line comments."),
 ]
 
+
+# ---------------------------
+# Database & Persistence
+# ---------------------------
+class DBManager:
+    def __init__(self, db_path=DB_FILE):
+        self.conn = sqlite3.connect(db_path, check_same_thread=False)
+        self._create_tables()
+        self.lock = threading.Lock()
+        # seed sample questions if empty
+        if not self.get_any_question():
+            self.seed_sample_questions()
+            
