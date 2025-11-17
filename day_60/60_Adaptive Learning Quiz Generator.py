@@ -92,4 +92,27 @@ class DBManager:
         )
         """)
         
-            
+
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            qid INTEGER,
+            timestamp TIMESTAMP,
+            correct INTEGER,
+            response_time REAL,
+            FOREIGN KEY(qid) REFERENCES questions(id)
+        )
+        """)
+        self.conn.commit()
+
+    def seed_sample_questions(self):
+        cur = self.conn.cursor()
+        for q in SAMPLE_QUESTIONS:
+            qid, question, choices, ans, topic, explan = q
+            cur.execute("INSERT OR IGNORE INTO questions (id,question,choices,answer_index,topic,explanation) VALUES (?,?,?,?,?,?)",
+                        (qid, question, choices, ans, topic, explan))
+            cur.execute("INSERT OR IGNORE INTO stats (qid, attempts, correct, last_seen, next_due, ease, interval) VALUES (?,?,?,?,?,?,?)",
+                        (qid, 0, 0, None, None, 2.5, 1))
+        self.conn.commit()
+
+
