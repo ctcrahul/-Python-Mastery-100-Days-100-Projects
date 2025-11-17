@@ -176,6 +176,30 @@ class DBManager:
             return None
         return {"id": r[0], "question": r[1], "choices": r[2].split("|"), "answer_index": int(r[3]), "topic": r[4], "explanation": r[5]}
 
+   def get_all_question_ids(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT id FROM questions")
+        return [r[0] for r in cur.fetchall()]
+
+    def get_due_questions(self, topics=None):
+        """
+        Return list of qids that are due (next_due is None or <= now) optionally filtered by topics
+        """
+        cur = self.conn.cursor()
+        now_ts = datetime.utcnow().isoformat()
+        if topics:
+            placeholders = ",".join("?" for _ in topics)
+            sql = f"""
+            SELECT q.id FROM questions q
+            LEFT JOIN stats s ON s.qid=q.id
+            WHERE (s.next_due IS NULL OR s.next_due <= ?) AND q.topic IN ({placeholders})
+            """
+            cur.execute(sql, (now_ts, *topics))
+        else:
+            cur.execute("SELECT q.id FROM questions q LEFT JOIN stats s ON s.qid=q.id WHERE (s.next_due IS NULL OR s.next_due <= ?)", (now_ts,))
+        return [r[0] for r in cur.fetchall()
+
+                
 
 
 
