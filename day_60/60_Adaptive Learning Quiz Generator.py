@@ -162,6 +162,20 @@ class DBManager:
                                 (new_id, 0, 0, None, None, 2.5, 1))
         self.conn.commit()
 
-                    
+
+ def list_topics(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT DISTINCT topic FROM questions")
+        return [r[0] for r in cur.fetchall()]
+
+    def get_question(self, qid):
+        cur = self.conn.cursor()
+        cur.execute("SELECT id,question,choices,answer_index,topic,explanation FROM questions WHERE id=?", (qid,))
+        r = cur.fetchone()
+        if not r:
+            return None
+        return {"id": r[0], "question": r[1], "choices": r[2].split("|"), "answer_index": int(r[3]), "topic": r[4], "explanation": r[5]}
+
+
 
 
