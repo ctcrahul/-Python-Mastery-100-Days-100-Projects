@@ -65,4 +65,31 @@ class DBManager:
         # seed sample questions if empty
         if not self.get_any_question():
             self.seed_sample_questions()
+
+
+    def _create_tables(self):
+        cur = self.conn.cursor()
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS questions (
+            id INTEGER PRIMARY KEY,
+            question TEXT NOT NULL,
+            choices TEXT NOT NULL,
+            answer_index INTEGER NOT NULL,
+            topic TEXT,
+            explanation TEXT
+        )
+        """)
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS stats (
+            qid INTEGER PRIMARY KEY,
+            attempts INTEGER DEFAULT 0,
+            correct INTEGER DEFAULT 0,
+            last_seen TIMESTAMP,
+            next_due TIMESTAMP,
+            ease REAL DEFAULT 2.5,   -- SM-2 like ease factor
+            interval INTEGER DEFAULT 1,
+            FOREIGN KEY(qid) REFERENCES questions(id)
+        )
+        """)
+        
             
