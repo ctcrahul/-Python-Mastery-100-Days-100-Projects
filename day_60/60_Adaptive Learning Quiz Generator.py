@@ -116,3 +116,23 @@ class DBManager:
         self.conn.commit()
 
 
+    def get_any_question(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT id FROM questions LIMIT 1")
+        return cur.fetchone()
+
+    def import_questions_from_csv(self, path):
+        cur = self.conn.cursor()
+        with open(path, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    qid = int(row.get("id") or 0)
+                except:
+                    qid = None
+                question = row.get("question") or row.get("text") or ""
+                choices = row.get("choices") or "|".join([row.get(f"choice{i}") or "" for i in range(1,6) if row.get(f"choice{i}")])
+                if not choices:
+                    
+
+
