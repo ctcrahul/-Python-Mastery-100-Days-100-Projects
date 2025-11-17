@@ -147,6 +147,20 @@ class DBManager:
                             ans = i
                             break
 
+                topic = row.get("topic") or "General"
+                explanation = row.get("explanation") or ""
+                if qid:
+                    cur.execute("INSERT OR REPLACE INTO questions (id,question,choices,answer_index,topic,explanation) VALUES (?,?,?,?,?,?)",
+                                (qid, question, choices, ans, topic, explanation))
+                    cur.execute("INSERT OR IGNORE INTO stats (qid, attempts, correct, last_seen, next_due, ease, interval) VALUES (?,?,?,?,?,?,?)",
+                                (qid, 0, 0, None, None, 2.5, 1))
+                else:
+                    cur.execute("INSERT INTO questions (question,choices,answer_index,topic,explanation) VALUES (?,?,?,?,?)",
+                                (question, choices, ans, topic, explanation))
+                    new_id = cur.lastrowid
+                    cur.execute("INSERT OR IGNORE INTO stats (qid, attempts, correct, last_seen, next_due, ease, interval) VALUES (?,?,?,?,?,?,?)",
+                                (new_id, 0, 0, None, None, 2.5, 1))
+        self.conn.commit()
 
                     
 
