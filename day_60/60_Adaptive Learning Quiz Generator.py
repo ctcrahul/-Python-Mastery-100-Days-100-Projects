@@ -133,6 +133,21 @@ class DBManager:
                 question = row.get("question") or row.get("text") or ""
                 choices = row.get("choices") or "|".join([row.get(f"choice{i}") or "" for i in range(1,6) if row.get(f"choice{i}")])
                 if not choices:
+                                        # try to split by ; or |
+                    choices = row.get("options") or ""
+                ans_raw = row.get("answer") or row.get("answer_index") or "0"
+                try:
+                    ans = int(ans_raw)
+                except:
+                    # if answer is text, find index
+                    ans = 0
+                    parts = choices.split("|")
+                    for i, c in enumerate(parts):
+                        if c.strip().lower() == ans_raw.strip().lower():
+                            ans = i
+                            break
+
+
                     
 
 
