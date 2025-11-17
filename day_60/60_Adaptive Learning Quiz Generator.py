@@ -209,6 +209,18 @@ class DBManager:
             return {"attempts": 0, "correct": 0, "last_seen": None, "next_due": None, "ease":2.5, "interval":1}
         return {"attempts": r[0], "correct": r[1], "last_seen": r[2], "next_due": r[3], "ease": r[4], "interval": r[5]}
 
+    def record_result(self, qid, correct, response_time):
+        """
+        Update stats using a simplified SM-2 algorithm for spaced repetition.
+        """
+        with self.lock:
+            cur = self.conn.cursor()
+            st = self.get_stats(qid)
+            attempts = st["attempts"] + 1
+            corrects = st["correct"] + (1 if correct else 0)
+            last_seen = datetime.utcnow().isoformat()
+
+
 
 
 
