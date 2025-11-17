@@ -201,5 +201,14 @@ class DBManager:
 
                 
 
+    def get_stats(self, qid):
+        cur = self.conn.cursor()
+        cur.execute("SELECT attempts, correct, last_seen, next_due, ease, interval FROM stats WHERE qid=?", (qid,))
+        r = cur.fetchone()
+        if not r:
+            return {"attempts": 0, "correct": 0, "last_seen": None, "next_due": None, "ease":2.5, "interval":1}
+        return {"attempts": r[0], "correct": r[1], "last_seen": r[2], "next_due": r[3], "ease": r[4], "interval": r[5]}
+
+
 
 
