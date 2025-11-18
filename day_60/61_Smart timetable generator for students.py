@@ -51,6 +51,28 @@ class Subject:
         self.time_range = time_range  # (start_hour, end_hour)
         self.avoid_back_to_back = bool(avoid_back_to_back)
 
+               # spread score: prefer days with lower usage
+                spread_score = 1.0 / (1.0 + used_slots_per_day[d_idx])
+
+                # compactness: slight prefer midday over extremes
+                mid = self.num_slots_per_day / 2
+                dist = abs(slot_start + slots_needed/2 - mid)
+                comp_score = 1.0 / (1.0 + dist/5.0)
+
+                score = day_pref * time_pref * spread_score * back_to_back_penalty * comp_score
+
+                candidates.append((score, d_idx, slot_start))
+
+        if not candidates:
+            return False
+
+        # pick best candidate by score
+        candidates.sort(key=lambda x: -x[0])
+        best = candidates[0]
+        _, d_idx, slot_start = best
+
+  
+
     def to_dict(self):
         return {
             "name": self.name,
