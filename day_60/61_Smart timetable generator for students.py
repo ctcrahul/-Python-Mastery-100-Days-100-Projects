@@ -156,4 +156,21 @@ class TimetableEngine:
        
 
 
+    def _place_task_greedy(self, subj, slots_needed, used_slots_per_day):
+        """
+        Evaluate potential placements and pick best:
+        - Candidate slots are day, slot_start where contiguous slots are free
+        - Score candidates by:
+            * day preferred (1.0) vs not (0.6)
+            * time within preferred range (1.0) vs outside (0.5)
+            * lower used_slots_per_day favored (spread)
+            * penalize if back-to-back violation would occur
+        """
+        candidates = []
+        preferred_days_set = set(subj.preferred_days)
+        start_slot_pref = self.hour_to_slot(subj.time_range[0])
+        end_slot_pref = self.hour_to_slot(subj.time_range[1])
+
+
+
 
