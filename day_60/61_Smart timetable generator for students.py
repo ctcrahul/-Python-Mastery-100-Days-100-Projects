@@ -36,3 +36,18 @@ DAYS_FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
 DEFAULT_DAYS = DAYS_FULL[:5]  # Mon-Fri
 
 SLOT_MINUTES = 30  # resolution
+
+# ----------------------------
+# Timetable Engine
+# ----------------------------
+class Subject:
+    def __init__(self, name, sessions_per_week, session_length_min, priority=3,
+                 preferred_days=None, time_range=(8, 18), avoid_back_to_back=False):
+        self.name = name.strip()
+        self.sessions_per_week = int(sessions_per_week)
+        self.session_length_min = int(session_length_min)
+        self.priority = int(priority)
+        self.preferred_days = preferred_days if preferred_days is not None else DEFAULT_DAYS.copy()
+        self.time_range = time_range  # (start_hour, end_hour)
+        self.avoid_back_to_back = bool(avoid_back_to_back)
+                    
