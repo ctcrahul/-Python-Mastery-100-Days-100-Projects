@@ -50,4 +50,27 @@ class Subject:
         self.preferred_days = preferred_days if preferred_days is not None else DEFAULT_DAYS.copy()
         self.time_range = time_range  # (start_hour, end_hour)
         self.avoid_back_to_back = bool(avoid_back_to_back)
-                    
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "sessions_per_week": self.sessions_per_week,
+            "session_length_min": self.session_length_min,
+            "priority": self.priority,
+            "preferred_days": self.preferred_days,
+            "time_range": self.time_range,
+            "avoid_back_to_back": self.avoid_back_to_back
+        }
+
+    @staticmethod
+    def from_dict(d):
+        return Subject(
+            d["name"],
+            d["sessions_per_week"],
+            d["session_length_min"],
+            d.get("priority", 3),
+            d.get("preferred_days"),
+            tuple(d.get("time_range", (8, 18))),
+            d.get("avoid_back_to_back", False)
+        )
+
