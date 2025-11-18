@@ -173,4 +173,37 @@ class TimetableEngine:
 
 
 
+        for d_idx, day in enumerate(self.days):
+            # Skip if day not preferred? We still allow but with lower score
+            day_pref = 1.0 if day in preferred_days_set else 0.6
+
+            for slot_start in range(0, self.num_slots_per_day - slots_needed + 1):
+                # check contiguous slots free
+                free = True
+                for s in range(slot_start, slot_start + slots_needed):
+                    if self.timetable[d_idx][s] is not None:
+                        free = False
+                        break
+                if not free:
+                    continue
+
+                # check daily max constraint if we place here
+                if (used_slots_per_day[d_idx] + slots_needed) * (self.slot_minutes / 60.0) > self.max_hours_per_day:
+                    continue
+
+                # time preference
+                time_pref = 1.0 if (slot_start >= start_slot_pref and (slot_start + slots_needed) <= end_slot_pref) else 0.5
+
+                # avoid back-to-back: check neighbor slots before and after
+                back_to_back_penalty = 1.0
+                if subj.avoid_back_to_back:
+                    before = slot_start - 1
+                    after = slot_start + slots_needed
+                    if before >= 0 and self.timetable[d_idx][before] is not None:
+                        back_to_back_penalty *= 0.3
+                    if after < self.num_slots_per_day and self.timetable[d_idx][after] is not None:
+                        back_to_back_penalty *= 0.3
+
+
+
 
