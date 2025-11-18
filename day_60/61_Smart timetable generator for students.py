@@ -114,4 +114,46 @@ class TimetableEngine:
         return f"{h:02d}:{m:02d}"
 
 
+    # Core scheduling algorithm
+    def generate(self):
+        """
+        Greedy scheduling:
+        1) Create a list of session "tasks" from subjects: each session requires n slots.
+        2) Sort tasks by priority and number of remaining possible placements (harder first).
+        3) Place each session into best slot according to:
+            - preferred days/time ranges
+            - respecting max_hours_per_day
+            - avoiding back-to-back if requested
+        4) If fails to place some sessions, return partial timetable plus list of unplaced.
+        """
+        self.reset_timetable()
+        tasks = []
+        for subj in self.subjects:
+            slots_needed = max(1, subj.session_length_min // self.slot_minutes)
+            # create tasks
+            for i in range(subj.sessions_per_week):
+                tasks.append({
+                    "subject": subj,
+                    "slots_needed": slots_needed,
+                    "id": f"{subj.name}#{i+1}"
+                })
+
+        # Shuffle tasks to introduce variety, then sort by priority descending and slots_needed desc
+        random.shuffle(tasks)
+        tasks.sort(key=lambda t: (-t["subject"].priority, -t["slots_needed"], t["subject"].name))
+
+        unplaced = []
+        # Track hours used per day
+        used_slots_per_day = [0] * len(self.days)
+
+        for task in tasks:
+            subj = task["subject"]
+            placed = self._place_task_greedy(subj, task["slots_needed"], used_slots_per_day)
+            if not placed:
+                unplaced.append(task)
+
+        return unplaced
+       
+
+
 
