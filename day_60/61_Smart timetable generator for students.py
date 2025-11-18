@@ -74,3 +74,33 @@ class Subject:
             d.get("avoid_back_to_back", False)
         )
 
+class TimetableEngine:
+    def __init__(self, days=DEFAULT_DAYS, day_start=8, day_end=18, max_hours_per_day=8):
+        self.days = days[:]  # list of day names
+        self.day_start = day_start
+        self.day_end = day_end
+        self.max_hours_per_day = float(max_hours_per_day)
+        self.slot_minutes = SLOT_MINUTES
+        self.slots_per_hour = 60 // self.slot_minutes
+        self.subjects = []  # list of Subject
+        self._build_grid()
+
+    def _build_grid(self):
+        self.num_slots_per_day = (self.day_end - self.day_start) * self.slots_per_hour
+        # representation: timetable[day_index][slot_index] = None or (subject_name, length_slots)
+        self.timetable = [[None for _ in range(self.num_slots_per_day)] for _ in self.days]
+
+    def add_subject(self, subj: Subject):
+        self.subjects.append(subj)
+
+    def remove_subject(self, name):
+        self.subjects = [s for s in self.subjects if s.name != name]
+
+    def clear_subjects(self):
+        self.subjects = []
+
+    def reset_timetable(self):
+        self._build_grid()
+
+
+
