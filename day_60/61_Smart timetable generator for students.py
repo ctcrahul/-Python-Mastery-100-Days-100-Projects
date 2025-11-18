@@ -28,3 +28,11 @@ from datetime import datetime
 import os
 import math
 import random
+
+# ----------------------------
+# Helper data structures
+# ----------------------------
+DAYS_FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+DEFAULT_DAYS = DAYS_FULL[:5]  # Mon-Fri
+
+SLOT_MINUTES = 30  # resolution
