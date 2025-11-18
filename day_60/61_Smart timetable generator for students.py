@@ -1,6 +1,6 @@
-"""
-Smart Timetable Generator for Students (single-file)
+"""                                                           Day = 61
 
+                                                  Smart Timetable Generator for Students 
 Features:
 - Tkinter GUI to add subjects with:
     * name, sessions_per_week, session_length_minutes, priority (1-5),
@@ -206,4 +206,6 @@ class TimetableEngine:
 
 
 
-
+#===========================================================================================================================================================================
+                                                              Keep learning keep Exploring
+#===========================================================================================================================================================================
