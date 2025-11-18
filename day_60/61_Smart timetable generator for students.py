@@ -96,6 +96,38 @@ class Subject:
             d.get("avoid_back_to_back", False)
         )
 
+ def optimize(self, iterations=500):
+        """
+        Attempt improving timetable by swapping two session placements.
+        Evaluate using a heuristic "happiness" score: prefers:
+            - sessions in preferred days/time
+            - balanced load across days
+            - respecting avoid_back_to_back
+        """
+        def hash_session_positions():
+            sessions = {}
+            for d_idx in range(len(self.days)):
+                s = 0
+                while s < self.num_slots_per_day:
+                    cell = self.timetable[d_idx][s]
+                    if cell is None:
+                        s += 1
+                        continue
+                    subj_name, length = cell
+                    # find session block start: ensure we only record once per block
+                    # record position by name + start slot
+                    if (s == 0) or (self.timetable[d_idx][s-1] is None):
+                        sessions.setdefault(subj_name, []).append((d_idx, s, length))
+                    s += length
+            return sessions
+
+        def score_timetable():
+            score = 0.0
+            used = [0]*len(self.days)
+            for subj in self.subjects:
+                # for all session placements of
+              
+
 class TimetableEngine:
     def __init__(self, days=DEFAULT_DAYS, day_start=8, day_end=18, max_hours_per_day=8):
         self.days = days[:]  # list of day names
