@@ -102,5 +102,16 @@ class TimetableEngine:
     def reset_timetable(self):
         self._build_grid()
 
+    # Utility: convert hour to slot index
+    def hour_to_slot(self, hour_float):
+        # hour_float like 9.5 -> 9:30
+        return int(round((hour_float - self.day_start) * self.slots_per_hour))
+
+    def slot_to_time(self, slot_idx):
+        total_minutes = self.day_start * 60 + slot_idx * self.slot_minutes
+        h = total_minutes // 60
+        m = total_minutes % 60
+        return f"{h:02d}:{m:02d}"
+
 
 
