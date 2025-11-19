@@ -134,4 +134,21 @@ def start_analyzer():
                 cv2.putText(frame, f"Squats: {squat_count}", (400, 80),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
              
+          if warning:
+                    cv2.putText(frame, warning, (20, 450),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,0,255), 3)
 
+                mp_drawing.draw_landmarks(
+                    frame, result.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+
+            cv2.imshow("Workout Form Analyzer", frame)
+            if cv2.waitKey(5) & 0xFF == 27:
+                break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+# Run
+if __name__ == "__main__":
+    start_analyzer()
+ 
