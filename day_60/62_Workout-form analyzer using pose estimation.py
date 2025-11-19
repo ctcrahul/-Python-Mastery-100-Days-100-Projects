@@ -119,3 +119,19 @@ def start_analyzer():
                 elif elbow_angle > 160 and curl_state == "down":
                     warning = "Extend fully but don't lock joints."
 
+               # --------------------------
+                # Draw Overlay
+                # --------------------------
+                cv2.putText(frame, f"Elbow Angle: {int(elbow_angle)}", (20, 40),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,0), 2)
+                cv2.putText(frame, f"Knee Angle: {int(knee_angle)}", (20, 70),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,0), 2)
+                cv2.putText(frame, f"Back Angle: {int(back_angle)}", (20, 100),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,0), 2)
+
+                cv2.putText(frame, f"Curls: {curl_count}", (400, 40),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+                cv2.putText(frame, f"Squats: {squat_count}", (400, 80),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+             
+
