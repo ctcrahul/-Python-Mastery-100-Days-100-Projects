@@ -40,3 +40,16 @@ def calc_angle(a, b, c):
     if angle > 180:
         angle = 360 - angle
     return angle
+
+# ----------------------------------------
+# Live Workout Analyzer
+# ----------------------------------------
+def start_analyzer():
+    cap = cv2.VideoCapture(0)
+
+    curl_count = 0
+    curl_state = "down"
+
+    squat_count = 0
+    squat_state = "up"
+
