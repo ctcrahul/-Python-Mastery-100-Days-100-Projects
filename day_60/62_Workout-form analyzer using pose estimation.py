@@ -82,3 +82,19 @@ def start_analyzer():
                 ankle = [lm[mp_pose.PoseLandmark.LEFT_ANKLE].x * w,
                          lm[mp_pose.PoseLandmark.LEFT_ANKLE].y * h]
 
+               # --------------------------
+                # Angles
+                # --------------------------
+                elbow_angle = calc_angle(shoulder, elbow, wrist)
+                knee_angle = calc_angle(hip, knee, ankle)
+                back_angle = calc_angle(shoulder, hip, knee)
+
+                # --------------------------
+                # BICEP CURL DETECTION
+                # --------------------------
+                if elbow_angle < 40:
+                    curl_state = "up"
+                if elbow_angle > 150 and curl_state == "up":
+                    curl_count += 1
+                    curl_state = "down"
+                 
