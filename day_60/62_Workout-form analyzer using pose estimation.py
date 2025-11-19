@@ -1,5 +1,6 @@
-"""
-Workout Form Analyzer using Pose Estimation
+"""                                                             Day = 62      
+      
+                                                  Workout Form Analyzer using Pose Estimation
 ------------------------------------------
 Features:
  - Real-time webcam feed (OpenCV)
