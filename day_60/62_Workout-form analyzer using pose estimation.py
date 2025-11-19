@@ -53,3 +53,19 @@ def start_analyzer():
     squat_count = 0
     squat_state = "up"
 
+    with mp_pose.Pose(min_detection_confidence=0.6, min_tracking_confidence=0.6) as pose:
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            frame = cv2.flip(frame, 1)
+            h, w, _ = frame.shape
+
+            img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            result = pose.process(img_rgb)
+
+            if result.pose_landmarks:
+                lm = result.pose_landmarks.landmark
+
+
