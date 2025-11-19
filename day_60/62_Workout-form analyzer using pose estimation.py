@@ -68,4 +68,17 @@ def start_analyzer():
             if result.pose_landmarks:
                 lm = result.pose_landmarks.landmark
 
+                # Extract key points
+                shoulder = [lm[mp_pose.PoseLandmark.LEFT_SHOULDER].x * w,
+                            lm[mp_pose.PoseLandmark.LEFT_SHOULDER].y * h]
+                elbow = [lm[mp_pose.PoseLandmark.LEFT_ELBOW].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_ELBOW].y * h]
+                wrist = [lm[mp_pose.PoseLandmark.LEFT_WRIST].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_WRIST].y * h]
+                hip = [lm[mp_pose.PoseLandmark.LEFT_HIP].x * w,
+                       lm[mp_pose.PoseLandmark.LEFT_HIP].y * h]
+                knee = [lm[mp_pose.PoseLandmark.LEFT_KNEE].x * w,
+                        lm[mp_pose.PoseLandmark.LEFT_KNEE].y * h]
+                ankle = [lm[mp_pose.PoseLandmark.LEFT_ANKLE].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_ANKLE].y * h]
 
