@@ -146,6 +146,45 @@ def start_analyzer():
             if cv2.waitKey(5) & 0xFF == 27:
                 break
 
+
+      
+                # Extract key points
+                shoulder = [lm[mp_pose.PoseLandmark.LEFT_SHOULDER].x * w,
+                            lm[mp_pose.PoseLandmark.LEFT_SHOULDER].y * h]
+                elbow = [lm[mp_pose.PoseLandmark.LEFT_ELBOW].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_ELBOW].y * h]
+                wrist = [lm[mp_pose.PoseLandmark.LEFT_WRIST].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_WRIST].y * h]
+                hip = [lm[mp_pose.PoseLandmark.LEFT_HIP].x * w,
+                       lm[mp_pose.PoseLandmark.LEFT_HIP].y * h]
+                knee = [lm[mp_pose.PoseLandmark.LEFT_KNEE].x * w,
+                        lm[mp_pose.PoseLandmark.LEFT_KNEE].y * h]
+                ankle = [lm[mp_pose.PoseLandmark.LEFT_ANKLE].x * w,
+                         lm[mp_pose.PoseLandmark.LEFT_ANKLE].y * h]
+
+                # --------------------------
+                # Angles
+                # --------------------------
+                elbow_angle = calc_angle(shoulder, elbow, wrist)
+                knee_angle = calc_angle(hip, knee, ankle)
+                back_angle = calc_angle(shoulder, hip, knee)
+
+                # --------------------------
+                # BICEP CURL DETECTION
+                # --------------------------
+                if elbow_angle < 40:
+                    curl_state = "up"
+                if elbow_angle > 150 and curl_state == "up":
+                    curl_count += 1
+                    curl_state = "down"
+
+                # --------------------------
+                # SQUAT DETECTION
+                # --------------------------
+                if knee_angle < 70:
+                    squat_state = "down"
+                if knee_angle > 160 and squat_state == "down":
+                      
     cap.release()
     cv2.destroyAllWindows()
 
