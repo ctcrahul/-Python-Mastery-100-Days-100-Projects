@@ -98,3 +98,24 @@ def start_analyzer():
                     curl_count += 1
                     curl_state = "down"
                  
+               # --------------------------
+                # SQUAT DETECTION
+                # --------------------------
+                if knee_angle < 70:
+                    squat_state = "down"
+                if knee_angle > 160 and squat_state == "down":
+                    squat_count += 1
+                    squat_state = "up"
+
+                # --------------------------
+                # Form Warnings
+                # --------------------------
+                warning = ""
+
+                if back_angle < 140:
+                    warning = "⚠ Keep your back straighter!"
+                elif knee_angle < 60:
+                    warning = "⚠ Don't go too deep!"
+                elif elbow_angle > 160 and curl_state == "down":
+                    warning = "Extend fully but don't lock joints."
+
