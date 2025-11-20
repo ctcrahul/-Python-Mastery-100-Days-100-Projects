@@ -33,6 +33,36 @@ PRESETS_FILE = "filter_presets.json"
 def apply_original(img):
     return img.copy()
 
+    self.status_var = tk.StringVar(value="Load an image to begin.")
+        ttk.Label(top, textvariable=self.status_var, foreground="#555555").pack(side="right")
+
+        # Main layout: left thumbnails, right preview
+        main = ttk.Frame(self.root, padding=8)
+        main.pack(fill="both", expand=True)
+
+        # Left: filter list / thumbnails
+        left = ttk.Frame(main)
+        left.pack(side="left", fill="y")
+
+        ttk.Label(left, text="Filter Marketplace", font=("Segoe UI", 12, "bold")).pack(anchor="w")
+
+        self.filter_canvas = tk.Canvas(left, width=260, bg="#f7f7f7", highlightthickness=0)
+        self.filter_scrollbar = ttk.Scrollbar(left, orient="vertical", command=self.filter_canvas.yview)
+        self.filter_canvas.configure(yscrollcommand=self.filter_scrollbar.set)
+
+        self.filter_frame = ttk.Frame(self.filter_canvas)
+        self.filter_canvas.create_window((0, 0), window=self.filter_frame, anchor="nw")
+
+        self.filter_canvas.pack(side="left", fill="y", expand=False)
+        self.filter_scrollbar.pack(side="left", fill="y")
+
+        self.filter_frame.bind("<Configure>", lambda e: self.filter_canvas.configure(scrollregion=self.filter_canvas.bbox("all")))
+
+        # Right: preview
+        right = ttk.Frame(main)
+        right.pack(side="right", fill="both", expand=True)
+
+
 
 def apply_grayscale(img):
     return ImageOps.grayscale(img).convert("RGB")
