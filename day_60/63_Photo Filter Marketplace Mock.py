@@ -137,6 +137,25 @@ FILTERS = {
 
 
 # -----------------------------
+# Preset storage helpers
+# -----------------------------
+def load_presets():
+    if not os.path.exists(PRESETS_FILE):
+        return {}
+    try:
+        with open(PRESETS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def save_presets(presets):
+    try:
+        with open(PRESETS_FILE, "w", encoding="utf-8") as f:
+            json.dump(presets, f, indent=2)
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save presets: {e}")
+
 
 
 
