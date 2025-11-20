@@ -156,6 +156,21 @@ def save_presets(presets):
     except Exception as e:
         messagebox.showerror("Error", f"Failed to save presets: {e}")
 
+# -----------------------------
+# Main GUI App
+# -----------------------------
+class FilterMarketplaceApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Photo Filter Marketplace Mock")
+        self.root.geometry("1200x700")
 
+        self.original_image = None  # full-res PIL
+        self.display_image = None   # PIL resized for preview
+        self.current_filtered = None
+        self.current_filter_name = "Original"
+
+        self.thumbnail_size = (220, 220)
+        self.preview_size = (480, 480)
 
 
