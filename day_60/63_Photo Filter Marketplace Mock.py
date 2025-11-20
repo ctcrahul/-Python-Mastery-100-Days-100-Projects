@@ -1,5 +1,6 @@
-"""
-Project 63: Photo Filter Marketplace Mock
+"""                                                                  Day = 63
+
+                                                             Photo Filter Marketplace Mock
 -----------------------------------------
 
 A single-file Python app that:
