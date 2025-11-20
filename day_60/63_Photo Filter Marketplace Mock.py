@@ -63,5 +63,29 @@ def apply_high_contrast(img):
     img = enhancer.enhance(1.3)
     return img
 
+def apply_soft_pastel(img):
+    img = ImageOps.autocontrast(img)
+    enhancer = ImageEnhance.Color(img)
+    img = enhancer.enhance(0.7)
+    img = img.filter(ImageFilter.GaussianBlur(radius=1))
+    return img
+
+
+def apply_vignette(img):
+    w, h = img.size
+    vignette = Image.new("L", (w, h), 0)
+    for y in range(h):
+        for x in range(w):
+            dx = (x - w / 2) / (w / 2)
+            dy = (y - h / 2) / (h / 2)
+            d = (dx * dx + dy * dy) ** 0.5
+            val = int(max(0, 255 * (1 - d)))
+            vignette.putpixel((x, y), val)
+    mask = vignette.filter(ImageFilter.GaussianBlur(radius=min(w, h) * 0.05))
+    dark = Image.new("RGB", (w, h), "#000000")
+    blended = Image.composite(img, dark, mask)
+    return blended
+
+
 
 
