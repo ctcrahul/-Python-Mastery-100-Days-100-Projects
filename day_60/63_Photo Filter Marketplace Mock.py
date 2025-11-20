@@ -121,6 +121,22 @@ def ImageChalkEdge(gray, blurred):
     return Image.fromarray(e).convert("RGB")
 
 
+FILTERS = {
+    "Original": apply_original,
+    "Grayscale": apply_grayscale,
+    "Sepia Classic": apply_sepia,
+    "Warm Glow": apply_warm,
+    "Cool Tone": apply_cool,
+    "High Contrast Pop": apply_high_contrast,
+    "Soft Pastel": apply_soft_pastel,
+    "Vignette Mood": apply_vignette,
+    "Film Fade": apply_film_fade,
+    "HDR Pop": apply_hdr_pop,
+    "Ink Sketch": apply_ink_sketch,
+}
+
+
+# -----------------------------
 
 
 
