@@ -173,4 +173,28 @@ class FilterMarketplaceApp:
         self.thumbnail_size = (220, 220)
         self.preview_size = (480, 480)
 
+      self.thumbnail_photoimages = {}  # keep references
+        self.presets = load_presets()    # name -> filter_name
+
+        self._build_ui()
+
+    def _build_ui(self):
+        # Top bar
+        top = ttk.Frame(self.root, padding=8)
+        top.pack(side="top", fill="x")
+
+        ttk.Button(top, text="Load Image", command=self.load_image).pack(side="left", padx=4)
+        ttk.Button(top, text="Save Current Filtered Image", command=self.save_filtered).pack(side="left", padx=4)
+
+        ttk.Separator(top, orient="vertical").pack(side="left", fill="y", padx=8)
+
+        ttk.Label(top, text="Presets:", font=("Segoe UI", 10, "bold")).pack(side="left")
+        self.preset_combo = ttk.Combobox(top, values=list(self.presets.keys()), state="readonly", width=20)
+        self.preset_combo.pack(side="left", padx=4)
+        ttk.Button(top, text="Apply Preset", command=self.apply_preset).pack(side="left", padx=4)
+        ttk.Button(top, text="Save Current as Preset", command=self.save_as_preset).pack(side="left", padx=4)
+        ttk.Button(top, text="Delete Preset", command=self.delete_preset).pack(side="left", padx=4)
+
+
+
 
