@@ -42,3 +42,26 @@ def apply_sepia(img):
     sepia = ImageOps.colorize(gray, "#704214", "#FFDCB8")
     return sepia
 
+def apply_warm(img):
+    r, g, b = img.split()
+    r = r.point(lambda i: min(255, int(i * 1.1)))
+    b = b.point(lambda i: int(i * 0.9))
+    return Image.merge("RGB", (r, g, b))
+
+
+def apply_cool(img):
+    r, g, b = img.split()
+    r = r.point(lambda i: int(i * 0.9))
+    b = b.point(lambda i: min(255, int(i * 1.1)))
+    return Image.merge("RGB", (r, g, b))
+
+
+def apply_high_contrast(img):
+    enhancer = ImageEnhance.Contrast(img)
+    img = enhancer.enhance(1.8)
+    enhancer = ImageEnhance.Color(img)
+    img = enhancer.enhance(1.3)
+    return img
+
+
+
