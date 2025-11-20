@@ -25,3 +25,20 @@ from tkinter import ttk, filedialog, messagebox, simpledialog
 from PIL import Image, ImageTk, ImageFilter, ImageEnhance, ImageOps
 
 PRESETS_FILE = "filter_presets.json"
+
+# -----------------------------
+# Filter definitions
+# -----------------------------
+def apply_original(img):
+    return img.copy()
+
+
+def apply_grayscale(img):
+    return ImageOps.grayscale(img).convert("RGB")
+
+
+def apply_sepia(img):
+    gray = ImageOps.grayscale(img)
+    sepia = ImageOps.colorize(gray, "#704214", "#FFDCB8")
+    return sepia
+
