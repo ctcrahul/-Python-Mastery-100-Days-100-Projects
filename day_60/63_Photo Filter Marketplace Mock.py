@@ -87,5 +87,18 @@ def apply_vignette(img):
     return blended
 
 
+def apply_film_fade(img):
+    img = apply_grayscale(img)
+    enhancer = ImageEnhance.Contrast(img)
+    img = enhancer.enhance(0.8)
+    enhancer = ImageEnhance.Brightness(img)
+    img = enhancer.enhance(1.1)
+    return img
 
+
+def apply_hdr_pop(img):
+    img1 = ImageEnhance.Color(img).enhance(1.3)
+    img2 = ImageEnhance.Sharpness(img1).enhance(1.5)
+    return img2
+   
 
