@@ -100,5 +100,27 @@ def apply_hdr_pop(img):
     img1 = ImageEnhance.Color(img).enhance(1.3)
     img2 = ImageEnhance.Sharpness(img1).enhance(1.5)
     return img2
-   
+
+
+
+def apply_ink_sketch(img):
+    gray = ImageOps.grayscale(img)
+    blurred = gray.filter(ImageFilter.GaussianBlur(radius=2))
+    edges = ImageChalkEdge(gray, blurred)
+    return edges
+
+
+def ImageChalkEdge(gray, blurred):
+    # simple pseudo-edge effect
+    import numpy as np
+    g = np.array(gray, dtype="int16")
+    b = np.array(blurred, dtype="int16")
+    e = abs(g - b)
+    e = 255 - e * 3
+    e = e.clip(0, 255).astype("uint8")
+    return Image.fromarray(e).convert("RGB")
+
+
+
+
 
