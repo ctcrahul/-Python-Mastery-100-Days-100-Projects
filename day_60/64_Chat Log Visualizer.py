@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import pandas as pd
@@ -77,6 +78,18 @@ def visualize_chat(df):
     plt.show()
 
 
+class ChatVisualizerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Chat Log Visualizer")
+        self.root.geometry("600x300")
+
+        title = tk.Label(root, text="Chat Log Visualizer", font=("Arial", 16, "bold"))
+        title.pack(pady=10)
+
+        info = tk.Label(root, text="Load a WhatsApp chat export (.txt) to visualize")
+        info.pack(pady=5)
+        
 
 
 
