@@ -12,10 +12,8 @@ import seaborn as sns
 
 def parse_chat(file_path):
     """
-def parse_chat(file_path):
-    """
     Parses WhatsApp-like chat files into structured DataFrame
-
+    """
     pattern = r"(\d{1,2}/\d{1,2}/\d{4}), (\d{1,2}:\d{2}) (AM|PM) - (.*?): (.*)"
 
     data = []
@@ -28,27 +26,8 @@ def parse_chat(file_path):
                 timestamp = f"{date} {time} {period}"
                 data.append([timestamp, sender, message])
 
-    df = pd.DataFrame(data, col
-
-                       df = pd.DataFrame(data, columns=["Timestamp", "Sender", "Message"])
+    df = pd.DataFrame(data, columns=["Timestamp", "Sender", "Message"])
     df["Timestamp"] = pd.to_datetime(df["Timestamp"], format="%d/%m/%Y %I:%M %p", errors="coerce")
-
-    s per Hour")
-    plt.xlabel("Hour")
-    plt.ylabel("Messages")
-
-    # 4. Heatmap
-    plt.subplot(2, 2, 4)
-    heatmap_data = df.groupby(["Day", "Hour"]).size().unstack(fill_value=0)
-    heatmap_data = heatmap_data.reindex([
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-    ])
-
-    sns.heatmap(heatmap_data, cmap="coolwarm")
-    plt.title("Chat Activity Heatmap")
-
-    plt.tight_layout()
-    plt.show()
 
     df["Hour"] = df["Timestamp"].dt.hour
     df["Day"] = df["Timestamp"].dt.day_name()
@@ -71,81 +50,6 @@ def visualize_chat(df):
     plt.ylabel("Count")
 
     # 2. Messages per day
-    plt.subplot(2, 2, 2)
-    df["Day"].value_counts().reindex([
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-    ]).plot(kind="bar")
-    plt.title("Messages per Day")
-
-
-
-
-class ChatVisualizerApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Chat Log Visualizer")
-        self.root.geometry("600x300")
-
-        title = tk.Label(root, text="Chat Log Visualizer", font=("Arial", 16, "bold"))
-        title.pack(pady=10)
-
-        info = tk.Label(root, text="Load a WhatsApp chat export (.txt) to visualize")
-        info.pack(pady=5)
-
-        load_btn = tk.Button(root, text="Load Chat File", command=self.load_file, width=20)
-        load_btn.pack(pady=20)
-
-        self.status = tk.Label(root, text="Waiting for file...", fg="blue")
-        self.status.pack(pady=5)
-
-
-    
-
-    df["Hour"] = df["Timestamp"].dt.hour
-    df["Day"] = df["Timestamp"].dt.day_name()
-    df["Date"] = df["Timestamp"].dt.date
-
-    return df
-
-
-def visualize_chat(df):
-    """
-    Create multiple visualizations in one window
-    """
-
-    plt.figure(figsize=(15, 10))
-
-
-        def load_file(self):
-        file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
-        if not file_path:
-            return
-        
-        try:
-            self.status.config(text="Processing chat...", fg="orange")
-            df = parse_chat(file_path)
-
-            if df.empty:
-                messagebox.showerror("Error", "No valid messages found in file!")
-                return
-
-            self.status.config(text="Generating visualizations...", fg="green")
-            visualize_chat(df)
-
-            self.status.config(text="Done!", fg="green")
-
-        except Exception as e:
-            messagebox.showerror("Error", str(e))
-            self.status.config(text="Error occurred", fg="red")
-
-
-    # 1. Messages per person
-    plt.subplot(2, 2, 1)
-    df["Sender"].value_counts().plot(kind="bar")
-    plt.title("Messages per Person")
-    plt.ylabel("Count")
-
-   # 2. Messages per day
     plt.subplot(2, 2, 2)
     df["Day"].value_counts().reindex([
         "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
@@ -184,10 +88,8 @@ class ChatVisualizerApp:
 
         info = tk.Label(root, text="Load a WhatsApp chat export (.txt) to visualize")
         info.pack(pady=5)
-        
 
-
-  load_btn = tk.Button(root, text="Load Chat File", command=self.load_file, width=20)
+        load_btn = tk.Button(root, text="Load Chat File", command=self.load_file, width=20)
         load_btn.pack(pady=20)
 
         self.status = tk.Label(root, text="Waiting for file...", fg="blue")
@@ -202,16 +104,14 @@ class ChatVisualizerApp:
             self.status.config(text="Processing chat...", fg="orange")
             df = parse_chat(file_path)
 
-
-          if df.empty:
+            if df.empty:
                 messagebox.showerror("Error", "No valid messages found in file!")
                 return
 
             self.status.config(text="Generating visualizations...", fg="green")
             visualize_chat(df)
 
-
-          self.status.config(text="Done!", fg="green")
+            self.status.config(text="Done!", fg="green")
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
@@ -222,7 +122,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ChatVisualizerApp(root)
     root.mainloop()
-
 
 
 #===========================================================================================================================================================================
