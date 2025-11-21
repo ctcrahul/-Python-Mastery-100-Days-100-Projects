@@ -47,6 +47,35 @@ def parse_chat(file_path):
     plt.tight_layout()
     plt.show()
 
+    df["Hour"] = df["Timestamp"].dt.hour
+    df["Day"] = df["Timestamp"].dt.day_name()
+    df["Date"] = df["Timestamp"].dt.date
+
+    return df
+
+
+def visualize_chat(df):
+    """
+    Create multiple visualizations in one window
+    """
+
+    plt.figure(figsize=(15, 10))
+
+    # 1. Messages per person
+    plt.subplot(2, 2, 1)
+    df["Sender"].value_counts().plot(kind="bar")
+    plt.title("Messages per Person")
+    plt.ylabel("Count")
+
+    # 2. Messages per day
+    plt.subplot(2, 2, 2)
+    df["Day"].value_counts().reindex([
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ]).plot(kind="bar")
+    plt.title("Messages per Day")
+
+
+
 
 class ChatVisualizerApp:
     def __init__(self, root):
