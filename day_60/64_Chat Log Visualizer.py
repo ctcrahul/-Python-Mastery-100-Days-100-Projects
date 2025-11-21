@@ -108,6 +108,15 @@ class ChatVisualizerApp:
             df = parse_chat(file_path)
 
 
+          if df.empty:
+                messagebox.showerror("Error", "No valid messages found in file!")
+                return
+
+            self.status.config(text="Generating visualizations...", fg="green")
+            visualize_chat(df)
+
+
+
 
 
 
