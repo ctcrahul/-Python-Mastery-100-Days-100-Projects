@@ -116,6 +116,17 @@ class ChatVisualizerApp:
             visualize_chat(df)
 
 
+          self.status.config(text="Done!", fg="green")
+
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+            self.status.config(text="Error occurred", fg="red")
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ChatVisualizerApp(root)
+    root.mainloop()
 
 
 
