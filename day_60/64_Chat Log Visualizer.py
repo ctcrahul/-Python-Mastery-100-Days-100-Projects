@@ -44,6 +44,30 @@ def visualize_chat(df):
 
     plt.figure(figsize=(15, 10))
 
+
+        def load_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+        if not file_path:
+            return
+        
+        try:
+            self.status.config(text="Processing chat...", fg="orange")
+            df = parse_chat(file_path)
+
+            if df.empty:
+                messagebox.showerror("Error", "No valid messages found in file!")
+                return
+
+            self.status.config(text="Generating visualizations...", fg="green")
+            visualize_chat(df)
+
+            self.status.config(text="Done!", fg="green")
+
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+            self.status.config(text="Error occurred", fg="red")
+
+
     # 1. Messages per person
     plt.subplot(2, 2, 1)
     df["Sender"].value_counts().plot(kind="bar")
