@@ -63,6 +63,23 @@ def visualize_chat(df):
     plt.xlabel("Hour")
     plt.ylabel("Messages")
 
+    # 4. Heatmap
+    plt.subplot(2, 2, 4)
+    heatmap_data = df.groupby(["Day", "Hour"]).size().unstack(fill_value=0)
+    heatmap_data = heatmap_data.reindex([
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ])
+
+    sns.heatmap(heatmap_data, cmap="coolwarm")
+    plt.title("Chat Activity Heatmap")
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
 
 
 
