@@ -49,6 +49,21 @@ def visualize_chat(df):
     plt.title("Messages per Person")
     plt.ylabel("Count")
 
+   # 2. Messages per day
+    plt.subplot(2, 2, 2)
+    df["Day"].value_counts().reindex([
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ]).plot(kind="bar")
+    plt.title("Messages per Day")
+
+    # 3. Messages per hour
+    plt.subplot(2, 2, 3)
+    df["Hour"].value_counts().sort_index().plot(kind="line", marker="o")
+    plt.title("Messages per Hour")
+    plt.xlabel("Hour")
+    plt.ylabel("Messages")
+
+
 
 
     
