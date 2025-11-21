@@ -30,6 +30,45 @@ def parse_chat(file_path):
                        df = pd.DataFrame(data, columns=["Timestamp", "Sender", "Message"])
     df["Timestamp"] = pd.to_datetime(df["Timestamp"], format="%d/%m/%Y %I:%M %p", errors="coerce")
 
+    s per Hour")
+    plt.xlabel("Hour")
+    plt.ylabel("Messages")
+
+    # 4. Heatmap
+    plt.subplot(2, 2, 4)
+    heatmap_data = df.groupby(["Day", "Hour"]).size().unstack(fill_value=0)
+    heatmap_data = heatmap_data.reindex([
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ])
+
+    sns.heatmap(heatmap_data, cmap="coolwarm")
+    plt.title("Chat Activity Heatmap")
+
+    plt.tight_layout()
+    plt.show()
+
+
+class ChatVisualizerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Chat Log Visualizer")
+        self.root.geometry("600x300")
+
+        title = tk.Label(root, text="Chat Log Visualizer", font=("Arial", 16, "bold"))
+        title.pack(pady=10)
+
+        info = tk.Label(root, text="Load a WhatsApp chat export (.txt) to visualize")
+        info.pack(pady=5)
+
+        load_btn = tk.Button(root, text="Load Chat File", command=self.load_file, width=20)
+        load_btn.pack(pady=20)
+
+        self.status = tk.Label(root, text="Waiting for file...", fg="blue")
+        self.status.pack(pady=5)
+
+
+    
+
     df["Hour"] = df["Timestamp"].dt.hour
     df["Day"] = df["Timestamp"].dt.day_name()
     df["Date"] = df["Timestamp"].dt.date
