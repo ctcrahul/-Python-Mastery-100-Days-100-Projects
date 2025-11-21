@@ -92,6 +92,21 @@ class ChatVisualizerApp:
         
 
 
+  load_btn = tk.Button(root, text="Load Chat File", command=self.load_file, width=20)
+        load_btn.pack(pady=20)
+
+        self.status = tk.Label(root, text="Waiting for file...", fg="blue")
+        self.status.pack(pady=5)
+
+    def load_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+        if not file_path:
+            return
+        
+        try:
+            self.status.config(text="Processing chat...", fg="orange")
+            df = parse_chat(file_path)
+
 
 
 
