@@ -15,6 +15,17 @@ Dependencies:
 
 Run:
     python animated_weather_widget.py
+        self._build_ui()
+        self._update_forecast_labels()
+        self._apply_scene_from_current_forecast()
+
+    def _build_ui(self):
+        # Layout: left = canvas, right = controls
+        main = ttk.Frame(self.root, padding=10)
+        main.pack(fill="both", expand=True)
+
+        # Left canvas
+        canvas_frame
 """
 
 import tkinter as tk
