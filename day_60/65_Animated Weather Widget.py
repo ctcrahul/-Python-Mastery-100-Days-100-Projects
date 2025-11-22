@@ -50,6 +50,7 @@ import time
     def _create_sun(self):
         if self.sun_item is not None:
             return
+
         r = min(self.width, self.height) * 0.08
         cx = int(self.width * 0.15)
         cy = int(self.height * 0.2)
