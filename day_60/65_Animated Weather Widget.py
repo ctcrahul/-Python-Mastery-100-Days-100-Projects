@@ -23,7 +23,19 @@ import random
 import math
 import time
 
+        )
+        self._draw_vertical_gradient(top_color, bottom_color)
 
+        # horizon ground
+        ground_h = int(self.height * 0.25)
+        self.canvas.create_rectangle(
+            0, self.height - ground_h,
+            self.width, self.height,
+            fill="#4CAF50", outline=""
+        )
+
+        # add basic elements by condition
+        if self.current_co
 # ------------------ Mock Weather Data ------------------ #
 MOCK_FORECAST = [
     # city, day, condition, temp, high, low
