@@ -10,7 +10,38 @@ Single-file Python app with:
  - Mock 3-day forecast for a few cities
  - Smooth transitions when switching city/day
 
-Dependencies:
+Dependencies # Small footer info
+        self.info_label = ttk.Label(
+            right,
+            text="Mock data only.\nAnimations reflect each condition.",
+            font=("Segoe UI", 8),
+            foreground="#666666"
+        )
+        self.info_label.pack(anchor="w", pady=(4, 0))
+
+    # ---------------- Logic helpers ---------------- #
+    def _get_forecast_for(self, city):
+        rows = [r for r in MOCK_FORECAST if r[0] == city]
+        # ensure same order: Today, Tomorrow, Day After
+        sorted_rows = sorted(rows, key=lambda r: self.day_names.index(r[1]) if r[1] in self.day_names else 99)
+        return sorted_rows
+
+    def _current_forecast_row(self):
+        city = self.city_var.get()
+        rows = self._get_forecast_for(city)
+        if not rows:
+            return None
+        idx = min(self.current_day_index, len(rows)-1)
+        return rows[idx]
+
+    def _update_forecast_labels(self):
+        row = self._current_forecast_row()
+        if not row:
+            self.temp_label.config(text="--°C")
+            self.cond_label.config(text="")
+            self.range_label.config(text="")
+            return
+        city, day, cond, temp, high, low = 
     Only standard library (tkinter) – no extra installs.
 
 Run:
