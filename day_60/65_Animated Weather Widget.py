@@ -34,3 +34,11 @@ MOCK_FORECAST = [
     ("Bengaluru", "Today",     "Rainy",   24, 26, 20),
     ("Bengaluru", "Tomorrow",  "Cloudy",  25, 27, 21),
     ("Bengaluru", "Day After", "Sunny",   27, 29, 22),
+    ("Delhi", "Today",     "Haze",    30, 32, 25),
+    ("Delhi", "Tomorrow",  "Sunny",   32, 34, 26),
+    ("Delhi", "Day After", "Storm",   28, 30, 24),
+
+    ("Mumbai", "Today",     "Rainy",   28, 30, 25),
+    ("Mumbai", "Tomorrow",  "Rainy",   27, 29, 24),
+    ("Mumbai", "Day After", "Cloudy",  29, 31, 25),
+]
