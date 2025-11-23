@@ -47,3 +47,17 @@ class MemeApp:
 
         title = tk.Label(root, text="Video Meme Generator", font=("Arial", 16, "bold"))
         title.pack(pady=10)
+     self.status = tk.Label(root, text="No video loaded.", fg="blue")
+        self.status.pack()
+
+        # Upload video
+        tk.Button(root, text="Select Video", command=self.select_video, width=20).pack(pady=10)
+
+        # Text inputs
+        tk.Label(root, text="Top Text:").pack()
+        self.top_entry = tk.Entry(root, width=50)
+        self.top_entry.pack(pady=5)
+
+        tk.Label(root, text="Bottom Text:").pack()
+        self.bottom_entry = tk.Entry(root, width=50)
+        self.bottom_entry.pack(pady=5)
