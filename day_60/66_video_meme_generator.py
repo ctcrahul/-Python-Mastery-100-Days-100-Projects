@@ -11,7 +11,24 @@ def generate_meme(video_path, top_text, bottom_text, output_path):
     W, H = clip.size
      style = ttk.Style(root)
     try:
-        style.theme_use("clam")
+        style.theme_use("clam")cond = "Sunny"
+        self.scene.set_condition(scene_cond)
+
+    # ------------- Event handlers ------------- #
+    def _set_day_index(self, idx):
+        self.current_day_index = idx
+        self._update_forecast_labels()
+        self._apply_scene_from_current_forecast()
+
+    def _on_city_change(self):
+        self.current_day_index = 0
+        self._update_forecast_labels()
+        self._apply_scene_from_current_forecast()
+
+
+# ------------------ Run app ------------------ #
+if __name__ == "__main__":
+    root = tk.Tk()
     except Exception:
         pass
     style.configure("Selected.TButton", background="#1976D2", foreground="white")
