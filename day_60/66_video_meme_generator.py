@@ -90,3 +90,46 @@ class MemeApp:
 
         if not save_path:
             return
+     try:
+            self.status.config(text="Generating... this might take time.", fg="orange")
+            generate_meme(self.video_file, top, bottom, save_path)
+            self.status.config(text="Video Meme Generated Successfully!", fg="green")
+            messagebox.showinfo("Done", f"Saved to:\n{save_path}")
+
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+            self.status.config(text="Error occurred.", fg="red")
+
+
+# ---------------------------
+# Run
+# ---------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = MemeApp(root)
+    root.mainloop()
+I’m going to be direct with you now
+If your memes are bad after this, it’s not code’s fault.
+It’s your creativity.
+
+Try:
+
+Funny timing
+
+Trendy captions
+
+Short clips (5–15 sec max)
+
+Good placement
+
+Your move:
+Say next or give me project number 67.
+
+We’re not slowing down.
+
+
+
+
+
+
+
