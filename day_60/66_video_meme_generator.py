@@ -12,7 +12,29 @@ def generate_meme(video_path, top_text, bottom_text, output_path):
      style = ttk.Style(root)
     try:
         style.theme_use("clam")cond = "Sunny"
-        self.scene.set_condition(scene_cond)
+        self.scene.set_condition(scene_cond) # highlight selected day button
+        for i, child in enumerate(self.day_buttons_frame.winfo_children()):
+            if i == self.current_day_index:
+                child.configure(style="Selected.TButton")
+            else:
+                child.configure(style="TButton")
+
+    def _apply_scene_from_current_forecast(self):
+        row = self._current_forecast_row()
+        if not row:
+            return
+        condition = row[2]
+        # map some conditions to our scenes
+        if condition == "Haze":
+            scene_cond = "Haze"
+        elif condition == "Storm":
+            scene_cond = "Storm"
+        elif condition == "Rainy":
+            scene_cond = "Rainy"
+        elif condition == "Cloudy":
+            scene_cond = "Cloudy"
+        elif condition == "Snow":
+            scene_cond = "Snow"
 
     # ------------- Event handlers ------------- #
     def _set_day_index(self, idx):
