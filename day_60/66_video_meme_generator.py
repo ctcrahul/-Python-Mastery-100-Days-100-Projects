@@ -132,4 +132,48 @@ We’re not slowing down.
 
 
 
+    def select_video(self):
+        self.video_file = filedialog.askopenfilename(
+            filetypes=[("Video files", "*.mp4 *.avi *.mov *.mkv")])
+        if self.video_file:
+            self.status.config(text=f"Loaded: {os.path.basename(self.video_file)}", fg="green")
+
+    def generate(self):
+        if not self.video_file:
+            messagebox.showerror("Error", "Select a video first.")
+            return
+
+        top = self.top_entry.get()
+        bottom = self.bottom_entry.get()
+
+        if top == "" and bottom == "":
+            messagebox.showerror("Error", "Enter at least one text.")
+            return
+
+        save_path = filedialog.asksaveasfilename(
+            defaultextension=".mp4",
+            filetypes=[("MP4", "*.mp4")]
+        )
+
+        if not save_path:
+            return
+
+        try:
+            self.status.config(text="Generating... this might take time.", fg="orange")
+            generate_meme(self.video_file, top, bottom, save_path)
+            self.status.config(text="Video Meme Generated Successfully!", fg="green")
+            messagebox.showinfo("Done", f"Saved to:\n{save_path}")
+
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+            self.status.config(text="Error occurred.", fg="red")
+
+
+# ---------------------------
+# Run
+# ---------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = MemeApp(root)
+    root.mainloop()
 
