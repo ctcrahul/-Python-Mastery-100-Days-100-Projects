@@ -9,6 +9,18 @@ def generate_meme(video_path, top_text, bottom_text, output_path):
 
     clip = VideoFileClip(video_path)
     W, H = clip.size
+     style = ttk.Style(root)
+    try:
+        style.theme_use("clam")
+    except Exception:
+        pass
+    style.configure("Selected.TButton", background="#1976D2", foreground="white")
+    style.map("Selected.TButton",
+              background=[("active", "#1565C0")],
+              foreground=[("active", "white")])
+
+    app = WeatherWid
+
 
     def make_text(txt, pos_y):
         return (TextClip(txt,
