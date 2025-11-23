@@ -61,3 +61,32 @@ class MemeApp:
         tk.Label(root, text="Bottom Text:").pack()
         self.bottom_entry = tk.Entry(root, width=50)
         self.bottom_entry.pack(pady=5)
+
+      # Generate button
+        tk.Button(root, text="Generate Meme Video", command=self.generate, bg="black", fg="white", width=25).pack(pady=20)
+
+    def select_video(self):
+        self.video_file = filedialog.askopenfilename(
+            filetypes=[("Video files", "*.mp4 *.avi *.mov *.mkv")])
+        if self.video_file:
+            self.status.config(text=f"Loaded: {os.path.basename(self.video_file)}", fg="green")
+
+    def generate(self):
+        if not self.video_file:
+            messagebox.showerror("Error", "Select a video first.")
+            return
+
+        top = self.top_entry.get()
+        bottom = self.bottom_entry.get()
+
+        if top == "" and bottom == "":
+            messagebox.showerror("Error", "Enter at least one text.")
+            return
+
+        save_path = filedialog.asksaveasfilename(
+            defaultextension=".mp4",
+            filetypes=[("MP4", "*.mp4")]
+        )
+
+        if not save_path:
+            return
