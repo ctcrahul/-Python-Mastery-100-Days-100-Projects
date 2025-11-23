@@ -34,3 +34,16 @@ def generate_meme(video_path, top_text, bottom_text, output_path):
         codec="libx264",
         audio_codec="aac"
     )
+# ---------------------------
+# GUI Application
+# ---------------------------
+class MemeApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Video Meme Generator")
+        self.root.geometry("600x400")
+
+        self.video_file = None
+
+        title = tk.Label(root, text="Video Meme Generator", font=("Arial", 16, "bold"))
+        title.pack(pady=10)
