@@ -39,7 +39,9 @@ def generate_fake_tweets(stock, n=200):
         timestamp = pd.Timestamp.now() - pd.Timedelta(minutes=random.randint(0, 600))
         tweets.append([timestamp, text])
     return pd.DataFrame(tweets, columns=["Time", "Tweet"])
- ----------------------------
+
+
+# ----------------------------
 # Sentiment Analyzer (Rule-Based)
 # ----------------------------
 def calculate_sentiment(tweet):
@@ -92,6 +94,8 @@ def visualize_sentiment(stock):
     plt.ylabel("Avg Sentiment")
     plt.tight_layout()
     plt.show()
+
+
 # ----------------------------
 # GUI App
 # ----------------------------
@@ -139,4 +143,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = StockSentimentApp(root)
     root.mainloop()
-
