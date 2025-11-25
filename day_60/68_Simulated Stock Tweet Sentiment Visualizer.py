@@ -92,4 +92,51 @@ def visualize_sentiment(stock):
     plt.ylabel("Avg Sentiment")
     plt.tight_layout()
     plt.show()
+# ----------------------------
+# GUI App
+# ----------------------------
+class StockSentimentApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Stock Tweet Sentiment Visualizer")
+        self.root.geometry("450x300")
+
+        title = tk.Label(root, text="Stock Tweet Sentiment Simulator",
+                         font=("Arial", 14, "bold"))
+        title.pack(pady=15)
+
+        tk.Label(root, text="Select Stock Ticker:").pack(pady=5)
+
+        self.stock_var = tk.StringVar(value=TICKERS[0])
+
+        self.dropdown = ttk.Combobox(root, textvariable=self.stock_var,
+                                     values=TICKERS, state="readonly")
+        self.dropdown.pack(pady=5)
+
+        self.generate_btn = tk.Button(root,
+                                      text="Generate Sentiment Analysis",
+                                      command=self.run_simulation,
+                                      bg="black", fg="white", width=28)
+        self.generate_btn.pack(pady=20)
+
+        self.status = tk.Label(root, text="", fg="green")
+        self.status.pack()
+
+    def run_simulation(self):
+        stock = self.stock_var.get()
+
+        self.status.config(text="Simulating tweets & generating graphs...")
+
+        visualize_sentiment(stock)
+
+        self.status.config(text="Done! Check graphs.")
+
+
+# ----------------------------
+# Run Application
+# ----------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StockSentimentApp(root)
+    root.mainloop()
 
