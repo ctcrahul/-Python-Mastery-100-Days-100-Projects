@@ -104,3 +104,45 @@ class NeonGeneratorApp:
         return None
 
 
+  def setup_ui(self):
+        left = ttk.Frame(self.root, padding=10)
+        left.pack(side="left", fill="y")
+
+        right = ttk.Frame(self.root, padding=10)
+        right.pack(side="right", fill="both", expand=True)
+
+        # Title
+        ttk.Label(left, text="Neon Sign Controls", font=("Segoe UI", 14, "bold")).pack(pady=5)
+
+        # Text input
+        ttk.Label(left, text="Your Text").pack(anchor="w")
+        self.text_entry = tk.Entry(left, width=25)
+        self.text_entry.insert(0, "HELLO WORLD")
+        self.text_entry.pack(pady=5)
+
+        # Font size
+        ttk.Label(left, text="Font Size").pack(anchor="w")
+        self.font_size = tk.IntVar(value=120)
+        ttk.Scale(left, from_=40, to=200, variable=self.font_size, orient="horizontal").pack(fill="x")
+
+        # Blur
+        ttk.Label(left, text="Glow Blur").pack(anchor="w")
+        self.blur_radius = tk.IntVar(value=25)
+        ttk.Scale(left, from_=5, to=70, variable=self.blur_radius, orient="horizontal").pack(fill="x")
+
+        # Glow strength
+        ttk.Label(left, text="Glow Strength").pack(anchor="w")
+        self.glow_layers = tk.IntVar(value=8)
+        ttk.Scale(left, from_=2, to=15, variable=self.glow_layers, orient="horizontal").pack(fill="x")
+
+        # Flicker option
+        self.flicker_var = tk.BooleanVar(value=False)
+        ttk.Checkbutton(left, text="Enable Flicker Effect", variable=self.flicker_var).pack(pady=10)
+
+        # Colors
+        ttk.Button(left, text="Text Color", command=self.pick_text_color).pack(fill="x", pady=2)
+        ttk.Button(left, text="Glow Color", command=self.pick_glow_color).pack(fill="x", pady=2)
+        ttk.Button(left, text="Background Color", command=self.pick_bg_color).pack(fill="x", pady=2)
+
+        ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
+
