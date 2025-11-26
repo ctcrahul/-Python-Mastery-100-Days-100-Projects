@@ -23,7 +23,8 @@ def generate_neon_image(
     """
     Creates a neon glowing text image.
     """
-   # Canvas size (dynamic based on text)
+
+    # Canvas size (dynamic based on text)
     padding = 80
     temp_img = Image.new("RGBA", (2000, 500), (0, 0, 0, 0))
     draw = ImageDraw.Draw(temp_img)
@@ -103,8 +104,7 @@ class NeonGeneratorApp:
                 return f
         return None
 
-
-  def setup_ui(self):
+    def setup_ui(self):
         left = ttk.Frame(self.root, padding=10)
         left.pack(side="left", fill="y")
 
@@ -145,7 +145,8 @@ class NeonGeneratorApp:
         ttk.Button(left, text="Background Color", command=self.pick_bg_color).pack(fill="x", pady=2)
 
         ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
-      # Generate + Save
+
+        # Generate + Save
         ttk.Button(left, text="Generate Neon", command=self.generate).pack(fill="x", pady=5)
         ttk.Button(left, text="Save Image", command=self.save_image).pack(fill="x", pady=5)
 
@@ -169,10 +170,9 @@ class NeonGeneratorApp:
     def pick_bg_color(self):
         color = colorchooser.askcolor(initialcolor=self.bg_color)[1]
         if color:
-            self.bg_co
+            self.bg_color = color
 
-
- def generate(self):
+    def generate(self):
         if not self.font_path:
             tk.messagebox.showerror("Error", "Font not found on your system.")
             return
@@ -221,4 +221,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = NeonGeneratorApp(root)
     root.mainloop()
-
