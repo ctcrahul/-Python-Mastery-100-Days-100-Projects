@@ -23,3 +23,53 @@ def generate_neon_image(
     """
     Creates a neon glowing text image.
     """
+   # Canvas size (dynamic based on text)
+    padding = 80
+    temp_img = Image.new("RGBA", (2000, 500), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(temp_img)
+
+    font = ImageFont.truetype(font_path, font_size)
+
+    bbox = draw.textbbox((0, 0), text, font=font)
+    w = bbox[2] - bbox[0]
+    h = bbox[3] - bbox[1]
+
+    img_w = w + padding * 2
+    img_h = h + padding * 2
+
+    img = Image.new("RGBA", (img_w, img_h), bg_color)
+    draw = ImageDraw.Draw(img)
+
+    x = padding
+    y = padding
+
+    # Glow layers
+    glow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow)
+
+    for i in range(glow_layers):
+        offset = i * 2
+
+        # Flicker effect
+        if flicker:
+            flicker_offset = random.randint(-2, 2)
+        else:
+            flicker_offset = 0
+
+        glow_draw.text(
+            (x + flicker_offset, y + flicker_offset),
+            text,
+            font=font,
+            fill=glow_color
+        )
+
+        glow = glow.filter(ImageFilter.GaussianBlur(blur_radius))
+
+    # Draw glow onto image
+    img = Image.alpha_composite(img, glow)
+
+    # Main text
+    draw = ImageDraw.Draw(img)
+    draw.text((x, y), text, font=font, fill=text_color)
+
+    return img
