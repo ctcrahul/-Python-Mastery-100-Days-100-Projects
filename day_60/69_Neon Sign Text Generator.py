@@ -170,3 +170,55 @@ class NeonGeneratorApp:
         color = colorchooser.askcolor(initialcolor=self.bg_color)[1]
         if color:
             self.bg_co
+
+
+ def generate(self):
+        if not self.font_path:
+            tk.messagebox.showerror("Error", "Font not found on your system.")
+            return
+
+        text = self.text_entry.get()
+
+        img = generate_neon_image(
+            text=text,
+            font_path=self.font_path,
+            font_size=self.font_size.get(),
+            text_color=self.text_color,
+            glow_color=self.glow_color,
+            bg_color=self.bg_color,
+            blur_radius=self.blur_radius.get(),
+            glow_layers=self.glow_layers.get(),
+            flicker=self.flicker_var.get()
+        )
+
+        self.current_image = img
+
+        # Resize for preview
+        preview = img.copy()
+        preview.thumbnail((700, 500))
+        self.tk_image = tk.PhotoImage(preview.convert("RGB"))
+
+        self.preview_label.config(image=self.tk_image)
+
+    def save_image(self):
+        if self.current_image is None:
+            return
+
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".png",
+            filetypes=[("PNG Image", "*.png")]
+        )
+
+        if file_path:
+            self.current_image.save(file_path)
+
+
+# --------------------------
+# Run
+# --------------------------
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = NeonGeneratorApp(root)
+    root.mainloop()
+
