@@ -145,4 +145,28 @@ class NeonGeneratorApp:
         ttk.Button(left, text="Background Color", command=self.pick_bg_color).pack(fill="x", pady=2)
 
         ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
+      # Generate + Save
+        ttk.Button(left, text="Generate Neon", command=self.generate).pack(fill="x", pady=5)
+        ttk.Button(left, text="Save Image", command=self.save_image).pack(fill="x", pady=5)
 
+        # Preview area
+        self.preview_label = tk.Label(right, bg="#000000")
+        self.preview_label.pack(fill="both", expand=True)
+
+        self.current_image = None
+        self.tk_image = None
+
+    def pick_text_color(self):
+        color = colorchooser.askcolor(initialcolor=self.text_color)[1]
+        if color:
+            self.text_color = color
+
+    def pick_glow_color(self):
+        color = colorchooser.askcolor(initialcolor=self.glow_color)[1]
+        if color:
+            self.glow_color = color
+
+    def pick_bg_color(self):
+        color = colorchooser.askcolor(initialcolor=self.bg_color)[1]
+        if color:
+            self.bg_co
