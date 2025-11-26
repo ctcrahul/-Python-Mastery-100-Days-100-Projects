@@ -73,3 +73,34 @@ def generate_neon_image(
     draw.text((x, y), text, font=font, fill=text_color)
 
     return img
+
+# --------------------------
+# GUI App
+# --------------------------
+
+class NeonGeneratorApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Neon Sign Text Generator")
+        self.root.geometry("1100x650")
+
+        self.font_path = self.get_default_font()
+        self.text_color = "#ffffff"
+        self.glow_color = "#ff00ff"
+        self.bg_color = "#000000"
+
+        self.setup_ui()
+
+    def get_default_font(self):
+        # Try common fonts gracefully
+        possible_fonts = [
+            "arial.ttf",
+            "Arial.ttf",
+            "C:\\Windows\\Fonts\\arial.ttf"
+        ]
+        for f in possible_fonts:
+            if os.path.exists(f):
+                return f
+        return None
+
+
