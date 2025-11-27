@@ -146,3 +146,22 @@ class DrumBeatApp:
 
 
 
+# -------------------------------
+# Load Sounds
+# -------------------------------
+
+kick_sound = generate_kick()
+snare_sound = generate_snare()
+hihat_sound = generate_hihat()
+
+# -------------------------------
+# Run
+# -------------------------------
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = DrumBeatApp(root)
+    root.mainloop()
+
+
+
