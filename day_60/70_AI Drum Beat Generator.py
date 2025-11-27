@@ -115,4 +115,34 @@ class DrumBeatApp:
 
 
 
+   def generate_and_play(self):
+        pattern = generate_pattern(complexity=self.complexity.get())
+        wave = build_beat(pattern, self.bpm.get())
+        self.last_wave = wave
+
+        self.status.config(text="Playing beat...")
+        play_sound(wave)
+        self.status.config(text="Done")
+
+    def export_wav(self):
+        if self.last_wave is None:
+            self.status.config(text="No beat generated yet")
+            return
+
+        file_path = filedialog.asksaveasfilename(defaultextension=".wav")
+        if not file_path:
+            return
+
+        audio = (self.last_wave * 32767).astype(np.int16)
+
+        import wave
+        with wave.open(file_path, "w") as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(2)
+            wf.setframerate(SAMPLE_RATE)
+            wf.writeframes(audio.tobytes())
+
+        self.status.config(text=f"Saved to {file_path}")
+
+
 
