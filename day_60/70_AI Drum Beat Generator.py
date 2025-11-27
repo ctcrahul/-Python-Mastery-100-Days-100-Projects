@@ -74,4 +74,45 @@ def build_beat(pattern, bpm):
         final_wave /= max_val
 
     return final_wave
-    
+
+
+# -------------------------------
+# Audio Play
+# -------------------------------
+
+def play_sound(wave):
+    audio = (wave * 32767).astype(np.int16)
+    sa.play_buffer(audio, 1, 2, SAMPLE_RATE).wait_done()
+
+# -------------------------------
+# GUI App
+# -------------------------------
+
+class DrumBeatApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("AI Drum Beat Generator")
+        self.root.geometry("500x400")
+
+        self.bpm = tk.IntVar(value=120)
+        self.complexity = tk.IntVar(value=3)
+
+        ttk.Label(root, text="AI Drum Beat Generator", font=("Arial", 14, "bold")).pack(pady=10)
+
+        ttk.Label(root, text="Tempo (BPM)").pack()
+        ttk.Scale(root, from_=60, to=200, variable=self.bpm).pack(fill="x", padx=20)
+
+        ttk.Label(root, text="Pattern Complexity").pack()
+        ttk.Scale(root, from_=1, to=10, variable=self.complexity).pack(fill="x", padx=20)
+
+        ttk.Button(root, text="Generate & Play", command=self.generate_and_play).pack(pady=20)
+        ttk.Button(root, text="Export as WAV", command=self.export_wav).pack(pady=5)
+
+        self.status = ttk.Label(root, text="", foreground="green")
+        self.status.pack()
+
+        self.last_wave = None
+
+
+
+
