@@ -30,7 +30,7 @@ def generate_hihat(duration=0.05):
     envelope = np.exp(-25 * t)
     return high_pass * envelope
 
- -------------------------------
+# -------------------------------
 # Beat Generator
 # -------------------------------
 
@@ -75,7 +75,6 @@ def build_beat(pattern, bpm):
 
     return final_wave
 
-
 # -------------------------------
 # Audio Play
 # -------------------------------
@@ -113,9 +112,7 @@ class DrumBeatApp:
 
         self.last_wave = None
 
-
-
-   def generate_and_play(self):
+    def generate_and_play(self):
         pattern = generate_pattern(complexity=self.complexity.get())
         wave = build_beat(pattern, self.bpm.get())
         self.last_wave = wave
@@ -144,8 +141,6 @@ class DrumBeatApp:
 
         self.status.config(text=f"Saved to {file_path}")
 
-
-
 # -------------------------------
 # Load Sounds
 # -------------------------------
@@ -162,6 +157,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = DrumBeatApp(root)
     root.mainloop()
-
-
-
