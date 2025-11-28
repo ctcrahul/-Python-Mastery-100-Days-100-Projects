@@ -76,4 +76,72 @@ RECIPES = [
         "ingredients": ["pasta", "garlic", "butter", "cheese"],
         "notes": "Minimal ingredients. Heavy on comfort, light on effort."
     },
+    {   "name": "Spicy Schezwan Noodles",
+        "cuisine": "Asian",
+        "veg": True,
+        "time": 25,
+        "difficulty": "Medium",
+        "tags": ["spicy", "street-style", "fun"],
+        "ingredients": ["noodles", "schezwan sauce", "veggies"],
+        "notes": "Pretty loud on flavour. Not for a ‘light’ mood."
+    },
     {
+        "name": "Grilled Chicken Bowl",
+        "cuisine": "Fusion",
+        "veg": False,
+        "time": 35,
+        "difficulty": "Medium",
+        "tags": ["protein", "light", "healthy"],
+        "ingredients": ["chicken", "rice", "veggies", "yogurt"],
+        "notes": "High protein, low nonsense. Good if you pretend to be disciplined."
+    },
+    {
+        "name": "Egg Bhurji with Toast",
+        "cuisine": "Indian",
+        "veg": False,
+        "time": 15,
+        "difficulty": "Easy",
+        "tags": ["quick", "protein", "comfort", "breakfast-for-dinner"],
+        "ingredients": ["eggs", "onion", "tomato", "bread"],
+        "notes": "Lazy, fast, and secretly pretty high in protein."
+    },
+    {
+        "name": "Chole Rice Bowl",
+        "cuisine": "Indian",
+        "veg": True,
+        "time": 40,
+        "difficulty": "Medium",
+        "tags": ["comfort", "heavy", "spicy", "weekend"],
+        "ingredients": ["chickpeas", "onion", "tomato", "spices", "rice"],
+        "notes": "Not ideal for late-night if you want to sleep, but great comfort food."
+    },
+    {
+        "name": "Tomato Basil Soup with Toast",
+        "cuisine": "Italian",
+        "veg": True,
+        "time": 30,
+        "difficulty": "Easy",
+        "tags": ["light", "comfort", "evening"],
+        "ingredients": ["tomatoes", "onion", "garlic", "basil", "bread"],
+        "notes": "For when you want to feel like you have your life together."
+    },
+    {
+        "name": "Curd Rice with Tempering",
+        "cuisine": "South Indian",
+        "veg": True,
+        "time": 20,
+        "difficulty": "Easy",
+        "tags": ["light", "comfort", "summer"],
+        "ingredients": ["rice", "curd", "mustard seeds", "chilies"],
+        "notes": "Ideal when your stomach is done with your bad decisions."
+    },
+    {
+        "name": "Tandoori Chicken (Oven / Airfryer)",
+        "cuisine": "Indian",
+        "veg": False,
+        "time": 45,
+        "difficulty": "Medium",
+        "tags": ["spicy", "protein", "weekend", "party"],
+        "ingredients": ["chicken", "yogurt", "spices"],
+        "notes": "Takes time to marinate & cook, but feels like a reward."
+    },
