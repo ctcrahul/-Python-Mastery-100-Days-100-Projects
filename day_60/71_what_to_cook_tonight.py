@@ -25,6 +25,7 @@ import textwrap
 # ----------------------------
 # Recipe "database"
 # ----------------------------
+
 RECIPES = [
     {
         "name": "Masala Maggi Upgrade",
@@ -76,7 +77,8 @@ RECIPES = [
         "ingredients": ["pasta", "garlic", "butter", "cheese"],
         "notes": "Minimal ingredients. Heavy on comfort, light on effort."
     },
-    {   "name": "Spicy Schezwan Noodles",
+    {
+        "name": "Spicy Schezwan Noodles",
         "cuisine": "Asian",
         "veg": True,
         "time": 25,
@@ -145,7 +147,7 @@ RECIPES = [
         "ingredients": ["chicken", "yogurt", "spices"],
         "notes": "Takes time to marinate & cook, but feels like a reward."
     },
-  {
+    {
         "name": "One-Pan Veg Cheesy Quesadilla",
         "cuisine": "Mexican",
         "veg": True,
@@ -178,6 +180,7 @@ MOOD_TAGS = {
 # ----------------------------
 # Scoring logic
 # ----------------------------
+
 def score_recipe(recipe, prefs):
     """
     Higher score = better match.
@@ -211,6 +214,7 @@ def score_recipe(recipe, prefs):
         reasons.append("veg dish but you selected non-veg")
     elif prefs["veg_pref"] != "Any":
         score += 1
+
     # Cuisine
     if prefs["cuisine"] != "Any":
         if recipe["cuisine"] == prefs["cuisine"]:
@@ -243,6 +247,7 @@ def recommend_recipes(prefs, top_n=3):
 
     scored.sort(key=lambda x: x[0], reverse=True)
     return scored[:top_n]
+
 
 # ----------------------------
 # GUI
@@ -292,8 +297,7 @@ class CookTonightApp:
 
         ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
 
-        t
-       ttk.Button(left, text="Recommend", command=self.on_recommend).pack(fill="x", pady=(0, 5))
+        ttk.Button(left, text="Recommend", command=self.on_recommend).pack(fill="x", pady=(0, 5))
         ttk.Button(left, text="Random Surprise", command=self.on_surprise).pack(fill="x")
 
         self.status_var = tk.StringVar(value="Set your mood and time, then click Recommend.")
@@ -352,7 +356,9 @@ class CookTonightApp:
             "mood": "Any",
         }
         results = recommend_recipes(prefs, top_n=1)
-        self._display_results(results, prefs, surprise=True)  def _display_results(self, results, prefs, surprise=False):
+        self._display_results(results, prefs, surprise=True)
+
+    def _display_results(self, results, prefs, surprise=False):
         self.results_text.delete("1.0", "end")
 
         if not results:
@@ -396,4 +402,27 @@ class CookTonightApp:
         wrapped_notes = textwrap.fill(recipe["notes"], width=80)
         self.results_text.insert("end", f"   Note: {wrapped_notes}\n\n", ("notes",))
 
-    def _show_intro_message(sel
+    def _show_intro_message(self):
+        intro = (
+            "This is not Swiggy.\n"
+            "You still have to cook.\n\n"
+            "Set how much energy and time you actually have,\n"
+            "tell me your mood, and I'll suggest recipes that roughly match.\n\n"
+            "No fake magic, just filters + scoring + a bit of randomness.\n"
+        )
+        self.results_text.insert("end", intro)
+
+
+# ----------------------------
+# Run
+# ----------------------------
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    style = ttk.Style(root)
+    try:
+        style.theme_use("clam")
+    except Exception:
+        pass
+    app = CookTonightApp(root)
+    root.mainloop()
