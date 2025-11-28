@@ -352,4 +352,48 @@ class CookTonightApp:
             "mood": "Any",
         }
         results = recommend_recipes(prefs, top_n=1)
-        self._display_results(results, prefs, surprise=True)
+        self._display_results(results, prefs, surprise=True)  def _display_results(self, results, prefs, surprise=False):
+        self.results_text.delete("1.0", "end")
+
+        if not results:
+            self.results_text.insert("end", "No recipes found. Impressive, you broke the toy.\n")
+            return
+
+        if surprise:
+            header = "🎲 Random-ish Surprise Pick\n\n"
+        else:
+            header = "Here’s what makes sense given what you chose:\n\n"
+        self.results_text.insert("end", header)
+
+        for idx, (score, recipe, reasons) in enumerate(results, start=1):
+            self._insert_recipe_block(idx, score, recipe, reasons, prefs)
+
+        if prefs["time_limit"] is None:
+            self.status_var.set("Tip: set a time limit so I stop recommending 45-min projects when you're half-dead.")
+        else:
+            self.status_var.set("Change mood / cuisine / time and hit Recommend again.")
+
+    def _insert_recipe_block(self, idx, score, recipe, reasons, prefs):
+        name = recipe["name"]
+        meta = f"{recipe['cuisine']} · {'Veg' if recipe['veg'] else 'Non-veg'} · {recipe['time']} min · {recipe['difficulty']}"
+
+        self.results_text.insert("end", f"{idx}. {name}\n", ("title",))
+        self.results_text.insert("end", f"   {meta}\n", ("meta",))
+
+        # reasons
+        if reasons:
+            self.results_text.insert("end", "   Why this shows up for you:\n")
+            for r in reasons:
+                self.results_text.insert("end", f"    • {r}\n", ("reason",))
+        else:
+            self.results_text.insert("end", "   This one is mostly here because I had to fill the list.\n", ("reason",))
+
+        # ingredients
+        ing = ", ".join(recipe["ingredients"])
+        self.results_text.insert("end", f"   Ingredients vibe: {ing}\n", ("bullet",))
+
+        # notes
+        wrapped_notes = textwrap.fill(recipe["notes"], width=80)
+        self.results_text.insert("end", f"   Note: {wrapped_notes}\n\n", ("notes",))
+
+    def _show_intro_message(sel
