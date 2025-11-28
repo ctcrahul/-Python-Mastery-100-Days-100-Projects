@@ -145,3 +145,36 @@ RECIPES = [
         "ingredients": ["chicken", "yogurt", "spices"],
         "notes": "Takes time to marinate & cook, but feels like a reward."
     },
+  {
+        "name": "One-Pan Veg Cheesy Quesadilla",
+        "cuisine": "Mexican",
+        "veg": True,
+        "time": 20,
+        "difficulty": "Easy",
+        "tags": ["cheesy", "fun", "handheld"],
+        "ingredients": ["tortilla/roti", "cheese", "veggies"],
+        "notes": "Ideal for movie night, not for dieting."
+    },
+    {
+        "name": "Overnight Oats (Prep for Tomorrow)",
+        "cuisine": "Western",
+        "veg": True,
+        "time": 10,
+        "difficulty": "Very Easy",
+        "tags": ["light", "prep-ahead", "healthy"],
+        "ingredients": ["oats", "milk/curd", "fruits"],
+        "notes": "Technically ‘cooking’, but zero gas stove involved."
+    },
+]
+
+MOOD_TAGS = {
+    "Comfort / Heavy": ["comfort", "cheesy", "heavy"],
+    "Light / Healthy": ["light", "healthy", "prep-ahead"],
+    "Spicy / Intense": ["spicy", "street-style"],
+    "Experimental / Fun": ["fun", "handheld", "student"]
+}
+
+
+# ----------------------------
+# Scoring logic
+# ----------------------------
