@@ -178,3 +178,36 @@ MOOD_TAGS = {
 # ----------------------------
 # Scoring logic
 # ----------------------------
+def score_recipe(recipe, prefs):
+    """
+    Higher score = better match.
+    prefs = {
+        'time_limit': int,
+        'veg_pref': 'Any'|'Veg'|'Non-veg',
+        'cuisine': 'Any' or string,
+        'mood': key from MOOD_TAGS or 'Any'
+    }
+    """
+    score = 0
+    reasons = []
+
+    # Time: penalize if over limit
+    if prefs["time_limit"] is not None:
+        if recipe["time"] <= prefs["time_limit"]:
+            # closer to limit gets slightly less reward than very quick
+            score += 3
+            reasons.append(f"fits your time ({recipe['time']} min ≤ {prefs['time_limit']} min)")
+        else:
+            # soft penalty
+            score -= 3
+            reasons.append(f"takes longer than your time ({recipe['time']} min)")
+
+    # Veg preference
+    if prefs["veg_pref"] == "Veg" and not recipe["veg"]:
+        score -= 100  # hard block
+        reasons.append("non-veg but you chose veg")
+    elif prefs["veg_pref"] == "Non-veg" and recipe["veg"]:
+        score -= 15   # strong penalty but still possible
+        reasons.append("veg dish but you selected non-veg")
+    elif prefs["veg_pref"] != "Any":
+        score += 1
