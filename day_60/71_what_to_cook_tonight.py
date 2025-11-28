@@ -25,3 +25,55 @@ import textwrap
 # ----------------------------
 # Recipe "database"
 # ----------------------------
+RECIPES = [
+    {
+        "name": "Masala Maggi Upgrade",
+        "cuisine": "Indian",
+        "veg": True,
+        "time": 15,
+        "difficulty": "Easy",
+        "tags": ["quick", "spicy", "comfort", "student", "cheap"],
+        "ingredients": ["maggi", "onion", "tomato", "green chili", "masala"],
+        "notes": "Your classic hostel hack, but slightly upgraded with veggies and extra spices."
+    },
+    {
+        "name": "Simple Dal Tadka",
+        "cuisine": "Indian",
+        "veg": True,
+        "time": 30,
+        "difficulty": "Easy",
+        "tags": ["comfort", "light", "home-style", "protein"],
+        "ingredients": ["lentils", "ghee", "garlic", "onion", "tomato", "spices"],
+        "notes": "Classic comfort bowl. Easy, filling, and safe choice on a tired day."
+    },
+    {
+        "name": "Paneer Bhurji Wrap",
+        "cuisine": "Indian",
+        "veg": True,
+        "time": 25,
+        "difficulty": "Medium",
+        "tags": ["protein", "spicy", "handheld", "fun"],
+        "ingredients": ["paneer", "onion", "capsicum", "tortilla/roti"],
+        "notes": "Takes bhurji and turns it into a portable wrap."
+    },
+    {
+        "name": "Veg Fried Rice",
+        "cuisine": "Asian",
+        "veg": True,
+        "time": 25,
+        "difficulty": "Easy",
+        "tags": ["quick", "one-pot", "light"],
+        "ingredients": ["rice", "mixed veggies", "soy sauce", "garlic"],
+        "notes": "Good way to use leftover rice. Light but satisfying."
+    },
+    {
+        "name": "Garlic Butter Pasta",
+        "cuisine": "Italian",
+        "veg": True,
+        "time": 20,
+        "difficulty": "Easy",
+        "tags": ["comfort", "creamy", "quick"],
+        "ingredients": ["pasta", "garlic", "butter", "cheese"],
+        "notes": "Minimal ingredients. Heavy on comfort, light on effort."
+    },
+    {
