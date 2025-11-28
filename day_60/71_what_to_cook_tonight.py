@@ -244,3 +244,52 @@ def recommend_recipes(prefs, top_n=3):
     scored.sort(key=lambda x: x[0], reverse=True)
     return scored[:top_n]
 
+# ----------------------------
+# GUI
+# ----------------------------
+
+class CookTonightApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title('"What to cook tonight?" – Mini Recommender')
+        self.root.geometry("900x600")
+        self.root.minsize(850, 550)
+
+        self._build_ui()
+
+    def _build_ui(self):
+        main = ttk.Frame(self.root, padding=10)
+        main.pack(fill="both", expand=True)
+
+        # Left: preferences
+        left = ttk.Frame(main, width=260)
+        left.pack(side="left", fill="y")
+        left.pack_propagate(False)
+
+        ttk.Label(left, text='What to cook tonight?', font=("Segoe UI", 14, "bold")).pack(anchor="w", pady=(0, 10))
+
+        ttk.Label(left, text="Time available (minutes)").pack(anchor="w")
+        self.time_var = tk.StringVar(value="30")
+        ttk.Entry(left, textvariable=self.time_var, width=10).pack(anchor="w", pady=(0, 8))
+
+        ttk.Label(left, text="Veg / Non-veg").pack(anchor="w")
+        self.veg_var = tk.StringVar(value="Any")
+        ttk.Radiobutton(left, text="Any", value="Any", variable=self.veg_var).pack(anchor="w")
+        ttk.Radiobutton(left, text="Veg only", value="Veg", variable=self.veg_var).pack(anchor="w")
+        ttk.Radiobutton(left, text="Non-veg focus", value="Non-veg", variable=self.veg_var).pack(anchor="w")
+
+        ttk.Label(left, text="Cuisine preference", padding=(0, 8, 0, 0)).pack(anchor="w")
+        cuisines = ["Any"] + sorted({r["cuisine"] for r in RECIPES})
+        self.cuisine_var = tk.StringVar(value="Any")
+        ttk.Combobox(left, textvariable=self.cuisine_var, values=cuisines,
+                     state="readonly", width=18).pack(anchor="w", pady=(0, 8))
+
+        ttk.Label(left, text="Mood", padding=(0, 8, 0, 0)).pack(anchor="w")
+        mood_opts = ["Any"] + list(MOOD_TAGS.keys())
+        self.mood_var = tk.StringVar(value="Any")
+        ttk.Combobox(left, textvariable=self.mood_var, values=mood_opts,
+                     state="readonly", width=22).pack(anchor="w")
+
+        ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
+
+        t
