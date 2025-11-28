@@ -211,3 +211,36 @@ def score_recipe(recipe, prefs):
         reasons.append("veg dish but you selected non-veg")
     elif prefs["veg_pref"] != "Any":
         score += 1
+    # Cuisine
+    if prefs["cuisine"] != "Any":
+        if recipe["cuisine"] == prefs["cuisine"]:
+            score += 4
+            reasons.append(f"matches cuisine: {recipe['cuisine']}")
+        else:
+            score -= 1
+
+    # Mood
+    if prefs["mood"] != "Any":
+        desired_tags = MOOD_TAGS.get(prefs["mood"], [])
+        matches = set(recipe["tags"]).intersection(desired_tags)
+        if matches:
+            score += 4 + len(matches)
+            reasons.append(f"fits mood: {', '.join(matches)}")
+        else:
+            score -= 1
+
+    # Small randomness so results aren't identical every time
+    score += random.uniform(-0.5, 0.5)
+
+    return score, reasons
+
+
+def recommend_recipes(prefs, top_n=3):
+    scored = []
+    for r in RECIPES:
+        s, reasons = score_recipe(r, prefs)
+        scored.append((s, r, reasons))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return scored[:top_n]
+
