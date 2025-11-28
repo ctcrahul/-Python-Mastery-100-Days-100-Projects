@@ -293,3 +293,63 @@ class CookTonightApp:
         ttk.Separator(left, orient="horizontal").pack(fill="x", pady=10)
 
         t
+       ttk.Button(left, text="Recommend", command=self.on_recommend).pack(fill="x", pady=(0, 5))
+        ttk.Button(left, text="Random Surprise", command=self.on_surprise).pack(fill="x")
+
+        self.status_var = tk.StringVar(value="Set your mood and time, then click Recommend.")
+        ttk.Label(left, textvariable=self.status_var, wraplength=230, foreground="#666").pack(anchor="w", pady=(10, 0))
+
+        # Right: results
+        right = ttk.Frame(main)
+        right.pack(side="right", fill="both", expand=True)
+
+        ttk.Label(right, text="Suggestions", font=("Segoe UI", 12, "bold")).pack(anchor="w")
+
+        self.results_text = tk.Text(right, wrap="word", font=("Consolas", 10))
+        self.results_text.pack(fill="both", expand=True, pady=(4, 0))
+
+        # configure tags for styling
+        self.results_text.tag_configure("title", font=("Segoe UI", 11, "bold"))
+        self.results_text.tag_configure("meta", foreground="#888")
+        self.results_text.tag_configure("bullet", foreground="#333")
+        self.results_text.tag_configure("reason", foreground="#1565C0")
+        self.results_text.tag_configure("notes", foreground="#4E342E")
+
+        # show initial hint
+        self._show_intro_message()
+
+    def _parse_time_limit(self):
+        raw = self.time_var.get().strip()
+        if not raw:
+            return None
+        try:
+            val = int(raw)
+            if val <= 0:
+                return None
+            return val
+        except ValueError:
+            return None
+
+    def on_recommend(self):
+        time_limit = self._parse_time_limit()
+        prefs = {
+            "time_limit": time_limit,
+            "veg_pref": self.veg_var.get(),
+            "cuisine": self.cuisine_var.get(),
+            "mood": self.mood_var.get(),
+        }
+
+        results = recommend_recipes(prefs, top_n=3)
+        self._display_results(results, prefs)
+
+    def on_surprise(self):
+        # Ignore most filters, just favour time and veg
+        time_limit = self._parse_time_limit()
+        prefs = {
+            "time_limit": time_limit,
+            "veg_pref": self.veg_var.get(),
+            "cuisine": "Any",
+            "mood": "Any",
+        }
+        results = recommend_recipes(prefs, top_n=1)
+        self._display_results(results, prefs, surprise=True)
