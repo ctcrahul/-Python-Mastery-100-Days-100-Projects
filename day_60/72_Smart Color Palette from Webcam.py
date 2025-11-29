@@ -75,3 +75,49 @@ class PaletteApp:
         root.title("Smart Palette from Webcam")
         root.geometry("920x560")
         self.running = True
+       # Webcam
+        self.cap = None
+        self.cam_thread = None
+        self.frame = None
+        self.lock = threading.Lock()
+
+        # UI state
+        self.n_colors = tk.IntVar(value=5)
+        self.sample_pixels = tk.IntVar(value=8000)
+        self.last_palette = None
+
+        self._build_ui()
+        self._start_camera()
+
+    def _build_ui(self):
+        main = ttk.Frame(self.root, padding=10)
+        main.pack(fill="both", expand=True)
+
+        left = ttk.Frame(main)
+        left.pack(side="left", fill="both", expand=True)
+
+        right = ttk.Frame(main, width=340)
+        right.pack(side="right", fill="y")
+        right.pack_propagate(False)
+
+        # Video panel (left)
+        self.video_label = tk.Label(left, bg="black")
+        self.video_label.pack(fill="both", expand=True, padx=6, pady=6)
+
+        control_frame = ttk.Frame(left)
+        control_frame.pack(fill="x", pady=(4,0))
+
+        ttk.Label(control_frame, text="Colors:").pack(side="left")
+        ttk.Spinbox(control_frame, from_=2, to=12, width=4, textvariable=self.n_colors).pack(side="left", padx=6)
+
+        ttk.Label(control_frame, text="Sample pixels:").pack(side="left", padx=(12,4))
+        ttk.Spinbox(control_frame, from_=1000, to=20000, increment=1000, width=6, textvariable=self.sample_pixels).pack(side="left")
+
+        ttk.Button(control_frame, text="Capture Palette", command=self.on_capture).pack(side="right", padx=6)
+        ttk.Button(control_frame, text="Freeze Frame", command=self.on_freeze).pack(side="right")
+
+        # Right panel controls
+        ttk.Label(right, text="Palette", font=("Segoe UI", 12, "bold")).pack(anchor="w", pady=(6,4), padx=8)
+
+        self.palette_canvas = tk.Canvas(right, width=320, height=220, bg="#222", highlightthickness=0)
+        self.palette_canvas.pack(padx=8, pady=6)
