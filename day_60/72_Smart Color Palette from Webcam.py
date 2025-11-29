@@ -121,3 +121,43 @@ class PaletteApp:
 
         self.palette_canvas = tk.Canvas(right, width=320, height=220, bg="#222", highlightthickness=0)
         self.palette_canvas.pack(padx=8, pady=6)
+       ttk.Label(right, text="Hex Codes (click to copy):", font=("Segoe UI", 10)).pack(anchor="w", padx=8, pady=(8,0))
+        self.hex_frame = ttk.Frame(right)
+        self.hex_frame.pack(fill="x", padx=8, pady=6)
+
+        ttk.Button(right, text="Save Palette Image", command=self.on_save_palette).pack(fill="x", padx=8, pady=(8,0))
+        ttk.Separator(right, orient="horizontal").pack(fill="x", pady=8, padx=8)
+        ttk.Label(right, text="Tips:", font=("Segoe UI", 10, "bold")).pack(anchor="w", padx=8)
+        tips = (
+            "• Move the camera closer for richer colors.\n"
+            "• Use more sample pixels for smoother clustering.\n"
+            "• Click a hex code to copy it to clipboard.\n"
+            "• Save palette as PNG for sharing."
+        )
+        ttk.Label(right, text=tips, wraplength=300, foreground="#666").pack(anchor="w", padx=8, pady=6)
+
+    def _start_camera(self):
+        try:
+            self.cap = cv2.VideoCapture(0)
+            if not self.cap or not self.cap.isOpened():
+                raise RuntimeError("Could not open webcam")
+        except Exception as e:
+            messagebox.showerror("Camera error", f"Failed to open webcam: {e}")
+            return
+
+        self.cam_thread = threading.Thread(target=self._camera_loop, daemon=True)
+        self.cam_thread.start()
+        # schedule UI update
+        self.root.after(30, self._update_video_label)
+
+    def _camera_loop(self):
+        while True:
+            if not self.cap or not self.cap.isOpened():
+                break
+            ret, frame = self.cap.read()
+            if not ret:
+                time.sleep(0.05)
+                continue
+            with self.lock:
+                self.frame = frame.copy()
+            time.sleep(0.02)  # throttle slightly
