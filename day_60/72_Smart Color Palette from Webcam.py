@@ -32,54 +32,8 @@ def extract_palette(img_bgr, n_colors=5, sample_pixels=8000, random_state=42):
 
     # KMeans
     km = KMeans(n_clusters=n_colors, random_state=random_state, n_init=10)
-    labels = 
-  centers = km.cluster_centers_.astype(int)
-   def on_capture(self):
-        with self.lock:
-            if self.frame is None:
-                messagebox.showinfo("No frame", "No camera frame available yet.")
-                return
-            frame = self.frame.copy()
-        # Extract palette
-        try:
-            n = max(2, min(12, int(self.n_colors.get())))
-        except Exception:
-            n = 5
-        try:
-            sample = max(2000, min(20000, int(self.sample_pixels.get())))
-        except Exception:
-            sample = 8000
-
-        colors = extract_palette(frame, n_colors=n, sample_pixels=sample)
-        # colors -> list of (rgb, pct, hex)
-        self.last_palette = colors
-        self._draw_palette(colors)
-
-    def _draw_palette(self, colors):
-        self.palette_canvas.delete("all")
-        w = self.palette_canvas.winfo_width() or 320
-        h = self.palette_canvas.winfo_height() or 220
-        pad = 6
-        n = len(colors)
-        sw = (w - (n + 1) * pad) // n
-        x = pad
-        # clear hex_frame
-        for child in self.hex_frame.winfo_children():
-            child.destroy()
-
-        for i, (rgb, pct, hx) in enumerate(colors):
-            # swatch
-            color_hex = hx
-            self.palette_canvas.create_rectangle(x, pad, x + sw, h - pad, fill=color_hex, outline="#222", width=2)
-            # percent text
-            pct_text = f"{int(pct*100)}%"
-            text_color = "white" if (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) < 140 else "black"
-            self.palette_canvas.create_text(x + 6, h - pad - 14, anchor="w", text=pct_text, fill=text_color, font=("Segoe UI", 9, "bold"))
-            # hex button
-            btn = ttk.Button(self.hex_frame, text=hx, width=18, command=lambda val=hx: self._copy_hex(val))
-            btn.grid(row=i//2, column=i%2, padx=4, pady=4, sticky="w")
-            x += sw + pad
-
+    labels = km.fit_predict(pixels)
+    centers = km.cluster_centers_.astype(int)
 
     # compute percentages
     _, counts = np.unique(labels, return_counts=True)
@@ -121,7 +75,8 @@ class PaletteApp:
         root.title("Smart Palette from Webcam")
         root.geometry("920x560")
         self.running = True
-       # Webcam
+
+        # Webcam
         self.cap = None
         self.cam_thread = None
         self.frame = None
@@ -167,7 +122,8 @@ class PaletteApp:
 
         self.palette_canvas = tk.Canvas(right, width=320, height=220, bg="#222", highlightthickness=0)
         self.palette_canvas.pack(padx=8, pady=6)
-       ttk.Label(right, text="Hex Codes (click to copy):", font=("Segoe UI", 10)).pack(anchor="w", padx=8, pady=(8,0))
+
+        ttk.Label(right, text="Hex Codes (click to copy):", font=("Segoe UI", 10)).pack(anchor="w", padx=8, pady=(8,0))
         self.hex_frame = ttk.Frame(right)
         self.hex_frame.pack(fill="x", padx=8, pady=6)
 
@@ -207,7 +163,8 @@ class PaletteApp:
             with self.lock:
                 self.frame = frame.copy()
             time.sleep(0.02)  # throttle slightly
-  def _update_video_label(self):
+
+    def _update_video_label(self):
         with self.lock:
             frame = None if self.frame is None else self.frame.copy()
         if frame is not None:
@@ -247,3 +204,96 @@ class PaletteApp:
                 self._frozen = True
             else:
                 self._frozen = False
+
+    def on_capture(self):
+        with self.lock:
+            if self.frame is None:
+                messagebox.showinfo("No frame", "No camera frame available yet.")
+                return
+            frame = self.frame.copy()
+        # Extract palette
+        try:
+            n = max(2, min(12, int(self.n_colors.get())))
+        except Exception:
+            n = 5
+        try:
+            sample = max(2000, min(20000, int(self.sample_pixels.get())))
+        except Exception:
+            sample = 8000
+
+        colors = extract_palette(frame, n_colors=n, sample_pixels=sample)
+        # colors -> list of (rgb, pct, hex)
+        self.last_palette = colors
+        self._draw_palette(colors)
+
+    def _draw_palette(self, colors):
+        self.palette_canvas.delete("all")
+        w = self.palette_canvas.winfo_width() or 320
+        h = self.palette_canvas.winfo_height() or 220
+        pad = 6
+        n = len(colors)
+        sw = (w - (n + 1) * pad) // n
+        x = pad
+        # clear hex_frame
+        for child in self.hex_frame.winfo_children():
+            child.destroy()
+
+        for i, (rgb, pct, hx) in enumerate(colors):
+            # swatch
+            color_hex = hx
+            self.palette_canvas.create_rectangle(x, pad, x + sw, h - pad, fill=color_hex, outline="#222", width=2)
+            # percent text
+            pct_text = f"{int(pct*100)}%"
+            text_color = "white" if (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) < 140 else "black"
+            self.palette_canvas.create_text(x + 6, h - pad - 14, anchor="w", text=pct_text, fill=text_color, font=("Segoe UI", 9, "bold"))
+            # hex button
+            btn = ttk.Button(self.hex_frame, text=hx, width=18, command=lambda val=hx: self._copy_hex(val))
+            btn.grid(row=i//2, column=i%2, padx=4, pady=4, sticky="w")
+            x += sw + pad
+
+    def _copy_hex(self, hx):
+        self.root.clipboard_clear()
+        self.root.clipboard_append(hx)
+        messagebox.showinfo("Copied", f"{hx} copied to clipboard")
+
+    def on_save_palette(self):
+        if not self.last_palette:
+            messagebox.showinfo("No palette", "Capture a palette first.")
+            return
+        img = make_palette_image(self.last_palette, sw=140, sh=140, padding=8)
+        path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG Image", "*.png")])
+        if not path:
+            return
+        try:
+            img.save(path)
+            messagebox.showinfo("Saved", f"Palette saved to {path}")
+        except Exception as e:
+            messagebox.showerror("Save failed", str(e))
+
+    def close(self):
+        self.running = False
+        try:
+            if self.cap:
+                self.cap.release()
+        except Exception:
+            pass
+        self.root.quit()
+
+# --------------------------
+# Run
+# --------------------------
+if __name__ == "__main__":
+    root = tk.Tk()
+    style = ttk.Style(root)
+    try:
+        style.theme_use("clam")
+    except Exception:
+        pass
+    app = PaletteApp(root)
+
+    def on_close():
+        if messagebox.askokcancel("Quit", "Exit the app?"):
+            app.close()
+
+    root.protocol("WM_DELETE_WINDOW", on_close)
+    root.mainloop()
