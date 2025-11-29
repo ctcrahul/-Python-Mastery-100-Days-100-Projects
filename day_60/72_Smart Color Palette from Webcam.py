@@ -161,3 +161,43 @@ class PaletteApp:
             with self.lock:
                 self.frame = frame.copy()
             time.sleep(0.02)  # throttle slightly
+  def _update_video_label(self):
+        with self.lock:
+            frame = None if self.frame is None else self.frame.copy()
+        if frame is not None:
+            # convert BGR->RGB and to PhotoImage via PIL
+            img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            h, w = img_rgb.shape[:2]
+            # keep aspect to fit label size
+            label_w = self.video_label.winfo_width() or 640
+            label_h = self.video_label.winfo_height() or 360
+            scale = min(label_w / w, label_h / h)
+            new_w = int(w * scale)
+            new_h = int(h * scale)
+            resized = cv2.resize(img_rgb, (new_w, new_h), interpolation=cv2.INTER_AREA)
+            # convert to PGM-like bytes for Tk PhotoImage (PIL would be nicer but avoids extra conversion steps)
+            from PIL import Image, ImageTk
+            pil = Image.fromarray(resized)
+            tkimg = ImageTk.PhotoImage(image=pil)
+            self.video_label.imgtk = tkimg
+            self.video_label.config(image=tkimg)
+        if self.running:
+            self.root.after(30, self._update_video_label)
+
+    def on_freeze(self):
+        # toggles freeze: when frozen, camera still runs but frame shown is last captured
+        # We'll capture current frame into self.frame and stop updating preview until next unfreeze
+        with self.lock:
+            if self.frame is None:
+                return
+            frozen = getattr(self, "_frozen", False)
+            if not frozen:
+                self._frozen_frame = self.frame.copy()
+                pil = Image.fromarray(cv2.cvtColor(self._frozen_frame, cv2.COLOR_BGR2RGB))
+                from PIL import ImageTk
+                tkimg = ImageTk.PhotoImage(image=pil.resize((self.video_label.winfo_width() or 640, self.video_label.winfo_height() or 360), resample=Image.BILINEAR))
+                self.video_label.imgtk = tkimg
+                self.video_label.config(image=tkimg)
+                self._frozen = True
+            else:
+                self._frozen = False
