@@ -34,6 +34,52 @@ def extract_palette(img_bgr, n_colors=5, sample_pixels=8000, random_state=42):
     km = KMeans(n_clusters=n_colors, random_state=random_state, n_init=10)
     labels = 
   centers = km.cluster_centers_.astype(int)
+   def on_capture(self):
+        with self.lock:
+            if self.frame is None:
+                messagebox.showinfo("No frame", "No camera frame available yet.")
+                return
+            frame = self.frame.copy()
+        # Extract palette
+        try:
+            n = max(2, min(12, int(self.n_colors.get())))
+        except Exception:
+            n = 5
+        try:
+            sample = max(2000, min(20000, int(self.sample_pixels.get())))
+        except Exception:
+            sample = 8000
+
+        colors = extract_palette(frame, n_colors=n, sample_pixels=sample)
+        # colors -> list of (rgb, pct, hex)
+        self.last_palette = colors
+        self._draw_palette(colors)
+
+    def _draw_palette(self, colors):
+        self.palette_canvas.delete("all")
+        w = self.palette_canvas.winfo_width() or 320
+        h = self.palette_canvas.winfo_height() or 220
+        pad = 6
+        n = len(colors)
+        sw = (w - (n + 1) * pad) // n
+        x = pad
+        # clear hex_frame
+        for child in self.hex_frame.winfo_children():
+            child.destroy()
+
+        for i, (rgb, pct, hx) in enumerate(colors):
+            # swatch
+            color_hex = hx
+            self.palette_canvas.create_rectangle(x, pad, x + sw, h - pad, fill=color_hex, outline="#222", width=2)
+            # percent text
+            pct_text = f"{int(pct*100)}%"
+            text_color = "white" if (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) < 140 else "black"
+            self.palette_canvas.create_text(x + 6, h - pad - 14, anchor="w", text=pct_text, fill=text_color, font=("Segoe UI", 9, "bold"))
+            # hex button
+            btn = ttk.Button(self.hex_frame, text=hx, width=18, command=lambda val=hx: self._copy_hex(val))
+            btn.grid(row=i//2, column=i%2, padx=4, pady=4, sticky="w")
+            x += sw + pad
+
 
     # compute percentages
     _, counts = np.unique(labels, return_counts=True)
