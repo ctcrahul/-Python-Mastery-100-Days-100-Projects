@@ -93,7 +93,47 @@ def delete_expense(conn, expense_id):
     conn.commit()
     print(f"Deleted expense id {expense_id}: {row[1]} {row[2]:.2f} {row[3]}")
 
+def parse_args():
+    parser = argparse.ArgumentParser(prog="expense_tracker.py", description="Personal Expense Tracker")
+    sub = parser.add_subparsers(dest="cmd", required=False)
 
+    # add
+    a = sub.add_parser("add", help="Add an expense")
+    a.add_argument("--date", "-d", default=datetime.now().strftime("%Y-%m-%d"), help="Date YYYY-MM-DD (default today)")
+    a.add_argument("--amount", "-a", required=True, help="Amount (number)")
+    a.add_argument("--category", "-c", required=True, help="Category name")
+    a.add_argument("--desc", "-m", default="", help="Description")
+
+    # list
+    l = sub.add_parser("list", help="List expenses")
+    l.add_argument("--limit", "-n", type=int, help="Limit rows")
+    l.add_argument("--start", help="Start date YYYY-MM-DD")
+    l.add_argument("--end", help="End date YYYY-MM-DD")
+    l.add_argument("--category", help="Filter by category")
+
+    # delete
+    d = sub.add_parser("delete", help="Delete an expense by id")
+    d.add_argument("id", type=int)
+
+    # summary
+    s = sub.add_parser("summary", help="Monthly summary")
+    s.add_argument("year", type=int)
+    s.add_argument("month", type=int)
+
+    # export
+    e = sub.add_parser("export", help="Export to CSV")
+    e.add_argument("filepath", help="CSV filepath")
+
+    # plot
+    p = sub.add_parser("plot", help="Save category breakdown PNG for a month")
+    p.add_argument("year", type=int)
+    p.add_argument("month", type=int)
+    p.add_argument("outpng", help="Output PNG path")
+
+    # interactive (no args)
+    sub.add_parser("interactive", help="Start interactive menu (default if no args)")
+
+    return parser.parse_args()
 def summary_month(conn, year, month):
     month_str = f"{year:04d}-{month:02d}"
     start = month_str + "-01"
