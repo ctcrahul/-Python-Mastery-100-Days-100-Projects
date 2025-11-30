@@ -55,3 +55,30 @@ def add_expense(conn, date, amount, category, description=""):
     conn.commit()
     print(f"Added: {date} | {amount:.2f} | {category} | {description}")
 
+def list_expenses(conn, limit=None, start_date=None, end_date=None, category=None):
+    cur = conn.cursor()
+    q = "SELECT id, date, amount, category, description FROM expenses WHERE 1=1"
+    params = []
+    if start_date:
+        q += " AND date >= ?"
+        params.append(start_date)
+    if end_date:
+        q += " AND date <= ?"
+        params.append(end_date)
+    if category:
+        q += " AND category = ?"
+        params.append(category)
+    q += " ORDER BY date DESC"
+    if limit:
+        q += " LIMIT ?"
+        params.append(limit)
+    cur.execute(q, params)
+    rows = cur.fetchall()
+    if not rows:
+        print("No expenses found.")
+        return
+    print(f"{'ID':>3}  {'Date':10}  {'Amount':>10}  {'Category':12}  Description")
+    print("-" * 60)
+    for r in rows:
+        print(f"{r[0]:>3}  {r[1]:10}  {r[2]:10.2f}  {r[3]:12}  {r[4]}")
+    print(f"\nTotal: {sum(r[2] for r in rows):.2f} over {len(rows)} record(s).")
