@@ -109,3 +109,31 @@ def summary_month(conn, year, month):
     for cat, amt in rows:
         print(f"  {cat:12}  {amt:10.2f}  ({(amt/total*100):5.1f}%)" if total else f"  {cat:12}  {amt:10.2f}")
     return rows, total
+
+def export_csv(conn, filepath):
+    cur = conn.cursor()
+    cur.execute("SELECT id, date, amount, category, description FROM expenses ORDER BY date")
+    rows = cur.fetchall()
+    with open(filepath, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["id", "date", "amount", "category", "description"])
+        writer.writerows(rows)
+    print(f"Exported {len(rows)} records to {filepath}")
+
+
+def plot_category_breakdown(rows, total, outpng):
+    if plt is None:
+        print("matplotlib not available — cannot plot. Install matplotlib and try again.")
+        return
+    if not rows:
+        print("No data to plot.")
+        return
+    categories = [r[0] for r in rows]
+    amounts = [r[1] for r in rows]
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.pie(amounts, labels=categories, autopct=lambda p: f"{p:.1f}%\n({p/100*total:.0f})", startangle=90)
+    ax.set_title("Category Breakdown")
+    plt.tight_layout()
+    fig.savefig(outpng)
+    plt.close(fig)
+    print(f"Saved category breakdown to {outpng}")
