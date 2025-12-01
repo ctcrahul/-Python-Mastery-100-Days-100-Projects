@@ -50,3 +50,12 @@ def parse_args():
     parser.add_argument("--city", "-c", required=True, help="City name")
     parser.add_argument("--key", "-k", required=True, help="OpenWeather API key")
     return parser.parse_args()
+
+def main():
+    args = parse_args()
+    data = get_weather(args.city, args.key)
+    show_weather(data)
+
+
+if __name__ == "__main__":
+    main()
