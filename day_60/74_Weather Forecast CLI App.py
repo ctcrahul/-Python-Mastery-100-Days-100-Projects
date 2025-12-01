@@ -30,6 +30,7 @@ def show_weather(data):
     if not data:
         print("No data to show.")
         return
+
     name = data.get("name")
     main = data.get("main", {})
     wind = data.get("wind", {})
@@ -50,6 +51,7 @@ def parse_args():
     parser.add_argument("--city", "-c", required=True, help="City name")
     parser.add_argument("--key", "-k", required=True, help="OpenWeather API key")
     return parser.parse_args()
+
 
 def main():
     args = parse_args()
