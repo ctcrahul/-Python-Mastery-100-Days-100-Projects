@@ -30,3 +30,23 @@ def show_weather(data):
     if not data:
         print("No data to show.")
         return
+    name = data.get("name")
+    main = data.get("main", {})
+    wind = data.get("wind", {})
+    weather = data.get("weather", [{}])[0]
+
+    print(f"\nWeather Report: {name}")
+    print("-" * 40)
+    print(f"Temperature: {main.get('temp')} °C")
+    print(f"Feels Like: {main.get('feels_like')} °C")
+    print(f"Humidity: {main.get('humidity')}%")
+    print(f"Condition: {weather.get('description').title()}")
+    print(f"Wind Speed: {wind.get('speed')} m/s")
+    print("-" * 40)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Weather Forecast CLI App")
+    parser.add_argument("--city", "-c", required=True, help="City name")
+    parser.add_argument("--key", "-k", required=True, help="OpenWeather API key")
+    return parser.parse_args()
