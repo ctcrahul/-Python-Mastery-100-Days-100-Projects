@@ -30,7 +30,9 @@ def get_db():
         db = g._db = sqlite3.connect(DB_PATH)
         db.row_factory = sqlite3.Row
     return db
-    def init_db():
+
+
+def init_db():
     db = sqlite3.connect(DB_PATH)
     cur = db.cursor()
     cur.execute(
@@ -44,7 +46,6 @@ def get_db():
         );
         """
     )
-    
     db.commit()
     db.close()
 
@@ -54,6 +55,130 @@ def close_connection(exception):
     db = getattr(g, "_db", None)
     if db is not None:
         db.close()
+
+
+# ---------- Utility ----------
+def now_iso():
+    return datetime.utcnow().isoformat() + "Z"
+
+
+def note_row_to_dict(row):
+    return {
+        "id": row["id"],
+        "title": row["title"],
+        "body": row["body"],
+        "created_at": row["created_at"],
+        "updated_at": row["updated_at"],
+    }
+
+
+# ---------- Routes ----------
+@APP.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
+
+
+@APP.route("/notes", methods=["POST"])
+def create_note():
+    data = request.get_json(force=True, silent=True)
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    title = (data.get("title") or "").strip()
+    body = (data.get("body") or "").strip()
+
+    if not title:
+        return jsonify({"error": "Title is required"}), 400
+    if not body:
+        return jsonify({"error": "Body is required"}), 400
+
+    db = get_db()
+    cur = db.cursor()
+    ts = now_iso()
+    cur.execute(
+        "INSERT INTO notes (title, body, created_at, updated_at) VALUES (?, ?, ?, ?)",
+        (title, body, ts, ts),
+    )
+    db.commit()
+    nid = cur.lastrowid
+    cur.execute("SELECT * FROM notes WHERE id = ?", (nid,))
+    row = cur.fetchone()
+    return jsonify(note_row_to_dict(row)), 201
+
+
+@APP.route("/notes", methods=["GET"])
+def list_notes():
+    # pagination
+    try:
+        page = int(request.args.get("page", "1"))
+        per_page = int(request.args.get("per_page", "10"))
+    except ValueError:
+        return jsonify({"error": "page and per_page must be integers"}), 400
+    if page < 1 or per_page < 1 or per_page > 100:
+        return jsonify({"error": "Invalid pagination parameters"}), 400
+
+    # search
+    q = (request.args.get("q") or "").strip()
+
+    offset = (page - 1) * per_page
+    db = get_db()
+    cur = db.cursor()
+
+    if q:
+        like = f"%{q}%"
+        cur.execute(
+            "SELECT COUNT(*) FROM notes WHERE title LIKE ? OR body LIKE ?",
+            (like, like),
+        )
+        total = cur.fetchone()[0]
+        cur.execute(
+            "SELECT * FROM notes WHERE title LIKE ? OR body LIKE ? ORDER BY updated_at DESC LIMIT ? OFFSET ?",
+            (like, like, per_page, offset),
+        )
+    else:
+        cur.execute("SELECT COUNT(*) FROM notes")
+        total = cur.fetchone()[0]
+        cur.execute(
+            "SELECT * FROM notes ORDER BY updated_at DESC LIMIT ? OFFSET ?",
+            (per_page, offset),
+        )
+
+    rows = cur.fetchall()
+    notes = [note_row_to_dict(r) for r in rows]
+    return jsonify(
+        {"notes": notes, "pagination": {"page": page, "per_page": per_page, "total": total}}
+    ), 200
+
+
+@APP.route("/notes/<int:note_id>", methods=["GET"])
+def get_note(note_id):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
+    row = cur.fetchone()
+    if not row:
+        return jsonify({"error": "Note not found"}), 404
+    return jsonify(note_row_to_dict(row)), 200
+
+
+@APP.route("/notes/<int:note_id>", methods=["PUT", "PATCH"])
+def update_note(note_id):
+    data = request.get_json(force=True, silent=True)
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    title = data.get("title")
+    body = data.get("body")
+
+    if title is not None:
+        title = title.strip()
+        if not title:
+            return jsonify({"error": "Title cannot be empty"}), 400
+    if body is not None:
+        body = body.strip()
+        if not body:
+            return jsonify({"error": "Body cannot be empty"}), 400
+
     db = get_db()
     cur = db.cursor()
     cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
@@ -100,122 +225,20 @@ def export_notes_csv():
         cur.execute("SELECT * FROM notes ORDER BY updated_at DESC")
     rows = cur.fetchall()
 
-
-# ---------- Utility ----------
-def now_iso():
-    return datetime.utcnow().isoformat() + "Z"
-
-
-def note_row_to_dict(row):
-    return {
-        "id": row["id"],
-        "title": row["title"],
-        "body": row["body"],
-        "created_at": row["created_at"],
-        "updated_at": row["updated_at"],
-    }
-# ---------- Routes ----------
-@APP.route("/health", methods=["GET"])
-def health():
-    return jsonify({"status": "ok"}), 200
+    si = io.StringIO()
+    writer = csv.writer(si)
+    writer.writerow(["id", "title", "body", "created_at", "updated_at"])
+    for r in rows:
+        writer.writerow([r["id"], r["title"], r["body"], r["created_at"], r["updated_at"]])
+    si.seek(0)
+    return send_file(io.BytesIO(si.getvalue().encode("utf-8")), mimetype="text/csv",
+                     as_attachment=True, download_name="notes_export.csv")
 
 
-@APP.route("/notes", methods=["POST"])
-def create_note():
-    data = request.get_json(force=True, silent=True)
-    if not data:
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    title = (data.get("title") or "").strip()
-    body = (data.get("body") or "").strip()
-
-    if not title:
-        return jsonify({"error": "Title is required"}), 400
-    if not body:
-        return jsonify({"error": "Body is required"}), 400
-
-    db = get_db()
-    cur = db.cursor()
-    ts = now_iso()
-    cur.execute(
-        "INSERT INTO notes (title, body, created_at, updated_at) VALUES (?, ?, ?, ?)",
-        (title, body, ts, ts),
-    )
-   db.commit()
-    nid = cur.lastrowid
-    cur.execute("SELECT * FROM notes WHERE id = ?", (nid,))
-    row = cur.fetchone()
-    return jsonify(note_row_to_dict(row)), 201
-
-
-@APP.route("/notes", methods=["GET"])
-def list_notes():
-    # pagination
-    try:
-        page = int(request.args.get("page", "1"))
-        per_page = int(request.args.get("per_page", "10"))
-    except ValueError:
-        return jsonify({"error": "page and per_page must be integers"}), 400
-    if page < 1 or per_page < 1 or per_page > 100:
-        return jsonify({"error": "Invalid pagination parameters"}), 400
-
-    # search
-    q = (request.args.get("q") or "").strip()
-
-    offset = (page - 1) * per_page
-    db = get_db()
-    cur = db.cursor()
-
-    if q:
-        like = f"%{q}%"
-        cur.execute(
-            "SELECT COUNT(*) FROM notes WHERE title LIKE ? OR body LIKE ?",
-            (like, like),
-        )
-        total = cur.fetchone()[0]
-        cur.execute(
-            "SELECT * FROM notes WHERE title LIKE ? OR body LIKE ? ORDER BY updated_at DESC LIMIT ? OFFSET ?",
-            (like, like, per_page, offset),
-        )
-    else:
-        cur.execute("SELECT COUNT(*) FROM notes")
-        total = cur.fetchone()[0]
-        cur.execute(
-            "SELECT * FROM notes ORDER BY updated_at DESC LIMIT ? OFFSET ?",
-            (per_page, offset),
-        )
-    rows = cur.fetchall()
-    notes = [note_row_to_dict(r) for r in rows]
-    return jsonify(
-        {"notes": notes, "pagination": {"page": page, "per_page": per_page, "total": total}}
-    ), 200
-
-
-@APP.route("/notes/<int:note_id>", methods=["GET"])
-def get_note(note_id):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
-    row = cur.fetchone()
-    if not row:
-        return jsonify({"error": "Note not found"}), 404
-    return jsonify(note_row_to_dict(row)), 200
-
-
-@APP.route("/notes/<int:note_id>", methods=["PUT", "PATCH"])
-def update_note(note_id):
-    data = request.get_json(force=True, silent=True)
-    if not data:
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    title = data.get("title")
-    body = data.get("body")
-
-    if title is not None:
-        title = title.strip()
-        if not title:
-            return jsonify({"error": "Title cannot be empty"}), 400
-    if body is not None:
-        body = body.strip()
-        if not body:
-            return jsonify({"error": "Body cannot be empty"}), 400
+# ---------- Start ----------
+if __name__ == "__main__":
+    # init DB if missing
+    init_db()
+    # run app
+    # Use 0.0.0.0 only for local network testing. In production use a proper WSGI server.
+    APP.run(host="127.0.0.1", port=5000, debug=True)
