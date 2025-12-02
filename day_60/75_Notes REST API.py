@@ -30,3 +30,18 @@ def get_db():
         db = g._db = sqlite3.connect(DB_PATH)
         db.row_factory = sqlite3.Row
     return db
+    def init_db():
+    db = sqlite3.connect(DB_PATH)
+    cur = db.cursor()
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            body TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        """
+    )
+    
