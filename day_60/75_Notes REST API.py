@@ -54,6 +54,51 @@ def close_connection(exception):
     db = getattr(g, "_db", None)
     if db is not None:
         db.close()
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
+    row = cur.fetchone()
+    if not row:
+        return jsonify({"error": "Note not found"}), 404
+
+    new_title = title if title is not None else row["title"]
+    new_body = body if body is not None else row["body"]
+    ts = now_iso()
+    cur.execute(
+        "UPDATE notes SET title = ?, body = ?, updated_at = ? WHERE id = ?",
+        (new_title, new_body, ts, note_id),
+    )
+    db.commit()
+    cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
+    updated = cur.fetchone()
+    return jsonify(note_row_to_dict(updated)), 200
+
+
+@APP.route("/notes/<int:note_id>", methods=["DELETE"])
+def delete_note(note_id):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT id FROM notes WHERE id = ?", (note_id,))
+    row = cur.fetchone()
+    if not row:
+        return jsonify({"error": "Note not found"}), 404
+    cur.execute("DELETE FROM notes WHERE id = ?", (note_id,))
+    db.commit()
+    return jsonify({"status": "deleted", "id": note_id}), 200
+
+
+@APP.route("/notes/export", methods=["GET"])
+def export_notes_csv():
+    # Optional search filter
+    q = (request.args.get("q") or "").strip()
+    db = get_db()
+    cur = db.cursor()
+    if q:
+        like = f"%{q}%"
+        cur.execute("SELECT * FROM notes WHERE title LIKE ? OR body LIKE ? ORDER BY updated_at DESC", (like, like))
+    else:
+        cur.execute("SELECT * FROM notes ORDER BY updated_at DESC")
+    rows = cur.fetchall()
 
 
 # ---------- Utility ----------
