@@ -45,3 +45,27 @@ def get_db():
         """
     )
     
+    db.commit()
+    db.close()
+
+
+@APP.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, "_db", None)
+    if db is not None:
+        db.close()
+
+
+# ---------- Utility ----------
+def now_iso():
+    return datetime.utcnow().isoformat() + "Z"
+
+
+def note_row_to_dict(row):
+    return {
+        "id": row["id"],
+        "title": row["title"],
+        "body": row["body"],
+        "created_at": row["created_at"],
+        "updated_at": row["updated_at"],
+    }
