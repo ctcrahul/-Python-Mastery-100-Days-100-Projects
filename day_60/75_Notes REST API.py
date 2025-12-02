@@ -139,3 +139,38 @@ def list_notes():
             "SELECT * FROM notes ORDER BY updated_at DESC LIMIT ? OFFSET ?",
             (per_page, offset),
         )
+    rows = cur.fetchall()
+    notes = [note_row_to_dict(r) for r in rows]
+    return jsonify(
+        {"notes": notes, "pagination": {"page": page, "per_page": per_page, "total": total}}
+    ), 200
+
+
+@APP.route("/notes/<int:note_id>", methods=["GET"])
+def get_note(note_id):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM notes WHERE id = ?", (note_id,))
+    row = cur.fetchone()
+    if not row:
+        return jsonify({"error": "Note not found"}), 404
+    return jsonify(note_row_to_dict(row)), 200
+
+
+@APP.route("/notes/<int:note_id>", methods=["PUT", "PATCH"])
+def update_note(note_id):
+    data = request.get_json(force=True, silent=True)
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    title = data.get("title")
+    body = data.get("body")
+
+    if title is not None:
+        title = title.strip()
+        if not title:
+            return jsonify({"error": "Title cannot be empty"}), 400
+    if body is not None:
+        body = body.strip()
+        if not body:
+            return jsonify({"error": "Body cannot be empty"}), 400
