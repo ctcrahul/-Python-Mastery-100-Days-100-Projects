@@ -69,3 +69,30 @@ def note_row_to_dict(row):
         "created_at": row["created_at"],
         "updated_at": row["updated_at"],
     }
+# ---------- Routes ----------
+@APP.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok"}), 200
+
+
+@APP.route("/notes", methods=["POST"])
+def create_note():
+    data = request.get_json(force=True, silent=True)
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    title = (data.get("title") or "").strip()
+    body = (data.get("body") or "").strip()
+
+    if not title:
+        return jsonify({"error": "Title is required"}), 400
+    if not body:
+        return jsonify({"error": "Body is required"}), 400
+
+    db = get_db()
+    cur = db.cursor()
+    ts = now_iso()
+    cur.execute(
+        "INSERT INTO notes (title, body, created_at, updated_at) VALUES (?, ?, ?, ?)",
+        (title, body, ts, ts),
+    )
