@@ -57,3 +57,35 @@ def monitor(interval, duration, metrics, logfile):
 
             writer.writerow(row)
             f.flush()
+            print("Logged:", row)
+
+            if time.time() - start >= duration:
+                break
+            time.sleep(interval)
+
+    print("Monitoring finished.")
+
+
+def plot_csv(csvfile):
+    if not os.path.exists(csvfile):
+        print("CSV file not found.")
+        return
+
+    timestamps = []
+    data = {}
+
+    with open(csvfile, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        fields = next(reader)
+
+        for field in fields:
+            if field != "timestamp":
+                data[field] = []
+
+        for row in reader:
+            timestamps.append(row[0])
+            for i, field in enumerate(fields[1:], start=1):
+                try:
+                    data[field].append(float(row[i]))
+                except:
+                    data[field].append(0.0)
