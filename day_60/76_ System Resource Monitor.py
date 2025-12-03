@@ -30,3 +30,30 @@ def collect_metrics(metric_list):
         data["net_sent"] = net.bytes_sent
         data["net_recv"] = net.bytes_recv
     return data
+def monitor(interval, duration, metrics, logfile):
+    fields = ["timestamp"] + metrics
+
+    # Expand net into two fields if needed
+    if "net" in metrics:
+        fields.remove("net")
+        fields.extend(["net_sent", "net_recv"])
+
+    print(f"Logging metrics to {logfile}")
+    print("Fields:", fields)
+
+    start = time.time()
+
+    with open(logfile, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(fields)
+
+        while True:
+            now = datetime.now().isoformat()
+            data = collect_metrics(metrics)
+
+            row = [now]
+            for field in fields[1:]:
+                row.append(data.get(field, ""))
+
+            writer.writerow(row)
+            f.flush()
