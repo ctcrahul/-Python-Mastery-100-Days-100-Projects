@@ -124,3 +124,8 @@ def main():
         print("Missing required args. Example:")
         print("python resource_monitor.py --interval 2 --duration 20 --metrics cpu ram net")
         return
+  monitor(args.interval, args.duration, args.metrics, args.log)
+
+
+if __name__ == "__main__":
+    main()
