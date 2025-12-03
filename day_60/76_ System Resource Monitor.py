@@ -30,6 +30,8 @@ def collect_metrics(metric_list):
         data["net_sent"] = net.bytes_sent
         data["net_recv"] = net.bytes_recv
     return data
+
+
 def monitor(interval, duration, metrics, logfile):
     fields = ["timestamp"] + metrics
 
@@ -57,6 +59,7 @@ def monitor(interval, duration, metrics, logfile):
 
             writer.writerow(row)
             f.flush()
+
             print("Logged:", row)
 
             if time.time() - start >= duration:
@@ -89,6 +92,7 @@ def plot_csv(csvfile):
                     data[field].append(float(row[i]))
                 except:
                     data[field].append(0.0)
+
     plt.figure(figsize=(10, 6))
     for field, values in data.items():
         plt.plot(values, label=field)
@@ -124,7 +128,8 @@ def main():
         print("Missing required args. Example:")
         print("python resource_monitor.py --interval 2 --duration 20 --metrics cpu ram net")
         return
-  monitor(args.interval, args.duration, args.metrics, args.log)
+
+    monitor(args.interval, args.duration, args.metrics, args.log)
 
 
 if __name__ == "__main__":
