@@ -89,3 +89,38 @@ def plot_csv(csvfile):
                     data[field].append(float(row[i]))
                 except:
                     data[field].append(0.0)
+    plt.figure(figsize=(10, 6))
+    for field, values in data.items():
+        plt.plot(values, label=field)
+
+    plt.title("System Resource Usage Over Time")
+    plt.xlabel("Samples")
+    plt.ylabel("Value")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="System Resource Monitor")
+
+    parser.add_argument("--interval", type=int, help="Seconds between samples")
+    parser.add_argument("--duration", type=int, help="Total duration in seconds")
+    parser.add_argument("--metrics", nargs="*", help="cpu ram disk net")
+    parser.add_argument("--log", default="usage_log.csv", help="CSV log file name")
+    parser.add_argument("--plot", help="Plot a CSV file")
+
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    if args.plot:
+        plot_csv(args.plot)
+        return
+
+    if not args.interval or not args.duration or not args.metrics:
+        print("Missing required args. Example:")
+        print("python resource_monitor.py --interval 2 --duration 20 --metrics cpu ram net")
+        return
