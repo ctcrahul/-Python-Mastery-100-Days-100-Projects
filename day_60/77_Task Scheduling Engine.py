@@ -110,3 +110,61 @@ def disable_task(task_id):
     conn.commit()
     conn.close()
     print("Task disabled.")
+# ------------------------------
+# RUNNER
+# ------------------------------
+def log_history(task_id, stdout, stderr, code):
+    conn = sqlite3.connect(HISTORY_DB)
+    c = conn.cursor()
+    c.execute(
+        "INSERT INTO history (task_id, timestamp, stdout, stderr, returncode) VALUES (?, ?, ?, ?, ?)",
+        (task_id, datetime.now().isoformat(), stdout, stderr, code),
+    )
+    conn.commit()
+    conn.close()
+
+
+def run_task(task_id, command):
+    try:
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        out, err = proc.communicate()
+        out = out.decode("utf-8", "ignore")
+        err = err.decode("utf-8", "ignore")
+
+        log_history(task_id, out, err, proc.returncode)
+
+    except Exception as e:
+        log_history(task_id, "", str(e), -1)
+
+
+def scheduler_loop():
+    print("Scheduler started. Ctrl+C to stop.")
+
+    while True:
+        conn = sqlite3.connect(TASK_DB)
+        c = conn.cursor()
+        c.execute("SELECT id, command, interval, enabled, last_run FROM tasks WHERE enabled = 1")
+        tasks = c.fetchall()
+        conn.close()
+
+        now = datetime.now()
+
+        for task in tasks:
+            tid, cmd, interval, enabled, last_run = task
+
+            if last_run:
+                last = datetime.fromisoformat(last_run)
+                if (now - last).total_seconds() < interval:
+                    continue
+
+            # Run in background thread
+            threading.Thread(target=run_task, args=(tid, cmd), daemon=True).start()
+
+            # Update last_run timestamp
+            conn = sqlite3.connect(TASK_DB)
+            c = conn.cursor()
+            c.execute("UPDATE tasks SET last_run = ? WHERE id = ?", (now.isoformat(), tid))
+            conn.commit()
+            conn.close()
+
+        time.sleep(1)
