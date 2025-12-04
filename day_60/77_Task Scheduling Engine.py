@@ -25,3 +25,43 @@ import os
 
 TASK_DB = "tasks.db"
 HISTORY_DB = "history.db"
+
+# ------------------------------
+# DB INIT
+# ------------------------------
+def init_task_db():
+    conn = sqlite3.connect(TASK_DB)
+    c = conn.cursor()
+    c.execute(
+        """
+        CREATE TABLE IF NOT EXISTS tasks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            command TEXT NOT NULL,
+            interval INTEGER NOT NULL,
+            enabled INTEGER NOT NULL DEFAULT 1,
+            last_run TEXT
+        );
+        """
+    )
+    conn.commit()
+    conn.close()
+
+
+def init_history_db():
+    conn = sqlite3.connect(HISTORY_DB)
+    c = conn.cursor()
+    c.execute(
+        """
+        CREATE TABLE IF NOT EXISTS history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            task_id INTEGER,
+            timestamp TEXT,
+            stdout TEXT,
+            stderr TEXT,
+            returncode INTEGER
+        );
+        """
+    )
+    conn.commit()
+    conn.close()
+
