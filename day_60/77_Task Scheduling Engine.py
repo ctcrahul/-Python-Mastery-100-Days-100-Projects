@@ -65,3 +65,48 @@ def init_history_db():
     conn.commit()
     conn.close()
 
+# ------------------------------
+# TASK OPERATIONS
+# ------------------------------
+def add_task(command, interval):
+    conn = sqlite3.connect(TASK_DB)
+    c = conn.cursor()
+    c.execute("INSERT INTO tasks (command, interval) VALUES (?, ?)", (command, interval))
+    conn.commit()
+    conn.close()
+    print("Task added.")
+
+
+def list_tasks():
+    conn = sqlite3.connect(TASK_DB)
+    c = conn.cursor()
+    c.execute("SELECT id, command, interval, enabled, last_run FROM tasks")
+    rows = c.fetchall()
+    conn.close()
+
+    if not rows:
+        print("No tasks.")
+        return
+
+    for r in rows:
+        print(
+            f"[{r[0]}] every {r[2]}s | enabled={bool(r[3])} | last_run={r[4]} | {r[1]}"
+        )
+
+
+def enable_task(task_id):
+    conn = sqlite3.connect(TASK_DB)
+    c = conn.cursor()
+    c.execute("UPDATE tasks SET enabled = 1 WHERE id = ?", (task_id,))
+    conn.commit()
+    conn.close()
+    print("Task enabled.")
+
+
+def disable_task(task_id):
+    conn = sqlite3.connect(TASK_DB)
+    c = conn.cursor()
+    c.execute("UPDATE tasks SET enabled = 0 WHERE id = ?", (task_id,))
+    conn.commit()
+    conn.close()
+    print("Task disabled.")
