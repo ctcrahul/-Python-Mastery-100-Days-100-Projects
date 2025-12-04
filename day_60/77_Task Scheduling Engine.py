@@ -26,6 +26,7 @@ import os
 TASK_DB = "tasks.db"
 HISTORY_DB = "history.db"
 
+
 # ------------------------------
 # DB INIT
 # ------------------------------
@@ -64,6 +65,7 @@ def init_history_db():
     )
     conn.commit()
     conn.close()
+
 
 # ------------------------------
 # TASK OPERATIONS
@@ -110,6 +112,8 @@ def disable_task(task_id):
     conn.commit()
     conn.close()
     print("Task disabled.")
+
+
 # ------------------------------
 # RUNNER
 # ------------------------------
@@ -168,6 +172,8 @@ def scheduler_loop():
             conn.close()
 
         time.sleep(1)
+
+
 # ------------------------------
 # ARG PARSE
 # ------------------------------
