@@ -168,3 +168,51 @@ def scheduler_loop():
             conn.close()
 
         time.sleep(1)
+# ------------------------------
+# ARG PARSE
+# ------------------------------
+def parse_args():
+    p = argparse.ArgumentParser(description="Mini Task Scheduler")
+    p.add_argument("--add", help="Command to run")
+    p.add_argument("--interval", type=int, help="Seconds between runs")
+    p.add_argument("--list", action="store_true")
+    p.add_argument("--enable", type=int)
+    p.add_argument("--disable", type=int)
+    p.add_argument("--run", action="store_true")
+    return p.parse_args()
+
+
+def main():
+    init_task_db()
+    init_history_db()
+
+    args = parse_args()
+
+    if args.add:
+        if not args.interval:
+            print("You must provide --interval with --add")
+            return
+        add_task(args.add, args.interval)
+        return
+
+    if args.list:
+        list_tasks()
+        return
+
+    if args.enable is not None:
+        enable_task(args.enable)
+        return
+
+    if args.disable is not None:
+        disable_task(args.disable)
+        return
+
+    if args.run:
+        scheduler_loop()
+        return
+
+    print("No action provided. Use --help.")
+
+
+if __name__ == "__main__":
+    main()
