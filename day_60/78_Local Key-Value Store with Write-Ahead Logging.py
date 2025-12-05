@@ -103,3 +103,47 @@ def repl():
             print("Bye.")
             break
 
+def repl():
+    store = KeyValueStore()
+    print("KV Store (type EXIT to quit)")
+
+    while True:
+        try:
+            raw = input("> ").strip()
+        except EOFError:
+            break
+
+        if not raw:
+            continue
+
+        parts = shlex.split(raw)
+        cmd = parts[0].upper()
+
+        if cmd == "EXIT":
+            print("Bye.")
+            break
+
+        if cmd == "SET" and len(parts) >= 3:
+            key = parts[1]
+            value = " ".join(parts[2:])
+            print(store.set(key, value))
+
+        elif cmd == "GET" and len(parts) == 2:
+            print(store.get(parts[1]))
+
+        elif cmd == "DEL" and len(parts) == 2:
+            print(store.delete(parts[1]))
+
+        elif cmd == "EXISTS" and len(parts) == 2:
+            print(store.exists(parts[1]))
+
+        elif cmd == "KEYS":
+            pattern = parts[1] if len(parts) == 2 else "*"
+            print(store.keys(pattern))
+
+        else:
+            print("ERR unknown command")
+    
+
+if __name__ == "__main__":
+    repl()
