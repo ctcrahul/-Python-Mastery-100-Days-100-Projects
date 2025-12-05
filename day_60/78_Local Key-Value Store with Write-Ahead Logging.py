@@ -70,6 +70,7 @@ class KeyValueStore:
         self.data.pop(key, None)
         self.append_wal(f"DEL {key}")
         return "1" if existed else "0"
+
     def exists(self, key):
         return "1" if key in self.data else "0"
 
@@ -82,26 +83,6 @@ class KeyValueStore:
             return " ".join(k for k in self.data if k.startswith(prefix))
         return pattern if pattern in self.data else ""
 
-
-def repl():
-    store = KeyValueStore()
-    print("KV Store (type EXIT to quit)")
-
-    while True:
-        try:
-            raw = input("> ").strip()
-        except EOFError:
-            break
-
-        if not raw:
-            continue
-
-        parts = shlex.split(raw)
-        cmd = parts[0].upper()
-
-        if cmd == "EXIT":
-            print("Bye.")
-            break
 
 def repl():
     store = KeyValueStore()
