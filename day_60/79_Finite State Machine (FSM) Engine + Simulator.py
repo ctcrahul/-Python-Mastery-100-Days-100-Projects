@@ -56,3 +56,28 @@ class FSM:
         # enter action
         if next_state.on_enter:
             next_state.on_enter(self.current)
+        self.save_state()
+        return f"Transitioned to {self.current}"
+
+    def save_state(self):
+        with open(STATE_FILE, "w") as f:
+            f.write(self.current)
+
+    def load_state(self):
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE, "r") as f:
+                self.current = f.read().strip()
+
+
+# ------------------------------
+# Traffic Light Demo FSM
+# ------------------------------
+
+def on_enter(state):
+    print(f"[ENTER] {state}")
+
+def on_exit(state):
+    print(f"[EXIT] {state}")
+
+def build_traffic_light_fsm():
+    fsm = FSM("RED")
