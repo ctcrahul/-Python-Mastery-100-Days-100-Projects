@@ -56,6 +56,7 @@ class FSM:
         # enter action
         if next_state.on_enter:
             next_state.on_enter(self.current)
+
         self.save_state()
         return f"Transitioned to {self.current}"
 
@@ -81,7 +82,8 @@ def on_exit(state):
 
 def build_traffic_light_fsm():
     fsm = FSM("RED")
-   red = State("RED", on_enter, on_exit)
+
+    red = State("RED", on_enter, on_exit)
     yellow = State("YELLOW", on_enter, on_exit)
     green = State("GREEN", on_enter, on_exit)
 
@@ -100,6 +102,7 @@ def build_traffic_light_fsm():
 def run_demo():
     fsm = build_traffic_light_fsm()
     print(f"Starting in state: {fsm.current}")
+
     while True:
         time.sleep(2)
         print(fsm.trigger("timer"))
