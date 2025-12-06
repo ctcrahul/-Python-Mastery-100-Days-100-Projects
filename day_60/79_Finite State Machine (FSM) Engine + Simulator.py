@@ -81,3 +81,22 @@ def on_exit(state):
 
 def build_traffic_light_fsm():
     fsm = FSM("RED")
+   red = State("RED", on_enter, on_exit)
+    yellow = State("YELLOW", on_enter, on_exit)
+    green = State("GREEN", on_enter, on_exit)
+
+    red.add_transition("timer", "GREEN")
+    green.add_transition("timer", "YELLOW")
+    yellow.add_transition("timer", "RED")
+
+    fsm.add_state(red)
+    fsm.add_state(yellow)
+    fsm.add_state(green)
+
+    fsm.load_state()
+    return fsm
+
+
+def run_demo():
+    fsm = build_traffic_light_fsm()
+    print(f"Starting in state: {fsm.current}")
