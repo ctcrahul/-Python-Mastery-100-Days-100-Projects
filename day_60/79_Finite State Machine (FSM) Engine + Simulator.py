@@ -100,3 +100,11 @@ def build_traffic_light_fsm():
 def run_demo():
     fsm = build_traffic_light_fsm()
     print(f"Starting in state: {fsm.current}")
+    while True:
+        time.sleep(2)
+        print(fsm.trigger("timer"))
+
+
+if __name__ == "__main__":
+    # comment out run_demo() if you want to manually test transitions
+    run_demo()
