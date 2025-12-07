@@ -29,3 +29,40 @@ class MessageBroker:
             return "Topic already exists"
         self.topics[name] = deque(maxlen=100)
         return f"Topic '{name}' created"
+   # --------------------------
+    # Producer
+    # --------------------------
+    def publish(self, topic, message):
+        if topic not in self.topics:
+            return "Topic not found"
+        self.topics[topic].append(message)
+        return f"Published to {topic}: {message}"
+
+    # --------------------------
+    # Consumer
+    # --------------------------
+    def subscribe(self, consumer, topic):
+        if topic not in self.topics:
+            return "Topic not found"
+
+        self.consumers[consumer] = {
+            "topic": topic,
+            "offset": 0
+        }
+        return f"Consumer '{consumer}' subscribed to '{topic}'"
+
+    def poll(self, consumer):
+        if consumer not in self.consumers:
+            return "Unknown consumer"
+
+        info = self.consumers[consumer]
+        topic = info["topic"]
+        offset = info["offset"]
+        messages = self.topics[topic]
+
+        if offset >= len(messages):
+            return "(no new messages)"
+
+        msg = messages[offset]
+        info["offset"] += 1
+        return msg
