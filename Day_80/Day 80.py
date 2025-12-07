@@ -29,7 +29,8 @@ class MessageBroker:
             return "Topic already exists"
         self.topics[name] = deque(maxlen=100)
         return f"Topic '{name}' created"
-   # --------------------------
+
+    # --------------------------
     # Producer
     # --------------------------
     def publish(self, topic, message):
@@ -66,6 +67,7 @@ class MessageBroker:
         msg = messages[offset]
         info["offset"] += 1
         return msg
+
     # --------------------------
     # Consumer Groups
     # --------------------------
@@ -94,6 +96,8 @@ class MessageBroker:
         msg = messages[offset]
         info["offset"] += 1
         return msg
+
+
 # -------------------------------------
 # Simple REPL UI
 # -------------------------------------
@@ -145,6 +149,7 @@ def repl():
 
         else:
             print("ERR unknown command")
+
 
 if __name__ == "__main__":
     repl()
