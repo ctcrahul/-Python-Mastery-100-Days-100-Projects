@@ -94,4 +94,54 @@ class MessageBroker:
         msg = messages[offset]
         info["offset"] += 1
         return msg
+# -------------------------------------
+# Simple REPL UI
+# -------------------------------------
+def repl():
+    broker = MessageBroker()
 
+    print("Event Broker (type EXIT to quit)")
+    print("Commands:")
+    print("  CREATE_TOPIC name")
+    print("  PUBLISH topic message...")
+    print("  SUB consumer topic")
+    print("  POLL consumer")
+    print("  CREATE_GROUP group topic")
+    print("  POLL_GROUP group")
+    print("")
+
+    while True:
+        raw = input("> ").strip()
+
+        if raw.upper() == "EXIT":
+            print("Bye.")
+            break
+
+        parts = shlex.split(raw)
+        if not parts:
+            continue
+
+        cmd = parts[0].upper()
+
+        if cmd == "CREATE_TOPIC" and len(parts) == 2:
+            print(broker.create_topic(parts[1]))
+
+        elif cmd == "PUBLISH" and len(parts) >= 3:
+            topic = parts[1]
+            message = " ".join(parts[2:])
+            print(broker.publish(topic, message))
+
+        elif cmd == "SUB" and len(parts) == 3:
+            print(broker.subscribe(parts[1], parts[2]))
+
+        elif cmd == "POLL" and len(parts) == 2:
+            print(broker.poll(parts[1]))
+
+        elif cmd == "CREATE_GROUP" and len(parts) == 3:
+            print(broker.create_group(parts[1], parts[2]))
+
+        elif cmd == "POLL_GROUP" and len(parts) == 2:
+            print(broker.poll_group(parts[1]))
+
+        else:
+            print("ERR unknown command")
