@@ -145,3 +145,6 @@ def repl():
 
         else:
             print("ERR unknown command")
+
+if __name__ == "__main__":
+    repl()
