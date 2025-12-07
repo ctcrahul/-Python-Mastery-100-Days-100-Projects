@@ -66,3 +66,32 @@ class MessageBroker:
         msg = messages[offset]
         info["offset"] += 1
         return msg
+    # --------------------------
+    # Consumer Groups
+    # --------------------------
+    def create_group(self, group, topic):
+        if topic not in self.topics:
+            return "Topic not found"
+
+        self.consumer_groups[group] = {
+            "topic": topic,
+            "offset": 0
+        }
+        return f"Group '{group}' created"
+
+    def poll_group(self, group):
+        if group not in self.consumer_groups:
+            return "Unknown group"
+
+        info = self.consumer_groups[group]
+        topic = info["topic"]
+        offset = info["offset"]
+        messages = self.topics[topic]
+
+        if offset >= len(messages):
+            return "(no new messages)"
+
+        msg = messages[offset]
+        info["offset"] += 1
+        return msg
+
