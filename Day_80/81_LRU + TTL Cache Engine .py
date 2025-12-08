@@ -116,3 +116,32 @@ class LRUCache:
                 for key, node in list(self.map.items()):
                     if node.expire_at and node.expire_at < now:
                         expired.append(key)
+             for key in expired:
+                    node = self.map[key]
+                    self._remove(node)
+                    del self.map[key]
+
+    # -------------------------
+    # Stats
+    # -------------------------
+    def stats(self):
+        return {
+            "count": len(self.map),
+            "hits": self.hits,
+            "misses": self.misses,
+            "keys": list(self.map.keys()),
+        }
+
+
+# -------------------------
+# Demo
+# -------------------------
+if __name__ == "__main__":
+    cache = LRUCache(capacity=3)
+
+    cache.set("a", 1, ttl=3)
+    cache.set("b", 2)
+    cache.set("c", 3)
+    print(cache.get("a"))
+    cache.set("d", 4)  # should evict LRU of b/c
+    print(cache.stats())
