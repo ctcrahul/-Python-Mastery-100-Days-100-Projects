@@ -49,6 +49,7 @@ class LRUCache:
         node.prev = self.head
         node.next = nxt
         nxt.prev = node
+
     def _remove(self, node):
         prev, nxt = node.prev, node.next
         prev.next = nxt
@@ -83,7 +84,8 @@ class LRUCache:
             self._add_to_front(node)
 
             return "OK"
-   def get(self, key):
+
+    def get(self, key):
         with self.lock:
             if key not in self.map:
                 self.misses += 1
@@ -116,7 +118,8 @@ class LRUCache:
                 for key, node in list(self.map.items()):
                     if node.expire_at and node.expire_at < now:
                         expired.append(key)
-             for key in expired:
+
+                for key in expired:
                     node = self.map[key]
                     self._remove(node)
                     del self.map[key]
