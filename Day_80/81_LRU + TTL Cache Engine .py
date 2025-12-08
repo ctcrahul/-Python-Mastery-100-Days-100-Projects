@@ -83,3 +83,36 @@ class LRUCache:
             self._add_to_front(node)
 
             return "OK"
+   def get(self, key):
+        with self.lock:
+            if key not in self.map:
+                self.misses += 1
+                return None
+
+            node = self.map[key]
+
+            # TTL check
+            if node.expire_at and node.expire_at < time.time():
+                self._remove(node)
+                del self.map[key]
+                self.misses += 1
+                return None
+
+            # LRU update
+            self._move_to_front(node)
+            self.hits += 1
+            return node.value
+
+    # -------------------------
+    # Background cleaner
+    # -------------------------
+    def _cleanup_loop(self):
+        while True:
+            time.sleep(self.cleanup_interval)
+            now = time.time()
+
+            with self.lock:
+                expired = []
+                for key, node in list(self.map.items()):
+                    if node.expire_at and node.expire_at < now:
+                        expired.append(key)
