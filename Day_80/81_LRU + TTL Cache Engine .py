@@ -49,3 +49,37 @@ class LRUCache:
         node.prev = self.head
         node.next = nxt
         nxt.prev = node
+    def _remove(self, node):
+        prev, nxt = node.prev, node.next
+        prev.next = nxt
+        nxt.prev = prev
+
+    def _move_to_front(self, node):
+        self._remove(node)
+        self._add_to_front(node)
+
+    # -------------------------
+    # Core Cache
+    # -------------------------
+    def set(self, key, value, ttl=None):
+        with self.lock:
+            expire_at = time.time() + ttl if ttl else None
+
+            if key in self.map:
+                node = self.map[key]
+                node.value = value
+                node.expire_at = expire_at
+                self._move_to_front(node)
+                return "OK"
+
+            if len(self.map) >= self.capacity:
+                # evict LRU
+                lru = self.tail.prev
+                self._remove(lru)
+                del self.map[lru.key]
+
+            node = Node(key, value, expire_at)
+            self.map[key] = node
+            self._add_to_front(node)
+
+            return "OK"
