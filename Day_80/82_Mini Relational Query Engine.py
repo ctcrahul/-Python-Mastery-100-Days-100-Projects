@@ -107,3 +107,18 @@ class Engine:
             return self.tables[name].create_index(col)
 
         return "ERR: unknown command"
+
+def repl():
+    engine = Engine()
+    print("Mini SQL Engine (type EXIT to quit)")
+
+    while True:
+        raw = input("> ").strip()
+        if raw.upper() == "EXIT":
+            break
+        result = engine.execute(raw)
+        print(result)
+
+
+if __name__ == "__main__":
+    repl()
