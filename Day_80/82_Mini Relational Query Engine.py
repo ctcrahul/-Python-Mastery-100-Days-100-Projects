@@ -27,6 +27,7 @@ class Table:
         row = dict(zip(self.columns, values))
         row_id = len(self.rows)
         self.rows.append(row)
+
         # update indexes
         for col, idx in self.indexes.items():
             value = row[col]
@@ -65,8 +66,8 @@ class Engine:
 
     def execute(self, command):
         parts = shlex.split(command)
-        if not p
-           return ""
+        if not parts:
+            return ""
 
         cmd = parts[0].upper()
 
@@ -107,6 +108,7 @@ class Engine:
             return self.tables[name].create_index(col)
 
         return "ERR: unknown command"
+
 
 def repl():
     engine = Engine()
