@@ -45,3 +45,24 @@ class Table:
 
         self.indexes[col] = idx
         return f"Index created on {col}"
+
+    def select_all(self):
+        return self.rows
+
+    def select_where(self, col, value):
+        if col in self.indexes:
+            # indexed lookup
+            row_ids = self.indexes[col].get(value, [])
+            return [self.rows[i] for i in row_ids]
+
+        # fallback scan
+        return [r for r in self.rows if r.get(col) == value]
+
+
+class Engine:
+    def __init__(self):
+        self.tables = {}
+
+    def execute(self, command):
+        parts = shlex.split(command)
+        if not p
