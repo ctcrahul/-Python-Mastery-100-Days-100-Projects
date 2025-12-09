@@ -66,3 +66,44 @@ class Engine:
     def execute(self, command):
         parts = shlex.split(command)
         if not p
+           return ""
+
+        cmd = parts[0].upper()
+
+        if cmd == "CREATE":
+            name = parts[1]
+            cols = parts[2:]
+            if name in self.tables:
+                return "ERR: table exists"
+            self.tables[name] = Table(name, cols)
+            return f"Table '{name}' created"
+
+        if cmd == "INSERT":
+            name = parts[1]
+            if name not in self.tables:
+                return "ERR: no such table"
+            values = parts[2:]
+            return self.tables[name].insert(values)
+
+        if cmd == "SELECT":
+            name = parts[1]
+            if name not in self.tables:
+                return "ERR: no such table"
+
+            if len(parts) == 2:
+                return self.tables[name].select_all()
+
+            if parts[2].upper() == "WHERE":
+                col = parts[3]
+                assert parts[4] == "==", "Use '=='"
+                value = parts[5]
+                return self.tables[name].select_where(col, value)
+
+        if cmd == "INDEX":
+            name = parts[1]
+            col = parts[2]
+            if name not in self.tables:
+                return "ERR: no such table"
+            return self.tables[name].create_index(col)
+
+        return "ERR: unknown command"
