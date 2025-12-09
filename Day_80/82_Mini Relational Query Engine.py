@@ -27,3 +27,21 @@ class Table:
         row = dict(zip(self.columns, values))
         row_id = len(self.rows)
         self.rows.append(row)
+        # update indexes
+        for col, idx in self.indexes.items():
+            value = row[col]
+            idx.setdefault(value, []).append(row_id)
+
+        return "OK"
+
+    def create_index(self, col):
+        if col not in self.columns:
+            return "ERR: no such column"
+
+        idx = {}
+        for i, row in enumerate(self.rows):
+            value = row[col]
+            idx.setdefault(value, []).append(i)
+
+        self.indexes[col] = idx
+        return f"Index created on {col}"
