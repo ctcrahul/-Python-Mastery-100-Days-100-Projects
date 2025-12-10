@@ -25,7 +25,7 @@ class ChatServer:
     def __init__(self):
         self.rooms = defaultdict(set)      # room -> set of writers
         self.usernames = {}                # writer -> name
-             self.user_rooms = {}               # writer -> room
+        self.user_rooms = {}               # writer -> room
         self.message_queues = {}           # writer -> asyncio.Queue
 
     async def register(self, writer):
@@ -61,7 +61,7 @@ class ChatServer:
                 break
 
     async def handle(self, reader, writer):
-       await self.register(writer)
+        await self.register(writer)
 
         asyncio.create_task(self.broadcaster(writer))
 
@@ -125,3 +125,12 @@ class ChatServer:
             await self.send(writer, "Unknown command")
 
     async def run(self, host="127.0.0.1", port=8888):
+        server = await asyncio.start_server(self.handle, host, port)
+        addrs = ", ".join(str(sock.getsockname()) for sock in server.sockets)
+        print(f"Server running on {addrs}")
+        async with server:
+            await server.serve_forever()
+
+
+if __name__ == "__main__":
+    asyncio.run(ChatServer().run())
