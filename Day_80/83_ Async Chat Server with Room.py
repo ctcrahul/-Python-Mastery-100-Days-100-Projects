@@ -61,3 +61,26 @@ class ChatServer:
                 break
 
     async def handle(self, reader, writer):
+       await self.register(writer)
+
+        asyncio.create_task(self.broadcaster(writer))
+
+        try:
+            while True:
+                data = await reader.readline()
+                if not data:
+                    break
+                text = data.decode().strip()
+                if text.startswith("/"):
+                    await self.handle_command(writer, text)
+                else:
+                    await self.send(writer, "Unknown command. Use /msg to chat.")
+        except Exception:
+            pass
+
+        await self.unregister(writer)
+
+    async def handle_command(self, writer, text):
+        parts = text.split(" ", 1)
+        cmd = parts[0].lower()
+        arg = parts[1] if len(parts) > 1 else ""
