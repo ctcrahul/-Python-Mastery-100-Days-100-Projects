@@ -84,3 +84,44 @@ class ChatServer:
         parts = text.split(" ", 1)
         cmd = parts[0].lower()
         arg = parts[1] if len(parts) > 1 else ""
+
+        if cmd == "/nick":
+            self.usernames[writer] = arg or self.usernames[writer]
+            await self.send(writer, f"Name set to {self.usernames[writer]}")
+
+        elif cmd == "/join":
+            new_room = arg.strip()
+            old_room = self.user_rooms.get(writer)
+
+            if old_room and writer in self.rooms[old_room]:
+                self.rooms[old_room].remove(writer)
+
+            self.rooms[new_room].add(writer)
+            self.user_rooms[writer] = new_room
+            await self.send(writer, f"You joined room '{new_room}'")
+
+        elif cmd == "/rooms":
+            await self.send(writer, "Rooms: " + ", ".join(self.rooms.keys()))
+
+        elif cmd == "/users":
+            names = [self.usernames[w] for w in self.usernames]
+            await self.send(writer, "Users: " + ", ".join(names))
+
+        elif cmd == "/msg":
+            room = self.user_rooms.get(writer)
+            if not room:
+                await self.send(writer, "Join a room first with /join <room>")
+                return
+            sender = self.usernames.get(writer, "unknown")
+            message = f"[{room}] {sender}: {arg}"
+            for w in list(self.rooms[room]):
+                await self.send(w, message)
+
+        elif cmd == "/quit":
+            await self.send(writer, "Goodbye.")
+            await self.unregister(writer)
+
+        else:
+            await self.send(writer, "Unknown command")
+
+    async def run(self, host="127.0.0.1", port=8888):
