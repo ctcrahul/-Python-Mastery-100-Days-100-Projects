@@ -60,6 +60,7 @@ def vclock_compare(vc1, vc2):
         return -1
     return 0
 
+
 @app.post("/put")
 async def put(request: Request):
     global store
@@ -88,6 +89,7 @@ async def get(key: str):
     if not item:
         return {"value": None, "vclock": {}}
     return item
+
 
 @app.post("/gossip")
 async def gossip(incoming: dict):
@@ -118,6 +120,7 @@ def gossip_loop():
                 requests.post(f"http://localhost:{p}/gossip", json=store, timeout=1)
             except:
                 pass
+
 
 def start_gossip():
     t = threading.Thread(target=gossip_loop, daemon=True)
