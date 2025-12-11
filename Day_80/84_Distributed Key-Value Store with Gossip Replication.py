@@ -118,3 +118,25 @@ def gossip_loop():
                 requests.post(f"http://localhost:{p}/gossip", json=store, timeout=1)
             except:
                 pass
+
+def start_gossip():
+    t = threading.Thread(target=gossip_loop, daemon=True)
+    t.start()
+
+
+# Run server
+def start(port, peer_ports):
+    global node_id, peers
+    node_id = str(port)
+    peers = peer_ports
+    start_gossip()
+    run(app, host="127.0.0.1", port=port)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, required=True)
+    parser.add_argument("--peers", nargs="*", type=int, default=[])
+    args = parser.parse_args()
+
+    start(args.port, args.peers)
