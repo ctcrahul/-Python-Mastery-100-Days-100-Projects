@@ -88,3 +88,33 @@ async def get(key: str):
     if not item:
         return {"value": None, "vclock": {}}
     return item
+
+@app.post("/gossip")
+async def gossip(incoming: dict):
+    global store
+    for key, item in incoming.items():
+        if key not in store:
+            store[key] = item
+            continue
+
+        local = store[key]
+        cmp = vclock_compare(local["vclock"], item["vclock"])
+
+        if cmp == -1:
+            store[key] = item
+        elif cmp == 0:
+            # concurrent -> keep both? For now we merge vector clocks, pick incoming value
+            merged_vc = merge_vclocks(local["vclock"], item["vclock"])
+            store[key] = {"value": item["value"], "vclock": merged_vc}
+
+    return {"status": "merged"}
+
+
+def gossip_loop():
+    while True:
+        time.sleep(2)
+        for p in peers:
+            try:
+                requests.post(f"http://localhost:{p}/gossip", json=store, timeout=1)
+            except:
+                pass
