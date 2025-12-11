@@ -59,3 +59,32 @@ def vclock_compare(vc1, vc2):
     if lt and not gt:
         return -1
     return 0
+
+@app.post("/put")
+async def put(request: Request):
+    global store
+    form = await request.form()
+    key = form["key"]
+    value = form["value"]
+
+    existing = store.get(key)
+    new_vc = {node_id: (existing["vclock"].get(node_id, 0) + 1) if existing else 1}
+
+    if existing:
+        merged_vc = merge_vclocks(existing["vclock"], new_vc)
+    else:
+        merged_vc = new_vc
+
+    store[key] = {
+        "value": value,
+        "vclock": merged_vc
+    }
+    return {"status": "OK", "node": node_id}
+
+
+@app.get("/get")
+async def get(key: str):
+    item = store.get(key)
+    if not item:
+        return {"value": None, "vclock": {}}
+    return item
