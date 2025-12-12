@@ -30,6 +30,7 @@ auth_scheme = HTTPBearer()
 users = {}             # username -> {password_hash, refresh_tokens:set}
 revoked_refresh_tokens = set()
 
+
 def hash_pw(pw: str):
     return bcrypt.hashpw(pw.encode(), bcrypt.gensalt()).decode()
 
@@ -44,34 +45,6 @@ def make_access_token(username):
         "exp": datetime.utcnow() + timedelta(seconds=ACCESS_TTL)
     }
     return jwt.encode(payload, SECRET, algorithm="HS256")
-    # rotate token
-    users[username]["refresh_tokens"].remove(jti)
-    revoked_refresh_tokens.add(jti)
-
-    new_refresh, new_jti = make_refresh_token(username)
-    users[username]["refresh_tokens"].add(new_jti)
-
-    new_access = make_access_token(username)
-
-    return {"access": new_access, "refresh": new_refresh}
-
-
-@app.post("/logout")
-async def logout(request: Request):
-    data = await request.json()
-    token = data["refresh"]
-    payload = verify_refresh_token(token)
-
-    username = payload["sub"]
-    jti = payload["jti"]
-
-    if jti in revoked_refresh_tokens:
-        return {"status": "already revoked"}
-
-    revoked_refresh_tokens.add(jti)
-    users[username]["refresh_tokens"].discard(jti)
-    return {"status": "logged out"}
-
 
 
 def make_refresh_token(username):
@@ -83,6 +56,8 @@ def make_refresh_token(username):
     }
     token = jwt.encode(payload, REFRESH_SECRET, algorithm="HS256")
     return token, token_id
+
+
 def verify_access_token(token: str):
     try:
         return jwt.decode(token, SECRET, algorithms=["HS256"])
@@ -144,3 +119,38 @@ async def refresh(request: Request):
 
     if jti not in users[username]["refresh_tokens"]:
         raise HTTPException(401, "Refresh token not recognized")
+
+    # rotate token
+    users[username]["refresh_tokens"].remove(jti)
+    revoked_refresh_tokens.add(jti)
+
+    new_refresh, new_jti = make_refresh_token(username)
+    users[username]["refresh_tokens"].add(new_jti)
+
+    new_access = make_access_token(username)
+
+    return {"access": new_access, "refresh": new_refresh}
+
+
+@app.post("/logout")
+async def logout(request: Request):
+    data = await request.json()
+    token = data["refresh"]
+    payload = verify_refresh_token(token)
+
+    username = payload["sub"]
+    jti = payload["jti"]
+
+    if jti in revoked_refresh_tokens:
+        return {"status": "already revoked"}
+
+    revoked_refresh_tokens.add(jti)
+    users[username]["refresh_tokens"].discard(jti)
+    return {"status": "logged out"}
+
+
+@app.get("/protected")
+async def protected(creds: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    token = creds.credentials
+    payload = verify_access_token(token)
+    return {"message": "You accessed protected data", "user": payload["sub"]}
