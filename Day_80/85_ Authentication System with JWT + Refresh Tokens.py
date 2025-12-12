@@ -44,6 +44,34 @@ def make_access_token(username):
         "exp": datetime.utcnow() + timedelta(seconds=ACCESS_TTL)
     }
     return jwt.encode(payload, SECRET, algorithm="HS256")
+    # rotate token
+    users[username]["refresh_tokens"].remove(jti)
+    revoked_refresh_tokens.add(jti)
+
+    new_refresh, new_jti = make_refresh_token(username)
+    users[username]["refresh_tokens"].add(new_jti)
+
+    new_access = make_access_token(username)
+
+    return {"access": new_access, "refresh": new_refresh}
+
+
+@app.post("/logout")
+async def logout(request: Request):
+    data = await request.json()
+    token = data["refresh"]
+    payload = verify_refresh_token(token)
+
+    username = payload["sub"]
+    jti = payload["jti"]
+
+    if jti in revoked_refresh_tokens:
+        return {"status": "already revoked"}
+
+    revoked_refresh_tokens.add(jti)
+    users[username]["refresh_tokens"].discard(jti)
+    return {"status": "logged out"}
+
 
 
 def make_refresh_token(username):
