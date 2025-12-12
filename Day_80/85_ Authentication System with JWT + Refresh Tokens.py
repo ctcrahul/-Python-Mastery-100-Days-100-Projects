@@ -55,4 +55,31 @@ def make_refresh_token(username):
     }
     token = jwt.encode(payload, REFRESH_SECRET, algorithm="HS256")
     return token, token_id
+def verify_access_token(token: str):
+    try:
+        return jwt.decode(token, SECRET, algorithms=["HS256"])
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid or expired access token")
+
+
+def verify_refresh_token(token: str):
+    try:
+        return jwt.decode(token, REFRESH_SECRET, algorithms=["HS256"])
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid or expired refresh token")
+
+
+@app.post("/register")
+async def register(request: Request):
+    data = await request.json()
+    username = data["username"]
+    password = data["password"]
+
+    if username in users:
+        raise HTTPException(400, "User exists")
+
+    pw_hash = hash_pw(password)
+    users[username] = {"password": pw_hash, "refresh_tokens": set()}
+    return {"status": "registered", "user": username}
+
 
