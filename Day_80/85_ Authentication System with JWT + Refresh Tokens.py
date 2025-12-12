@@ -83,3 +83,36 @@ async def register(request: Request):
     return {"status": "registered", "user": username}
 
 
+@app.post("/login")
+async def login(request: Request):
+    data = await request.json()
+    username = data["username"]
+    password = data["password"]
+
+    if username not in users:
+        raise HTTPException(400, "Unknown user")
+
+    if not check_pw(password, users[username]["password"]):
+        raise HTTPException(400, "Wrong password")
+
+    access_token = make_access_token(username)
+    refresh_token, token_id = make_refresh_token(username)
+    users[username]["refresh_tokens"].add(token_id)
+
+    return {"access": access_token, "refresh": refresh_token}
+
+
+@app.post("/refresh")
+async def refresh(request: Request):
+    data = await request.json()
+    token = data["refresh"]
+
+    payload = verify_refresh_token(token)
+    username = payload["sub"]
+    jti = payload["jti"]
+
+    if jti in revoked_refresh_tokens:
+        raise HTTPException(401, "Refresh token revoked")
+
+    if jti not in users[username]["refresh_tokens"]:
+        raise HTTPException(401, "Refresh token not recognized")
