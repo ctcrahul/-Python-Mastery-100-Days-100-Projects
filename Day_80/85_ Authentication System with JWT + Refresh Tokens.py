@@ -29,3 +29,30 @@ auth_scheme = HTTPBearer()
 
 users = {}             # username -> {password_hash, refresh_tokens:set}
 revoked_refresh_tokens = set()
+
+def hash_pw(pw: str):
+    return bcrypt.hashpw(pw.encode(), bcrypt.gensalt()).decode()
+
+
+def check_pw(pw: str, hashed: str):
+    return bcrypt.checkpw(pw.encode(), hashed.encode())
+
+
+def make_access_token(username):
+    payload = {
+        "sub": username,
+        "exp": datetime.utcnow() + timedelta(seconds=ACCESS_TTL)
+    }
+    return jwt.encode(payload, SECRET, algorithm="HS256")
+
+
+def make_refresh_token(username):
+    token_id = str(uuid.uuid4())
+    payload = {
+        "sub": username,
+        "jti": token_id,
+        "exp": datetime.utcnow() + timedelta(seconds=REFRESH_TTL)
+    }
+    token = jwt.encode(payload, REFRESH_SECRET, algorithm="HS256")
+    return token, token_id
+
