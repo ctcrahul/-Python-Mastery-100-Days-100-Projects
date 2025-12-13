@@ -89,3 +89,17 @@ class LogAnalyzer:
             print("\nNo error spikes detected.")
 
         print("\n--- END REPORT ---\n")
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python log_analyzer.py <logfile>")
+        return
+
+    logfile = sys.argv[1]
+    analyzer = LogAnalyzer()
+    analyzer.process(logfile)
+    analyzer.report()
+
+
+if __name__ == "__main__":
+    main()
