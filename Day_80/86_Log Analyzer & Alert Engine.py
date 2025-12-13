@@ -36,3 +36,31 @@ class LogAnalyzer:
             return timestamp, level, message
         except Exception:
             return None
+    def process(self, filepath):
+        with open(filepath, "r", encoding="utf-8") as f:
+            for line in f:
+                parsed = self.parse_line(line.strip())
+                if not parsed:
+                    continue
+
+                ts, level, message = parsed
+                self.level_count[level] += 1
+
+                if level == "ERROR":
+                    self.errors.append(ts)
+                    self.error_messages[message] += 1
+
+    def detect_error_spikes(self):
+        spikes = []
+        self.errors.sort()
+
+        for i in range(len(self.errors)):
+            window_start = self.errors[i]
+            window_end = window_start + timedelta(seconds=ERROR_WINDOW_SECONDS)
+            count = 0
+
+            for j in range(i, len(self.errors)):
+                if self.errors[j] <= window_end:
+                    count += 1
+                else:
+                    break
