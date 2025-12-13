@@ -64,3 +64,28 @@ class LogAnalyzer:
                     count += 1
                 else:
                     break
+            if count >= ERROR_SPIKE_THRESHOLD:
+                spikes.append((window_start, count))
+
+        return spikes
+
+    def report(self):
+        print("\n--- LOG ANALYSIS REPORT ---\n")
+
+        print("Log Levels:")
+        for level, count in self.level_count.items():
+            print(f"  {level}: {count}")
+
+        print("\nMost Common Errors:")
+        for msg, count in self.error_messages.most_common(5):
+            print(f"  {count}x {msg}")
+
+        spikes = self.detect_error_spikes()
+        if spikes:
+            print("\n⚠ ERROR SPIKES DETECTED:")
+            for ts, count in spikes:
+                print(f"  {count} errors starting at {ts}")
+        else:
+            print("\nNo error spikes detected.")
+
+        print("\n--- END REPORT ---\n")
