@@ -36,6 +36,7 @@ class LogAnalyzer:
             return timestamp, level, message
         except Exception:
             return None
+
     def process(self, filepath):
         with open(filepath, "r", encoding="utf-8") as f:
             for line in f:
@@ -64,6 +65,7 @@ class LogAnalyzer:
                     count += 1
                 else:
                     break
+
             if count >= ERROR_SPIKE_THRESHOLD:
                 spikes.append((window_start, count))
 
@@ -89,6 +91,7 @@ class LogAnalyzer:
             print("\nNo error spikes detected.")
 
         print("\n--- END REPORT ---\n")
+
 
 def main():
     if len(sys.argv) != 2:
