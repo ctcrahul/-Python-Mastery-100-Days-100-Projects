@@ -81,3 +81,16 @@ def parse_args():
     p.add_argument("target", help="Target directory")
     p.add_argument("--delete", action="store_true", help="Delete extra files in target")
     return p.parse_args()
+def main():
+    args = parse_args()
+
+    if not os.path.isdir(args.source):
+        print("Source directory does not exist")
+        return
+
+    ensure_dir(args.target)
+    sync(args.source, args.target, args.delete)
+
+
+if __name__ == "__main__":
+    main()
