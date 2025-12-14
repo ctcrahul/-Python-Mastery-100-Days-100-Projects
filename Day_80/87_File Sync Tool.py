@@ -36,6 +36,8 @@ def collect_files(root):
             rel = os.path.relpath(full, root)
             files[rel] = full
     return files
+
+
 def ensure_dir(path):
     os.makedirs(path, exist_ok=True)
 
@@ -62,7 +64,7 @@ def sync(src, dst, delete_extra=False):
                 updated += 1
 
     # Delete extra files
-   if delete_extra:
+    if delete_extra:
         for rel, dst_path in dst_files.items():
             if rel not in src_files:
                 os.remove(dst_path)
@@ -81,6 +83,8 @@ def parse_args():
     p.add_argument("target", help="Target directory")
     p.add_argument("--delete", action="store_true", help="Delete extra files in target")
     return p.parse_args()
+
+
 def main():
     args = parse_args()
 
