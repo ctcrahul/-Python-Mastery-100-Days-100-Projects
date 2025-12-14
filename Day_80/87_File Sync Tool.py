@@ -62,3 +62,22 @@ def sync(src, dst, delete_extra=False):
                 updated += 1
 
     # Delete extra files
+   if delete_extra:
+        for rel, dst_path in dst_files.items():
+            if rel not in src_files:
+                os.remove(dst_path)
+                print(f"[DELETE] {rel}")
+                deleted += 1
+
+    print("\n--- SUMMARY ---")
+    print(f"Copied : {copied}")
+    print(f"Updated: {updated}")
+    print(f"Deleted: {deleted}")
+
+
+def parse_args():
+    p = argparse.ArgumentParser(description="File Sync Tool")
+    p.add_argument("source", help="Source directory")
+    p.add_argument("target", help="Target directory")
+    p.add_argument("--delete", action="store_true", help="Delete extra files in target")
+    return p.parse_args()
