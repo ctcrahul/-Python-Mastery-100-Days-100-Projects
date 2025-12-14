@@ -36,3 +36,29 @@ def collect_files(root):
             rel = os.path.relpath(full, root)
             files[rel] = full
     return files
+def ensure_dir(path):
+    os.makedirs(path, exist_ok=True)
+
+
+def sync(src, dst, delete_extra=False):
+    src_files = collect_files(src)
+    dst_files = collect_files(dst) if os.path.exists(dst) else {}
+
+    copied = updated = deleted = 0
+
+    # Copy & update
+    for rel, src_path in src_files.items():
+        dst_path = os.path.join(dst, rel)
+        ensure_dir(os.path.dirname(dst_path))
+
+        if rel not in dst_files:
+            shutil.copy2(src_path, dst_path)
+            print(f"[COPY] {rel}")
+            copied += 1
+        else:
+            if file_hash(src_path) != file_hash(dst_files[rel]):
+                shutil.copy2(src_path, dst_path)
+                print(f"[UPDATE] {rel}")
+                updated += 1
+
+    # Delete extra files
