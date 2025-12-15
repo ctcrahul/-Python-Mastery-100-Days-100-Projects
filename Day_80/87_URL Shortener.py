@@ -82,3 +82,20 @@ def redirect_url(code):
     url, _ = record
     increment_click(code)
     return redirect(url)
+
+@app.route("/stats/<code>")
+def stats(code):
+    record = get_url(code)
+    if not record:
+        return jsonify({"error": "Not found"}), 404
+
+    url, clicks = record
+    return jsonify({
+        "url": url,
+        "clicks": clicks
+    })
+
+
+if __name__ == "__main__":
+    init_db()
+    app.run(debug=True)
