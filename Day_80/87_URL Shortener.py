@@ -28,6 +28,7 @@ def init_db():
             )
         """)
 
+
 def generate_code(length=6):
     return "".join(random.choice(BASE62) for _ in range(length))
 
@@ -56,6 +57,7 @@ def increment_click(code):
             (code,)
         )
 
+
 @app.route("/shorten", methods=["POST"])
 def shorten():
     data = request.get_json()
@@ -82,6 +84,7 @@ def redirect_url(code):
     url, _ = record
     increment_click(code)
     return redirect(url)
+
 
 @app.route("/stats/<code>")
 def stats(code):
