@@ -55,3 +55,30 @@ def increment_click(code):
             "UPDATE urls SET clicks = clicks + 1 WHERE code=?",
             (code,)
         )
+
+@app.route("/shorten", methods=["POST"])
+def shorten():
+    data = request.get_json()
+    url = data.get("url")
+
+    if not url:
+        return jsonify({"error": "URL required"}), 400
+
+    while True:
+        code = generate_code()
+        if not get_url(code):
+            break
+
+    save_url(code, url)
+    return jsonify({"short_url": f"http://127.0.0.1:5000/{code}"})
+
+
+@app.route("/<code>")
+def redirect_url(code):
+    record = get_url(code)
+    if not record:
+        return jsonify({"error": "Not found"}), 404
+
+    url, _ = record
+    increment_click(code)
+    return redirect(url)
