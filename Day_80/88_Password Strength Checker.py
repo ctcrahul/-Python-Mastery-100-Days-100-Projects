@@ -23,10 +23,6 @@ COMMON_PASSWORDS = {
 
 CHARSETS = {
     "lower": 26,
-    "upper": 26
-
-CHARSETS = {
-    "lower": 26,
     "upper": 26,
     "digits": 10,
     "symbols": 32
@@ -69,6 +65,8 @@ def human_time(seconds):
     if seconds < 31536000:
         return f"{seconds / 86400:.1f} days"
     return f"{seconds / 31536000:.1f} years"
+
+
 def score_password(password):
     score = 0
 
@@ -93,8 +91,9 @@ def score_password(password):
 
 
 def analyze(password):
-    print("\n--
- ent = entropy(password)
+    print("\n--- PASSWORD ANALYSIS ---")
+
+    ent = entropy(password)
     sec = crack_time(ent)
     score = score_password(password)
 
