@@ -94,3 +94,30 @@ def score_password(password):
 
 def analyze(password):
     print("\n--
+ ent = entropy(password)
+    sec = crack_time(ent)
+    score = score_password(password)
+
+    print(f"Length       : {len(password)}")
+    print(f"Entropy      : {ent:.2f} bits")
+    print(f"Crack Time   : {human_time(sec)}")
+    print(f"Strength     : {score}/100")
+
+    if password.lower() in COMMON_PASSWORDS:
+        print("⚠ WARNING: Common leaked password")
+
+    if score < 40:
+        print("❌ Weak password")
+    elif score < 70:
+        print("⚠ Medium strength")
+    else:
+        print("✅ Strong password")
+
+
+def main():
+    pw = input("Enter password to check: ")
+    analyze(pw)
+
+
+if __name__ == "__main__":
+    main()
