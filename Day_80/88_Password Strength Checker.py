@@ -69,4 +69,28 @@ def human_time(seconds):
     if seconds < 31536000:
         return f"{seconds / 86400:.1f} days"
     return f"{seconds / 31536000:.1f} years"
+def score_password(password):
+    score = 0
 
+    if len(password) >= 12:
+        score += 30
+    elif len(password) >= 8:
+        score += 15
+
+    if re.search(r"[A-Z]", password):
+        score += 15
+    if re.search(r"[a-z]", password):
+        score += 15
+    if re.search(r"\d", password):
+        score += 15
+    if re.search(r"[^\w]", password):
+        score += 10
+
+    if password.lower() in COMMON_PASSWORDS:
+        score = 0
+
+    return min(score, 100)
+
+
+def analyze(password):
+    print("\n--
