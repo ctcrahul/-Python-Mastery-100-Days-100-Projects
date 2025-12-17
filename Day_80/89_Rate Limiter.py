@@ -32,3 +32,32 @@ class TokenBucket:
                 self.tokens -= tokens
                 return True
             return False
+
+class SlidingWindow:
+    def __init__(self, limit, window_seconds):
+        self.limit = limit
+        self.window = window_seconds
+        self.events = deque()
+        self.lock = threading.Lock()
+
+    def allow(self):
+        with self.lock:
+            now = time.time()
+            while self.events and self.events[0] <= now - self.window:
+                self.events.popleft()
+
+            if len(self.events) < self.limit:
+                self.events.append(now)
+                return True
+            return False
+
+
+class RateLimiter:
+    def __init__(self, rate, capacity, window_limit, window_seconds):
+        self.buckets = defaultdict(lambda: TokenBucket(rate, capacity))
+        self.windows = defaultdict(lambda: SlidingWindow(window_limit, window_seconds))
+
+    def allow(self, user_id):
+        # both must allow
+        return self.buckets[user_id].allow() and self.windows[user_id].allow()
+
