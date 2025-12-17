@@ -11,19 +11,7 @@ import time
 import threading
 from collections import deque, defaultdict
 
-class RateLimiter:
-    def __init__(self, rate, capacity, window_limit, window_seconds):
-        self.buckets = defaultdict(lambda: TokenBucket(rate, capacity))
-        self.windows = defaultdict(lambda: SlidingWindow(window_limit, window_seconds))
 
-    def allow(self, user_id):
-        # both must allow
-        return self.buckets[user_id].allow() and self.windows[user_id].allow()
-
-
-# ---------------- Demo ----------------
-if __name__ == "__main__":
-    limiter = RateLimiter(
 class TokenBucket:
     def __init__(self, rate, capacity):
         self.rate = rate              # tokens per second
@@ -44,6 +32,7 @@ class TokenBucket:
                 self.tokens -= tokens
                 return True
             return False
+
 
 class SlidingWindow:
     def __init__(self, limit, window_seconds):
@@ -72,6 +61,7 @@ class RateLimiter:
     def allow(self, user_id):
         # both must allow
         return self.buckets[user_id].allow() and self.windows[user_id].allow()
+
 
 # ---------------- Demo ----------------
 if __name__ == "__main__":
