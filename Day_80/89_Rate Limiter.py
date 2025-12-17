@@ -61,3 +61,19 @@ class RateLimiter:
         # both must allow
         return self.buckets[user_id].allow() and self.windows[user_id].allow()
 
+# ---------------- Demo ----------------
+if __name__ == "__main__":
+    limiter = RateLimiter(
+        rate=5,             # 5 req/sec
+        capacity=10,         # burst up to 10
+        window_limit=20,     # max 20 requests
+        window_seconds=10    # per 10 seconds
+    )
+
+    user = "user123"
+
+    print("Sending 30 requests quickly:\n")
+    for i in range(30):
+        allowed = limiter.allow(user)
+        print(f"Request {i+1}: {'ALLOWED' if allowed else 'BLOCKED'}")
+        time.sleep(0.1)
