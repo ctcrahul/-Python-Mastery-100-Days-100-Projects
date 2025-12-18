@@ -70,3 +70,17 @@ class JobScheduler:
 
     def stop(self):
         self.running = False
+# ---------------- Demo ----------------
+if __name__ == "__main__":
+    scheduler = JobScheduler()
+
+    t = threading.Thread(target=scheduler.run, daemon=True)
+    t.start()
+
+    scheduler.add_job("low_priority", priority=1, delay=0, duration=2)
+    scheduler.add_job("high_priority", priority=5, delay=0, duration=1)
+    scheduler.add_job("delayed_job", priority=3, delay=3, duration=1)
+    scheduler.add_job("medium_priority", priority=3, delay=0, duration=1)
+
+    time.sleep(8)
+    scheduler.stop()
