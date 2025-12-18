@@ -52,3 +52,21 @@ class JobScheduler:
                 if not self.jobs:
                     time.sleep(0.1)
                     continue
+                job = self.jobs[0]
+                now = time.time()
+
+                if job.run_at > now:
+                    time.sleep(job.run_at - now)
+                    continue
+
+                heapq.heappop(self.jobs)
+
+            self.execute(job)
+
+    def execute(self, job):
+        print(f"[RUNNING] {job.name}")
+        time.sleep(job.duration)
+        print(f"[DONE] {job.name}")
+
+    def stop(self):
+        self.running = False
