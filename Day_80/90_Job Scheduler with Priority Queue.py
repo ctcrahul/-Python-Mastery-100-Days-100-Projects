@@ -33,6 +33,7 @@ class Job:
             other.run_at, -other.priority, other.id
         )
 
+
 class JobScheduler:
     def __init__(self):
         self.jobs = []
@@ -52,6 +53,7 @@ class JobScheduler:
                 if not self.jobs:
                     time.sleep(0.1)
                     continue
+
                 job = self.jobs[0]
                 now = time.time()
 
@@ -70,6 +72,8 @@ class JobScheduler:
 
     def stop(self):
         self.running = False
+
+
 # ---------------- Demo ----------------
 if __name__ == "__main__":
     scheduler = JobScheduler()
