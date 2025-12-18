@@ -32,3 +32,23 @@ class Job:
         return (self.run_at, -self.priority, self.id) < (
             other.run_at, -other.priority, other.id
         )
+
+class JobScheduler:
+    def __init__(self):
+        self.jobs = []
+        self.lock = threading.Lock()
+        self.running = True
+
+    def add_job(self, name, priority=1, delay=0, duration=1):
+        job = Job(name, priority, delay, duration)
+        with self.lock:
+            heapq.heappush(self.jobs, job)
+        print(f"[ADDED] {name} (priority={priority}, delay={delay}s)")
+
+    def run(self):
+        print("Scheduler started\n")
+        while self.running:
+            with self.lock:
+                if not self.jobs:
+                    time.sleep(0.1)
+                    continue
