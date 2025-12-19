@@ -45,3 +45,23 @@ def crawl(start_url):
 
         if depth > MAX_DEPTH or url in visited:
             continue
+
+        print(f"[DEPTH {depth}] {url}")
+        visited.add(url)
+
+        try:
+            resp = requests.get(url, timeout=TIMEOUT)
+            if "text/html" not in resp.headers.get("Content-Type", ""):
+                continue
+        except Exception:
+            continue
+
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for a in soup.find_all("a", href=True):
+            link = normalize(urljoin(url, a["href"]))
+            if same_domain(link, base_netloc) and link not in visited:
+                queue.append((link, depth + 1))
+
+    print(f"\nCrawled {len(visited)} pages.")
+    return visited
+
