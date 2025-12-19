@@ -65,3 +65,9 @@ def crawl(start_url):
     print(f"\nCrawled {len(visited)} pages.")
     return visited
 
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python web_crawler.py <url>")
+        sys.exit(1)
+
+    crawl(sys.argv[1])
