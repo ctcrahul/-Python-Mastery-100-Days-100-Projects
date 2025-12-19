@@ -1,4 +1,4 @@
-""
+"""
 Project 91 — Web Crawler (BFS, Domain-Limited)
 
 Run:
@@ -22,6 +22,8 @@ import sys
 MAX_PAGES = 50
 MAX_DEPTH = 3
 TIMEOUT = 5
+
+
 def normalize(url):
     url, _ = urldefrag(url)  # remove #fragment
     return url.rstrip("/")
@@ -64,6 +66,7 @@ def crawl(start_url):
 
     print(f"\nCrawled {len(visited)} pages.")
     return visited
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
