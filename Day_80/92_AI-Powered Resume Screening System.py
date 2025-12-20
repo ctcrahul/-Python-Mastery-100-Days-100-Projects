@@ -30,3 +30,21 @@ def load_resumes(folder_path):
                 filenames.append(file)
 
     return resumes, filenames
+
+# -----------------------------
+# Resume Ranking Logic
+# -----------------------------
+def rank_resumes(job_description, resumes, filenames):
+    documents = [clean_text(job_description)] + resumes
+
+    vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = vectorizer.fit_transform(documents)
+
+    similarity_scores = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
+
+    results = pd.DataFrame({
+        "Resume": filenames,
+        "Match_Score": similarity_scores
+    })
+
+    return results.sort_values(by="Match_Score", ascending=False)
