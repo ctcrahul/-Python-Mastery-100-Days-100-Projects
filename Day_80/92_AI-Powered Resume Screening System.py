@@ -48,6 +48,7 @@ def rank_resumes(job_description, resumes, filenames):
     })
 
     return results.sort_values(by="Match_Score", ascending=False)
+
 # -----------------------------
 # MAIN
 # -----------------------------
