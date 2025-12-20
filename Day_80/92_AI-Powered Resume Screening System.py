@@ -48,3 +48,20 @@ def rank_resumes(job_description, resumes, filenames):
     })
 
     return results.sort_values(by="Match_Score", ascending=False)
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    job_description = """
+    We are looking for a Python developer with experience in
+    machine learning, data analysis, pandas, numpy, and scikit-learn.
+    Knowledge of NLP is a plus.
+    """
+
+    resume_folder = "resumes"  # folder containing .txt resumes
+
+    resumes, filenames = load_resumes(resume_folder)
+    ranked_resumes = rank_resumes(job_description, resumes, filenames)
+
+    print("\n===== Resume Ranking =====\n")
+    print(ranked_resumes.to_string(index=False))
