@@ -84,3 +84,16 @@ def main():
 
         elif choice == "2":
             view_expenses()
+
+        elif choice == "3":
+            analyze_expenses()
+
+        elif choice == "4":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
