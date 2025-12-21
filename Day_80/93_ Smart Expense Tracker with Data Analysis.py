@@ -32,3 +32,32 @@ def add_expense(category, amount, note=""):
     df.to_csv(FILE_NAME, index=False)
     print("Expense added successfully.")
 
+# -----------------------------
+# View Expenses
+# -----------------------------
+def view_expenses():
+    df = pd.read_csv(FILE_NAME)
+    if df.empty:
+        print("No expenses found.")
+    else:
+        print(df)
+
+# -----------------------------
+# Expense Analysis
+# -----------------------------
+def analyze_expenses():
+    df = pd.read_csv(FILE_NAME)
+    if df.empty:
+        print("No data to analyze.")
+        return
+
+    summary = df.groupby("Category")["Amount"].sum()
+    print("\nExpense Summary:\n")
+    print(summary)
+
+    summary.plot(kind="bar")
+    plt.title("Expense Distribution by Category")
+    plt.xlabel("Category")
+    plt.ylabel("Total Amount")
+    plt.tight_layout()
+    plt.show()
