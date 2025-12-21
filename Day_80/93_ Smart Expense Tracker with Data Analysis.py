@@ -61,3 +61,26 @@ def analyze_expenses():
     plt.ylabel("Total Amount")
     plt.tight_layout()
     plt.show()
+# -----------------------------
+# MAIN MENU
+# -----------------------------
+def main():
+    initialize_file()
+
+    while True:
+        print("\n--- Expense Tracker ---")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Analyze Expenses")
+        print("4. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            category = input("Category: ")
+            amount = float(input("Amount: "))
+            note = input("Note (optional): ")
+            add_expense(category, amount, note)
+
+        elif choice == "2":
+            view_expenses()
