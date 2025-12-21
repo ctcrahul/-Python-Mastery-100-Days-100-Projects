@@ -61,6 +61,7 @@ def analyze_expenses():
     plt.ylabel("Total Amount")
     plt.tight_layout()
     plt.show()
+
 # -----------------------------
 # MAIN MENU
 # -----------------------------
