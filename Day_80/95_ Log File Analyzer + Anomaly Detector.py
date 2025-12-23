@@ -1,5 +1,5 @@
 # Project 95: Log File Analyzer + Anomaly Detector
-# Author: You
+
 
 import re
 import pandas as pd
