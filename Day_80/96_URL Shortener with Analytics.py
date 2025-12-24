@@ -1,5 +1,5 @@
 # Project 96: URL Shortener with Analytics
-# Author: You
+
 
 import string
 import random
@@ -21,6 +21,7 @@ def load_data():
 def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
+
 # -----------------------------
 # Generate Short Code
 # -----------------------------
@@ -46,6 +47,7 @@ def shorten_url(original_url):
 
     save_data(data)
     return short_code
+
 # -----------------------------
 # Access URL
 # -----------------------------
@@ -60,6 +62,7 @@ def access_url(short_code):
     save_data(data)
 
     print("Redirecting to:", data[short_code]["original_url"])
+
 # -----------------------------
 # Analytics
 # -----------------------------
@@ -90,7 +93,7 @@ def main():
         print("3. View Analytics")
         print("4. Exit")
 
-      choice = input("Enter choice: ")
+        choice = input("Enter choice: ")
 
         if choice == "1":
             url = input("Enter original URL: ")
@@ -113,4 +116,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
