@@ -60,3 +60,32 @@ def access_url(short_code):
     save_data(data)
 
     print("Redirecting to:", data[short_code]["original_url"])
+# -----------------------------
+# Analytics
+# -----------------------------
+def show_analytics():
+    data = load_data()
+
+    if not data:
+        print("No URLs found.")
+        return
+
+    print("\n--- URL Analytics ---")
+    for code, info in data.items():
+        print(f"""
+Short Code : {code}
+Original   : {info['original_url']}
+Clicks     : {info['clicks']}
+Created At : {info['created_at']}
+""")
+
+# -----------------------------
+# MAIN MENU
+# -----------------------------
+def main():
+    while True:
+        print("\n--- URL Shortener ---")
+        print("1. Shorten URL")
+        print("2. Access Short URL")
+        print("3. View Analytics")
+        print("4. Exit")
