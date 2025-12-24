@@ -46,3 +46,17 @@ def shorten_url(original_url):
 
     save_data(data)
     return short_code
+# -----------------------------
+# Access URL
+# -----------------------------
+def access_url(short_code):
+    data = load_data()
+
+    if short_code not in data:
+        print("Invalid short URL")
+        return
+
+    data[short_code]["clicks"] += 1
+    save_data(data)
+
+    print("Redirecting to:", data[short_code]["original_url"])
