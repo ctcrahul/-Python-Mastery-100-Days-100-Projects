@@ -89,3 +89,28 @@ def main():
         print("2. Access Short URL")
         print("3. View Analytics")
         print("4. Exit")
+
+      choice = input("Enter choice: ")
+
+        if choice == "1":
+            url = input("Enter original URL: ")
+            code = shorten_url(url)
+            print("Short URL code:", code)
+
+        elif choice == "2":
+            code = input("Enter short code: ")
+            access_url(code)
+
+        elif choice == "3":
+            show_analytics()
+
+        elif choice == "4":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
+
