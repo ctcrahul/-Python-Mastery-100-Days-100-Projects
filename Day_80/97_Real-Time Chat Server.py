@@ -27,6 +27,7 @@ def handle_client(client):
             broadcast(f"{nickname} left the chat.".encode("utf-8"))
             client.close()
             break
+
 def receive():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((HOST, PORT))
