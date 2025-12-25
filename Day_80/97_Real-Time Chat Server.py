@@ -44,3 +44,10 @@ def receive():
         clients.append(client)
 
         print(f"Nickname is {nickname}")
+        broadcast(f"{nickname} joined the chat!".encode("utf-8"))
+
+        thread = threading.Thread(target=handle_client, args=(client,))
+        thread.start()
+
+if __name__ == "__main__":
+    receive()
