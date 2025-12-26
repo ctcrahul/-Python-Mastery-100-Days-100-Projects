@@ -31,3 +31,12 @@ import json
 import time
 
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+def process_task(task):
+    print("Processing:", task["data"])
+    time.sleep(2)
+    print("Done.")
+
+while True:
+    _, task_json = r.brpop("task_queue")
+    task = json.loads(task_json)
+    process_task(task)
