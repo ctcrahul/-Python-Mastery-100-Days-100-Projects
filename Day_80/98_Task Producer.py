@@ -23,7 +23,6 @@ if __name__ == "__main__":
 
 
 
-
 # Project 98 - Worker Node
 
 import redis
@@ -31,6 +30,7 @@ import json
 import time
 
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+
 def process_task(task):
     print("Processing:", task["data"])
     time.sleep(2)
