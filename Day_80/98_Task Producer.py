@@ -20,3 +20,14 @@ if __name__ == "__main__":
         if data == "exit":
             break
         send_task("process_data", data)
+
+
+
+
+# Project 98 - Worker Node
+
+import redis
+import json
+import time
+
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
