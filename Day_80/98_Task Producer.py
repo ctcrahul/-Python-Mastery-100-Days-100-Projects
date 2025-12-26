@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
 
 
-# Project 98 - Worker Node
+#################################### - Worker Node
 
 import redis
 import json
