@@ -20,7 +20,6 @@ def is_allowed(user_id):
     return count < RATE_LIMIT
 
 
-
 # --------- Test Simulation ----------
 if __name__ == "__main__":
     user = "user_123"
