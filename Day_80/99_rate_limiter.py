@@ -18,3 +18,14 @@ def is_allowed(user_id):
     _, count, _, _ = pipe.execute()
 
     return count < RATE_LIMIT
+
+
+
+# --------- Test Simulation ----------
+if __name__ == "__main__":
+    user = "user_123"
+
+    for i in range(10):
+        allowed = is_allowed(user)
+        print(f"Request {i+1} ->", "ALLOWED" if allowed else "BLOCKED")
+        time.sleep(1)
