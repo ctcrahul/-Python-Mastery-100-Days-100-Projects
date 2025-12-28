@@ -47,3 +47,18 @@ async def middleware(request: Request, call_next):
     rate_limiter(client_ip)
     response = await call_next(request)
     return response
+# ---------------------------
+# ROUTES
+# ---------------------------
+@app.get("/")
+def home():
+    return {"message": "API Gateway Online"}
+
+@app.get("/secure-data")
+def secure_data(user=Depends(authenticate)):
+    return {"message": f"Hello {user}, secure data accessed"}
+
+# ---------------------------
+# START SERVER
+# ---------------------------
+# uvicorn main:app --reload
