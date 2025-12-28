@@ -38,3 +38,12 @@ def rate_limiter(identifier: str):
 
     if count > RATE_LIMIT:
         raise HTTPException(status_code=429, detail="Rate limit exceeded")
+# ---------------------------
+# MIDDLEWARE
+# ---------------------------
+@app.middleware("http")
+async def middleware(request: Request, call_next):
+    client_ip = request.client.host
+    rate_limiter(client_ip)
+    response = await call_next(request)
+    return response
