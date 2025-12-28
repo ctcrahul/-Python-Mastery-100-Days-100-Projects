@@ -22,3 +22,19 @@ def authenticate(request: Request):
     if not api_key or api_key not in API_KEYS:
         raise HTTPException(status_code=401, detail="Invalid API Key")
     return API_KEYS[api_key]
+# ---------------------------
+# RATE LIMITER
+# ---------------------------
+def rate_limiter(identifier: str):
+    key = f"rate:{identifier}"
+    now = int(time.time())
+
+    pipe = r.pipeline()
+    pipe.zremrangebyscore(key, 0, now - WINDOW)
+    pipe.zadd(key, {now: now})
+    pipe.zcard(key)
+    pipe.expire(key, WINDOW)
+    _, _, count, _ = pipe.execute()
+
+    if count > RATE_LIMIT:
+        raise HTTPException(status_code=429, detail="Rate limit exceeded")
