@@ -46,3 +46,24 @@ while True:
             print(f"Queued job: {job_name}")
 
     time.sleep(1)
+
+
+
+
+worker.py
+
+import redis
+import json
+import time
+
+r = redis.Redis(host="localhost", port=6379, decode_responses=True)
+
+def process(job):
+    print(f"Executing job: {job['name']} | payload: {job['payload']}")
+    time.sleep(2)
+    print("Done.")
+
+while True:
+    _, job_data = r.brpop("job_queue")
+    job = json.loads(job_data)
+    process(job)
