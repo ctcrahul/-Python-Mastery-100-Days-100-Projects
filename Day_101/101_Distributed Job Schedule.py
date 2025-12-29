@@ -37,3 +37,12 @@ r = redis.Redis(host="localhost", port=6379, decode_responses=True)
 while True:
     jobs = r.hgetall("scheduled_jobs")
     now = int(time.time())
+   for job_name, job_data in jobs.items():
+        job = json.loads(job_data)
+        if now - job["last_run"] >= job["interval"]:
+            job["last_run"] = now
+            r.hset("scheduled_jobs", job_name, json.dumps(job))
+            r.lpush("job_queue", json.dumps(job))
+            print(f"Queued job: {job_name}")
+
+    time.sleep(1)
