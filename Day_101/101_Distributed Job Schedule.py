@@ -1,9 +1,10 @@
-Scheduler → Redis Queue → Worker(s) → Job Execution
+""" Scheduler → Redis Queue → Worker(s) → Job Execution
                          ↓
                     Execution Logs
+"""
 
 
-scheduler.py
+#########################          scheduler.py
 
 import redis
 import time
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     schedule_job("cleanup_temp", 15, {"type": "cleanup"})
 
 
-scheduler_runner.py
+######################           scheduler_runner.py
 
 import redis
 import json
@@ -50,7 +51,7 @@ while True:
 
 
 
-worker.py
+#####################                  worker.py
 
 import redis
 import json
