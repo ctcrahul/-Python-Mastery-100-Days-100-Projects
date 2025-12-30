@@ -70,4 +70,8 @@ def all_tasks():
 def health():
     return {"status": "system running"}
 
-# ---------
+# ---------------- START WORKER ----------------
+threading.Thread(target=worker, daemon=True).start()
+
+if __name__ == "__main__":
+    uvicorn.run("project_102:app", host="0.0.0.0", port=8000)
