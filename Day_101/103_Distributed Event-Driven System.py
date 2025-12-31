@@ -21,3 +21,17 @@ class EventBroker:
             }
             self.topics[topic].append(event)
             print(f"[BROKER] Event published to '{topic}'")
+    def subscribe(self, topic, consumer):
+        self.subscribers[topic].append(consumer)
+
+    def start_dispatcher(self):
+        def dispatch():
+            while True:
+                for topic, queue in self.topics.items():
+                    while queue:
+                        event = queue.popleft()
+                        for consumer in self.subscribers[topic]:
+                            consumer.consume(event)
+                time.sleep(0.1)
+
+        threading.Thread(target=dispatch, daemon=True).start()
