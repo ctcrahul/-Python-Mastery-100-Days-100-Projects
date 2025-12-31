@@ -35,3 +35,21 @@ class EventBroker:
                 time.sleep(0.1)
 
         threading.Thread(target=dispatch, daemon=True).start()
+
+# SYSTEM START
+# -----------------------------
+if __name__ == "__main__":
+    broker = EventBroker()
+
+    consumer_a = Consumer("AnalyticsService")
+    consumer_b = Consumer("NotificationService")
+
+    broker.subscribe("orders", consumer_a)
+    broker.subscribe("orders", consumer_b)
+
+    broker.start_dispatcher()
+
+    producer = Producer(broker)
+
+    for i in range(5):
+        producer.send("orders", {"order_i
