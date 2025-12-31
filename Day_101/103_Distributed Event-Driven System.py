@@ -7,7 +7,7 @@ from collections import defaultdict, deque
 # BROKER CORE
 # -----------------------------
 class EventBroker:
-      def __init__(self):
+    def __init__(self):
         self.topics = defaultdict(deque)
         self.subscribers = defaultdict(list)
         self.lock = threading.Lock()
@@ -21,6 +21,7 @@ class EventBroker:
             }
             self.topics[topic].append(event)
             print(f"[BROKER] Event published to '{topic}'")
+
     def subscribe(self, topic, consumer):
         self.subscribers[topic].append(consumer)
 
@@ -36,6 +37,29 @@ class EventBroker:
 
         threading.Thread(target=dispatch, daemon=True).start()
 
+
+# -----------------------------
+# CONSUMER
+# -----------------------------
+class Consumer:
+    def __init__(self, name):
+        self.name = name
+
+    def consume(self, event):
+        print(f"[{self.name}] received -> {event['data']}")
+
+# -----------------------------
+# PRODUCER
+# -----------------------------
+class Producer:
+    def __init__(self, broker):
+        self.broker = broker
+
+    def send(self, topic, message):
+        self.broker.publish(topic, message)
+
+
+# -----------------------------
 # SYSTEM START
 # -----------------------------
 if __name__ == "__main__":
@@ -52,4 +76,5 @@ if __name__ == "__main__":
     producer = Producer(broker)
 
     for i in range(5):
-        producer.send("orders", {"order_i
+        producer.send("orders", {"order_id": i, "amount": 100 + i})
+        time.sleep(1)
