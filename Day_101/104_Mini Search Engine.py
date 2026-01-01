@@ -26,3 +26,28 @@ def crawl(url, max_pages=5):
         return re.findall(r"[a-z]{3,}", text)
 
     stack = [url]
+    return pages
+
+# -----------------------------
+# BUILD INVERTED INDEX
+# -----------------------------
+def build_index(pages):
+    index = defaultdict(set)
+    for url, words in pages.items():
+        for word in words:
+            index[word].add(url)
+    return index
+
+# -----------------------------
+# SEARCH ENGINE
+# -----------------------------
+def search(query, index):
+    terms = query.lower().split()
+    scores = defaultdict(int)
+
+    for term in terms:
+        for url in index.get(term, []):
+            scores[url] += 1
+
+    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    return ranked
