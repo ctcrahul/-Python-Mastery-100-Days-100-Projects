@@ -26,6 +26,24 @@ def crawl(url, max_pages=5):
         return re.findall(r"[a-z]{3,}", text)
 
     stack = [url]
+
+    while stack and len(visited) < max_pages:
+        current = stack.pop()
+        if current in visited:
+            continue
+
+        try:
+            res = requests.get(current, timeout=5)
+            visited.add(current)
+            words = clean_text(res.text)
+            pages[current] = words
+
+            links = extract_links(res.text, current)
+            stack.extend(links[:3])
+
+        except:
+            pass
+
     return pages
 
 # -----------------------------
@@ -51,6 +69,7 @@ def search(query, index):
 
     ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     return ranked
+
 # -----------------------------
 # MAIN
 # -----------------------------
