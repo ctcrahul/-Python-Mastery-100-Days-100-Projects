@@ -51,3 +51,22 @@ def search(query, index):
 
     ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     return ranked
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    seed_url = "https://example.com"
+    print("Crawling...")
+    pages = crawl(seed_url)
+
+    print("Building index...")
+    index = build_index(pages)
+
+    print("\nSearch Engine Ready.\n")
+    while True:
+        q = input("Search query (or exit): ")
+        if q == "exit":
+            break
+        results = search(q, index)
+        for url, score in results[:5]:
+            print(f"{url}  (score={score})")
