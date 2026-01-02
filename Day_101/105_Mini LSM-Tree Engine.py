@@ -31,3 +31,17 @@ class MiniDB:
             for line in f:
                 key, value = line.strip().split("=", 1)
                 self.memtable[key] = value
+    def write_wal(self, key, value):
+        with open(WAL_FILE, "a") as f:
+            f.write(f"{key}={value}\n")
+
+    def put(self, key, value):
+        self.memtable[key] = value
+        self.write_wal(key, value)
+        if len(self.memtable) >= 5:
+            self.flush()
+
+    def get(self, key):
+        if key in self.memtable:
+            return self.memtable[key]
+        return self.disk.get(key, None)
