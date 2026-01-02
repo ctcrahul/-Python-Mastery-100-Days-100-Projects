@@ -31,6 +31,7 @@ class MiniDB:
             for line in f:
                 key, value = line.strip().split("=", 1)
                 self.memtable[key] = value
+
     def write_wal(self, key, value):
         with open(WAL_FILE, "a") as f:
             f.write(f"{key}={value}\n")
