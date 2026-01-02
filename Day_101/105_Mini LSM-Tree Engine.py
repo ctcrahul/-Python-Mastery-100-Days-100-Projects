@@ -61,3 +61,18 @@ if __name__ == "__main__":
     db = MiniDB()
 
     while True:
+        cmd = input("db> ").strip()
+        if cmd == "exit":
+            break
+
+        if cmd.startswith("set"):
+            _, k, v = cmd.split()
+            db.put(k, v)
+            print("OK")
+
+        elif cmd.startswith("get"):
+            _, k = cmd.split()
+            print(db.get(k))
+
+        else:
+            print("Commands: set <key> <value> | get <key>")
