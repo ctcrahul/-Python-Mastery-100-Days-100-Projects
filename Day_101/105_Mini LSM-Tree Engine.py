@@ -45,3 +45,19 @@ class MiniDB:
         if key in self.memtable:
             return self.memtable[key]
         return self.disk.get(key, None)
+
+    def flush(self):
+        print("Flushing to disk...")
+        self.disk.update(self.memtable)
+        with open(SSTABLE, "w") as f:
+            json.dump(self.disk, f)
+        self.memtable.clear()
+        open(WAL_FILE, "w").close()
+
+# -------------------------
+# DEMO
+# -------------------------
+if __name__ == "__main__":
+    db = MiniDB()
+
+    while True:
