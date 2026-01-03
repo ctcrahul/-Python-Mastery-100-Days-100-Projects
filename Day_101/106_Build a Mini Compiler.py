@@ -49,4 +49,41 @@ class Interpreter:
                 expr = tokens[i+2:i+5]
                 result = self.eval_expr(expr)
                 self.vars[var] = result
-                i += 5
+                i += 5            elif tok == "PRINT":
+                expr = tokens[i+1:i+4]
+                result = self.eval_expr(expr)
+                print(result)
+                i += 4
+
+            else:
+                raise SyntaxError("Invalid syntax")
+
+    def eval_expr(self, expr):
+        if len(expr) == 1:
+            return self.resolve(expr[0])
+
+        left = self.resolve(expr[0])
+        right = self.resolve(expr[2])
+        return left + right
+
+    def resolve(self, token):
+        tok, val = token
+        if tok == "NUMBER":
+            return int(val)
+        if tok == "ID":
+            return self.vars.get(val, 0)
+
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    print("Mini Language (type 'exit' to quit)")
+    interpreter = Interpreter()
+
+    while True:
+        code = input(">>> ")
+        if code == "exit":
+            break
+
+        tokens = lex(code)
+        interpreter.run(tokens)
