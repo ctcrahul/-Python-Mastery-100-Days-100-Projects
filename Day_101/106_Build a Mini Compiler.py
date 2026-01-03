@@ -15,6 +15,7 @@ TOKEN_SPEC = [
     ("SKIP",     r"[ \t]+"),
     ("NEWLINE",  r"\n"),
 ]
+
 def lex(code):
     tokens = []
     pos = 0
@@ -32,6 +33,7 @@ def lex(code):
         if not match:
             raise SyntaxError(f"Illegal character: {code[pos]}")
     return tokens
+
 # -----------------------------
 # PARSER / INTERPRETER
 # -----------------------------
@@ -49,7 +51,9 @@ class Interpreter:
                 expr = tokens[i+2:i+5]
                 result = self.eval_expr(expr)
                 self.vars[var] = result
-                i += 5            elif tok == "PRINT":
+                i += 5
+
+            elif tok == "PRINT":
                 expr = tokens[i+1:i+4]
                 result = self.eval_expr(expr)
                 print(result)
