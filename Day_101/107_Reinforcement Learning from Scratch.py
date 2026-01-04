@@ -14,6 +14,7 @@ ACTIONS = ["UP", "DOWN", "LEFT", "RIGHT"]
 # Q-TABLE
 # -----------------------------
 Q = {}
+
 def get_q(state, action):
     return Q.get((state, action), 0.0)
 
@@ -34,6 +35,7 @@ def step(state, action):
         y -= 1
     elif action == "RIGHT":
         y += 1
+
     x = max(0, min(GRID_SIZE - 1, x))
     y = max(0, min(GRID_SIZE - 1, y))
 
@@ -63,7 +65,8 @@ def train(episodes=500):
     alpha = 0.1     # learning rate
     gamma = 0.9     # discount factor
     epsilon = 1.0
-  for ep in range(episodes):
+
+    for ep in range(episodes):
         state = START
 
         while True:
