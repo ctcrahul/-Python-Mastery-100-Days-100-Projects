@@ -45,3 +45,21 @@ def step(state, action):
         return new_state, -10, True
 
     return new_state, -1, False
+
+# -----------------------------
+# POLICY (ε-greedy)
+# -----------------------------
+def choose_action(state, epsilon):
+    if random.random() < epsilon:
+        return random.choice(ACTIONS)
+
+    qs = [get_q(state, a) for a in ACTIONS]
+    return ACTIONS[qs.index(max(qs))]
+
+# -----------------------------
+# TRAINING LOOP
+# -----------------------------
+def train(episodes=500):
+    alpha = 0.1     # learning rate
+    gamma = 0.9     # discount factor
+    epsilon = 1.0
