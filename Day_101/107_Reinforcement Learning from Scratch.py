@@ -34,3 +34,14 @@ def step(state, action):
         y -= 1
     elif action == "RIGHT":
         y += 1
+    x = max(0, min(GRID_SIZE - 1, x))
+    y = max(0, min(GRID_SIZE - 1, y))
+
+    new_state = (x, y)
+
+    if new_state == GOAL:
+        return new_state, 10, True
+    if new_state == TRAP:
+        return new_state, -10, True
+
+    return new_state, -1, False
