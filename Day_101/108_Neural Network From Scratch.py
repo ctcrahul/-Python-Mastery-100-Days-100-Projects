@@ -45,3 +45,23 @@ class NeuralNetwork:
 
     def predict(self, x1, x2):
         return round(self.forward(x1, x2), 3)
+# -----------------------------
+# DATASET (AND GATE)
+# -----------------------------
+training_data = [
+    (0, 0, 0),
+    (0, 1, 0),
+    (1, 0, 0),
+    (1, 1, 1)
+]
+
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    nn = NeuralNetwork()
+    nn.train(training_data)
+
+    print("Results after training:\n")
+    for x1, x2, _ in training_data:
+        print(f"{x1} AND {x2} = {nn.predict(x1, x2)}")
