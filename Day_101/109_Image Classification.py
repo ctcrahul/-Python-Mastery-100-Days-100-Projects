@@ -84,3 +84,26 @@ model.fit(
 # -----------------------------
 model.save("image_classifier.h5")
 print("Model saved successfully.")
+
+test_data = test_gen.flow_from_directory(
+    TEST_DIR,
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode="binary"
+)
+
+# -----------------------------
+# CNN MODEL
+# -----------------------------
+model = Sequential([
+    Conv2D(32, (3,3), activation="relu", input_shape=(IMG_SIZE, IMG_SIZE, 3)),
+    MaxPooling2D(2,2),
+
+    Conv2D(64, (3,3), activation="relu"),
+    MaxPooling2D(2,2),
+
+    Conv2D(128, (3,3), activation="relu"),
+    MaxPooling2D(2,2),
+
+    Flatten(),
+    Dense
