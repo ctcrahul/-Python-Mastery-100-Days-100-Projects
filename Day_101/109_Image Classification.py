@@ -60,3 +60,27 @@ model = Sequential([
     Dropout(0.5),
     Dense(1, activation="sigmoid")
 ])
+
+# -----------------------------
+# COMPILE
+# -----------------------------
+model.compile(
+    optimizer="adam",
+    loss="binary_crossentropy",
+    metrics=["accuracy"]
+)
+
+# -----------------------------
+# TRAIN
+# -----------------------------
+model.fit(
+    train_data,
+    epochs=EPOCHS,
+    validation_data=test_data
+)
+
+# -----------------------------
+# SAVE MODEL
+# -----------------------------
+model.save("image_classifier.h5")
+print("Model saved successfully.")
