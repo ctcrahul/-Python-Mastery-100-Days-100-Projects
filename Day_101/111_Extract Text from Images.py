@@ -37,3 +37,9 @@ def extract_text(processed_img):
 if __name__ == "__main__":
     processed = preprocess(IMAGE_PATH)
     text = extract_text(processed)
+    print("\n--- Extracted Text ---\n")
+    print(text)
+
+    cv2.imshow("Processed Image", processed)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
