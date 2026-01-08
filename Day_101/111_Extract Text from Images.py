@@ -16,6 +16,7 @@ IMAGE_PATH = "sample.jpg"
 def preprocess(image_path):
     img = cv2.imread(image_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
     # Noise removal
     blur = cv2.GaussianBlur(gray, (5,5), 0)
 
@@ -31,12 +32,14 @@ def preprocess(image_path):
 def extract_text(processed_img):
     text = pytesseract.image_to_string(processed_img)
     return text
+
 # -----------------------------
 # MAIN
 # -----------------------------
 if __name__ == "__main__":
     processed = preprocess(IMAGE_PATH)
     text = extract_text(processed)
+
     print("\n--- Extracted Text ---\n")
     print(text)
 
