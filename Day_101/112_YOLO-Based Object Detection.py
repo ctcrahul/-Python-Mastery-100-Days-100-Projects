@@ -8,3 +8,10 @@ from ultralytics import YOLO
 model = YOLO("yolov8n.pt")  # nano version (fast)
 
 cap = cv2.VideoCapture(0)
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # Run detection
+    results = model(frame, stream=True)
