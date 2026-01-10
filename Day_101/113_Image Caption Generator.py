@@ -13,6 +13,7 @@ cnn = tf.keras.applications.InceptionV3(
     include_top=False,
     pooling="avg"
 )
+
 # -----------------------------
 # IMAGE PREPROCESSING
 # -----------------------------
@@ -33,6 +34,7 @@ idx_to_word = {
     4: "grass",
     5: "<end>"
 }
+
 # -----------------------------
 # SIMPLE DECODER (SIMULATED)
 # -----------------------------
@@ -46,10 +48,10 @@ def generate_caption(features):
 # -----------------------------
 if __name__ == "__main__":
     image_path = "sample.jpg"
+
     img = preprocess_image(image_path)
     features = cnn.predict(img)
 
     caption = generate_caption(features)
     print("\nGenerated Caption:")
     print(caption)
-Brutal truth
