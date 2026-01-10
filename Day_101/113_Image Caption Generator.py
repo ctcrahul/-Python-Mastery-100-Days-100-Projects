@@ -33,3 +33,16 @@ idx_to_word = {
     4: "grass",
     5: "<end>"
 }
+# -----------------------------
+# SIMPLE DECODER (SIMULATED)
+# -----------------------------
+def generate_caption(features):
+    # In real systems, this is an LSTM loop
+    # Here we simulate output for learning clarity
+    return "a dog on grass"
+
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    image_path = "sample.jpg"
