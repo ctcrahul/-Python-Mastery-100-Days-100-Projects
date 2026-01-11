@@ -39,4 +39,31 @@ test_data = datagen.flow_from_directory(
 # -----------------------------
 # PATCH EMBEDDING
 # -----------------------------
-class
+classclass PatchEmbedding(layers.Layer):
+    def __init__(self):
+        super().__init__()
+        self.projection = layers.Conv2D(
+            filters=64,
+            kernel_size=PATCH_SIZE,
+            strides=PATCH_SIZE
+        )
+
+    def call(self, x):
+        x = self.projection(x)
+        x = tf.reshape(x, (tf.shape(x)[0], -1, x.shape[-1]))
+        return x
+
+# -----------------------------
+# TRANSFORMER BLOCK
+# -----------------------------
+def transformer_block(x):
+    attn = layers.MultiHeadAttention(num_heads=4, key_dim=64)(x, x)
+    x = layers.Add()([x, attn])
+    x = layers.LayerNormalization()(x)
+
+    mlp = layers.Dense(128, activation="relu")(x)
+    mlp = layers.Dense(64)(mlp)
+    x = layers.Add()([x, mlp])
+    x = layers.LayerNormalization()(x)
+    return x
+
