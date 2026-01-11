@@ -14,3 +14,18 @@ PATCH_SIZE = 16
 NUM_CLASSES = 2
 BATCH_SIZE = 16
 EPOCHS = 5
+
+TRAIN_DIR = "dataset/train"
+TEST_DIR = "dataset/test"
+
+# -----------------------------
+# DATA PIPELINE
+# -----------------------------
+datagen = ImageDataGenerator(rescale=1./255)
+
+train_data = datagen.flow_from_directory(
+    TRAIN_DIR,
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode="categorical"
+)
