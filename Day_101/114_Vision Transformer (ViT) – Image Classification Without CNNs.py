@@ -29,6 +29,7 @@ train_data = datagen.flow_from_directory(
     batch_size=BATCH_SIZE,
     class_mode="categorical"
 )
+
 test_data = datagen.flow_from_directory(
     TEST_DIR,
     target_size=(IMG_SIZE, IMG_SIZE),
@@ -39,7 +40,7 @@ test_data = datagen.flow_from_directory(
 # -----------------------------
 # PATCH EMBEDDING
 # -----------------------------
-classclass PatchEmbedding(layers.Layer):
+class PatchEmbedding(layers.Layer):
     def __init__(self):
         super().__init__()
         self.projection = layers.Conv2D(
@@ -67,3 +68,30 @@ def transformer_block(x):
     x = layers.LayerNormalization()(x)
     return x
 
+# -----------------------------
+# BUILD MODEL
+# -----------------------------
+inputs = layers.Input(shape=(IMG_SIZE, IMG_SIZE, 3))
+x = PatchEmbedding()(inputs)
+
+for _ in range(4):
+    x = transformer_block(x)
+
+x = layers.GlobalAveragePooling1D()(x)
+outputs = layers.Dense(NUM_CLASSES, activation="softmax")(x)
+
+model = tf.keras.Model(inputs, outputs)
+
+# -----------------------------
+# COMPILE & TRAIN
+# -----------------------------
+model.compile(
+    optimizer=tfa.optimizers.AdamW(learning_rate=1e-4, weight_decay=1e-4),
+    loss="categorical_crossentropy",
+    metrics=["accuracy"]
+)
+
+model.fit(train_data, epochs=EPOCHS, validation_data=test_data)
+
+model.save("vit_classifier.h5")
+print("ViT model saved.")
