@@ -29,3 +29,14 @@ train_data = datagen.flow_from_directory(
     batch_size=BATCH_SIZE,
     class_mode="categorical"
 )
+test_data = datagen.flow_from_directory(
+    TEST_DIR,
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode="categorical"
+)
+
+# -----------------------------
+# PATCH EMBEDDING
+# -----------------------------
+class
