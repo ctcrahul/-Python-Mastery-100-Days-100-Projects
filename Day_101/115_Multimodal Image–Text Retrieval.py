@@ -29,3 +29,14 @@ image = Image.open(image_path)
 # -----------------------------
 # PREPROCESS
 # -----------------------------
+inputs = processor(
+    text=texts,
+    images=image,
+    return_tensors="pt",
+    padding=True
+).to(device)
+
+# -----------------------------
+# EMBEDDINGS
+# -----------------------------
+with torch.no
