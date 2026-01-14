@@ -39,4 +39,22 @@ inputs = processor(
 # -----------------------------
 # EMBEDDINGS
 # -----------------------------
-with torch.no
+with torch.nowith torch.no_grad():
+    outputs = model(**inputs)
+    image_embeds = outputs.image_embeds
+    text_embeds = outputs.text_embeds
+
+# Normalize embeddings
+image_embeds = image_embeds / image_embeds.norm(dim=-1, keepdim=True)
+text_embeds = text_embeds / text_embeds.norm(dim=-1, keepdim=True)
+
+# -----------------------------
+# SIMILARITY
+# -----------------------------
+similarity = (image_embeds @ text_embeds.T).squeeze(0)
+
+print("\nImage–Text Similarity Scores:\n")
+for txt, score in zip(texts, similarity):
+    print(f"{txt:<30} -> {float(score):.3f}")
+
+
