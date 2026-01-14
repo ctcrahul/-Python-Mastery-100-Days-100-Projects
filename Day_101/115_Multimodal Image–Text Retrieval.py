@@ -17,6 +17,7 @@ processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 # INPUTS
 # -----------------------------
 image_path = "sample.jpg"
+
 texts = [
     "a dog playing on grass",
     "a car on the road",
@@ -39,7 +40,7 @@ inputs = processor(
 # -----------------------------
 # EMBEDDINGS
 # -----------------------------
-with torch.nowith torch.no_grad():
+with torch.no_grad():
     outputs = model(**inputs)
     image_embeds = outputs.image_embeds
     text_embeds = outputs.text_embeds
@@ -56,5 +57,3 @@ similarity = (image_embeds @ text_embeds.T).squeeze(0)
 print("\nImage–Text Similarity Scores:\n")
 for txt, score in zip(texts, similarity):
     print(f"{txt:<30} -> {float(score):.3f}")
-
-
