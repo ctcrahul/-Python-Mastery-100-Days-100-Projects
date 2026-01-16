@@ -50,3 +50,28 @@ X_train, X_test, y_train, y_test = train_test_split(
 # -----------------------------
 # MODEL
 # -----------------------------
+model = Sequential([
+    Dense(256, activation="relu", input_shape=(40,)),
+    Dropout(0.3),
+    Dense(128, activation="relu"),
+    Dropout(0.3),
+    Dense(y_categorical.shape[1], activation="softmax")
+])
+
+model.compile(
+    optimizer="adam",
+    loss="categorical_crossentropy",
+    metrics=["accuracy"]
+)
+
+# -----------------------------
+# TRAIN
+# -----------------------------
+model.fit(
+    X_train, y_train,
+    epochs=30,
+    batch_size=32,
+    validation_data=(X_test, y_test)
+)
+
+model.save("speech_emotion_model.h5"
