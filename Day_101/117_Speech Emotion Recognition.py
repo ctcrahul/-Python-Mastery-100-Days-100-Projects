@@ -23,3 +23,16 @@ def extract_mfcc(file_path):
 DATASET_PATH = "dataset"  # folder with emotion subfolders
 
 X, y = [], []
+for emotion in os.listdir(DATASET_PATH):
+    emotion_path = os.path.join(DATASET_PATH, emotion)
+    if not os.path.isdir(emotion_path):
+        continue
+
+    for file in os.listdir(emotion_path):
+        if file.endswith(".wav"):
+            features = extract_mfcc(os.path.join(emotion_path, file))
+            X.append(features)
+            y.append(emotion)
+
+X = np.array(X)
+y = np.array(y)
