@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.utils import to_categorical
+
 # -----------------------------
 # FEATURE EXTRACTION
 # -----------------------------
@@ -23,6 +24,7 @@ def extract_mfcc(file_path):
 DATASET_PATH = "dataset"  # folder with emotion subfolders
 
 X, y = [], []
+
 for emotion in os.listdir(DATASET_PATH):
     emotion_path = os.path.join(DATASET_PATH, emotion)
     if not os.path.isdir(emotion_path):
@@ -36,6 +38,7 @@ for emotion in os.listdir(DATASET_PATH):
 
 X = np.array(X)
 y = np.array(y)
+
 # -----------------------------
 # ENCODE LABELS
 # -----------------------------
@@ -74,4 +77,5 @@ model.fit(
     validation_data=(X_test, y_test)
 )
 
-model.save("speech_emotion_model.h5"
+model.save("speech_emotion_model.h5")
+print("Model trained and saved.")
