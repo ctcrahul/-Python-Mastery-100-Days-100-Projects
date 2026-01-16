@@ -36,3 +36,17 @@ for emotion in os.listdir(DATASET_PATH):
 
 X = np.array(X)
 y = np.array(y)
+# -----------------------------
+# ENCODE LABELS
+# -----------------------------
+encoder = LabelEncoder()
+y_encoded = encoder.fit_transform(y)
+y_categorical = to_categorical(y_encoded)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y_categorical, test_size=0.2, random_state=42
+)
+
+# -----------------------------
+# MODEL
+# -----------------------------
