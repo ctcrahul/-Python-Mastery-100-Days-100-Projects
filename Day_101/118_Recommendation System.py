@@ -1,3 +1,6 @@
+pip install pandas numpy scikit-learn
+
+
 # Recommendation System (Collaborative Filtering)
 
 import pandas as pd
