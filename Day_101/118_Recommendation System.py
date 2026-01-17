@@ -25,3 +25,9 @@ def recommend(user_id, top_n=3):
     weighted_ratings = user_item.loc[similar_users.index].T.dot(similar_users)
     recommendations = weighted_ratings.sort_values(ascending=False).head(top_n)
     return recommendations.index.tolist()
+# -----------------------------
+# TEST
+# -----------------------------
+if __name__ == "__main__":
+    user = int(input("Enter user id: "))
+    print("Recommended items:", recommend(user))
