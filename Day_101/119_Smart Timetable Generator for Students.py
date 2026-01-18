@@ -1,6 +1,15 @@
 # Smart Timetable Generator
 # Builds an optimized weekly schedule
 
+Subjects = {
+  "Math": 5,
+  "Coding": 7,
+  "English": 3,
+  "ML": 4
+}
+Total Daily Hours = 6
+
+
 subjects = {
     "Math": 5,
     "Coding": 7,
