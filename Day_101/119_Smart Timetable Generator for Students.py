@@ -25,3 +25,8 @@ for day in days:
         schedule[day].append(expanded[index])
         used += 1
         index += 1
+
+# Print schedule
+print("\nGenerated Weekly Study Timetable:\n")
+for day in days:
+    print(day, ":", schedule[day])
