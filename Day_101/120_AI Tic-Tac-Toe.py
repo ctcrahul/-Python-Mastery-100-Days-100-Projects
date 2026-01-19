@@ -30,3 +30,24 @@ def minimax(b, depth, is_max):
                 best = max(best, minimax(b, depth+1, False))
                 b[i] = " "
         return best
+    else:
+        best = 100
+        for i in range(9):
+            if b[i] == " ":
+                b[i] = "X"
+                best = min(best, minimax(b, depth+1, True))
+                b[i] = " "
+        return best
+
+def best_move():
+    best_val = -100
+    move = -1
+    for i in range(9):
+        if board[i] == " ":
+            board[i] = "O"
+            val = minimax(board, 0, False)
+            board[i] = " "
+            if val > best_val:
+                best_val = val
+                move = i
+    return move
