@@ -87,3 +87,27 @@ while True:
         break
 
     print_board()
+
+# ---------------- MAIN LOOP ----------------
+print("You are X. AI is O. Positions are 0–8.")
+print_board()
+
+while True:
+    pos = int(input("Enter your move: "))
+    if board[pos] != " ":
+        print("Invalid move.")
+        continue
+
+    board[pos] = "X"
+
+    if is_winner(board, "X"):
+        print_board()
+        print("You win.")
+        break
+    if is_full(board):
+        print_board()
+        print("Draw.")
+        break
+
+    ai = best_move()
+    board[ai] = "O"
