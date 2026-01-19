@@ -22,3 +22,11 @@ def minimax(b, depth, is_max):
         return depth - 10
     if is_full(b):
         return 0
+    if is_max:
+        best = -100
+        for i in range(9):
+            if b[i] == " ":
+                b[i] = "O"
+                best = max(best, minimax(b, depth+1, False))
+                b[i] = " "
+        return best
