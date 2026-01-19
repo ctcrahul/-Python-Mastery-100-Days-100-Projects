@@ -22,6 +22,7 @@ def minimax(b, depth, is_max):
         return depth - 10
     if is_full(b):
         return 0
+
     if is_max:
         best = -100
         for i in range(9):
@@ -51,3 +52,38 @@ def best_move():
                 best_val = val
                 move = i
     return move
+
+# ---------------- MAIN LOOP ----------------
+print("You are X. AI is O. Positions are 0–8.")
+print_board()
+
+while True:
+    pos = int(input("Enter your move: "))
+    if board[pos] != " ":
+        print("Invalid move.")
+        continue
+
+    board[pos] = "X"
+
+    if is_winner(board, "X"):
+        print_board()
+        print("You win.")
+        break
+    if is_full(board):
+        print_board()
+        print("Draw.")
+        break
+
+    ai = best_move()
+    board[ai] = "O"
+
+    if is_winner(board, "O"):
+        print_board()
+        print("AI wins.")
+        break
+    if is_full(board):
+        print_board()
+        print("Draw.")
+        break
+
+    print_board()
