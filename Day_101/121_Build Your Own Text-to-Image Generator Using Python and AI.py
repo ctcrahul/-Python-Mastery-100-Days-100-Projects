@@ -1,5 +1,7 @@
 # Text-to-Image Generator using Stable Diffusion
 # Real generative AI system
+# pip install torch torchvision diffusers transformers accelerate safetensors pillow
+
 
 import torch
 from diffusers import StableDiffusionPipeline
