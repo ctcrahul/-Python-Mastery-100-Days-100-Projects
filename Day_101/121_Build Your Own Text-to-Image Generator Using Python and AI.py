@@ -45,17 +45,4 @@ if __name__ == "__main__":
 
 
 #####
-
-pipe = StableDiffusionPipeline.from_pretrained(
-    MODEL_ID,
-    torch_dtype=torch.float16 if DEVICE == "cuda" else torch.float32
-)
-
-pipe = pipe.to(DEVICE)
-
-# -----------------------------
-# GENERATE IMAGE
-# -----------------------------
-def generate_image(prompt, output_path="output.png"):
-    image = pipe(
-        pr
+#####
