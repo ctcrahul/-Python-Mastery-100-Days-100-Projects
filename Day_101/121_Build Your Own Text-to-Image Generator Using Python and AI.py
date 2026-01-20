@@ -32,3 +32,9 @@ def generate_image(prompt, output_path="output.png"):
 
     image.save(output_path)
     print(f"Image saved to {output_path}")
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    prompt = input("Enter text prompt: ")
+    generate_image(prompt)
