@@ -96,3 +96,33 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+################# templates/index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with PDF</title>
+</head>
+<body>
+    <h2>Chat with PDF Notes</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf" required>
+        <button type="submit">Upload PDF</button>
+    </form>
+
+    <hr>
+
+    <form method="POST">
+        <input type="text" name="question" placeholder="Ask a question..." required>
+        <button type="submit">Ask</button>
+    </form>
+
+    <h3>Answer:</h3>
+    <p>{{ answer }}</p>
+</body>
+</html>
+
