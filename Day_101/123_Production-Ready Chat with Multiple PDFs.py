@@ -6,33 +6,11 @@
 # Retriever → Context → LLM → Answer + Sources
 
 # pip install fastapi uvicorn langchain faiss-cpu pypdf sentence-transformers transformers torch python-multipart
-    if vector_db is None:
-        return {"error": "Upload PDFs first"}
 
-    llm = load_llm()
-
-    qa = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vector_db.as_retriever(),
-        memory=memory,
-        return_source_documents=True
-    )
-
-    result = qa({"question": question})
-
-    sources = list(set(
-        doc.metadata.get("source", "PDF")
-        for doc in result["source_documents"]
-    ))
-
-    return {
-        "answer": result["answer"],
-        "sources": sources
-    }
-rag_pdf_chat/
- ├── main.py
- ├── data/
- ├── vector_store/
+# rag_pdf_chat/
+#  ├── main.py
+#  ├── data/
+#  ├── vector_store/
 
 
   ##############                Main .py
