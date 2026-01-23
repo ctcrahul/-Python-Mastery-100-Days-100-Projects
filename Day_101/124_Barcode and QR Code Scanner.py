@@ -1,5 +1,5 @@
 #pip install opencv-python
-pip install pyzbar
+#pip install pyzbar
 
 import cv2
 from pyzbar import pyzbar
@@ -20,6 +20,7 @@ def scan_codes(frame):
         n = len(hull)
         for j in range(n):
             cv2.line(frame, hull[j], hull[(j + 1) % n], (0, 255, 0), 2)
+
         x, y, w, h = obj.rect
         text = f"{obj.type}: {obj.data.decode('utf-8')}"
         cv2.putText(
@@ -35,6 +36,8 @@ def scan_codes(frame):
         print(text)
 
     return frame
+
+
 def main():
     cap = cv2.VideoCapture(0)
 
@@ -52,3 +55,11 @@ def main():
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    main()
+
