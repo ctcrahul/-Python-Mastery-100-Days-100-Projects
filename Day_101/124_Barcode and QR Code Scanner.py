@@ -35,3 +35,20 @@ def scan_codes(frame):
         print(text)
 
     return frame
+def main():
+    cap = cv2.VideoCapture(0)
+
+    if not cap.isOpened():
+        print("Error: Cannot access camera")
+        return
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        frame = scan_codes(frame)
+        cv2.imshow("Barcode and QR Code Scanner", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
