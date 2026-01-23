@@ -20,3 +20,18 @@ def scan_codes(frame):
         n = len(hull)
         for j in range(n):
             cv2.line(frame, hull[j], hull[(j + 1) % n], (0, 255, 0), 2)
+        x, y, w, h = obj.rect
+        text = f"{obj.type}: {obj.data.decode('utf-8')}"
+        cv2.putText(
+            frame,
+            text,
+            (x, y - 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (0, 255, 0),
+            2
+        )
+
+        print(text)
+
+    return frame
