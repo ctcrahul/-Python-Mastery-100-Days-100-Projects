@@ -1,3 +1,11 @@
+# air_quality_index_prediction/
+#  ├── train_model.py
+#  ├── app.py
+#  ├── aqi_model.pkl
+#  └── air_quality.csv
+
+
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
