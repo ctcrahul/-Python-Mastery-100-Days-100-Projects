@@ -76,3 +76,19 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# POST /predict
+# {
+#   "PM2.5": 80,
+#   "PM10": 110,
+#   "NO2": 55,
+#   "SO2": 20,
+#   "CO": 1.2,
+#   "O3": 35
+# }
+
+
+# {
+#   "Predicted_AQI": 172.4
+# }
