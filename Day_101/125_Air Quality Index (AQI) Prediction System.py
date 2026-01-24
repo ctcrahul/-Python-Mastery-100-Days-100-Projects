@@ -31,3 +31,40 @@ print("Mean Absolute Error:", mae)
 # Save model
 joblib.dump(model, "aqi_model.pkl")
 print("Model saved as aqi_model.pkl")
+
+
+
+
+
+from flask import Flask, request, jsonify
+import joblib
+import numpy as np
+
+app = Flask(__name__)
+model = joblib.load("aqi_model.pkl")
+
+@app.route("/predict", methods=["POST"])
+def predict_aqi():
+    data = request.json
+
+    features = np.array([[
+        data["PM2.5"],
+        data["PM10"],
+        data["NO2"],
+        data["SO2"],
+        data["CO"],
+        data["O3"]
+    ]])
+
+    prediction = model.predict(features)[0]
+
+    return jsonify({
+        "Predicted_AQI": round(prediction, 2)
+    })
+
+@app.route("/")
+def home():
+    return {"status": "AQI Prediction API running"}
+
+if __name__ == "__main__":
+    app.run(debug=True)
