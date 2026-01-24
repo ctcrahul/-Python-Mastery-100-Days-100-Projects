@@ -5,7 +5,7 @@
 #  └── air_quality.csv
 
 
-
+                                                                   train_model.py
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -42,7 +42,7 @@ print("Model saved as aqi_model.pkl")
 
 
 
-
+                                                        app.py
 
 from flask import Flask, request, jsonify
 import joblib
