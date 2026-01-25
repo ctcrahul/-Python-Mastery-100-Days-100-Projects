@@ -31,3 +31,10 @@ model = RandomForestClassifier(
     n_estimators=200,
     random_state=42
 )
+model.fit(X_train, y_train)
+
+joblib.dump(model, "traffic_model.pkl")
+joblib.dump(le_road, "road_encoder.pkl")
+joblib.dump(le_cong, "cong_encoder.pkl")
+
+print("Traffic congestion model saved.")
