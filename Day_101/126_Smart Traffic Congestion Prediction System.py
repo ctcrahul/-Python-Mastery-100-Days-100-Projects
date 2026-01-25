@@ -38,3 +38,31 @@ joblib.dump(le_road, "road_encoder.pkl")
 joblib.dump(le_cong, "cong_encoder.pkl")
 
 print("Traffic congestion model saved.")
+
+
+
+
+
+###
+
+from flask import Flask, request, jsonify
+import joblib
+import numpy as np
+
+app = Flask(__name__)
+
+model = joblib.load("traffic_model.pkl")
+road_encoder = joblib.load("road_encoder.pkl")
+cong_encoder = joblib.load("cong_encoder.pkl")
+
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.json
+
+    road = road_encoder.transform([data["road_type"]])[0]
+
+    features = np.array([[
+        data["hour"],
+        data["day"],
+        data["vehicle_count"],
+        data["temperature"],
