@@ -5,6 +5,8 @@ traffic_congestion_prediction/
  └── traffic_data.csv
 
 
+###               train_model.py
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -43,7 +45,7 @@ print("Traffic congestion model saved.")
 
 
 
-###
+###             app.py
 
 from flask import Flask, request, jsonify
 import joblib
@@ -63,6 +65,27 @@ def predict():
 
     features = np.array([[
         data["hour"],
+        data["day"],
+        data["vehicle_count"],
+        data["temperature"],
+        data["rain"],
+        road
+    ]])
+
+    pred = model.predict(features)[0]
+    congestion = cong_encoder.inverse_transform([pred])[0]
+
+    return jsonify({
+        "Predicted_Congestion": congestion
+    })
+
+@app.route("/")
+def home():
+    return {"status": "Traffic Congestion API running"}
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
         data["day"],
         data["vehicle_count"],
         data["temperature"],
