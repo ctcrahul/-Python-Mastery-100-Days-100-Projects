@@ -66,3 +66,12 @@ if __name__ == "__main__":
     )
 
     print("\n🚨 Predicted Flood Risk:", risk)
+
+
+##### Example of output
+Rainfall (mm): 150
+River Level (m): 5.8
+Soil Moisture (%): 88
+Temperature (°C): 27
+
+Predicted Flood Risk: High
