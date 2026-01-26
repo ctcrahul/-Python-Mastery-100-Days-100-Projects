@@ -52,3 +52,17 @@ def predict_flood(rainfall, river_level, soil_moisture, temperature):
 # -----------------------------
 if __name__ == "__main__":
     print("\n🌧️ Flood Risk Prediction System\n")
+
+    rainfall = float(input("Rainfall (mm): "))
+    river_level = float(input("River Level (m): "))
+    soil_moisture = float(input("Soil Moisture (%): "))
+    temperature = float(input("Temperature (°C): "))
+
+    risk = predict_flood(
+        rainfall,
+        river_level,
+        soil_moisture,
+        temperature
+    )
+
+    print("\n🚨 Predicted Flood Risk:", risk)
