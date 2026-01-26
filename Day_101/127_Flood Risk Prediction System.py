@@ -19,3 +19,22 @@ data = {
 }
 
 df = pd.DataFrame(data)
+
+# -----------------------------
+# ENCODE TARGET
+# -----------------------------
+encoder = LabelEncoder()
+df["flood_risk"] = encoder.fit_transform(df["flood_risk"])
+
+X = df.drop("flood_risk", axis=1)
+y = df["flood_risk"]
+
+# -----------------------------
+# TRAIN MODEL
+# -----------------------------
+model = RandomForestClassifier(
+    n_estimators=200,
+    random_state=42
+)
+
+model.fit(X, y)
