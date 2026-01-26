@@ -38,3 +38,17 @@ model = RandomForestClassifier(
 )
 
 model.fit(X, y)
+
+# -----------------------------
+# PREDICTION FUNCTION
+# -----------------------------
+def predict_flood(rainfall, river_level, soil_moisture, temperature):
+    features = np.array([[rainfall, river_level, soil_moisture, temperature]])
+    pred = model.predict(features)[0]
+    return encoder.inverse_transform([pred])[0]
+
+# -----------------------------
+# USER INPUT
+# -----------------------------
+if __name__ == "__main__":
+    print("\n🌧️ Flood Risk Prediction System\n")
