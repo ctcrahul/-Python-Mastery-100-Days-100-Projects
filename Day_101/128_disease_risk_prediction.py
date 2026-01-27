@@ -43,3 +43,16 @@ def predict_risk(age, bmi, bp, cholesterol):
     features = np.array([[age, bmi, bp, cholesterol]])
     pred = model.predict(features)[0]
     return encoder.inverse_transform([pred])[0]
+# -----------------------------
+# USER INPUT
+# -----------------------------
+if __name__ == "__main__":
+    print("\n🏥 Disease Risk Prediction System\n")
+
+    age = int(input("Age: "))
+    bmi = float(input("BMI: "))
+    bp = int(input("Blood Pressure: "))
+    cholesterol = int(input("Cholesterol: "))
+
+    risk = predict_risk(age, bmi, bp, cholesterol)
+    print("\n⚠️ Predicted Disease Risk:", risk)
