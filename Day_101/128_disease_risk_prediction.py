@@ -58,3 +58,13 @@ if __name__ == "__main__":
 
     risk = predict_risk(age, bmi, bp, cholesterol)
     print("\n⚠️ Predicted Disease Risk:", risk)
+
+
+###### Output like this
+
+Age: 55
+BMI: 30
+Blood Pressure: 150
+Cholesterol: 245
+
+Predicted Disease Risk: High
