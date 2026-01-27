@@ -27,6 +27,7 @@ df["disease_risk"] = encoder.fit_transform(df["disease_risk"])
 
 X = df.drop("disease_risk", axis=1)
 y = df["disease_risk"]
+
 # -----------------------------
 # TRAIN MODEL
 # -----------------------------
@@ -43,6 +44,7 @@ def predict_risk(age, bmi, bp, cholesterol):
     features = np.array([[age, bmi, bp, cholesterol]])
     pred = model.predict(features)[0]
     return encoder.inverse_transform([pred])[0]
+
 # -----------------------------
 # USER INPUT
 # -----------------------------
