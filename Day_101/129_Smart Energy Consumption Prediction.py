@@ -57,3 +57,13 @@ if __name__ == "__main__":
     prediction = predict_energy(
         hour, temp, humidity, devices, weekend
     )
+     humidity = float(input("Humidity (%): "))
+    devices = int(input("Active Devices: "))
+    weekend = int(input("Weekend? (1=yes, 0=no): "))
+
+    prediction = predict_energy(
+        hour, temp, humidity, devices, weekend
+    )
+
+    print(f"\n🔋 Predicted Energy Usage: {prediction:.2f} kWh")
+
