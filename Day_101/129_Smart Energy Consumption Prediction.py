@@ -34,3 +34,26 @@ model = RandomForestRegressor(
 )
 
 model.fit(X, y)
+
+# -----------------------------
+# PREDICTION FUNCTION
+# -----------------------------
+def predict_energy(hour, temp, humidity, devices, weekend):
+    features = np.array([[hour, temp, humidity, devices, weekend]])
+    return model.predict(features)[0]
+
+# -----------------------------
+# USER INPUT
+# -----------------------------
+if __name__ == "__main__":
+    print("\n⚡ Smart Energy Consumption Predictor\n")
+
+    hour = int(input("Hour (0–23): "))
+    temp = float(input("Temperature (°C): "))
+    humidity = float(input("Humidity (%): "))
+    devices = int(input("Active Devices: "))
+    weekend = int(input("Weekend? (1=yes, 0=no): "))
+
+    prediction = predict_energy(
+        hour, temp, humidity, devices, weekend
+    )
