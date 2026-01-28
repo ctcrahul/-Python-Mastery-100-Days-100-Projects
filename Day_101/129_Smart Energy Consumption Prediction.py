@@ -129,3 +129,13 @@ if __name__ == "__main__":
 
     print(f"\n🔋 Predicted Energy Usage: {prediction:.2f} kWh")
 
+
+####### output like this
+
+Hour (0–23): 19
+Temperature (°C): 31
+Humidity (%): 44
+Active Devices: 9
+Weekend? (1=yes, 0=no): 0
+
+Predicted Energy Usage: 4.87 kWh
