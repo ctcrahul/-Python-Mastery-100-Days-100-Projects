@@ -17,3 +17,20 @@ data = {
     "is_weekend": [0, 0, 0, 0, 1, 1, 0, 1],
     "energy_kwh": [1.2, 2.8, 3.6, 5.2, 4.1, 0.9, 4.8, 4.3]
 }
+df = pd.DataFrame(data)
+
+# -----------------------------
+# FEATURES / TARGET
+# -----------------------------
+X = df.drop("energy_kwh", axis=1)
+y = df["energy_kwh"]
+
+# -----------------------------
+# TRAIN MODEL
+# -----------------------------
+model = RandomForestRegressor(
+    n_estimators=200,
+    random_state=42
+)
+
+model.fit(X, y)
