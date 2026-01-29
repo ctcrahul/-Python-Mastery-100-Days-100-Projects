@@ -38,3 +38,21 @@ def scrape_subreddit(subreddit_name, limit=50):
             "url": post.url,
             "selftext": post.selftext
         })
+    return pd.DataFrame(posts)
+
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    print("\n🧵 Reddit Post Scraper\n")
+
+    subreddit_name = input("Enter subreddit name (without r/): ")
+    limit = int(input("Number of posts to scrape: "))
+
+    df = scrape_subreddit(subreddit_name, limit)
+
+    file_name = f"{subreddit_name}_posts.csv"
+    df.to_csv(file_name, index=False)
+
+    print(f"\n✅ Scraped {len(df)} posts")
+    print(f"📁 Saved to {file_name}")
