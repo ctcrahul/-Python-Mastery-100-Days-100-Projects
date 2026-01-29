@@ -56,3 +56,12 @@ if __name__ == "__main__":
 
     print(f"\n✅ Scraped {len(df)} posts")
     print(f"📁 Saved to {file_name}")
+
+
+######## Output Like this
+
+Enter subreddit name (without r/): machinelearning
+Number of posts to scrape: 100
+
+Scraped 100 posts
+Saved to machinelearning_posts.csv
