@@ -1,8 +1,23 @@
 # Reddit Post Scraper (Single File)
 # Scrapes posts from a subreddit and saves to CSV
 
+# Advanced Reddit Post Scraper (Single File)
+# Features: comments, sentiment, filters, CSV + SQLite
+
 import praw
 import pandas as pd
+import sqlite3
+import time
+from datetime import datetime, timedelta
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+# -----------------------------
+# REDDIT API CREDENTIALS
+# -----------------------------
+CLIENT_ID = "YOUR_CLIENT_ID"
+CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+USER_AGENT = "advanced_reddit_scraper"
+
 
 # -----------------------------
 # REDDIT API CREDENTIALS
