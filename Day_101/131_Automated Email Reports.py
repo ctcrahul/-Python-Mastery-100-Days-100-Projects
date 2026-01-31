@@ -56,3 +56,18 @@ def send_email(subject, body):
     msg["From"] = SENDER_EMAIL
     msg["To"] = RECEIVER_EMAIL
     msg["Subject"] = subject
+
+    msg.attach(MIMEText(body, "plain"))
+
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    server.starttls()
+    server.login(SENDER_EMAIL, APP_PASSWORD)
+    server.send_message(msg)
+    server.quit()
+
+# -----------------------------
+# MAIN
+# -----------------------------
+if __name__ == "__main__":
+    print("📧 Sending Automated Email Report...")
+
