@@ -71,3 +71,9 @@ def send_email(subject, body):
 if __name__ == "__main__":
     print("📧 Sending Automated Email Report...")
 
+   report_text = generate_report(df)
+    subject = "Daily Automated Report"
+
+    send_email(subject, report_text)
+
+    print("✅ Email sent successfully")
