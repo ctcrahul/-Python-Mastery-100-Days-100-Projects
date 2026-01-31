@@ -41,3 +41,18 @@ Date: {date}
 
 ------------------------
 """
+
+    for _, row in df.iterrows():
+        report += f"{row['Metric']}: {row['Value']}\n"
+
+    report += "\nRegards,\nAutomated Reporting System"
+    return report
+
+# -----------------------------
+# SEND EMAIL
+# -----------------------------
+def send_email(subject, body):
+    msg = MIMEMultipart()
+    msg["From"] = SENDER_EMAIL
+    msg["To"] = RECEIVER_EMAIL
+    msg["Subject"] = subject
