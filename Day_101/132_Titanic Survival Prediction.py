@@ -33,3 +33,26 @@ df["Embarked"].fillna(df["Embarked"].mode()[0], inplace=True)
 encoder = LabelEncoder()
 df["Sex"] = encoder.fit_transform(df["Sex"])
 df["Embarked"] = encoder.fit_transform(df["Embarked"])
+# -----------------------------
+# SPLIT DATA
+# -----------------------------
+X = df[features]
+y = df[target]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# -----------------------------
+# TRAIN MODEL
+# -----------------------------
+model = RandomForestClassifier(
+    n_estimators=200,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+# -----------------------------
+# EVALUATION
+# -----------------------------
