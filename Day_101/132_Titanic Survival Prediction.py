@@ -56,3 +56,39 @@ model.fit(X_train, y_train)
 # -----------------------------
 # EVALUATION
 # -----------------------------
+predictions = model.predict(X_test)
+
+print("\n🎯 Accuracy:", accuracy_score(y_test, predictions))
+print("\n📊 Classification Report:\n")
+print(classification_report(y_test, predictions))
+
+# -----------------------------
+# SINGLE PASSENGER PREDICTION
+# -----------------------------
+def predict_survival(pclass, sex, age, sibsp, parch, fare, embarked):
+    sex = encoder.transform([sex])[0]
+    embarked = encoder.transform([embarked])[0]
+
+    sample = np.array([[pclass, sex, age, sibsp, parch, fare, embarked]])
+    result = model.predict(sample)[0]
+    return "Survived" if result == 1 else "Did Not Survive"
+
+# -----------------------------
+# USER INPUT
+# -----------------------------
+if __name__ == "__main__":
+    print("\n🚢 Titanic Survival Predictor\n")
+
+    pclass = int(input("Passenger Class (1/2/3): "))
+    sex = input("Sex (male/female): ")
+    age = float(input("Age: "))
+    sibsp = int(input("Siblings/Spouses aboard: "))
+    parch = int(input("Parents/Children aboard: "))
+    fare = float(input("Fare: "))
+    embarked = input("Embarked (C/Q/S): ")
+
+    result = predict_survival(
+        pclass, sex, age, sibsp, parch, fare, embarked
+    )
+
+    print("\n🧾 Prediction:", result)
