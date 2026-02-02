@@ -31,3 +31,26 @@ def register_face(name, frame):
     print(f"[INFO] Face registered for {name}")
 
 def recognize_faces(frame):
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    boxes = face_recognition.face_locations(rgb)
+    encodings = face_recognition.face_encodings(rgb, boxes)
+
+    names = []
+
+    for encoding in encodings:
+        if len(face_db["embeddings"]) == 0:
+            names.append("Unknown")
+            continue
+
+        distances = face_recognition.face_distance(
+            face_db["embeddings"], encoding
+        )
+        min_dist = np.min(distances)
+        best_match = np.argmin(distances)
+
+        if min_dist < THRESHOLD:
+            names.append(face_db["names"][best_match])
+        else:
+            names.append("Unknown")
+
+    return boxes, names
