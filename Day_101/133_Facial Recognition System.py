@@ -36,6 +36,33 @@ def recognize_faces(frame):
     encodings = face_recognition.face_encodings(rgb, boxes)
 
     names = []
+def main():
+    cap = cv2.VideoCapture(0)
+
+    print("Press 'r' to register a new face")
+    print("Press 'q' to quit")
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        boxes, names = recognize_faces(frame)
+
+        for (top, right, bottom, left), name in zip(boxes, names):
+            color = (0, 255, 0) if name != "Unknown" else (0, 0, 255)
+            cv2.rectangle(frame, (left, top), (right, bottom), color, 2)
+            cv2.putText(
+                frame,
+                name,
+                (left, top - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.75,
+                color,
+                2,
+            )
+
+        cv2.imshow("Facial Recognition System", frame)
 
     for encoding in encodings:
         if len(face_db["embeddings"]) == 0:
