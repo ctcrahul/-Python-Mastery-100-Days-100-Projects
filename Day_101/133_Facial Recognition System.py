@@ -13,6 +13,7 @@ if os.path.exists(DATA_FILE):
         face_db = pickle.load(f)
 else:
     face_db = {"names": [], "embeddings": []}
+
 def register_face(name, frame):
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     boxes = face_recognition.face_locations(rgb)
@@ -36,6 +37,25 @@ def recognize_faces(frame):
     encodings = face_recognition.face_encodings(rgb, boxes)
 
     names = []
+
+    for encoding in encodings:
+        if len(face_db["embeddings"]) == 0:
+            names.append("Unknown")
+            continue
+
+        distances = face_recognition.face_distance(
+            face_db["embeddings"], encoding
+        )
+        min_dist = np.min(distances)
+        best_match = np.argmin(distances)
+
+        if min_dist < THRESHOLD:
+            names.append(face_db["names"][best_match])
+        else:
+            names.append("Unknown")
+
+    return boxes, names
+
 def main():
     cap = cv2.VideoCapture(0)
 
@@ -64,24 +84,7 @@ def main():
 
         cv2.imshow("Facial Recognition System", frame)
 
-    for encoding in encodings:
-        if len(face_db["embeddings"]) == 0:
-            names.append("Unknown")
-            continue
-
-        distances = face_recognition.face_distance(
-            face_db["embeddings"], encoding
-        )
-        min_dist = np.min(distances)
-        best_match = np.argmin(distances)
-
-        if min_dist < THRESHOLD:
-            names.append(face_db["names"][best_match])
-        else:
-            names.append("Unknown")
-
-    return boxes, names
-      key = cv2.waitKey(1) & 0xFF
+        key = cv2.waitKey(1) & 0xFF
 
         if key == ord("r"):
             name = input("Enter name: ").strip()
