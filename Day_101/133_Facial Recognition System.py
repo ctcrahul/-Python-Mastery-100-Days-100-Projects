@@ -81,3 +81,18 @@ def main():
             names.append("Unknown")
 
     return boxes, names
+      key = cv2.waitKey(1) & 0xFF
+
+        if key == ord("r"):
+            name = input("Enter name: ").strip()
+            if name:
+                register_face(name, frame)
+
+        elif key == ord("q"):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
