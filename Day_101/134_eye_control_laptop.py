@@ -54,3 +54,16 @@ while True:
         ear = (left_ear + right_ear) / 2
 
         if ear < blink_threshold:
+          current_time = time.time()
+            if current_time - last_blink_time > blink_cooldown:
+                pyautogui.click()
+                last_blink_time = current_time
+
+        cv2.circle(frame, (iris_x, iris_y), 4, (0, 255, 0), -1)
+
+    cv2.imshow("Eye Controlled Laptop", frame)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+
+cam.release()
+cv2.destroyAllWindows()
