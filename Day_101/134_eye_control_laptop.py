@@ -35,3 +35,22 @@ while True:
     h, w, _ = frame.shape
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     result = face_mesh.process(rgb)
+
+
+
+    if result.multi_face_landmarks:
+        landmarks = result.multi_face_landmarks[0].landmark
+
+        iris_x = int(np.mean([landmarks[i].x for i in IRIS]) * w)
+        iris_y = int(np.mean([landmarks[i].y for i in IRIS]) * h)
+
+        screen_x = np.interp(iris_x, (0, w), (0, screen_w))
+        screen_y = np.interp(iris_y, (0, h), (0, screen_h))
+
+        pyautogui.moveTo(screen_x, screen_y, duration=0.05)
+
+        left_ear = eye_aspect_ratio(landmarks, LEFT_EYE)
+        right_ear = eye_aspect_ratio(landmarks, RIGHT_EYE)
+        ear = (left_ear + right_ear) / 2
+
+        if ear < blink_threshold:
