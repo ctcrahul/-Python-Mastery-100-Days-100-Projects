@@ -63,3 +63,33 @@ while True:
         smooth_y = alpha * screen_y + (1 - alpha) * smooth_y
 
         pyautogui.moveTo(smooth_x, smooth_y, duration=0.01)
+        left_ear = eye_aspect_ratio(landmarks, LEFT_EYE)
+        right_ear = eye_aspect_ratio(landmarks, RIGHT_EYE)
+        ear = (left_ear + right_ear) / 2
+
+        now = time.time()
+
+        # Blink logic
+        if ear < blink_threshold:
+            if blink_start is None:
+                blink_start = now
+        else:
+            if blink_start:
+                duration = now - blink_start
+                blink_start = None
+
+                if duration > drag_threshold:
+                    if not dragging:
+                        pyautogui.mouseDown()
+                        dragging = True
+                    else:
+                        pyautogui.mouseUp()
+                        dragging = False
+                else:
+                    if now - last_blink < blink_cooldown:
+                        pyautogui.rightClick()
+                        blink_count = 0
+                    else:
+                        pyautogui.click()
+
+                last_blink = now
