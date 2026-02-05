@@ -93,3 +93,18 @@ while True:
                         pyautogui.click()
 
                 last_blink = now
+
+        # Scroll by gaze
+        if iris_y < h * 0.3:
+            pyautogui.scroll(40)
+        elif iris_y > h * 0.7:
+            pyautogui.scroll(-40)
+
+        cv2.circle(frame, (iris_x, iris_y), 4, (0, 255, 0), -1)
+
+    cv2.imshow("Eye Controlled Laptop", frame)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+
+cam.release()
+cv2.destroyAllWindows()
