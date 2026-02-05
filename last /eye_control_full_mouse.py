@@ -39,3 +39,27 @@ def eye_aspect_ratio(landmarks, eye):
 print("Eye control active")
 print("Blink = left click | Double blink = right click | Long blink = drag")
 print("Look up/down = scroll | ESC to exit")
+
+
+while True:
+    ret, frame = cam.read()
+    if not ret:
+        break
+
+    frame = cv2.flip(frame, 1)
+    h, w, _ = frame.shape
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    result = face_mesh.process(rgb)
+
+    if result.multi_face_landmarks:
+        landmarks = result.multi_face_landmarks[0].landmark
+
+        iris_x, iris_y = iris_position(landmarks, w, h)
+
+        screen_x = np.interp(iris_x, (0, w), (0, screen_w))
+        screen_y = np.interp(iris_y, (0, h), (0, screen_h))
+
+        smooth_x = alpha * screen_x + (1 - alpha) * smooth_x
+        smooth_y = alpha * screen_y + (1 - alpha) * smooth_y
+
+        pyautogui.moveTo(smooth_x, smooth_y, duration=0.01)
