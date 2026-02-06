@@ -96,3 +96,39 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+in results %}
+<tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td></tr>
+{% endfor %}
+</table>
+{% endif %}
+"""
+
+def extract_text(file_path):
+    if file_path.endswith(".pdf"):
+        text = ""
+        with open(file_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            for page in reader.pages:
+                text += page.extract_text() or ""
+        return text
+    else:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            return f.read()
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    results = []
+
+    if request.method == "POST":
+        job_desc = request.form["job_desc"]
+        resumes = request.files.getlist("resumes")
+
+        documents = [job_desc]
+        filenames = []
+
+        for resume in resumes:
+            path = os.path.join(UPLOAD_FOLDER, resume.filename)
+            resume.save(path)
+            
