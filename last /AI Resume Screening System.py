@@ -78,3 +78,21 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+####            filenames.append(resume.filename)
+
+        vectorizer = TfidfVectorizer(stop_words="english")
+        vectors = vectorizer.fit_transform(documents)
+
+        scores = cosine_similarity(vectors[0:1], vectors[1:]).flatten()
+
+        for name, score in zip(filenames, scores):
+            results.append((name, round(score * 100, 2)))
+
+        results.sort(key=lambda x: x[1], reverse=True)
+
+    return render_template_string(HTML, results=results)
+
+if __name__ == "__main__":
+    app.run(debug=True)
