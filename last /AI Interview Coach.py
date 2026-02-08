@@ -39,3 +39,33 @@ def evaluate_answer(answer, reference):
     final_score = round((similarity * 0.7 + length_score * 0.3) * 100, 2)
 
     return final_score, similarity
+
+def generate_feedback(answer, score):
+    doc = nlp(answer)
+    filler_words = [t.text for t in doc if t.text.lower() in ["um", "uh", "like"]]
+
+    feedback = []
+    if score < 40:
+        feedback.append("Weak answer. No structure, no clarity.")
+    elif score < 70:
+        feedback.append("Average answer. Improve depth and examples.")
+    else:
+        feedback.append("Strong answer. Clear and relevant.")
+
+    if len(answer.split()) < 30:
+        feedback.append("Answer is too short. Expand with reasoning.")
+    if filler_words:
+        feedback.append(f"Remove filler words: {set(filler_words)}")
+
+    return " ".join(feedback)
+
+# ------------------ UI ------------------
+HTML = """
+<h2>AI Interview Coach</h2>
+<form method="post">
+    <label>Role</label><br>
+    <select name="role" onchange="this.form.submit()">
+        {% for r in roles %}
+            <option value="{{r}}" {% if r == role %}selected{% endif %}>{{r}}</option>
+        {% endfor %}
+    </select><br><br>
