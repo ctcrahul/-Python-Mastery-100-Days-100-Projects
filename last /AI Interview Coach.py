@@ -103,3 +103,14 @@ def index():
 
         score, _ = evaluate_answer(answer, IDEAL_ANSWERS[question])
         feedback = generate_feedback(answer, score)
+    return render_template_string(
+        HTML,
+        roles=ROLES.keys(),
+        role=role,
+        questions=questions,
+        score=score,
+        feedback=feedback
+    )
+
+if __name__ == "__main__":
+    app.run(debug=True)
