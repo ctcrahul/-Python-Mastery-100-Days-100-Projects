@@ -69,3 +69,37 @@ HTML = """
             <option value="{{r}}" {% if r == role %}selected{% endif %}>{{r}}</option>
         {% endfor %}
     </select><br><br>
+
+    <label>Question</label><br>
+    <select name="question">
+        {% for q in questions %}
+            <option value="{{q}}">{{q}}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <textarea name="answer" rows="6" cols="80" placeholder="Type your answer here..."></textarea><br><br>
+    <button type="submit">Evaluate</button>
+</form>
+
+{% if score %}
+<hr>
+<h3>Score: {{score}} / 100</h3>
+<p><b>Feedback:</b> {{feedback}}</p>
+{% endif %}
+"""
+
+# ------------------ ROUTE ------------------
+@app.route("/", methods=["GET", "POST"])
+def index():
+    role = request.form.get("role", "Data Analyst")
+    questions = ROLES[role]
+
+    score = None
+    feedback = None
+
+    if request.method == "POST" and "answer" in request.form:
+        question = request.form["question"]
+        answer = request.form["answer"]
+
+        score, _ = evaluate_answer(answer, IDEAL_ANSWERS[question])
+        feedback = generate_feedback(answer, score)
