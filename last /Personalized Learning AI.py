@@ -84,3 +84,36 @@ HTML = """
 <p><b>New Difficulty Level:</b> {{level}}</p>
 {% endif %}
 """
+
+
+# -----------------------------
+# Route
+# -----------------------------
+@app.route("/", methods=["GET", "POST"])
+def index():
+    topic = request.form.get("topic", "Python Basics")
+    level = USER_STATE["level"]
+    question = TOPICS[topic][level]
+
+    score = None
+
+    if request.method == "POST":
+        answer = request.form["answer"]
+        score = evaluate_answer(answer, IDEAL_ANSWERS[question])
+        new_level = update_level(score)
+
+        USER_STATE["level"] = new_level
+        USER_STATE["history"].append((topic, question, score))
+
+        level = new_level
+
+    return render_template_string(
+        HTML,
+        topics=TOPICS.keys(),
+        question=question,
+        score=score,
+        level=level
+    )
+
+if __name__ == "__main__":
+    app.run(debug=True)
