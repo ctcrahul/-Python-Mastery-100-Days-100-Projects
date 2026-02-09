@@ -71,3 +71,16 @@ HTML = """
 {% endfor %}
 </select><br><br>
 
+<label>Question</label><br>
+<p><b>{{question}}</b></p>
+
+<textarea name="answer" rows="6" cols="80" placeholder="Type your answer..."></textarea><br><br>
+<button type="submit">Submit</button>
+</form>
+
+{% if score %}
+<hr>
+<h3>Score: {{score}}</h3>
+<p><b>New Difficulty Level:</b> {{level}}</p>
+{% endif %}
+"""
