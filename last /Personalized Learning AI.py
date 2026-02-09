@@ -24,3 +24,26 @@ TOPICS = {
         "hard": "How does gradient descent work?"
     }
 }
+
+IDEAL_ANSWERS = {
+    "Explain what a variable is in Python.": "stores data value memory",
+    "Difference between list and tuple.": "mutable immutable performance",
+    "Explain Python memory management.": "heap garbage collection reference",
+    "What is supervised learning?": "labeled data prediction",
+    "Explain bias vs variance.": "underfitting overfitting tradeoff",
+    "How does gradient descent work?": "optimization loss function learning rate"
+}
+
+USER_STATE = {
+    "level": "easy",
+    "history": []
+}
+
+# -----------------------------
+# Core AI Logic
+# -----------------------------
+def evaluate_answer(answer, reference):
+    vectorizer = TfidfVectorizer()
+    vectors = vectorizer.fit_transform([answer, reference])
+    similarity = cosine_similarity(vectors[0:1], vectors[1:2])[0][0]
+    score = round(similarity * 100, 2)
