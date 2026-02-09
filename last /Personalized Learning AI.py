@@ -1,6 +1,7 @@
 # pip install flask scikit-learn spacy
 # python -m spacy download en_core_web_sm
 
+
 from flask import Flask, request, render_template_string
 import spacy
 from sklearn.metrics.pairwise import cosine_similarity
@@ -47,7 +48,7 @@ def evaluate_answer(answer, reference):
     vectors = vectorizer.fit_transform([answer, reference])
     similarity = cosine_similarity(vectors[0:1], vectors[1:2])[0][0]
     score = round(similarity * 100, 2)
-        return score
+    return score
 
 def update_level(score):
     if score < 40:
@@ -84,7 +85,6 @@ HTML = """
 <p><b>New Difficulty Level:</b> {{level}}</p>
 {% endif %}
 """
-
 
 # -----------------------------
 # Route
