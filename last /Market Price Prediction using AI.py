@@ -21,6 +21,7 @@ data.dropna(inplace=True)
 
 X = data[["Prev_Close", "MA_3", "MA_7"]]
 y = data["Close"]
+
 # -----------------------------
 # Train-Test Split
 # -----------------------------
