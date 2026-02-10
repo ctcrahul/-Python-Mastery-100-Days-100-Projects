@@ -49,3 +49,16 @@ plt.xlabel("Date")
 plt.ylabel("Market Price")
 plt.legend()
 plt.show()
+
+# -----------------------------
+# Next Day Prediction
+# -----------------------------
+last_row = data.iloc[-1]
+next_day_features = [[
+    last_row["Close"],
+    data["Close"].tail(3).mean(),
+    data["Close"].tail(7).mean()
+]]
+
+next_price = model.predict(next_day_features)[0]
+print("Predicted Next Day Price:", round(next_price, 2))
