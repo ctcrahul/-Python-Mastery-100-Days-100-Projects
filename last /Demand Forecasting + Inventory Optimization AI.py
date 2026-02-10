@@ -21,3 +21,31 @@ data.dropna(inplace=True)
 
 X = data[["Prev_Sales", "MA_3", "MA_7"]]
 y = data["Sales"]
+# =============================
+# TRAIN DEMAND MODEL
+# =============================
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, shuffle=False, test_size=0.2
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+data.loc[X_test.index, "Predicted_Demand"] = model.predict(X_test)
+
+# =============================
+# INVENTORY PARAMETERS
+# =============================
+LEAD_TIME = 5               # days
+HOLDING_COST = 2            # per unit per day
+ORDER_COST = 50             # per order
+SHORTAGE_COST = 10          # per unit
+CURRENT_STOCK = 400
+
+# =============================
+# INVENTORY FORMULAS
+# =============================
+avg_daily_demand = data["Sales"].mean()
+demand_std = data["Sales"].std()
+
+# Safety Stock
