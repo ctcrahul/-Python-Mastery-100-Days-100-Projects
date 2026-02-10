@@ -21,3 +21,31 @@ data.dropna(inplace=True)
 
 X = data[["Prev_Close", "MA_3", "MA_7"]]
 y = data["Close"]
+# -----------------------------
+# Train-Test Split
+# -----------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, shuffle=False, test_size=0.2
+)
+
+# -----------------------------
+# Model Training
+# -----------------------------
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# -----------------------------
+# Prediction
+# -----------------------------
+data.loc[X_test.index, "Predicted"] = model.predict(X_test)
+
+# -----------------------------
+# Visualization
+# -----------------------------
+plt.figure()
+plt.plot(data["Date"], data["Close"], label="Actual Price")
+plt.plot(data["Date"], data["Predicted"], label="Predicted Price")
+plt.xlabel("Date")
+plt.ylabel("Market Price")
+plt.legend()
+plt.show()
