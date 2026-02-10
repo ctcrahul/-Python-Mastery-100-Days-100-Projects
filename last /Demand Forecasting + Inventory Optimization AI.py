@@ -49,3 +49,41 @@ avg_daily_demand = data["Sales"].mean()
 demand_std = data["Sales"].std()
 
 # Safety Stock
+safety_stock = int(1.65 * demand_std * np.sqrt(LEAD_TIME))
+
+# Reorder Point
+reorder_point = int(avg_daily_demand * LEAD_TIME + safety_stock)
+
+# Economic Order Quantity (EOQ)
+annual_demand = avg_daily_demand * 365
+EOQ = int(np.sqrt((2 * annual_demand * ORDER_COST) / HOLDING_COST))
+
+# =============================
+# DECISION LOGIC
+# =============================
+decision = "DO NOT reorder yet"
+if CURRENT_STOCK <= reorder_point:
+    decision = f"REORDER {EOQ} units now"
+
+# =============================
+# OUTPUT
+# =============================
+print("\n--- DEMAND & INVENTORY DECISION ---")
+print("Average Daily Demand:", round(avg_daily_demand, 2))
+print("Safety Stock:", safety_stock)
+print("Reorder Point:", reorder_point)
+print("Current Stock:", CURRENT_STOCK)
+print("EOQ:", EOQ)
+print("Decision:", decision)
+
+# =============================
+# VISUALIZATION
+# =============================
+plt.figure()
+plt.plot(data["Date"], data["Sales"], label="Actual Sales")
+plt.plot(data["Date"], data["Predicted_Demand"], label="Predicted Demand")
+plt.axhline(reorder_point, linestyle="--", label="Reorder Point")
+plt.xlabel("Date")
+plt.ylabel("Units")
+plt.legend()
+plt.show()
