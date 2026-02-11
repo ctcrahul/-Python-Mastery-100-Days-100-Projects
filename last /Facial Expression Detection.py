@@ -42,3 +42,20 @@ while True:
 
 # Start webcam
 cap = cv2.VideoCapture(0)
+            cv2.putText(
+                frame,
+                label,
+                (x, y - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.9,
+                (0, 255, 0),
+                2
+            )
+
+    cv2.imshow("Emotion Detector", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
