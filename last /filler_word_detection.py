@@ -27,3 +27,24 @@ def detect_fillers(text):
 
     return total_words, filler_count, filler_ratio, filler_hits
 
+# Speech to text
+recognizer = sr.Recognizer()
+
+print("Speak your answer (press Ctrl+C to stop)...")
+
+with sr.Microphone() as source:
+    recognizer.adjust_for_ambient_noise(source)
+    audio = recognizer.listen(source)
+
+try:
+    text = recognizer.recognize_google(audio)
+    print("\nTranscribed Text:")
+    print(text)
+
+    total, fillers, ratio, details = detect_fillers(text)
+
+    print("\n--- Filler Word Analysis ---")
+    print("Total words:", total)
+    print("Filler words used:", fillers)
+    print("Filler density:", ratio, "%")
+    print("Details:", details)
