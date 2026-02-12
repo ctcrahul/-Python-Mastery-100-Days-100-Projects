@@ -26,3 +26,28 @@ try:
 except:
     answer_text = ""
     print("Could not recognize speech")
+# Facial emotion capture
+cap = cv2.VideoCapture(0)
+emotion_count = []
+
+for _ in range(30):
+    ret, frame = cap.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray,1.3,5)
+
+    for (x,y,w,h) in faces:
+        roi = gray[y:y+h,x:x+w]
+        roi = cv2.resize(roi,(48,48))/255.0
+        roi = roi.reshape(1,48,48,1)
+        pred = emotion_model.predict(roi)[0]
+        emotion_count.append(emotions[np.argmax(pred)])
+
+cap.release()
+
+# Feedback
+confidence = emotion_count.count("Happy") + emotion_count.count("Neutral")
+
+print("\n--- Feedback ---")
+print("Detected emotions:", set(emotion_count))
+print("Confidence Score:", confidence)
+print("Answer Length:", len(answer_text.split()))
