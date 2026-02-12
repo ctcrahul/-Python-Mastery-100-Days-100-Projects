@@ -26,6 +26,7 @@ try:
 except:
     answer_text = ""
     print("Could not recognize speech")
+
 # Facial emotion capture
 cap = cv2.VideoCapture(0)
 emotion_count = []
