@@ -48,3 +48,14 @@ try:
     print("Filler words used:", fillers)
     print("Filler density:", ratio, "%")
     print("Details:", details)
+    if ratio > 8:
+        print("⚠ Too many filler words. You sound unprepared.")
+    elif ratio > 4:
+        print("⚠ Moderate filler usage. Needs improvement.")
+    else:
+        print("✅ Good clarity. Minimal filler usage.")
+
+except sr.UnknownValueError:
+    print("Could not understand speech")
+except sr.RequestError:
+    print("Speech recognition service error")
