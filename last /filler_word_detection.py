@@ -27,6 +27,7 @@ def detect_fillers(text):
 
     return total_words, filler_count, filler_ratio, filler_hits
 
+
 # Speech to text
 recognizer = sr.Recognizer()
 
@@ -48,6 +49,7 @@ try:
     print("Filler words used:", fillers)
     print("Filler density:", ratio, "%")
     print("Details:", details)
+
     if ratio > 8:
         print("⚠ Too many filler words. You sound unprepared.")
     elif ratio > 4:
