@@ -94,6 +94,10 @@ def run_assistant():
         elif "open google" in command:
             open_google()
 
+        elif "open" in command:
+    app = command.replace("open", "").strip()
+    open_app(app)
+
         elif "weather" in command:
             speak("Tell city name")
             city = take_command()
