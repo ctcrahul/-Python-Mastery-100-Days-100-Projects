@@ -6,6 +6,9 @@ import webbrowser
 import pywhatkit
 import os
 import requests
+import pyautogui
+import yagmail
+import time
 
 engine = pyttsx3.init()
 engine.setProperty('rate', 170)
@@ -30,15 +33,41 @@ def take_command():
 
     return command
 
+# -------- BASIC FEATURES --------
+
 def tell_time():
-    time = datetime.datetime.now().strftime('%I:%M %p')
-    speak("Current time is " + time)
+    time_now = datetime.datetime.now().strftime('%I:%M %p')
+    speak("Current time is " + time_now)
 
 def search_wiki(query):
     speak("Searching Wikipedia")
     result = wikipedia.summary(query, sentences=2)
-    speak(result
+    speak(result)
 
+def open_youtube():
+    webbrowser.open("https://youtube.com")
+
+def open_google():
+    webbrowser.open("https://google.com")
+
+def play_song(song):
+    speak("Playing " + song)
+    pywhatkit.playonyt(song)
+
+# -------- WEATHER --------
+
+def weather(city):
+    api_key = "YOUR_API_KEY"
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+    data = requests.get(url).json()
+
+    if data["cod"] != "404":
+        temp = int(data["main"]["temp"] - 273.15)
+        speak(f"Temperature in {city} is {temp} degree Celsius")
+    else:
+        speak("City not found")
+
+# -------- APP CONTROL --------
 
 def open_app(app_name):
     apps = {
@@ -53,27 +82,63 @@ def open_app(app_name):
         os.startfile(apps[app_name])
     else:
         speak("App not found")
-          
 
-def open_youtube():
-    webbrowser.open("https://youtube.com")
+# -------- SCREENSHOT --------
 
-def open_google():
-    webbrowser.open("https://google.com")
+def take_screenshot():
+    screenshot = pyautogui.screenshot()
+    screenshot.save("screenshot.png")
+    speak("Screenshot taken")
 
-def play_song(song):
-    speak("Playing " + song)
-    pywhatkit.playonyt(song)
-def weather(city):
-    api_key = "your_api_key_here"
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
-    data = requests.get(url).json()
+# -------- MEMORY --------
 
-    if data["cod"] != "404":
-        temp = int(data["main"]["temp"] - 273.15)
-        speak(f"Temperature in {city} is {temp} degree Celsius")
-    else:
-        speak("City not found")
+def save_note():
+    speak("What should I remember?")
+    note = take_command()
+
+    with open("memory.txt", "a") as f:
+        f.write(note + "\n")
+
+    speak("Saved successfully")
+
+def read_notes():
+    try:
+        with open("memory.txt", "r") as f:
+            data = f.read()
+            speak("You told me to remember")
+            speak(data)
+    except:
+        speak("No memory found")
+
+# -------- EMAIL --------
+
+def send_email():
+    speak("What should I say?")
+    content = take_command()
+
+    yag = yagmail.SMTP('your_email@gmail.com', 'your_app_password')
+    yag.send('receiver@gmail.com', 'Voice Assistant Message', content)
+
+    speak("Email sent")
+
+# -------- REMINDER --------
+
+def set_reminder():
+    speak("What should I remind you?")
+    task = take_command()
+
+    speak("After how many seconds?")
+    delay = take_command()
+
+    try:
+        delay = int(delay)
+        speak("Reminder set")
+        time.sleep(delay)
+        speak("Reminder: " + task)
+    except:
+        speak("Invalid time")
+
+# -------- MAIN LOOP --------
 
 def run_assistant():
     speak("Voice assistant activated")
@@ -94,14 +159,33 @@ def run_assistant():
         elif "open google" in command:
             open_google()
 
-        elif "open" in command:
-    app = command.replace("open", "").strip()
-    open_app(app)
+        elif "play" in command:
+            song = command.replace("play", "")
+            play_song(song)
 
         elif "weather" in command:
             speak("Tell city name")
             city = take_command()
             weather(city)
+
+        elif "open" in command:
+            app = command.replace("open", "").strip()
+            open_app(app)
+
+        elif "screenshot" in command:
+            take_screenshot()
+
+        elif "remember this" in command:
+            save_note()
+
+        elif "what do you remember" in command:
+            read_notes()
+
+        elif "send email" in command:
+            send_email()
+
+        elif "remind me" in command:
+            set_reminder()
 
         elif "shutdown" in command:
             speak("Shutting down system")
