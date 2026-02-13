@@ -37,7 +37,23 @@ def tell_time():
 def search_wiki(query):
     speak("Searching Wikipedia")
     result = wikipedia.summary(query, sentences=2)
-    speak(result)
+    speak(result
+
+
+def open_app(app_name):
+    apps = {
+        "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "notepad": "notepad.exe",
+        "calculator": "calc.exe",
+        "word": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
+    }
+
+    if app_name in apps:
+        speak(f"Opening {app_name}")
+        os.startfile(apps[app_name])
+    else:
+        speak("App not found")
+          
 
 def open_youtube():
     webbrowser.open("https://youtube.com")
