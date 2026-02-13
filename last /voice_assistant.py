@@ -77,3 +77,18 @@ def run_assistant():
 
         elif "open google" in command:
             open_google()
+
+        elif "weather" in command:
+            speak("Tell city name")
+            city = take_command()
+            weather(city)
+
+        elif "shutdown" in command:
+            speak("Shutting down system")
+            os.system("shutdown /s /t 5")
+
+        elif "stop" in command:
+            speak("Goodbye")
+            break
+
+run_assistant()
