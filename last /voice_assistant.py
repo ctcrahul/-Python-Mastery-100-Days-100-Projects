@@ -48,3 +48,32 @@ def open_google():
 def play_song(song):
     speak("Playing " + song)
     pywhatkit.playonyt(song)
+def weather(city):
+    api_key = "your_api_key_here"
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+    data = requests.get(url).json()
+
+    if data["cod"] != "404":
+        temp = int(data["main"]["temp"] - 273.15)
+        speak(f"Temperature in {city} is {temp} degree Celsius")
+    else:
+        speak("City not found")
+
+def run_assistant():
+    speak("Voice assistant activated")
+
+    while True:
+        command = take_command()
+
+        if "time" in command:
+            tell_time()
+
+        elif "wikipedia" in command:
+            query = command.replace("wikipedia", "")
+            search_wiki(query)
+
+        elif "open youtube" in command:
+            open_youtube()
+
+        elif "open google" in command:
+            open_google()
