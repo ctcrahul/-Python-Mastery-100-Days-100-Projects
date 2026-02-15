@@ -67,3 +67,57 @@ model.fit(X, training_labels)
 def predict_intent(command):
     X_test = vectorizer.transform([command])
     return model.predict(X_test)[0]
+
+# -------- FEATURES --------
+
+def tell_time():
+    time_now = datetime.datetime.now().strftime('%I:%M %p')
+    speak("Current time is " + time_now)
+
+def open_youtube():
+    webbrowser.open("https://youtube.com")
+
+def play_song(song):
+    speak("Playing " + song)
+    pywhatkit.playonyt(song)
+
+def take_screenshot():
+    screenshot = pyautogui.screenshot()
+    screenshot.save("screenshot.png")
+    speak("Screenshot taken")
+
+def save_note():
+    speak("What should I remember?")
+    note = take_command()
+    with open("memory.txt", "a") as f:
+        f.write(note + "\n")
+    speak("Saved successfully")
+
+def read_notes():
+    try:
+        with open("memory.txt", "r") as f:
+            data = f.read()
+            speak("You told me to remember")
+            speak(data)
+    except:
+        speak("No memory found")
+
+def open_app(command):
+    apps = {
+        "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "notepad": "notepad.exe",
+        "calculator": "calc.exe"
+    }
+
+    for app in apps:
+        if app in command:
+            speak(f"Opening {app}")
+            os.startfile(apps[app])
+            return
+
+    speak("App not found")
+
+def shutdown_system():
+    speak("Shutting down system")
+    os.system("shutdown /s /t 5")
+
