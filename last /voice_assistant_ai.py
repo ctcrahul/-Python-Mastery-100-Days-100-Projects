@@ -20,6 +20,7 @@ def speak(text):
     print("Assistant:", text)
     engine.say(text)
     engine.runAndWait()
+
 def take_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -34,6 +35,8 @@ def take_command():
         return "none"
 
     return command
+
+
 # -------- AI INTENT TRAINING --------
 
 training_sentences = [
@@ -67,6 +70,7 @@ model.fit(X, training_labels)
 def predict_intent(command):
     X_test = vectorizer.transform([command])
     return model.predict(X_test)[0]
+
 
 # -------- FEATURES --------
 
@@ -121,3 +125,42 @@ def shutdown_system():
     speak("Shutting down system")
     os.system("shutdown /s /t 5")
 
+
+# -------- MAIN LOOP --------
+
+def run_assistant():
+    speak("AI Voice Assistant Activated")
+
+    while True:
+        command = take_command()
+
+        if command == "none":
+            continue
+
+        intent = predict_intent(command)
+
+        if intent == "time":
+            tell_time()
+
+        elif intent == "youtube":
+            open_youtube()
+
+        elif intent == "screenshot":
+            take_screenshot()
+
+        elif intent == "save_note":
+            save_note()
+
+        elif intent == "read_note":
+            read_notes()
+
+        elif intent == "shutdown":
+            shutdown_system()
+
+        elif intent == "play":
+            play_song(command)
+
+        elif intent == "open_app":
+            open_app(command)
+
+run_assistant()
