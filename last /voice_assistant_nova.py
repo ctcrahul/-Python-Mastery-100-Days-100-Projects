@@ -115,3 +115,59 @@ def take_screenshot():
     screenshot = pyautogui.screenshot()
     screenshot.save("screenshot.png")
     speak("Screenshot taken")
+def save_note():
+    speak("What should I remember?")
+    note = take_command()
+    with open("memory.txt", "a") as f:
+        f.write(note + "\n")
+    speak("Saved successfully")
+
+def read_notes():
+    try:
+        with open("memory.txt", "r") as f:
+            data = f.read()
+            speak("You told me to remember")
+            speak(data)
+    except:
+        speak("No memory found")
+
+def open_app(command):
+    apps = {
+        "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "notepad": "notepad.exe",
+        "calculator": "calc.exe"
+    }
+
+    for app in apps:
+        if app in command:
+            speak(f"Opening {app}")
+            os.startfile(apps[app])
+            return
+
+    speak("App not found")
+
+def shutdown_system():
+    speak("Shutting down system")
+    os.system("shutdown /s /t 5")
+
+# -------- MAIN LOOP --------
+
+def run_assistant():
+    speak("Nova activated")
+
+    while True:
+        listen_for_wake_word()
+        command = take_command()
+
+        if command == "none":
+            continue
+
+        intent = predict_intent(command)
+
+        if intent == "time":
+            tell_time()
+
+        elif intent == "youtube":
+            open_youtube()
+
+        elif intent == "screenshot
