@@ -48,6 +48,7 @@ def listen_for_wake_word():
                 if "hey nova" in text:
                     speak("Yes?")
                     return
+
 # -------- COMMAND LISTENER --------
 
 def take_command():
@@ -77,6 +78,7 @@ training_sentences = [
     "shutdown system", "turn off computer",
     "play music", "play song"
 ]
+
 training_labels = [
     "open_app", "open_app", "open_app",
     "youtube", "youtube", "youtube",
@@ -115,6 +117,7 @@ def take_screenshot():
     screenshot = pyautogui.screenshot()
     screenshot.save("screenshot.png")
     speak("Screenshot taken")
+
 def save_note():
     speak("What should I remember?")
     note = take_command()
@@ -170,4 +173,22 @@ def run_assistant():
         elif intent == "youtube":
             open_youtube()
 
-        elif intent == "screenshot
+        elif intent == "screenshot":
+            take_screenshot()
+
+        elif intent == "save_note":
+            save_note()
+
+        elif intent == "read_note":
+            read_notes()
+
+        elif intent == "shutdown":
+            shutdown_system()
+
+        elif intent == "play":
+            play_song(command)
+
+        elif intent == "open_app":
+            open_app(command)
+
+run_assistant()
