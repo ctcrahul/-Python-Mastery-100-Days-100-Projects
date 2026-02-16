@@ -48,3 +48,32 @@ def listen_for_wake_word():
                 if "hey nova" in text:
                     speak("Yes?")
                     return
+# -------- COMMAND LISTENER --------
+
+def take_command():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening for command...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        command = r.recognize_google(audio).lower()
+        print("You:", command)
+    except:
+        return "none"
+
+    return command
+
+# -------- AI INTENT --------
+
+training_sentences = [
+    "open chrome", "launch browser", "start chrome",
+    "open youtube", "go to youtube", "launch youtube",
+    "what time is it", "tell me the time",
+    "take screenshot", "capture screen",
+    "remember this", "save this note",
+    "what do you remember", "show memory",
+    "shutdown system", "turn off computer",
+    "play music", "play song"
+]
