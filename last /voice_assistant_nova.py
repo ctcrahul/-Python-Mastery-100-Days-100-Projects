@@ -77,3 +77,41 @@ training_sentences = [
     "shutdown system", "turn off computer",
     "play music", "play song"
 ]
+training_labels = [
+    "open_app", "open_app", "open_app",
+    "youtube", "youtube", "youtube",
+    "time", "time",
+    "screenshot", "screenshot",
+    "save_note", "save_note",
+    "read_note", "read_note",
+    "shutdown", "shutdown",
+    "play", "play"
+]
+
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(training_sentences)
+
+model_intent = LogisticRegression()
+model_intent.fit(X, training_labels)
+
+def predict_intent(command):
+    X_test = vectorizer.transform([command])
+    return model_intent.predict(X_test)[0]
+
+# -------- FEATURES --------
+
+def tell_time():
+    time_now = datetime.datetime.now().strftime('%I:%M %p')
+    speak("Current time is " + time_now)
+
+def open_youtube():
+    webbrowser.open("https://youtube.com")
+
+def play_song(song):
+    speak("Playing " + song)
+    pywhatkit.playonyt(song)
+
+def take_screenshot():
+    screenshot = pyautogui.screenshot()
+    screenshot.save("screenshot.png")
+    speak("Screenshot taken")
