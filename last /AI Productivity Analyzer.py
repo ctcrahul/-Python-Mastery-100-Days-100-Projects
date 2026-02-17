@@ -9,6 +9,12 @@ from flask import Flask, render_template_string
 
 log_file = "activity_log.csv"
 
+# ---------- TRACK ACTIVE WINDOW ----------
+def get_active_window():
+    window = win32gui.GetForegroundWindow()
+    title = win32gui.GetWindowText(window)
+    return title
+
 # ---------- LOG ACTIVITY ----------
 def log_activity(duration=60):
     print("Tracking started... Press CTRL+C to stop")
@@ -45,6 +51,7 @@ def label_data(df):
     
     df['Label'] = labels
     return df
+
 # ---------- AI CLASSIFIER ----------
 def train_ai(df):
     le = LabelEncoder()
@@ -99,3 +106,13 @@ HTML = """
 def home():
     score = analyze()
     return render_template_string(HTML, score=score)
+
+# ---------- MAIN ----------
+if __name__ == "__main__":
+    
+    choice = input("1: Track Activity\n2: Run Dashboard\nChoose: ")
+    
+    if choice == "1":
+        log_activity()
+    elif choice == "2":
+        app.run()
