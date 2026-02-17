@@ -67,3 +67,35 @@ def productivity_score(df):
     productive = len(df[df['Label']=="Productive"])
     score = (productive/total)*100
     return round(score,2)
+
+# ---------- ANALYSIS ----------
+def analyze():
+    df = pd.read_csv(log_file, names=["Time", "Window"])
+    df = label_data(df)
+    
+    score = productivity_score(df)
+    model, le = train_ai(df)
+    
+    print("\nProductivity Score:", score,"%")
+    
+    df['Hour'] = pd.to_datetime(df['Time']).dt.hour
+    
+    hourly = df.groupby('Hour')['Label'].value_counts().unstack().fillna(0)
+    hourly.plot(kind='bar')
+    plt.title("Hourly Productivity Pattern")
+    plt.show()
+    
+    return score
+
+# ---------- DASHBOARD ----------
+app = Flask(__name__)
+
+HTML = """
+<h1>AI Productivity Dashboard</h1>
+<h2>Productivity Score: {{score}}%</h2>
+"""
+
+@app.route("/")
+def home():
+    score = analyze()
+    return render_template_string(HTML, score=score)
