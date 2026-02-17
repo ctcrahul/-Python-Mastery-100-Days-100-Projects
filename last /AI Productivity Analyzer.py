@@ -45,3 +45,25 @@ def label_data(df):
     
     df['Label'] = labels
     return df
+# ---------- AI CLASSIFIER ----------
+def train_ai(df):
+    le = LabelEncoder()
+    df['Encoded'] = le.fit_transform(df['Label'])
+    
+    df['Window'] = df['Window'].astype(str)
+    df['Length'] = df['Window'].apply(len)
+    
+    X = df[['Length']]
+    y = df['Encoded']
+    
+    model = DecisionTreeClassifier()
+    model.fit(X, y)
+    
+    return model, le
+
+# ---------- PRODUCTIVITY SCORE ----------
+def productivity_score(df):
+    total = len(df)
+    productive = len(df[df['Label']=="Productive"])
+    score = (productive/total)*100
+    return round(score,2)
