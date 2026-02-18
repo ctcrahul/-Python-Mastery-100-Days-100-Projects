@@ -32,6 +32,7 @@ def generate_slides(topic, num_slides):
     Slide 2:
     ...
     """
+
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role":"user","content":prompt}]
@@ -55,6 +56,7 @@ def build_ppt(content):
         notes = ""
 
         mode = ""
+
         for line in lines:
             if "Title:" in line:
                 title = line.replace("Title:","").strip()
@@ -84,6 +86,8 @@ def build_ppt(content):
     file_path = "generated_presentation.pptx"
     prs.save(file_path)
     return file_path
+
+
 # ========== UI ==========
 st.title("AI PPT Generator (Gamma Style MVP)")
 
