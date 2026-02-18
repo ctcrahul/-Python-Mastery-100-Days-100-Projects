@@ -84,3 +84,24 @@ def build_ppt(content):
     file_path = "generated_presentation.pptx"
     prs.save(file_path)
     return file_path
+# ========== UI ==========
+st.title("AI PPT Generator (Gamma Style MVP)")
+
+topic = st.text_input("Enter Topic")
+num_slides = st.slider("Number of Slides", 3, 15, 8)
+
+if st.button("Generate PPT"):
+
+    with st.spinner("AI is building your presentation..."):
+
+        ai_content = generate_slides(topic, num_slides)
+        ppt_file = build_ppt(ai_content)
+
+        with open(ppt_file, "rb") as f:
+            st.download_button(
+                label="Download PPT",
+                data=f,
+                file_name="AI_Presentation.pptx"
+            )
+
+        st.success("Done 🚀")
