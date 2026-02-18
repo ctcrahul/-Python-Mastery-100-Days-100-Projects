@@ -55,3 +55,32 @@ def build_ppt(content):
         notes = ""
 
         mode = ""
+        for line in lines:
+            if "Title:" in line:
+                title = line.replace("Title:","").strip()
+            elif "Points:" in line:
+                mode = "points"
+            elif "Notes:" in line:
+                mode = "notes"
+            else:
+                if mode == "points":
+                    points.append(line.strip())
+                elif mode == "notes":
+                    notes += line.strip() + " "
+
+        slide_layout = prs.slide_layouts[1]
+        slide_obj = prs.slides.add_slide(slide_layout)
+
+        slide_obj.shapes.title.text = title
+        body = slide_obj.shapes.placeholders[1]
+        tf = body.text_frame
+
+        for p in points:
+            if p:
+                tf.add_paragraph().text = p
+
+        slide_obj.notes_slide.notes_text_frame.text = notes
+
+    file_path = "generated_presentation.pptx"
+    prs.save(file_path)
+    return file_path
