@@ -32,3 +32,26 @@ def generate_slides(topic, num_slides):
     Slide 2:
     ...
     """
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role":"user","content":prompt}]
+    )
+
+    return response.choices[0].message.content
+
+
+# ========== PPT BUILDER ==========
+def build_ppt(content):
+
+    prs = Presentation()
+
+    slides = content.split("Slide ")
+
+    for slide in slides[1:]:
+
+        lines = slide.split("\n")
+        title = ""
+        points = []
+        notes = ""
+
+        mode = ""
