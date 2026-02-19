@@ -68,3 +68,28 @@ def build_ppt(content):
 
         slide_layout = prs.slide_layouts[1]
         slide_obj = prs.slides.add_slide(slide_layout)
+        slide_layout = prs.slide_layouts[1]
+        slide_obj = prs.slides.add_slide(slide_layout)
+
+        slide_obj.shapes.title.text = title
+        body = slide_obj.shapes.placeholders[1]
+        tf = body.text_frame
+
+        for p in points:
+            if p:
+                tf.add_paragraph().text = p
+
+        slide_obj.notes_slide.notes_text_frame.text = notes
+
+    file_path = "doc_presentation.pptx"
+    prs.save(file_path)
+    return file_path
+
+
+# -------- UI --------
+st.title("AI Document to PPT Generator")
+
+uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
+num_slides = st.slider("Slides", 3, 15, 8)
+
+if uploaded_file and st.button("Generate PPT"):
