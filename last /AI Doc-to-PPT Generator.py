@@ -93,3 +93,20 @@ uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
 num_slides = st.slider("Slides", 3, 15, 8)
 
 if uploaded_file and st.button("Generate PPT"):
+if uploaded_file and st.button("Generate PPT"):
+
+    with st.spinner("Reading document..."):
+        text = extract_text(uploaded_file)
+
+    with st.spinner("Creating slides..."):
+        content = generate_slides_from_doc(text, num_slides)
+        ppt = build_ppt(content)
+
+        with open(ppt, "rb") as f:
+            st.download_button(
+                label="Download PPT",
+                data=f,
+                file_name="Doc_to_PPT.pptx"
+            )
+
+        st.success("Done 🚀")
