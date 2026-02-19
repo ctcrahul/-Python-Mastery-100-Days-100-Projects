@@ -14,3 +14,28 @@ def extract_text(pdf_file):
         text += page.extract_text()
     return text
 
+# -------- AI Structuring --------
+def generate_slides_from_doc(text, num_slides):
+
+    prompt = f"""
+    Convert this document into a {num_slides}-slide presentation.
+
+    Extract key ideas and structure logically.
+
+    Format:
+
+    Slide 1:
+    Title:
+    Points:
+    Notes:
+
+    Slide 2:
+    ...
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role":"user","content":prompt + text[:6000]}]
+    )
+
+    return response.choices[0].message.content
