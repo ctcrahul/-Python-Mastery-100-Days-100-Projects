@@ -14,6 +14,7 @@ def extract_text(pdf_file):
         text += page.extract_text()
     return text
 
+
 # -------- AI Structuring --------
 def generate_slides_from_doc(text, num_slides):
 
@@ -39,6 +40,8 @@ def generate_slides_from_doc(text, num_slides):
     )
 
     return response.choices[0].message.content
+
+
 # -------- PPT Builder --------
 def build_ppt(content):
 
@@ -68,8 +71,6 @@ def build_ppt(content):
 
         slide_layout = prs.slide_layouts[1]
         slide_obj = prs.slides.add_slide(slide_layout)
-        slide_layout = prs.slide_layouts[1]
-        slide_obj = prs.slides.add_slide(slide_layout)
 
         slide_obj.shapes.title.text = title
         body = slide_obj.shapes.placeholders[1]
@@ -92,7 +93,6 @@ st.title("AI Document to PPT Generator")
 uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
 num_slides = st.slider("Slides", 3, 15, 8)
 
-if uploaded_file and st.button("Generate PPT"):
 if uploaded_file and st.button("Generate PPT"):
 
     with st.spinner("Reading document..."):
