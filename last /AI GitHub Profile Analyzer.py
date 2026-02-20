@@ -30,3 +30,23 @@ def analyze_profile(user, repos):
     diversity_score = min(unique_languages * 10, 100)
 
     final_score = (consistency_score + complexity_score + diversity_score) / 3
+   final_score = (consistency_score + complexity_score + diversity_score) / 3
+
+    if final_score > 75:
+        level = "Strong Hire Potential"
+    elif final_score > 50:
+        level = "Moderate Potential"
+    else:
+        level = "Needs Real Project Work"
+
+    return {
+        "Repositories": repo_count,
+        "Total Stars": total_stars,
+        "Total Forks": total_forks,
+        "Languages Used": list(set(languages)),
+        "Consistency Score": consistency_score,
+        "Complexity Score": complexity_score,
+        "Diversity Score": diversity_score,
+        "Final AI Score": round(final_score, 2),
+        "Hiring Insight": level
+    }
