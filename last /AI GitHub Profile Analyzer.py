@@ -50,3 +50,16 @@ def analyze_profile(user, repos):
         "Final AI Score": round(final_score, 2),
         "Hiring Insight": level
     }
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    username = request.json.get("username")
+    user, repos = get_user_data(username)
+
+    if "message" in user:
+        return jsonify({"error": "User not found"})
+
+    result = analyze_profile(user, repos)
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
