@@ -1,3 +1,4 @@
+
 import streamlit as st
 import speech_recognition as sr
 import librosa
@@ -21,6 +22,7 @@ def analyze_confidence(audio_file):
     tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
     energy = np.mean(librosa.feature.rms(y=y))
     return tempo, energy
+
 def score_response(filler_count, tempo, energy):
     score = 100
 
