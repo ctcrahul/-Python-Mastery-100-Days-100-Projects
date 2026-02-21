@@ -1,3 +1,31 @@
+"""
+AI Interview Confidence Analyzer
+
+Purpose:
+Evaluate interview responses using speech patterns and language usage
+to estimate confidence level.
+
+Method:
+1. Convert speech to text
+2. Detect filler words (hesitation markers)
+3. Measure speech tempo and vocal energy
+4. Combine signals into confidence score
+
+Why this matters:
+Confident candidates tend to speak with fewer fillers,
+stable energy, and consistent pacing.
+
+Limitations:
+- Not a true lie detector
+- Does not account for cultural speaking styles
+- Works best with clear audio input
+
+Future Improvements:
+- Emotion detection
+- Contextual answer relevance scoring
+- Transformer-based hesitation analysis
+"""
+
 
 import streamlit as st
 import speech_recognition as sr
