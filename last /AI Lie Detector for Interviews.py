@@ -45,3 +45,21 @@ if uploaded_audio:
     try:
         text = r.recognize_google(audio)
         st.write("📝 Transcribed Text:", text)
+
+        filler_count = analyze_filler(text)
+        tempo, energy = analyze_confidence(uploaded_audio)
+
+        score = score_response(filler_count, tempo, energy)
+
+        st.subheader("📊 AI Confidence Score")
+        st.write(score)
+
+        if score > 80:
+            st.success("Strong and confident answer")
+        elif score > 50:
+            st.warning("Moderate confidence")
+        else:
+            st.error("Low confidence / nervous response")
+
+    except:
+        st.error("Could not understand audio")
