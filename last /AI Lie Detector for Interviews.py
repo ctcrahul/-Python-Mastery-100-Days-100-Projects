@@ -21,3 +21,27 @@ def analyze_confidence(audio_file):
     tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
     energy = np.mean(librosa.feature.rms(y=y))
     return tempo, energy
+def score_response(filler_count, tempo, energy):
+    score = 100
+
+    score -= filler_count * 5
+
+    if tempo < 90:
+        score -= 10
+
+    if energy < 0.02:
+        score -= 10
+
+    return max(score, 0)
+
+uploaded_audio = st.file_uploader("Upload your interview answer (wav)", type=["wav"])
+
+if uploaded_audio:
+
+    r = sr.Recognizer()
+    with sr.AudioFile(uploaded_audio) as source:
+        audio = r.record(source)
+
+    try:
+        text = r.recognize_google(audio)
+        st.write("📝 Transcribed Text:", text)
