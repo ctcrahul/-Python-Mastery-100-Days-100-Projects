@@ -24,6 +24,7 @@ def generate_data(n=1000):
             "I will eat healthy",
             "I will quit sugar"
         ])
+
         strength = random.choice(["strong", "weak"])
         if strength == "strong":
             statement += " " + random.choice(strong_words)
@@ -51,6 +52,23 @@ df = generate_data()
 
 X = df[["statement","past_success","pressure","sleep_gap"]]
 y = df["follow"]
+
+# ---------- MODEL PIPELINE ----------
+text_features = "statement"
+num_features = ["past_success","pressure","sleep_gap"]
+
+preprocessor = ColumnTransformer([
+    ("text", TfidfVectorizer(), text_features),
+    ("num", StandardScaler(), num_features)
+])
+
+model = Pipeline([
+    ("pre", preprocessor),
+    ("clf", LogisticRegression())
+])
+
+model.fit(X, y)
+
 # ---------- WEB UI ----------
 html = """
 <h2>AI Follow-Through Predictor</h2>
