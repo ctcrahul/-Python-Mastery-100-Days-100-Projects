@@ -24,3 +24,30 @@ def generate_data(n=1000):
             "I will eat healthy",
             "I will quit sugar"
         ])
+        strength = random.choice(["strong", "weak"])
+        if strength == "strong":
+            statement += " " + random.choice(strong_words)
+        else:
+            statement += " " + random.choice(weak_words)
+
+        past_success = random.uniform(0, 1)
+        pressure = random.choice([0,1])  # external pressure
+        sleep_gap = random.randint(0,5)
+
+        # logic for label
+        score = past_success + pressure - sleep_gap*0.1
+        if strength == "strong":
+            score += 0.3
+
+        follow = 1 if score > 0.5 else 0
+
+        data.append([statement, past_success, pressure, sleep_gap, follow])
+
+    return pd.DataFrame(data, columns=[
+        "statement","past_success","pressure","sleep_gap","follow"
+    ])
+
+df = generate_data()
+
+X = df[["statement","past_success","pressure","sleep_gap"]]
+y = df["follow"]
