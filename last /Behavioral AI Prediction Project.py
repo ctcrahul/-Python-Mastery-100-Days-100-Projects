@@ -1,3 +1,93 @@
+# AI Human Follow-Through Predictor
+
+## Overview
+This project predicts whether a person is likely to follow through on what they say.
+
+Instead of focusing on traditional ML tasks like image classification, this system models human behavioral commitment using:
+
+- Natural Language Processing
+- Context-based signals
+- Probabilistic prediction
+
+It analyzes a user's statement along with behavioral factors to estimate the likelihood of real action.
+
+---
+
+## Problem Statement
+People often express intentions but fail to execute them.
+
+Example:
+
+"I will wake up early from tomorrow"
+
+This project answers:
+
+Will they actually do it?
+
+---
+
+## How It Works
+
+The system takes:
+
+- A commitment statement
+- Past success ratio
+- External pressure
+- Lifestyle realism (sleep gap)
+
+It processes:
+
+1. Intent strength from text using NLP
+2. Behavioral reliability factors
+3. Environmental influence
+
+Then predicts:
+
+Probability of follow-through
+
+---
+
+## Tech Stack
+
+- Python
+- Flask
+- Scikit-learn
+- TF-IDF NLP
+
+---
+
+## Model Pipeline
+
+Text Features:
+- Commitment language
+
+Numeric Features:
+- Past success
+- External pressure
+- Sleep gap
+
+Model:
+- Logistic Regression
+
+Output:
+- Follow-through probability
+
+---
+
+## Features
+
+- Intent analysis
+- Behavioral modeling
+- Risk prediction
+- Real-world decision simulation
+
+---
+
+## Run Locally
+
+Install dependencies:
+
+
 from flask import Flask, request, render_template_string
 import pandas as pd
 import random
