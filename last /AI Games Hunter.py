@@ -3,8 +3,10 @@ import random
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 
+# --- Initialize Game Engine ---
 pygame.init()
 
+# --- Game Window Setup ---
 WIDTH, HEIGHT = 600, 600
 GRID = 20
 CELL = WIDTH // GRID
@@ -14,51 +16,63 @@ pygame.display.set_caption("AI Games Hunter")
 
 clock = pygame.time.Clock()
 
+# --- Player, AI and Coin Positions ---
 player_pos = [1, 1]
 ai_pos = [18, 18]
 coin_pos = [random.randint(0,19), random.randint(0,19)]
 
-move_history = []
-labels = []
+# --- Store Player Behavior Data ---
+move_history = []   # stores previous player positions
+labels = []         # stores movement directions
 
+# --- AI Learning Model ---
 model = DecisionTreeClassifier()
 trained = False
 
+# --- Draw Game Objects ---
 def draw():
     screen.fill((0,0,0))
-    pygame.draw.rect(screen,(0,255,0),(player_pos[0]*CELL,player_pos[1]*CELL,CELL,CELL))
-    pygame.draw.rect(screen,(255,0,0),(ai_pos[0]*CELL,ai_pos[1]*CELL,CELL,CELL))
-    pygame.draw.rect(screen,(255,255,0),(coin_pos[0]*CELL,coin_pos[1]*CELL,CELL,CELL))
+    pygame.draw.rect(screen,(0,255,0),(player_pos[0]*CELL,player_pos[1]*CELL,CELL,CELL)) # Player
+    pygame.draw.rect(screen,(255,0,0),(ai_pos[0]*CELL,ai_pos[1]*CELL,CELL,CELL))         # AI Hunter
+    pygame.draw.rect(screen,(255,255,0),(coin_pos[0]*CELL,coin_pos[1]*CELL,CELL,CELL))   # Coin
     pygame.display.update()
 
+# --- AI Movement Logic ---
 def move_ai():
     global trained
 
+    # If enough data exists, AI predicts player next move
     if trained and len(move_history) > 20:
         prediction = model.predict([move_history[-1]])[0]
         px, py = player_pos
 
-        if prediction == 0:
+        # Predicted target position
+        if prediction == 0:   # Up
             target = [px, py-1]
-        elif prediction == 1:
+        elif prediction == 1: # Down
             target = [px, py+1]
-        elif prediction == 2:
+        elif prediction == 2: # Left
             target = [px-1, py]
-        else:
+        else:                 # Right
             target = [px+1, py]
 
+        # AI moves toward predicted future position
         ai_pos[0] += np.sign(target[0]-ai_pos[0])
         ai_pos[1] += np.sign(target[1]-ai_pos[1])
+
     else:
+        # Before learning, AI just chases player
         ai_pos[0] += np.sign(player_pos[0]-ai_pos[0])
         ai_pos[1] += np.sign(player_pos[1]-ai_pos[1])
 
+# --- Train AI Model Using Player Behavior ---
 def train_model():
     global trained
     if len(move_history) > 30:
         model.fit(move_history[:-1], labels[1:])
         trained = True
 
+# --- Main Game Loop ---
 running = True
 while running:
     clock.tick(10)
@@ -71,6 +85,7 @@ while running:
 
     keys = pygame.key.get_pressed()
 
+    # --- Player Movement Input ---
     if keys[pygame.K_UP] and player_pos[1] > 0:
         player_pos[1] -= 1
         move = 0
@@ -86,16 +101,20 @@ while running:
     else:
         move = None
 
+    # --- Record Player Behavior for AI Learning ---
     if move is not None:
         move_history.append(prev)
         labels.append(move)
         train_model()
 
+    # --- AI Executes Movement Strategy ---
     move_ai()
 
+    # --- Coin Collection Logic ---
     if player_pos == coin_pos:
         coin_pos = [random.randint(0,19), random.randint(0,19)]
 
+    # --- Game Over Condition ---
     if player_pos == ai_pos:
         print("AI caught you!")
         running = False
