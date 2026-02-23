@@ -23,3 +23,37 @@ labels = []
 
 model = DecisionTreeClassifier()
 trained = False
+def draw():
+    screen.fill((0,0,0))
+    pygame.draw.rect(screen,(0,255,0),(player_pos[0]*CELL,player_pos[1]*CELL,CELL,CELL))
+    pygame.draw.rect(screen,(255,0,0),(ai_pos[0]*CELL,ai_pos[1]*CELL,CELL,CELL))
+    pygame.draw.rect(screen,(255,255,0),(coin_pos[0]*CELL,coin_pos[1]*CELL,CELL,CELL))
+    pygame.display.update()
+
+def move_ai():
+    global trained
+
+    if trained and len(move_history) > 20:
+        prediction = model.predict([move_history[-1]])[0]
+        px, py = player_pos
+
+        if prediction == 0:
+            target = [px, py-1]
+        elif prediction == 1:
+            target = [px, py+1]
+        elif prediction == 2:
+            target = [px-1, py]
+        else:
+            target = [px+1, py]
+
+        ai_pos[0] += np.sign(target[0]-ai_pos[0])
+        ai_pos[1] += np.sign(target[1]-ai_pos[1])
+    else:
+        ai_pos[0] += np.sign(player_pos[0]-ai_pos[0])
+        ai_pos[1] += np.sign(player_pos[1]-ai_pos[1])
+
+def train_model():
+    global trained
+    if len(move_history) > 30:
+        model.fit(move_history[:-1], labels[1:])
+        trained = True
