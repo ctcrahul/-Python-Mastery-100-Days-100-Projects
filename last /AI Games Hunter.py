@@ -57,3 +57,38 @@ def train_model():
     if len(move_history) > 30:
         model.fit(move_history[:-1], labels[1:])
         trained = True
+
+running = True
+while running:
+    clock.tick(10)
+
+    prev = player_pos.copy()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_UP] and player_pos[1] > 0:
+        player_pos[1] -= 1
+        move = 0
+    elif keys[pygame.K_DOWN] and player_pos[1] < 19:
+        player_pos[1] += 1
+        move = 1
+    elif keys[pygame.K_LEFT] and player_pos[0] > 0:
+        player_pos[0] -= 1
+        move = 2
+    elif keys[pygame.K_RIGHT] and player_pos[0] < 19:
+        player_pos[0] += 1
+        move = 3
+    else:
+        move = None
+
+    if move is not None:
+        move_history.append(prev)
+        labels.append(move)
+        train_model()
+
+    move_ai()
+
