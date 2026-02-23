@@ -92,3 +92,14 @@ while running:
 
     move_ai()
 
+    if player_pos == coin_pos:
+        coin_pos = [random.randint(0,19), random.randint(0,19)]
+
+    if player_pos == ai_pos:
+        print("AI caught you!")
+        running = False
+
+    draw()
+
+pygame.quit()
+
