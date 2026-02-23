@@ -23,6 +23,7 @@ labels = []
 
 model = DecisionTreeClassifier()
 trained = False
+
 def draw():
     screen.fill((0,0,0))
     pygame.draw.rect(screen,(0,255,0),(player_pos[0]*CELL,player_pos[1]*CELL,CELL,CELL))
@@ -102,4 +103,3 @@ while running:
     draw()
 
 pygame.quit()
-
