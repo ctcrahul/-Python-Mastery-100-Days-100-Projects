@@ -154,3 +154,32 @@ def burnout_risk(df):
         return "Moderate"
     else:
         return "Low"
+# ---------------------------
+# STEP 6: AI INSIGHT GENERATOR
+# ---------------------------
+
+def generate_insights(df, leaks):
+    insights = []
+
+    worst_hour = df.groupby("hour")["productivity_score"].mean().idxmin()
+    best_hour = df.groupby("hour")["productivity_score"].mean().idxmax()
+
+    insights.append(f"Lowest productivity hour detected: {worst_hour}:00")
+    insights.append(f"Peak performance hour: {best_hour}:00")
+
+    if len(leaks) > 0:
+        insights.append("Frequent time leaks detected during high-switch sessions.")
+
+    return insights
+
+# ---------------------------
+# RUN SYSTEM
+# ---------------------------
+
+df = generate_activity_data()
+df = calculate_focus_score(df)
+df, model = train_productivity_model(df)
+
+leaks = detect_time_leaks(df)
+risk = burnout_risk(df)
+insights = generate_insights(df, leaks)
