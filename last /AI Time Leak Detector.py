@@ -183,3 +183,22 @@ df, model = train_productivity_model(df)
 leaks = detect_time_leaks(df)
 risk = burnout_risk(df)
 insights = generate_insights(df, leaks)
+# ---------------------------
+# RESULTS
+# ---------------------------
+
+print("\nFOCUS SCORE:", round(df["focus_score"].mean()*100,2), "%")
+print("BURNOUT RISK:", risk)
+print("TIME LEAK SESSIONS:", len(leaks))
+
+print("\nAI INSIGHTS:")
+for i in insights:
+    print("-", i)
+
+# ---------------------------
+# VISUALIZE
+# ---------------------------
+
+plt.plot(df["focus_score"])
+plt.title("Focus Trend")
+plt.show()
