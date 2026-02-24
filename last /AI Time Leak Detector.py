@@ -20,3 +20,40 @@ This is behavioral AI, not just classification.
 
 import pandas as pd
 import numpy as np
+from sklearn.ensemble import RandomForestRegressor, IsolationForest
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+
+# ---------------------------
+# STEP 1: SIMULATE ACTIVITY DATA
+# ---------------------------
+
+def generate_activity_data(days=7):
+    """
+    Generates simulated work activity data.
+    Replace this later with real tracking data.
+    """
+    data = []
+
+    start_time = datetime.now() - timedelta(days=days)
+
+    for i in range(days * 24):
+        hour = (start_time + timedelta(hours=i)).hour
+
+        # simulate realistic behavior
+        if 9 <= hour <= 12:
+            typing = np.random.randint(200, 400)
+            switches = np.random.randint(2, 5)
+            idle = np.random.randint(5, 15)
+        elif 14 <= hour <= 17:
+            typing = np.random.randint(150, 300)
+            switches = np.random.randint(3, 8)
+            idle = np.random.randint(10, 25)
+        elif 21 <= hour <= 23:
+            typing = np.random.randint(50, 150)
+            switches = np.random.randint(8, 15)
+            idle = np.random.randint(25, 45)
+        else:
+            typing = np.random.randint(0, 80)
+            switches = np.random.randint(1, 6)
+            idle = np.random.randint(20, 60)
