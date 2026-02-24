@@ -1,3 +1,6 @@
+
+
+
 """
 AI TIME LEAK DETECTOR
 ---------------------
@@ -57,6 +60,7 @@ def generate_activity_data(days=7):
             typing = np.random.randint(0, 80)
             switches = np.random.randint(1, 6)
             idle = np.random.randint(20, 60)
+
         session = np.random.randint(20, 60)
 
         data.append([
@@ -154,6 +158,7 @@ def burnout_risk(df):
         return "Moderate"
     else:
         return "Low"
+
 # ---------------------------
 # STEP 6: AI INSIGHT GENERATOR
 # ---------------------------
@@ -183,6 +188,7 @@ df, model = train_productivity_model(df)
 leaks = detect_time_leaks(df)
 risk = burnout_risk(df)
 insights = generate_insights(df, leaks)
+
 # ---------------------------
 # RESULTS
 # ---------------------------
