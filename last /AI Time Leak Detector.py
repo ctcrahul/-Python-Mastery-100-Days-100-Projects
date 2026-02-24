@@ -57,3 +57,39 @@ def generate_activity_data(days=7):
             typing = np.random.randint(0, 80)
             switches = np.random.randint(1, 6)
             idle = np.random.randint(20, 60)
+        session = np.random.randint(20, 60)
+
+        data.append([
+            hour,
+            typing,
+            switches,
+            idle,
+            session
+        ])
+
+    df = pd.DataFrame(data, columns=[
+        "hour",
+        "keystrokes",
+        "app_switches",
+        "idle_time",
+        "session_length"
+    ])
+
+    return df
+
+# ---------------------------
+# STEP 2: CALCULATE FOCUS SCORE
+# ---------------------------
+
+def calculate_focus_score(df):
+    """
+    Calculates focus score based on behavior
+    """
+    df["focus_score"] = (
+        (df["keystrokes"] / 400) * 0.4 +
+        (1 - df["app_switches"] / 15) * 0.3 +
+        (1 - df["idle_time"] / 60) * 0.3
+    )
+
+    df["focus_score"] = df["focus_score"].clip(0,1)
+    return df
