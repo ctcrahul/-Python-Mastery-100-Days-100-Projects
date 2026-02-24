@@ -93,3 +93,64 @@ def calculate_focus_score(df):
 
     df["focus_score"] = df["focus_score"].clip(0,1)
     return df
+
+# ---------------------------
+# STEP 3: PRODUCTIVITY MODEL
+# ---------------------------
+
+def train_productivity_model(df):
+    """
+    Train ML model to predict productivity
+    """
+
+    X = df[["keystrokes", "app_switches", "idle_time", "session_length"]]
+
+    # synthetic productivity label
+    y = (
+        df["keystrokes"] * 0.3 -
+        df["app_switches"] * 0.2 -
+        df["idle_time"] * 0.3 +
+        df["session_length"] * 0.2
+    )
+
+    model = RandomForestRegressor()
+    model.fit(X, y)
+
+    df["productivity_score"] = model.predict(X)
+
+    return df, model
+
+# ---------------------------
+# STEP 4: TIME LEAK DETECTION
+# ---------------------------
+
+def detect_time_leaks(df):
+    """
+    Uses anomaly detection to detect wasteful sessions
+    """
+
+    X = df[["keystrokes", "app_switches", "idle_time"]]
+
+    iso = IsolationForest(contamination=0.2)
+    df["anomaly"] = iso.fit_predict(X)
+
+    leaks = df[df["anomaly"] == -1]
+
+    return leaks
+
+# ---------------------------
+# STEP 5: BURNOUT RISK
+# ---------------------------
+
+def burnout_risk(df):
+    late_hours = df[df["hour"] >= 21]
+    low_focus = late_hours[late_hours["focus_score"] < 0.4]
+
+    risk = len(low_focus) / max(len(late_hours),1)
+
+    if risk > 0.6:
+        return "High"
+    elif risk > 0.3:
+        return "Moderate"
+    else:
+        return "Low"
