@@ -37,6 +37,7 @@ def split_pdf(file, start, end, output_path):
 
     with open(output_path, "wb") as f:
         writer.write(f)
+
 # ================= COMPRESS PDF =================
 def compress_pdf(file, output_path):
     reader = PdfReader(file)
@@ -50,7 +51,7 @@ def compress_pdf(file, output_path):
     with open(output_path, "wb") as f:
         writer.write(f)
 
-# ================= WATERMARK ================= 
+# ================= WATERMARK =================
 def add_watermark(file, text, output_path):
     watermark_path = "watermark.pdf"
 
@@ -121,3 +122,63 @@ Watermark Text: <input type=text name=text>
 @app.route("/")
 def home():
     return render_template_string(HTML)
+
+@app.route("/merge", methods=["POST"])
+def merge():
+    files = request.files.getlist("files")
+    paths = []
+    for f in files:
+        path = os.path.join(UPLOAD_FOLDER, f.filename)
+        f.save(path)
+        paths.append(path)
+
+    output = os.path.join(UPLOAD_FOLDER, "merged.pdf")
+    merge_pdfs(paths, output)
+    return send_file(output)
+
+@app.route("/split", methods=["POST"])
+def split():
+    file = request.files["file"]
+    start = int(request.form["start"])
+    end = int(request.form["end"])
+
+    path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(path)
+
+    output = os.path.join(UPLOAD_FOLDER, "split.pdf")
+    split_pdf(path, start, end, output)
+    return send_file(output)
+
+@app.route("/compress", methods=["POST"])
+def compress():
+    file = request.files["file"]
+    path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(path)
+
+    output = os.path.join(UPLOAD_FOLDER, "compressed.pdf")
+    compress_pdf(path, output)
+    return send_file(output)
+
+@app.route("/watermark", methods=["POST"])
+def watermark():
+    file = request.files["file"]
+    text = request.form["text"]
+
+    path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(path)
+
+    output = os.path.join(UPLOAD_FOLDER, "watermarked.pdf")
+    add_watermark(path, text, output)
+    return send_file(output)
+
+@app.route("/summary", methods=["POST"])
+def summary():
+    file = request.files["file"]
+    path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(path)
+
+    summary = summarize_pdf(path)
+    return f"<h3>Summary:</h3><p>{summary}</p>"
+
+if __name__ == "__main__":
+    app.run(debug=True)
