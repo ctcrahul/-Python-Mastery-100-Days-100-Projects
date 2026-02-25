@@ -50,7 +50,7 @@ def compress_pdf(file, output_path):
     with open(output_path, "wb") as f:
         writer.write(f)
 
-# ================= WATERMARK =================
+# ================= WATERMARK ================= 
 def add_watermark(file, text, output_path):
     watermark_path = "watermark.pdf"
 
