@@ -37,3 +37,44 @@ def split_pdf(file, start, end, output_path):
 
     with open(output_path, "wb") as f:
         writer.write(f)
+# ================= COMPRESS PDF =================
+def compress_pdf(file, output_path):
+    reader = PdfReader(file)
+    writer = PdfWriter()
+
+    for page in reader.pages:
+        writer.add_page(page)
+
+    writer.add_metadata({"Compressed": "True"})
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+# ================= WATERMARK =================
+def add_watermark(file, text, output_path):
+    watermark_path = "watermark.pdf"
+
+    c = canvas.Canvas(watermark_path)
+    c.drawString(200, 500, text)
+    c.save()
+
+    watermark = PdfReader(watermark_path)
+    reader = PdfReader(file)
+    writer = PdfWriter()
+
+    for page in reader.pages:
+        page.merge_page(watermark.pages[0])
+        writer.add_page(page)
+
+    with open(output_path, "wb") as f:
+        writer.write(f)
+
+# ================= PDF SUMMARY =================
+def summarize_pdf(file):
+    text = ""
+    with pdfplumber.open(file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() or ""
+
+    summary = text[:500]  # Basic Summary Logic
+    return summary
