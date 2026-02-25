@@ -78,3 +78,46 @@ def summarize_pdf(file):
 
     summary = text[:500]  # Basic Summary Logic
     return summary
+
+# ================= ROUTES =================
+
+HTML = """
+<h2>AI PDF TOOLKIT</h2>
+
+<h3>Merge PDFs</h3>
+<form method=post action="/merge" enctype=multipart/form-data>
+<input type=file name=files multiple>
+<input type=submit value=Merge>
+</form>
+
+<h3>Split PDF</h3>
+<form method=post action="/split" enctype=multipart/form-data>
+<input type=file name=file>
+Start Page: <input type=number name=start>
+End Page: <input type=number name=end>
+<input type=submit value=Split>
+</form>
+
+<h3>Compress PDF</h3>
+<form method=post action="/compress" enctype=multipart/form-data>
+<input type=file name=file>
+<input type=submit value=Compress>
+</form>
+
+<h3>Add Watermark</h3>
+<form method=post action="/watermark" enctype=multipart/form-data>
+<input type=file name=file>
+Watermark Text: <input type=text name=text>
+<input type=submit value=Add>
+</form>
+
+<h3>Summarize PDF</h3>
+<form method=post action="/summary" enctype=multipart/form-data>
+<input type=file name=file>
+<input type=submit value=Summarize>
+</form>
+"""
+
+@app.route("/")
+def home():
+    return render_template_string(HTML)
