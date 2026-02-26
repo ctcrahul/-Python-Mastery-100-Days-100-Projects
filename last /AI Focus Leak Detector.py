@@ -1,4 +1,4 @@
-"""
+ """
 AI Focus Leak Detector
 Detects productivity vs distraction using behavior data
 """
