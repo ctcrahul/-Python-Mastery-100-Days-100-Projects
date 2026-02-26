@@ -67,3 +67,10 @@ model = RandomForestClassifier()
 model.fit(X, y)
 
 print("\nAI Training Complete")
+
+focus_score = (df["label"] == "Focused").sum() / len(df) * 100
+
+print(f"Your Focus Score: {focus_score:.2f}%")
+
+df.to_csv("focus_log.csv", index=False)
+print("Data saved to focus_log.csv")
