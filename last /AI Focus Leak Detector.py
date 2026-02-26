@@ -39,3 +39,31 @@ try:
             "hour": start.hour
         })
         
+except KeyboardInterrupt:
+    print("Tracking stopped.")
+
+df = pd.DataFrame(data)
+
+def label(row):
+    if row["cpu"] > 40:
+        return "Focused"
+    elif "youtube" in row["window"].lower():
+        return "Distracted"
+    else:
+        return "Idle"
+
+df["label"] = df.apply(label, axis=1)
+
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+df["window_encoded"] = le.fit_transform(df["window"])
+df["label_encoded"] = le.fit_transform(df["label"])
+
+X = df[["window_encoded", "cpu", "hour"]]
+y = df["label_encoded"]
+
+model = RandomForestClassifier()
+model.fit(X, y)
+
+print("\nAI Training Complete")
