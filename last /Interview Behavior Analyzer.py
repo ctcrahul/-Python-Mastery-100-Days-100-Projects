@@ -60,3 +60,30 @@ def relevance_score(text, question):
     question_words = set(question.lower().split())
     match = text_words.intersection(question_words)
     return len(match) / len(question_words) * 100
+def analyze_answer(answer, duration, question):
+    words = answer.split()
+    filler_count = analyze_filler_words(answer)
+    speed = speaking_speed(len(words), duration)
+    sentiment = sentiment_score(answer)
+    confidence = confidence_score(speed, filler_count)
+    relevance = relevance_score(answer, question)
+
+    print("\n--- AI Interview Feedback ---")
+    print("Answer:", answer)
+    print("Filler Words Used:", filler_count)
+    print("Speaking Speed (WPM):", round(speed,2))
+    print("Sentiment Score:", round(sentiment,2))
+    print("Confidence Score:", confidence)
+    print("Answer Relevance:", round(relevance,2), "%")
+
+# Example interview question
+question = "Tell me about your strengths"
+
+print("Interview Question:", question)
+
+answer, duration = record_answer()
+
+if answer:
+    analyze_answer(answer, duration, question)
+else:
+    print("Could not understand audio.")
