@@ -67,6 +67,59 @@ def analyze_answer(answer, duration, question):
     sentiment = sentiment_score(answer)
     confidence = confidence_score(speed, filler_count)
     relevance = relevance_score(answer, question)
+# ---------- RECORD SPEECH ---------- #
+
+def record_answer():
+    recognizer = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        print("\nSpeak your answer now...")
+        recognizer.adjust_for_ambient_noise(source)
+
+        start = time.time()
+        audio = recognizer.listen(source)
+        end = time.time()
+
+    duration = end - start
+
+    try:
+        text = recognizer.recognize_google(audio)
+        return text, duration
+    except:
+        return None, duration
+
+# ---------- ANALYSIS FUNCTIONS ---------- #
+
+def count_filler_words(text):
+    count = 0
+    for word in FILLER_WORDS:
+        count += text.lower().count(word)
+    return count
+
+def speaking_speed(word_count, duration):
+    if duration == 0:
+        return 0
+    return word_count / (duration / 60)
+
+def sentiment_analysis(text):
+    blob = TextBlob(text)
+    return blob.sentiment.polarity
+
+def confidence_score(speed, filler_count):
+    score = 100
+
+    # Too slow
+    if speed < 90:
+        score -= 20
+
+    # Too fast
+    if speed > 170:
+        score -= 15
+
+    # Filler penalty
+    score -= filler_count * 4
+
+    return max(score, 0)
 
     print("\n--- AI Interview Feedback ---")
     print("Answer:", answer)
