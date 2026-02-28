@@ -14,6 +14,7 @@ uploaded_file = st.file_uploader("Upload CSV File")
 if uploaded_file:
 
     df = pd.read_csv(uploaded_file)
+
     st.subheader("Uploaded Data")
     st.dataframe(df)
 
@@ -38,6 +39,7 @@ if uploaded_file:
 
     # Effort Stability
     df['Effort Stability'] = df['study_hours'].rolling(3).std().fillna(0)
+
     # Burnout Risk
     df['Burnout Risk'] = (
         (df['study_hours'] > 7).astype(int) +
@@ -64,6 +66,7 @@ if uploaded_file:
         st.line_chart(df['Procrastination Score'])
 
     st.subheader("AI Insights")
+
     avg_consistency = df['Consistency Score'].mean()
     avg_stability = df['Effort Stability'].mean()
     avg_burnout = df['Burnout Risk'].mean()
