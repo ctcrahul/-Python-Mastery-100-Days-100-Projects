@@ -38,3 +38,29 @@ if uploaded_file:
 
     # Effort Stability
     df['Effort Stability'] = df['study_hours'].rolling(3).std().fillna(0)
+    # Burnout Risk
+    df['Burnout Risk'] = (
+        (df['study_hours'] > 7).astype(int) +
+        (df['sleep'] < 6).astype(int)
+    )
+
+    # Procrastination Score
+    df['Procrastination Score'] = df['distractions'] / (df['study_hours'] + 1)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Consistency Score")
+        st.line_chart(df['Consistency Score'])
+
+        st.subheader("Effort Stability")
+        st.line_chart(df['Effort Stability'])
+
+    with col2:
+        st.subheader("Burnout Risk")
+        st.bar_chart(df['Burnout Risk'])
+
+        st.subheader("Procrastination Score")
+        st.line_chart(df['Procrastination Score'])
+
+    st.subheader("AI Insights")
