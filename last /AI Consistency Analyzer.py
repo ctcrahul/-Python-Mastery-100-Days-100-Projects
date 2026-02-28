@@ -64,3 +64,21 @@ if uploaded_file:
         st.line_chart(df['Procrastination Score'])
 
     st.subheader("AI Insights")
+    avg_consistency = df['Consistency Score'].mean()
+    avg_stability = df['Effort Stability'].mean()
+    avg_burnout = df['Burnout Risk'].mean()
+
+    if avg_consistency < 40:
+        st.error("Low discipline pattern detected.")
+    elif avg_consistency < 70:
+        st.warning("Moderate consistency.")
+    else:
+        st.success("Strong consistency pattern.")
+
+    if avg_stability > 2:
+        st.warning("Your effort is unstable.")
+
+    if avg_burnout > 0.5:
+        st.error("Burnout risk rising.")
+
+    st.write("Real growth requires stable effort, not intensity bursts.")
